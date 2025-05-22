@@ -27,7 +27,6 @@ const active = computed({
   },
   set(tab) {
     // Hash is specified here to prevent the page from scrolling to the top
-    console.log("set:", tab);
     navigateTo({
       path: tab,
     });
