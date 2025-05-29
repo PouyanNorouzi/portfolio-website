@@ -5,5 +5,5 @@ useHead({
 </script>
 
 <template>
-  <p>This is the index page</p>
+  <IndexHero />
 </template>
