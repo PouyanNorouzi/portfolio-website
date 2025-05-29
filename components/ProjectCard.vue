@@ -14,65 +14,70 @@ const formatDate = (date: Date) => {
 </script>
 
 <template>
-  <UCard class="project-card h-full">
-    <template #header>
-      <div class="relative">
-        <img
-          :src="project.image"
-          :alt="project.name"
-          class="w-full h-48 object-cover rounded-t-lg">
-        <div class="absolute top-2 right-2 flex gap-2">
-          <UBadge v-for="tag in project.tags" :key="tag" :label="tag" variant="solid" size="xs" />
-        </div>
-      </div>
-    </template>
-
-    <div class="flex flex-col h-full">
-      <div class="flex-1">
-        <h3 class="text-xl font-semibold mb-2">{{ project.name }}</h3>
-        <p class="text-gray-600 dark:text-gray-300 mb-4 text-sm">
-          {{ project.description }}
-        </p>
-
-        <div class="mb-4">
-          <p class="text-xs text-gray-500 dark:text-gray-400 mb-2">
-            {{ formatDate(project.startDate) }} - {{ formatDate(project.endDate) }}
-          </p>
-        </div>
-
-        <div class="mb-4">
-          <h4 class="text-sm font-medium mb-2 text-gray-700 dark:text-gray-200">Tech Stack:</h4>
-          <div class="flex flex-wrap gap-1">
-            <UBadge
-              v-for="tech in project.techStack"
-              :key="tech"
-              :label="tech"
-              variant="outline"
-              size="xs" />
+  <UCard class="project-card">
+    <div class="flex flex-col md:flex-row gap-4">
+      <!-- Left side - Image -->
+      <div class="relative md:w-1/3">
+        <div class="aspect-ratio-container">
+          <img
+            :src="project.image"
+            :alt="project.name"
+            class="w-full h-full object-cover rounded-lg absolute top-0 left-0">
+          <div class="absolute top-2 right-2 flex gap-2">
+            <UBadge v-for="tag in project.tags" :key="tag" :label="tag" variant="solid" size="xs" />
           </div>
         </div>
       </div>
 
-      <div class="flex gap-2 mt-auto pt-4">
-        <UButton
-          v-if="project.github"
-          :to="project.github"
-          target="_blank"
-          variant="outline"
-          size="sm"
-          icon="i-lucide-github"
-          class="flex-1">
-          Code
-        </UButton>
-        <UButton
-          v-if="project.liveDemo"
-          :to="project.liveDemo"
-          target="_blank"
-          size="sm"
-          icon="i-lucide-external-link"
-          class="flex-1">
-          Live Demo
-        </UButton>
+      <!-- Right side - Content -->
+      <div class="flex flex-col flex-1 justify-between">
+        <div>
+          <h3 class="text-xl font-semibold mb-2">{{ project.name }}</h3>
+          <p class="text-gray-600 dark:text-gray-300 mb-4 text-sm">
+            {{ project.description }}
+          </p>
+
+          <div class="mb-4">
+            <p class="text-xs text-gray-500 dark:text-gray-400 mb-2">
+              {{ formatDate(project.startDate) }} - {{ formatDate(project.endDate) }}
+            </p>
+          </div>
+
+          <div class="mb-4">
+            <h4 class="text-sm font-medium mb-2 text-gray-700 dark:text-gray-200">Tech Stack:</h4>
+            <div class="flex flex-wrap gap-1">
+              <UBadge
+                v-for="tech in project.techStack"
+                :key="tech"
+                :label="tech"
+                variant="outline"
+                size="xs" />
+            </div>
+          </div>
+        </div>
+
+        <div class="flex gap-2 justify-end">
+          <UTooltip text="View Code">
+            <UButton
+              v-if="project.github"
+              :to="project.github"
+              target="_blank"
+              variant="ghost"
+              size="sm"
+              icon="i-lucide-github" />
+          </UTooltip>
+
+          <UTooltip text="View Live Demo">
+            <UButton
+              v-if="project.liveDemo"
+              :to="project.liveDemo"
+              target="_blank"
+              variant="ghost"
+              size="sm"
+              icon="i-lucide-external-link"
+              color="primary" />
+          </UTooltip>
+        </div>
       </div>
     </div>
   </UCard>
@@ -83,10 +88,24 @@ const formatDate = (date: Date) => {
   transition:
     transform 0.2s ease-in-out,
     box-shadow 0.2s ease-in-out;
+  overflow: hidden;
 }
 
 .project-card:hover {
   transform: translateY(-4px);
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.aspect-ratio-container {
+  position: relative;
+  padding-top: 56.25%; /* 16:9 aspect ratio (9 / 16 = 0.5625 or 56.25%) */
+  width: 100%;
+  height: 0;
+}
+
+@media (max-width: 768px) {
+  .aspect-ratio-container {
+    padding-top: 56.25%; /* Maintain 16:9 even on mobile */
+  }
 }
 </style>
