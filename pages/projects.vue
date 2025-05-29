@@ -47,7 +47,7 @@ const projects: Project[] = [
   <div class="projects-container py-12">
     <UContainer>
       <h1 class="text-3xl md:text-4xl font-bold mb-8">My Projects</h1>
-      <div class="flex flex-col gap-6 max-w-3xl mx-auto">
+      <div class="flex flex-col gap-6 w-full">
         <ProjectCard
           v-for="project in projects"
           :key="project.id"

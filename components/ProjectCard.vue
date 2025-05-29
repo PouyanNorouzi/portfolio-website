@@ -14,15 +14,15 @@ const formatDate = (date: Date) => {
 </script>
 
 <template>
-  <UCard class="project-card">
-    <div class="flex flex-col md:flex-row gap-4">
+  <UCard class="project-card overflow-hidden" variant="soft">
+    <div class="flex flex-col md:flex-row gap-4 h-full">
       <!-- Left side - Image -->
-      <div class="relative md:w-1/3">
-        <div class="aspect-ratio-container">
+      <div class="relative md:w-1/3 md:flex md:items-stretch overflow-hidden md:min-h-[250px]">
+        <div class="relative w-full h-full">
           <img
             :src="project.image"
             :alt="project.name"
-            class="w-full h-full object-cover rounded-lg absolute top-0 left-0">
+            class="w-full h-[200px] md:h-full object-cover md:absolute md:inset-0 md:rounded-l-lg">
           <div class="absolute top-2 right-2 flex gap-2">
             <UBadge v-for="tag in project.tags" :key="tag" :label="tag" variant="solid" size="xs" />
           </div>
@@ -51,7 +51,7 @@ const formatDate = (date: Date) => {
                 :key="tech"
                 :label="tech"
                 variant="outline"
-                size="xs" />
+                size="md" />
             </div>
           </div>
         </div>
@@ -88,7 +88,6 @@ const formatDate = (date: Date) => {
   transition:
     transform 0.2s ease-in-out,
     box-shadow 0.2s ease-in-out;
-  overflow: hidden;
 }
 
 .project-card:hover {
@@ -96,16 +95,10 @@ const formatDate = (date: Date) => {
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
 }
 
-.aspect-ratio-container {
-  position: relative;
-  padding-top: 56.25%; /* 16:9 aspect ratio (9 / 16 = 0.5625 or 56.25%) */
-  width: 100%;
-  height: 0;
-}
-
-@media (max-width: 768px) {
-  .aspect-ratio-container {
-    padding-top: 56.25%; /* Maintain 16:9 even on mobile */
+/* Add deep selector to ensure card inner container has full height */
+@media (min-width: 768px) {
+  .project-card:deep(.u-card-inner) {
+    height: 100%;
   }
 }
 </style>
