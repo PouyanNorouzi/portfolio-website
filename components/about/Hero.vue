@@ -1,14 +1,6 @@
 <script setup lang="ts">
-// Define the interface for card items
-interface CardItem {
-  title: string;
-  icon: string;
-  description: string;
-  color: string;
-}
-
 // Card items data
-const cards = ref<CardItem[]>([
+const cards = ref<AboutCardItem[]>([
   {
     title: "Developer",
     icon: "i-lucide-code",

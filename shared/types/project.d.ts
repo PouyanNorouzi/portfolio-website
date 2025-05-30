@@ -4,7 +4,7 @@ declare interface Project {
 	description: string;
 	startDate: Date;
 	endDate: Date;
-	techStack: string[];
+	techStack: Skill[];
 	tags: string[];
 	image: string;
 	github?: string;

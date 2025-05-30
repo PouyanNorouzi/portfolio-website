@@ -5,21 +5,40 @@ useHead({
 
 // Skills data organized by category
 const skills = ref({
-  languages: ["Python", "Java", "JavaScript", "C", "C#", "HTML", "CSS"],
-  tools: [
-    "jQuery",
-    "EJS",
-    "TypeScript",
-    "Node.js",
-    "React",
-    "Next.js",
-    "Vue",
-    "Nuxt",
-    "Unity",
-    "Godot",
+  languages: [
+    { title: "Python", icon: "i-devicon-python" },
+    { title: "Java", icon: "i-devicon-java" },
+    { title: "JavaScript", icon: "i-devicon-javascript" },
+    { title: "C", icon: "i-devicon-c" },
+    { title: "C#", icon: "i-devicon-csharp" },
+    { title: "HTML", icon: "i-devicon-html5" },
+    { title: "CSS", icon: "i-devicon-css3" },
   ],
-  database: ["Prisma", "MongoDB", "MySQL", "PostgreSQL", "Firebase"],
-  workflow: ["Git", "Agile", "Trello", "Unit Testing"],
+  tools: [
+    { title: "jQuery", icon: "i-devicon-jquery" },
+    { title: "EJS", icon: "i-lucide-brackets" },
+    { title: "TypeScript", icon: "i-devicon-typescript" },
+    { title: "Node.js", icon: "i-devicon-nodejs" },
+    { title: "React", icon: "i-devicon-react" },
+    { title: "Next.js", icon: "i-devicon-nextjs" },
+    { title: "Vue", icon: "i-devicon-vuejs" },
+    { title: "Nuxt", icon: "i-devicon-nuxtjs" },
+    { title: "Unity", icon: "i-devicon-unity" },
+    { title: "Godot", icon: "i-devicon-godot" },
+  ],
+  database: [
+    { title: "Prisma", icon: "i-devicon-prisma" },
+    { title: "MongoDB", icon: "i-devicon-mongodb" },
+    { title: "MySQL", icon: "i-devicon-mysql" },
+    { title: "PostgreSQL", icon: "i-devicon-postgresql" },
+    { title: "Firebase", icon: "i-devicon-firebase" },
+  ],
+  workflow: [
+    { title: "Git", icon: "i-devicon-git" },
+    { title: "Agile", icon: "i-lucide-repeat" },
+    { title: "Trello", icon: "i-devicon-trello" },
+    { title: "Unit Testing", icon: "i-lucide-badge-check" },
+  ],
 });
 
 // Education data
@@ -57,24 +76,6 @@ const experience = ref([
     <AboutHero />
 
     <UContainer class="py-8">
-      <!-- Overview Section -->
-      <section class="mb-16 animate-fade-in">
-        <h2 class="text-3xl font-bold mb-6 text-center">Overview</h2>
-
-        <div class="bg-gray-50 dark:bg-gray-800 rounded-lg p-6">
-          <p class="mb-4">
-            With experience in both academic and personal projects, I've developed skills in
-            frontend and backend technologies, focusing on creating efficient, responsive, and
-            intuitive user interfaces backed by robust server-side code.
-          </p>
-          <p>
-            My development journey has led me to explore various technologies and frameworks,
-            always with a focus on writing clean, maintainable code and creating applications
-            that provide real value to users.
-          </p>
-        </div>
-      </section>
-
       <!-- Skills Section -->
       <section class="mb-16 animate-fade-in-delay-1">
         <h2 class="text-3xl font-bold mb-6 text-center">Skills & Expertise</h2>
@@ -89,7 +90,7 @@ const experience = ref([
               </div>
             </template>
             <div class="flex flex-wrap gap-2">
-              <UBadge v-for="skill in skills.languages" :key="skill" :label="skill" />
+              <SkillBadge v-for="skill in skills.languages" :key="skill.title" :skill="skill" />
             </div>
           </UCard>
 
@@ -102,7 +103,7 @@ const experience = ref([
               </div>
             </template>
             <div class="flex flex-wrap gap-2">
-              <UBadge v-for="skill in skills.tools" :key="skill" :label="skill" />
+              <SkillBadge v-for="skill in skills.tools" :key="skill.title" :skill="skill" />
             </div>
           </UCard>
 
@@ -115,7 +116,7 @@ const experience = ref([
               </div>
             </template>
             <div class="flex flex-wrap gap-2">
-              <UBadge v-for="skill in skills.database" :key="skill" :label="skill" />
+              <SkillBadge v-for="skill in skills.database" :key="skill.title" :skill="skill" />
             </div>
           </UCard>
 
@@ -128,7 +129,7 @@ const experience = ref([
               </div>
             </template>
             <div class="flex flex-wrap gap-2">
-              <UBadge v-for="skill in skills.workflow" :key="skill" :label="skill" />
+              <SkillBadge v-for="skill in skills.workflow" :key="skill.title" :skill="skill" />
             </div>
           </UCard>
         </div>

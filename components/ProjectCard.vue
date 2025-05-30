@@ -46,10 +46,10 @@ const formatDate = (date: Date) => {
           <div class="mb-4">
             <h4 class="text-sm font-medium mb-2 text-gray-700 dark:text-gray-200">Tech Stack:</h4>
             <div class="flex flex-wrap gap-1">
-              <UBadge
+              <SkillBadge
                 v-for="tech in project.techStack"
-                :key="tech"
-                :label="tech"
+                :key="tech.title"
+                :skill="tech"
                 variant="outline"
                 size="md" />
             </div>
