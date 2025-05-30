@@ -19,8 +19,7 @@ const projects = ref<Project[]>([
       { title: "Firebase", icon: "i-devicon-firebase" },
     ],
     tags: ["Academic Project", "E-Commerce", "Mobile-First"],
-    image:
-      "https://images.unsplash.com/photo-1588580000645-4562a6d2c839?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
+    image: "/img/projects/textbook-hero.png",
     github: "https://github.com/PouyanNorouzi/1800_202410_BBY09",
     liveDemo: "https://textbookhero-19cac.web.app/",
   },
@@ -62,7 +61,7 @@ const projects = ref<Project[]>([
     image:
       "https://images.unsplash.com/photo-1557683316-973673baf926?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1129&q=80",
     github: "https://github.com/PouyanNorouzi/multicultural-calender",
-    liveDemo: "https://calendar.pouyannorouzi.com"
+    liveDemo: "https://calendar.pouyannorouzi.com",
   },
   {
     id: 4,
