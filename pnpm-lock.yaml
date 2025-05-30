@@ -42,6 +42,9 @@ importers:
         specifier: ^4.5.1
         version: 4.5.1(vue@3.5.14(typescript@5.8.3))
     devDependencies:
+      '@iconify-json/devicon':
+        specifier: ^1.2.24
+        version: 1.2.24
       '@iconify-json/logos':
         specifier: ^1.2.4
         version: 1.2.4
@@ -471,6 +474,9 @@ packages:
   '@humanwhocodes/retry@0.4.3':
     resolution: {integrity: sha512-bV0Tgo9K4hfPCek+aMAn81RppFKv2ySDQeMoSZuvTASywNTnVJCArCZE2FWqpvIatKu7VMRLWlR1EazvVhDyhQ==}
     engines: {node: '>=18.18'}
+
+  '@iconify-json/devicon@1.2.24':
+    resolution: {integrity: sha512-Y46dfXckSh04IWeV8hB/7IOkbq6H+oV+wCapz5PDx2Z4aXqGx6Fm5ZcKP9Jt9YiEhqN02Hehl4cni3Vp+xfheg==}
 
   '@iconify-json/logos@1.2.4':
     resolution: {integrity: sha512-XC4If5D/hbaZvUkTV8iaZuGlQCyG6CNOlaAaJaGa13V5QMYwYjgtKk3vPP8wz3wtTVNVEVk3LRx1fOJz+YnSMw==}
@@ -5453,6 +5459,10 @@ snapshots:
   '@humanwhocodes/retry@0.3.1': {}
 
   '@humanwhocodes/retry@0.4.3': {}
+
+  '@iconify-json/devicon@1.2.24':
+    dependencies:
+      '@iconify/types': 2.0.0
 
   '@iconify-json/logos@1.2.4':
     dependencies:

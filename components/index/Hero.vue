@@ -26,7 +26,7 @@
             </div>
           </div>
           <div class="hero-visual flex justify-center lg:justify-end">
-            <HeroAvatar text="P" size="lg" />
+            <IndexHeroAvatar text="P" size="lg" />
           </div>
         </div>
       </div>
