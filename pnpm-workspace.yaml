@@ -7,4 +7,4 @@ onlyBuiltDependencies:
   - vue-demi
 supportedArchitectures:
   os: [linux]
-  cpu: [x64]
+  cpu: [x64, arm]
