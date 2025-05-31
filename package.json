@@ -28,5 +28,24 @@
     "@iconify-json/devicon": "^1.2.24",
     "@iconify-json/logos": "^1.2.4",
     "@iconify-json/lucide": "^1.2.44"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "@parcel/watcher",
+      "@tailwindcss/oxide",
+      "esbuild",
+      "sharp",
+      "unrs-resolver",
+      "vue-demi"
+    ],
+    "supportedArchitectures": {
+      "os": [
+        "linux"
+      ],
+      "cpu": [
+        "x64",
+        "arm"
+      ]
+    }
   }
 }
