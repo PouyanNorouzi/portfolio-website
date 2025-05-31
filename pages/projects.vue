@@ -100,6 +100,7 @@ const projects = ref<Project[]>([
     tags: ["Cloud Computing", "Gaming", "Real Time"],
     image: "/img/projects/tdp.png",
     github: "https://github.com/rockclimber147/CloudComputingTermProject",
+    liveDemo: "https://tdp.pouyannorouzi.com"
   },
   {
     id: 6,
