@@ -41,7 +41,7 @@ const projects = ref<Project[]>([
     tags: ["Academic Project", "AI Integration", "Public Safety"],
     image: "/img/projects/disasternot.png",
     github: "https://github.com/PouyanNorouzi/2800-202410-BBY28",
-    liveDemo: "https://two800-202410-bby28-8ghn.onrender.com/",
+    liveDemo: "https://disasternot.pouyannorouzi.com/",
   },
   {
     id: 3,
@@ -78,7 +78,7 @@ const projects = ref<Project[]>([
     ],
     tags: ["Personal Project", "System Programming", "File Transfer"],
     image: "/img/projects/pws.png",
-    github: "https://github.com/PouyanNorouzi/pouyan-web-services",
+    github: "https://github.com/PouyanNorouzi/pws",
   },
   {
     id: 5,
