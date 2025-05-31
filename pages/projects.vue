@@ -39,8 +39,7 @@ const projects = ref<Project[]>([
       { title: "OpenAI API", icon: "i-logos-openai-icon" },
     ],
     tags: ["Academic Project", "AI Integration", "Public Safety"],
-    image:
-      "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80",
+    image: "/img/projects/disasternot.png",
     github: "https://github.com/PouyanNorouzi/2800-202410-BBY28",
     liveDemo: "https://two800-202410-bby28-8ghn.onrender.com/",
   },
@@ -58,8 +57,7 @@ const projects = ref<Project[]>([
       { title: "MongoDB", icon: "i-devicon-mongodb" },
     ],
     tags: ["Personal Project", "Cultural Education", "Interactive Calendar"],
-    image:
-      "https://images.unsplash.com/photo-1557683316-973673baf926?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1129&q=80",
+    image: "/img/projects/multicultural-calendar.png",
     github: "https://github.com/PouyanNorouzi/multicultural-calender",
     liveDemo: "https://calendar.pouyannorouzi.com",
   },
@@ -68,8 +66,8 @@ const projects = ref<Project[]>([
     name: "Pouyan Web Services",
     description:
       "A cross-platform C-based client using libssh that connects to an SSH server for file management and remote terminal access. Works on both Linux and Windows operating systems. Primarily designed for interacting with a Raspberry Pi server used for hosting and storage, with SFTP functionality for seamless file transfers.",
-    startDate: new Date("2023-11-01"),
-    endDate: new Date("2024-01-20"),
+    startDate: new Date("2024-12-02"),
+    endDate: new Date("2024-12-20"),
     techStack: [
       { title: "C", icon: "i-devicon-c" },
       { title: "libssh", icon: "i-lucide-key" },
@@ -79,8 +77,7 @@ const projects = ref<Project[]>([
       { title: "Linux", icon: "i-devicon-linux" },
     ],
     tags: ["Personal Project", "System Programming", "File Transfer"],
-    image:
-      "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80",
+    image: "/img/projects/pws.png",
     github: "https://github.com/PouyanNorouzi/pouyan-web-services",
   },
   {
@@ -101,8 +98,7 @@ const projects = ref<Project[]>([
       { title: "HTML/CSS", icon: "i-devicon-html5" },
     ],
     tags: ["Cloud Computing", "Gaming", "Real Time"],
-    image:
-      "https://images.unsplash.com/photo-1536743939714-23ec5ac2dbae?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80",
+    image: "/img/projects/tdp.png",
     github: "https://github.com/rockclimber147/CloudComputingTermProject",
   },
   {
@@ -124,8 +120,7 @@ const projects = ref<Project[]>([
       { title: "Zustand", icon: "i-devicon-zustand" },
     ],
     tags: ["Industry-Sponsored", "Dating Platform", "Full Stack"],
-    image:
-      "https://images.unsplash.com/photo-1545205597-3d9d02c29597?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
+    image: "/img/projects/conscious-connections.png",
   },
   {
     id: 7,
