@@ -22,6 +22,7 @@ declare type SkillName =
 
 // Category definition with styling properties
 declare interface SkillCategory {
+  id: number;
   name: SkillName;
   icon: string;
   color: string;
@@ -29,6 +30,7 @@ declare interface SkillCategory {
 
 // Enhanced skill definition with network-focused properties
 declare interface EnhancedSkill extends Skill {
+  id: number; // Unique identifier for the skill
   proficiency: number; // Value between 0-1 representing skill level (moved from Skill)
   category: SkillName; // Direct reference to category
   relatedSkills?: string[]; // Array of skill titles this skill is related to
