@@ -3,44 +3,6 @@ useHead({
   title: "Pouyan - About",
 });
 
-// Skills data organized by category
-const skills = ref({
-  languages: [
-    { title: "Python", icon: "i-devicon-python" },
-    { title: "Java", icon: "i-devicon-java" },
-    { title: "JavaScript", icon: "i-devicon-javascript" },
-    { title: "C", icon: "i-devicon-c" },
-    { title: "C#", icon: "i-devicon-csharp" },
-    { title: "HTML", icon: "i-devicon-html5" },
-    { title: "CSS", icon: "i-devicon-css3" },
-  ],
-  tools: [
-    { title: "jQuery", icon: "i-devicon-jquery" },
-    { title: "EJS", icon: "i-lucide-brackets" },
-    { title: "TypeScript", icon: "i-devicon-typescript" },
-    { title: "Node.js", icon: "i-devicon-nodejs" },
-    { title: "React", icon: "i-devicon-react" },
-    { title: "Next.js", icon: "i-devicon-nextjs" },
-    { title: "Vue", icon: "i-devicon-vuejs" },
-    { title: "Nuxt", icon: "i-devicon-nuxtjs" },
-    { title: "Unity", icon: "i-devicon-unity" },
-    { title: "Godot", icon: "i-devicon-godot" },
-  ],
-  database: [
-    { title: "Prisma", icon: "i-devicon-prisma" },
-    { title: "MongoDB", icon: "i-devicon-mongodb" },
-    { title: "MySQL", icon: "i-devicon-mysql" },
-    { title: "PostgreSQL", icon: "i-devicon-postgresql" },
-    { title: "Firebase", icon: "i-devicon-firebase" },
-  ],
-  workflow: [
-    { title: "Git", icon: "i-devicon-git" },
-    { title: "Agile", icon: "i-lucide-repeat" },
-    { title: "Trello", icon: "i-devicon-trello" },
-    { title: "Unit Testing", icon: "i-lucide-badge-check" },
-  ],
-});
-
 // Education data
 const education = ref([
   {
@@ -77,63 +39,7 @@ const experience = ref([
 
     <UContainer class="py-8">
       <!-- Skills Section -->
-      <section class="mb-16 animate-fade-in-delay-1">
-        <h2 class="text-3xl font-bold mb-6 text-center">Skills & Expertise</h2>
-
-        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-          <!-- Languages -->
-          <UCard>
-            <template #header>
-              <div class="flex items-center">
-                <UIcon name="i-lucide-code" class="mr-2 text-primary" />
-                <h3 class="text-xl font-semibold">Languages</h3>
-              </div>
-            </template>
-            <div class="flex flex-wrap gap-2">
-              <SkillBadge v-for="skill in skills.languages" :key="skill.title" :skill="skill" />
-            </div>
-          </UCard>
-
-          <!-- Tools -->
-          <UCard>
-            <template #header>
-              <div class="flex items-center">
-                <UIcon name="i-lucide-wrench" class="mr-2 text-primary" />
-                <h3 class="text-xl font-semibold">Tools & Frameworks</h3>
-              </div>
-            </template>
-            <div class="flex flex-wrap gap-2">
-              <SkillBadge v-for="skill in skills.tools" :key="skill.title" :skill="skill" />
-            </div>
-          </UCard>
-
-          <!-- Database -->
-          <UCard>
-            <template #header>
-              <div class="flex items-center">
-                <UIcon name="i-lucide-database" class="mr-2 text-primary" />
-                <h3 class="text-xl font-semibold">Database</h3>
-              </div>
-            </template>
-            <div class="flex flex-wrap gap-2">
-              <SkillBadge v-for="skill in skills.database" :key="skill.title" :skill="skill" />
-            </div>
-          </UCard>
-
-          <!-- Workflow -->
-          <UCard>
-            <template #header>
-              <div class="flex items-center">
-                <UIcon name="i-lucide-git-branch" class="mr-2 text-primary" />
-                <h3 class="text-xl font-semibold">Workflow</h3>
-              </div>
-            </template>
-            <div class="flex flex-wrap gap-2">
-              <SkillBadge v-for="skill in skills.workflow" :key="skill.title" :skill="skill" />
-            </div>
-          </UCard>
-        </div>
-      </section>
+      <AboutSkills />
 
       <!-- Education Section -->
       <section class="mb-16 animate-fade-in-delay-2">
