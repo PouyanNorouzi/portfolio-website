@@ -12,6 +12,7 @@ import {
 import { Radar } from "vue-chartjs";
 import { SKILLS } from "~/utils/constants/skills";
 import { CATEGORIES } from "~/utils/constants/categories";
+import { SkillBadge } from "#components";
 
 const colorMode = useColorMode();
 
@@ -70,7 +71,9 @@ const chartData = computed<ChartData<"radar">>(() => {
     datasets: [
       {
         label: "Skill Proficiency",
-        data: skillCategories.value.map((category) => calculateCategoryProficiency(category.name) * 100),
+        data: skillCategories.value.map(
+          (category) => calculateCategoryProficiency(category.name) * 100
+        ),
         backgroundColor: "rgba(54, 162, 235, 0.2)",
         borderColor: "rgba(54, 162, 235, 1)",
         pointBackgroundColor: skillCategories.value.map((category) => category.color),
@@ -223,32 +226,21 @@ const activeCategory = ref<SkillName | "all">("all");
               {{ category.name }}
             </h4>
             <div class="flex flex-wrap gap-2">
-              <UBadge
+              <SkillBadge
                 v-for="skill in skillMap[category.name].value"
                 :key="skill.title"
                 :label="skill.title"
-                variant="soft"
-                class="flex items-center gap-1 py-1 px-2">
-                <template #leading>
-                  <UIcon :name="skill.icon" class="text-lg" />
-                </template>
-              </UBadge>
+                :skill="skill" />
             </div>
           </div>
         </div>
 
         <!-- Display filtered skills when a specific category is selected -->
         <div v-else class="flex flex-wrap gap-2">
-          <UBadge
+          <SkillBadge
             v-for="skill in skillMap[activeCategory].value"
             :key="skill.title"
-            :label="skill.title"
-            variant="soft"
-            class="flex items-center gap-1 py-1 px-2">
-            <template #leading>
-              <UIcon :name="skill.icon" class="text-lg" />
-            </template>
-          </UBadge>
+            :skill="skill" />
         </div>
       </UCard>
     </div>

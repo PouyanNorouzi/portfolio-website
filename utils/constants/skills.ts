@@ -274,7 +274,7 @@ export const SKILL_PRISMA: EnhancedSkill = {
 export const SKILL_DYNAMODB: EnhancedSkill = {
   id: 31,
   title: "DynamoDB",
-  icon: "i-devicon-amazonwebservices",
+  icon: "i-devicon-amazonwebservices-wordmark",
   proficiency: 0.65,
   category: "Data",
   relatedSkills: ["MongoDB", "AWS"],
@@ -283,7 +283,7 @@ export const SKILL_DYNAMODB: EnhancedSkill = {
 export const SKILL_RDS: EnhancedSkill = {
   id: 32,
   title: "RDS",
-  icon: "i-devicon-amazonwebservices",
+  icon: "i-devicon-amazonwebservices-wordmark",
   proficiency: 0.7,
   category: "Data",
   relatedSkills: ["MySQL", "PostgreSQL", "AWS"],
@@ -293,7 +293,7 @@ export const SKILL_RDS: EnhancedSkill = {
 export const SKILL_EC2: EnhancedSkill = {
   id: 33,
   title: "EC2",
-  icon: "i-devicon-amazonwebservices",
+  icon: "i-devicon-amazonwebservices-wordmark",
   proficiency: 0.75,
   category: "Cloud & DevOps",
   relatedSkills: ["AWS", "Linux", "Self-hosting"],
@@ -302,7 +302,7 @@ export const SKILL_EC2: EnhancedSkill = {
 export const SKILL_LAMBDA: EnhancedSkill = {
   id: 34,
   title: "Lambda",
-  icon: "i-devicon-amazonwebservices",
+  icon: "i-devicon-amazonwebservices-wordmark",
   proficiency: 0.7,
   category: "Cloud & DevOps",
   relatedSkills: ["AWS", "JavaScript", "Node.js"],
@@ -311,7 +311,7 @@ export const SKILL_LAMBDA: EnhancedSkill = {
 export const SKILL_S3: EnhancedSkill = {
   id: 35,
   title: "S3",
-  icon: "i-devicon-amazonwebservices",
+  icon: "i-devicon-amazonwebservices-wordmark",
   proficiency: 0.8,
   category: "Cloud & DevOps",
   relatedSkills: ["AWS"],

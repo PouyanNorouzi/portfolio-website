@@ -23,7 +23,7 @@ const formatDate = (date: Date) => {
             :src="project.image"
             :alt="project.name"
             class="w-full md:h-full object-fill md:absolute md:inset-0 md:rounded-l-lg"
-            preload/>
+            preload />
           <div class="absolute top-2 right-2 flex gap-2">
             <UBadge v-for="tag in project.tags" :key="tag" :label="tag" variant="solid" size="xs" />
           </div>
@@ -47,12 +47,7 @@ const formatDate = (date: Date) => {
           <div class="mb-4">
             <h4 class="text-sm font-medium mb-2 text-gray-700 dark:text-gray-200">Tech Stack:</h4>
             <div class="flex flex-wrap gap-1">
-              <SkillBadge
-                v-for="tech in project.techStack"
-                :key="tech.title"
-                :skill="tech"
-                variant="outline"
-                size="md" />
+              <SkillBadge v-for="tech in project.techStack" :key="tech.title" :skill="tech" />
             </div>
           </div>
         </div>
