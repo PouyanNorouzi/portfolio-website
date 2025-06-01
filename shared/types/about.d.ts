@@ -35,6 +35,7 @@ declare interface EnhancedSkill extends Skill {
   category: SkillName; // Direct reference to category
   relatedSkills?: string[]; // Array of skill titles this skill is related to
   description?: string; // Optional: brief description of your experience with this skill
+  color?: string; // optional color for the skill
 }
 
 // Base network node properties shared by all node types

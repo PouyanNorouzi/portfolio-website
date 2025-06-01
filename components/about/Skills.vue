@@ -52,8 +52,28 @@ const skillMap: Record<SkillName, ComputedRef<EnhancedSkill[]>> = {
   "Cloud & DevOps": cloudSkills,
 };
 
-// Helper function to calculate average proficiency for a category should be moved later to
-// utils when state manager is set up
+// Determine the active category for displaying skills
+const activeCategory = ref<SkillName | "all">("all");
+
+const radarData = computed((): { data: number[]; labels: string[]; colors: string[] } => {
+  if (activeCategory.value === "all") {
+    const data = skillCategories.value.map(
+      (category) => calculateCategoryProficiency(category.name) * 100
+    );
+    const labels: string[] = skillCategories.value.map((category) => category.name);
+    const colors: string[] = skillCategories.value.map((category) => category.color);
+
+    return { data, labels, colors };
+  }
+  const data = skillMap[activeCategory.value].value.map((skill) => skill.proficiency * 100);
+  const labels: string[] = skillMap[activeCategory.value].value.map((skill) => skill.title);
+  const colors: string[] = skillMap[activeCategory.value].value.map((skill) => skill.color || "blue");
+
+  return { data, labels, colors };
+});
+
+// Helper function to calculate average proficiency for a category
+// should be moved later to utils when state manager is set up
 const calculateCategoryProficiency = (categorySkills: SkillName | "all"): number => {
   if (categorySkills === "all") {
     const sum = skillsData.value.reduce((acc, skill) => acc + (skill.proficiency || 0), 0);
@@ -67,16 +87,14 @@ const calculateCategoryProficiency = (categorySkills: SkillName | "all"): number
 // Chart configuration
 const chartData = computed<ChartData<"radar">>(() => {
   return {
-    labels: skillCategories.value.map((category) => category.name),
+    labels: radarData.value.labels,
     datasets: [
       {
         label: "Skill Proficiency",
-        data: skillCategories.value.map(
-          (category) => calculateCategoryProficiency(category.name) * 100
-        ),
+        data: radarData.value.data,
         backgroundColor: "rgba(54, 162, 235, 0.2)",
         borderColor: "rgba(54, 162, 235, 1)",
-        pointBackgroundColor: skillCategories.value.map((category) => category.color),
+        pointBackgroundColor: radarData.value.colors,
         pointRadius: 5,
         pointHoverRadius: 7,
         borderWidth: 2,
@@ -131,9 +149,6 @@ const chartOptions = computed<ChartOptions<"radar">>(() => ({
     },
   },
 }));
-
-// Determine the active category for displaying skills
-const activeCategory = ref<SkillName | "all">("all");
 </script>
 
 <template>
