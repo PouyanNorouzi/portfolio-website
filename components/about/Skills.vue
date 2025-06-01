@@ -17,95 +17,321 @@ const colorMode = useColorMode();
 ChartJS.register(RadialLinearScale, PointElement, LineElement, Tooltip, Legend);
 
 // Skills data with proficiency levels
-const skillsData = ref({
-  frontend: [
-    { title: "HTML", icon: "i-devicon-html5", proficiency: 0.95 },
-    { title: "CSS", icon: "i-devicon-css3", proficiency: 0.88 },
-    { title: "JavaScript", icon: "i-devicon-javascript", proficiency: 0.85 },
-    { title: "React", icon: "i-devicon-react", proficiency: 0.7 },
-    { title: "Vue", icon: "i-devicon-vuejs", proficiency: 0.85 },
-    { title: "Next.js", icon: "i-devicon-nextjs", proficiency: 0.65 },
-    { title: "Nuxt", icon: "i-devicon-nuxtjs", proficiency: 0.75 },
-    { title: "jQuery", icon: "i-devicon-jquery", proficiency: 0.8 },
-  ],
-  backend: [
-    { title: "Node.js", icon: "i-devicon-nodejs", proficiency: 0.82 },
-    { title: "Python", icon: "i-devicon-python", proficiency: 0.9 },
-    { title: "Java", icon: "i-devicon-java", proficiency: 0.75 },
-    { title: "C#", icon: "i-devicon-csharp", proficiency: 0.8 },
-    { title: "C", icon: "i-devicon-c", proficiency: 0.7 },
-    { title: "TypeScript", icon: "i-devicon-typescript", proficiency: 0.78 },
-  ],
-  databases: [
-    { title: "MongoDB", icon: "i-devicon-mongodb", proficiency: 0.8 },
-    { title: "MySQL", icon: "i-devicon-mysql", proficiency: 0.85 },
-    { title: "PostgreSQL", icon: "i-devicon-postgresql", proficiency: 0.75 },
-    { title: "Firebase", icon: "i-devicon-firebase", proficiency: 0.65 },
-    { title: "Prisma", icon: "i-devicon-prisma", proficiency: 0.7 },
-  ],
-  tools: [
-    { title: "Git", icon: "i-devicon-git", proficiency: 0.9 },
-    { title: "Agile", icon: "i-lucide-repeat", proficiency: 0.8 },
-    { title: "Trello", icon: "i-devicon-trello", proficiency: 0.85 },
-    { title: "Unit Testing", icon: "i-lucide-badge-check", proficiency: 0.7 },
-    { title: "EJS", icon: "i-lucide-brackets", proficiency: 0.75 },
-  ],
-  gameDev: [
-    { title: "Unity", icon: "i-devicon-unity", proficiency: 0.6 },
-    { title: "Godot", icon: "i-devicon-godot", proficiency: 0.5 },
-    { title: "C#", icon: "i-devicon-csharp", proficiency: 0.8 },
-  ],
-});
+const skillsData = ref<EnhancedSkill[]>([
+  // Software Development
+  {
+    title: "JavaScript",
+    icon: "i-devicon-javascript",
+    proficiency: 0.85,
+    category: "Software Development",
+    relatedSkills: ["TypeScript", "Node.js", "React", "Vue"],
+  },
+  {
+    title: "TypeScript",
+    icon: "i-devicon-typescript",
+    proficiency: 0.78,
+    category: "Software Development",
+    relatedSkills: ["JavaScript", "Node.js", "React", "Vue"],
+  },
+  {
+    title: "Python",
+    icon: "i-devicon-python",
+    proficiency: 0.9,
+    category: "Software Development",
+    relatedSkills: ["Django", "Flask"],
+  },
+  {
+    title: "Java",
+    icon: "i-devicon-java",
+    proficiency: 0.75,
+    category: "Software Development",
+    relatedSkills: ["C#"],
+  },
+  {
+    title: "C#",
+    icon: "i-devicon-csharp",
+    proficiency: 0.8,
+    category: "Software Development",
+    relatedSkills: ["Java", ".NET"],
+  },
+  {
+    title: "C",
+    icon: "i-devicon-c",
+    proficiency: 0.7,
+    category: "Software Development",
+    relatedSkills: [],
+  },
 
-// Map skills to categories for the chart
-const frontend = ["HTML", "CSS", "JavaScript", "React", "Vue", "Next.js", "Nuxt", "jQuery"];
-const backend = ["Node.js", "Python", "Java", "C#", "C", "TypeScript"];
-const databases = ["MongoDB", "MySQL", "PostgreSQL", "Firebase", "Prisma"];
-const tools = ["Git", "Agile", "Trello", "Unit Testing", "EJS"];
-const gameDev = ["Unity", "Godot", "C#"];
+  // Web Technologies
+  {
+    title: "HTML",
+    icon: "i-devicon-html5",
+    proficiency: 0.95,
+    category: "Web Technologies",
+    relatedSkills: ["CSS", "JavaScript"],
+  },
+  {
+    title: "CSS",
+    icon: "i-devicon-css3",
+    proficiency: 0.88,
+    category: "Web Technologies",
+    relatedSkills: ["HTML"],
+  },
+  {
+    title: "React",
+    icon: "i-devicon-react",
+    proficiency: 0.7,
+    category: "Web Technologies",
+    relatedSkills: ["JavaScript", "Next.js"],
+  },
+  {
+    title: "Vue",
+    icon: "i-devicon-vuejs",
+    proficiency: 0.85,
+    category: "Web Technologies",
+    relatedSkills: ["JavaScript", "Nuxt"],
+  },
+  {
+    title: "Next.js",
+    icon: "i-devicon-nextjs",
+    proficiency: 0.65,
+    category: "Web Technologies",
+    relatedSkills: ["React", "JavaScript"],
+  },
+  {
+    title: "Nuxt",
+    icon: "i-devicon-nuxtjs",
+    proficiency: 0.75,
+    category: "Web Technologies",
+    relatedSkills: ["Vue", "JavaScript"],
+  },
+  {
+    title: "jQuery",
+    icon: "i-devicon-jquery",
+    proficiency: 0.8,
+    category: "Web Technologies",
+    relatedSkills: ["JavaScript"],
+  },
+  {
+    title: "Node.js",
+    icon: "i-devicon-nodejs",
+    proficiency: 0.82,
+    category: "Web Technologies",
+    relatedSkills: ["JavaScript", "Express.js"],
+  },
+  {
+    title: "Express.js",
+    icon: "i-devicon-express",
+    proficiency: 0.78,
+    category: "Web Technologies",
+    relatedSkills: ["Node.js", "JavaScript"],
+  },
+  {
+    title: "EJS",
+    icon: "i-lucide-brackets",
+    proficiency: 0.75,
+    category: "Web Technologies",
+    relatedSkills: ["HTML", "JavaScript", "Node.js"],
+  },
+
+  // Systems
+  {
+    title: "Linux",
+    icon: "i-devicon-linux",
+    proficiency: 0.85,
+    category: "Systems",
+    relatedSkills: ["Bash", "Raspberry Pi"],
+  },
+  {
+    title: "Bash",
+    icon: "i-devicon-bash",
+    proficiency: 0.75,
+    category: "Systems",
+    relatedSkills: ["Linux"],
+  },
+  {
+    title: "Operating Systems",
+    icon: "i-lucide-laptop",
+    proficiency: 0.8,
+    category: "Systems",
+    relatedSkills: ["Linux"],
+  },
+  {
+    title: "Raspberry Pi",
+    icon: "i-devicon-raspberrypi",
+    proficiency: 0.9,
+    category: "Systems",
+    relatedSkills: ["Linux", "Self-hosting"],
+  },
+  {
+    title: "Virtualization",
+    icon: "i-lucide-layers",
+    proficiency: 0.7,
+    category: "Systems",
+    relatedSkills: ["Linux", "Docker"],
+  },
+  {
+    title: "Networking",
+    icon: "i-lucide-network",
+    proficiency: 0.75,
+    category: "Systems",
+    relatedSkills: ["Linux", "EC2"],
+  },
+  {
+    title: "System Security",
+    icon: "i-lucide-shield",
+    proficiency: 0.7,
+    category: "Systems",
+    relatedSkills: ["Linux", "Networking"],
+  },
+
+  // Data
+  {
+    title: "MongoDB",
+    icon: "i-devicon-mongodb",
+    proficiency: 0.8,
+    category: "Data",
+    relatedSkills: ["Node.js", "DynamoDB"],
+  },
+  {
+    title: "MySQL",
+    icon: "i-devicon-mysql",
+    proficiency: 0.85,
+    category: "Data",
+    relatedSkills: ["PostgreSQL", "RDS"],
+  },
+  {
+    title: "PostgreSQL",
+    icon: "i-devicon-postgresql",
+    proficiency: 0.75,
+    category: "Data",
+    relatedSkills: ["MySQL", "RDS"],
+  },
+  {
+    title: "Firebase",
+    icon: "i-devicon-firebase",
+    proficiency: 0.65,
+    category: "Data",
+    relatedSkills: ["DynamoDB"],
+  },
+  {
+    title: "Prisma",
+    icon: "i-devicon-prisma",
+    proficiency: 0.7,
+    category: "Data",
+    relatedSkills: ["PostgreSQL", "MySQL"],
+  },
+  {
+    title: "DynamoDB",
+    icon: "i-devicon-amazonwebservices",
+    proficiency: 0.65,
+    category: "Data",
+    relatedSkills: ["MongoDB", "AWS"],
+  },
+  {
+    title: "RDS",
+    icon: "i-devicon-amazonwebservices",
+    proficiency: 0.7,
+    category: "Data",
+    relatedSkills: ["MySQL", "PostgreSQL", "AWS"],
+  },
+
+  // Cloud & DevOps
+  {
+    title: "EC2",
+    icon: "i-devicon-amazonwebservices",
+    proficiency: 0.75,
+    category: "Cloud & DevOps",
+    relatedSkills: ["AWS", "Linux", "Self-hosting"],
+  },
+  {
+    title: "Lambda",
+    icon: "i-devicon-amazonwebservices",
+    proficiency: 0.7,
+    category: "Cloud & DevOps",
+    relatedSkills: ["AWS", "JavaScript", "Node.js"],
+  },
+  {
+    title: "S3",
+    icon: "i-devicon-amazonwebservices",
+    proficiency: 0.8,
+    category: "Cloud & DevOps",
+    relatedSkills: ["AWS"],
+  },
+  {
+    title: "Git",
+    icon: "i-devicon-git",
+    proficiency: 0.9,
+    category: "Cloud & DevOps",
+    relatedSkills: ["CI/CD"],
+  },
+  {
+    title: "Docker",
+    icon: "i-devicon-docker",
+    proficiency: 0.75,
+    category: "Cloud & DevOps",
+    relatedSkills: ["Virtualization", "CI/CD"],
+  },
+  {
+    title: "Self-hosting",
+    icon: "i-lucide-server",
+    proficiency: 0.85,
+    category: "Cloud & DevOps",
+    relatedSkills: ["Raspberry Pi", "Linux", "Docker"],
+  },
+  {
+    title: "CI/CD",
+    icon: "i-lucide-git-branch",
+    proficiency: 0.7,
+    category: "Cloud & DevOps",
+    relatedSkills: ["Git", "Docker"],
+  },
+  {
+    title: "Nginx",
+    icon: "i-devicon-nginx",
+    proficiency: 0.75,
+    category: "Cloud & DevOps",
+    relatedSkills: ["Self-hosting", "Linux"],
+  },
+]);
+
+const softwareDevelopmentSkills = computed<EnhancedSkill[]>(() =>
+  skillsData.value.filter((s) => s.category === "Software Development")
+);
+
+const webSkills = computed<EnhancedSkill[]>(() =>
+  skillsData.value.filter((s) => s.category === "Web Technologies")
+);
+
+const systemsSkills = computed<EnhancedSkill[]>(() =>
+  skillsData.value.filter((s) => s.category === "Systems")
+);
+
+const dataSkills = computed<EnhancedSkill[]>(() =>
+  skillsData.value.filter((s) => s.category === "Data")
+);
+
+const cloudSkills = computed<EnhancedSkill[]>(() =>
+  skillsData.value.filter((s) => s.category === "Cloud & DevOps")
+);
+
+const skillMap: Record<SkillName, ComputedRef<EnhancedSkill[]>> = {
+  "Software Development": softwareDevelopmentSkills,
+  "Web Technologies": webSkills,
+  "Systems": systemsSkills,
+  "Data": dataSkills,
+  "Cloud & DevOps": cloudSkills,
+};
 
 // Helper function to calculate average proficiency for a category
 const calculateCategoryProficiency = (categorySkills: SkillName | "all"): number => {
-  switch (categorySkills) {
-    case "Frontend": {
-      const skills = skillsData.value.frontend;
-      const sum = skills.reduce((acc, skill) => acc + (skill.proficiency || 0), 0);
-      return sum / skills.length;
-    }
-    case "Backend": {
-      const skills = skillsData.value.backend;
-      const sum = skills.reduce((acc, skill) => acc + (skill.proficiency || 0), 0);
-      return sum / skills.length;
-    }
-    case "Databases": {
-      const skills = skillsData.value.databases;
-      const sum = skills.reduce((acc, skill) => acc + (skill.proficiency || 0), 0);
-      return sum / skills.length;
-    }
-    case "Game Dev": {
-      const skills = skillsData.value.gameDev;
-      const sum = skills.reduce((acc, skill) => acc + (skill.proficiency || 0), 0);
-      return sum / skills.length;
-    }
-    case "Tools": {
-      const skills = skillsData.value.tools;
-      const sum = skills.reduce((acc, skill) => acc + (skill.proficiency || 0), 0);
-      return sum / skills.length;
-    }
-    default: {
-      // Flatten all skills into a single array
-      const allSkills = [
-        ...skillsData.value.backend,
-        ...skillsData.value.frontend,
-        ...skillsData.value.databases,
-        ...skillsData.value.tools,
-        ...skillsData.value.gameDev,
-      ];
-
-      const sum = allSkills.reduce((acc, skill) => acc + (skill.proficiency || 0), 0);
-      return sum / allSkills.length;
-    }
+  if (categorySkills === "all") {
+    const sum = skillsData.value.reduce((acc, skill) => acc + (skill.proficiency || 0), 0);
+    return sum / skillsData.value.length;
   }
+  const skills = skillMap[categorySkills].value;
+  const sum = skills.reduce((acc, skill) => acc + (skill.proficiency || 0), 0);
+  return sum / skills.length;
 };
 
 // Chart configuration
@@ -115,13 +341,7 @@ const chartData = computed<ChartData<"radar">>(() => {
     datasets: [
       {
         label: "Skill Proficiency",
-        data: [
-          calculateCategoryProficiency("Frontend") * 100,
-          calculateCategoryProficiency("Backend") * 100,
-          calculateCategoryProficiency("Databases") * 100,
-          calculateCategoryProficiency("Tools") * 100,
-          calculateCategoryProficiency("Game Dev") * 100,
-        ],
+        data: skillCategories.map((category) => calculateCategoryProficiency(category.name) * 100),
         backgroundColor: "rgba(54, 162, 235, 0.2)",
         borderColor: "rgba(54, 162, 235, 1)",
         pointBackgroundColor: skillCategories.map((category) => category.color),
@@ -181,7 +401,7 @@ const chartOptions = computed<ChartOptions<"radar">>(() => ({
 }));
 
 // Determine the active category for displaying skills
-const activeCategory = ref("all");
+const activeCategory = ref<SkillName | "all">("all");
 </script>
 
 <template>
@@ -223,20 +443,7 @@ const activeCategory = ref("all");
               </template>
               {{ category.name }}
               <UBadge
-                :label="
-                  (category.name === 'Frontend'
-                    ? frontend.length
-                    : category.name === 'Backend'
-                      ? backend.length
-                      : category.name === 'Databases'
-                        ? databases.length
-                        : category.name === 'Tools'
-                          ? tools.length
-                          : category.name === 'Game Dev'
-                            ? gameDev.length
-                            : 0
-                  ).toString()
-                "
+                :label="skillMap[category.name].value.length.toString()"
                 size="xs"
                 variant="subtle"
                 class="ml-2" />
@@ -275,122 +482,20 @@ const activeCategory = ref("all");
             </div>
             <UBadge
               v-if="activeCategory === 'all'"
-              :label="`${
-                skillsData.backend.length +
-                skillsData.frontend.length +
-                skillsData.databases.length +
-                skillsData.gameDev.length +
-                skillsData.tools.length
-              } Skills`"
+              :label="`${skillsData.length} Skills`"
               variant="subtle" />
           </div>
         </template>
         <!-- Display skill tags grouped by categories when 'all' is selected -->
         <div v-if="activeCategory === 'all'">
-          <!-- Frontend Skills -->
-          <div class="mb-6">
+          <div v-for="category in skillCategories" :key="category.name" class="mb-6">
             <h4 class="text-lg font-medium mb-2 flex items-center">
-              <UIcon
-                :name="skillCategories[0].icon"
-                class="mr-2"
-                :style="`color: ${skillCategories[0].color}`" />
-              Frontend
+              <UIcon :name="category.icon" class="mr-2" :style="`color: ${category.color}`" />
+              {{ category.name }}
             </h4>
             <div class="flex flex-wrap gap-2">
               <UBadge
-                v-for="skill in skillsData.frontend"
-                :key="skill.title"
-                :label="skill.title"
-                variant="soft"
-                class="flex items-center gap-1 py-1 px-2">
-                <template #leading>
-                  <UIcon :name="skill.icon" class="text-lg" />
-                </template>
-              </UBadge>
-            </div>
-          </div>
-
-          <!-- Backend Skills -->
-          <div class="mb-6">
-            <h4 class="text-lg font-medium mb-2 flex items-center">
-              <UIcon
-                :name="skillCategories[1].icon"
-                class="mr-2"
-                :style="`color: ${skillCategories[1].color}`" />
-              Backend
-            </h4>
-            <div class="flex flex-wrap gap-2">
-              <UBadge
-                v-for="skill in skillsData.backend"
-                :key="skill.title"
-                :label="skill.title"
-                variant="soft"
-                class="flex items-center gap-1 py-1 px-2">
-                <template #leading>
-                  <UIcon :name="skill.icon" class="text-lg" />
-                </template>
-              </UBadge>
-            </div>
-          </div>
-
-          <!-- Database Skills -->
-          <div class="mb-6">
-            <h4 class="text-lg font-medium mb-2 flex items-center">
-              <UIcon
-                :name="skillCategories[2].icon"
-                class="mr-2"
-                :style="`color: ${skillCategories[2].color}`" />
-              Databases
-            </h4>
-            <div class="flex flex-wrap gap-2">
-              <UBadge
-                v-for="skill in skillsData.databases"
-                :key="skill.title"
-                :label="skill.title"
-                variant="soft"
-                class="flex items-center gap-1 py-1 px-2">
-                <template #leading>
-                  <UIcon :name="skill.icon" class="text-lg" />
-                </template>
-              </UBadge>
-            </div>
-          </div>
-
-          <!-- Tools Skills -->
-          <div class="mb-6">
-            <h4 class="text-lg font-medium mb-2 flex items-center">
-              <UIcon
-                :name="skillCategories[3].icon"
-                class="mr-2"
-                :style="`color: ${skillCategories[3].color}`" />
-              Tools
-            </h4>
-            <div class="flex flex-wrap gap-2">
-              <UBadge
-                v-for="skill in skillsData.tools"
-                :key="skill.title"
-                :label="skill.title"
-                variant="soft"
-                class="flex items-center gap-1 py-1 px-2">
-                <template #leading>
-                  <UIcon :name="skill.icon" class="text-lg" />
-                </template>
-              </UBadge>
-            </div>
-          </div>
-
-          <!-- Game Dev Skills -->
-          <div>
-            <h4 class="text-lg font-medium mb-2 flex items-center">
-              <UIcon
-                :name="skillCategories[4].icon"
-                class="mr-2"
-                :style="`color: ${skillCategories[4].color}`" />
-              Game Dev
-            </h4>
-            <div class="flex flex-wrap gap-2">
-              <UBadge
-                v-for="skill in skillsData.gameDev"
+                v-for="skill in skillMap[category.name].value"
                 :key="skill.title"
                 :label="skill.title"
                 variant="soft"
@@ -406,17 +511,7 @@ const activeCategory = ref("all");
         <!-- Display filtered skills when a specific category is selected -->
         <div v-else class="flex flex-wrap gap-2">
           <UBadge
-            v-for="skill in activeCategory === 'Frontend'
-              ? skillsData.frontend
-              : activeCategory === 'Backend'
-                ? skillsData.backend
-                : activeCategory === 'Databases'
-                  ? skillsData.databases
-                  : activeCategory === 'Tools'
-                    ? skillsData.tools
-                    : activeCategory === 'Game Dev'
-                      ? skillsData.gameDev
-                      : []"
+            v-for="skill in skillMap[activeCategory].value"
             :key="skill.title"
             :label="skill.title"
             variant="soft"
