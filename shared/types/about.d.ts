@@ -99,3 +99,16 @@ declare interface NetworkState {
   highlightedNodes: Set<string>;
   highlightedLinks: Set<string>;
 }
+
+// Resume types
+declare interface ResumeDetails {
+  fileName: string;
+  fileSize: string;
+  lastUpdated: string;
+}
+
+declare interface ResumeFormat {
+  type: "PDF" | "DOCX";
+  icon: string;
+  link: string;
+}

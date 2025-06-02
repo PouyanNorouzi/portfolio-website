@@ -96,28 +96,9 @@ const experience = ref([
         </div>
       </section>
 
-      <!-- Contact CTA -->
-      <section
-        class="text-center animate-fade-in-delay-5 bg-gray-50 dark:bg-gray-800 p-8 rounded-lg">
-        <h2 class="text-2xl font-semibold mb-4">Let's Connect</h2>
-        <p class="mb-6">Interested in collaboration or have questions? Feel free to reach out!</p>
-        <div class="flex justify-center gap-4">
-          <UButton
-            to="mailto:pouyannorouzii@gmail.com"
-            size="lg"
-            icon="i-lucide-mail"
-            color="primary">
-            Email Me
-          </UButton>
-          <UButton
-            to="https://www.linkedin.com/in/pouyan-norouzi/"
-            target="_blank"
-            size="lg"
-            icon="i-logos-linkedin-icon"
-            variant="outline">
-            LinkedIn
-          </UButton>
-        </div>
+      <!-- Contact & Resume Section -->
+      <section class="text-center animate-fade-in-delay-5 bg-gray-50 dark:bg-gray-800 p-8 rounded-lg">
+        <AboutResume />
       </section>
     </UContainer>
   </div>
