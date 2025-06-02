@@ -136,7 +136,7 @@ export const SKILL_NODEJS: EnhancedSkill = {
 export const SKILL_EXPRESSJS: EnhancedSkill = {
   id: 16,
   title: "Express.js",
-  icon: "i-devicon-express",
+  icon: "i-simple-icons-express",
   proficiency: 0.9,
   category: "Web Technologies",
   relatedSkills: ["Node.js", "JavaScript"],
@@ -145,7 +145,7 @@ export const SKILL_EXPRESSJS: EnhancedSkill = {
 export const SKILL_EJS: EnhancedSkill = {
   id: 17,
   title: "EJS",
-  icon: "i-lucide-brackets",
+  icon: "i-simple-icons-ejs",
   proficiency: 0.6,
   category: "Web Technologies",
   relatedSkills: ["HTML", "JavaScript", "Node.js"],
@@ -164,7 +164,7 @@ export const SKILL_LINUX: EnhancedSkill = {
 export const SKILL_BASH: EnhancedSkill = {
   id: 19,
   title: "Bash",
-  icon: "i-devicon-bash",
+  icon: "i-devicon-plain-bash",
   proficiency: 0.65,
   category: "Systems",
   relatedSkills: ["Linux"],
@@ -264,7 +264,7 @@ export const SKILL_FIREBASE: EnhancedSkill = {
 export const SKILL_PRISMA: EnhancedSkill = {
   id: 30,
   title: "Prisma",
-  icon: "i-devicon-prisma",
+  icon: "i-simple-icons-prisma",
   proficiency: 0.9,
   category: "Data",
   relatedSkills: ["PostgreSQL", "MySQL"],
@@ -273,7 +273,7 @@ export const SKILL_PRISMA: EnhancedSkill = {
 export const SKILL_DYNAMODB: EnhancedSkill = {
   id: 31,
   title: "DynamoDB",
-  icon: "i-devicon-amazonwebservices-wordmark",
+  icon: "i-devicon-dynamodb",
   proficiency: 0.85,
   category: "Data",
   relatedSkills: ["MongoDB", "AWS"],
@@ -282,7 +282,7 @@ export const SKILL_DYNAMODB: EnhancedSkill = {
 export const SKILL_RDS: EnhancedSkill = {
   id: 32,
   title: "RDS",
-  icon: "i-devicon-amazonwebservices-wordmark",
+  icon: "i-logos-aws-rds",
   proficiency: 0.75,
   category: "Data",
   relatedSkills: ["MySQL", "PostgreSQL", "AWS"],
@@ -292,7 +292,7 @@ export const SKILL_RDS: EnhancedSkill = {
 export const SKILL_EC2: EnhancedSkill = {
   id: 33,
   title: "EC2",
-  icon: "i-devicon-amazonwebservices-wordmark",
+  icon: "i-logos-aws-ec2",
   proficiency: 0.75,
   category: "Cloud & DevOps",
   relatedSkills: ["AWS", "Linux", "Self-hosting"],
@@ -301,7 +301,7 @@ export const SKILL_EC2: EnhancedSkill = {
 export const SKILL_LAMBDA: EnhancedSkill = {
   id: 34,
   title: "Lambda",
-  icon: "i-devicon-amazonwebservices-wordmark",
+  icon: "i-logos-aws-lambda",
   proficiency: 0.5,
   category: "Cloud & DevOps",
   relatedSkills: ["AWS", "JavaScript", "Node.js"],
@@ -310,7 +310,7 @@ export const SKILL_LAMBDA: EnhancedSkill = {
 export const SKILL_S3: EnhancedSkill = {
   id: 35,
   title: "S3",
-  icon: "i-devicon-amazonwebservices-wordmark",
+  icon: "i-logos-aws-s3",
   proficiency: 0.8,
   category: "Cloud & DevOps",
   relatedSkills: ["AWS"],
@@ -355,7 +355,7 @@ export const SKILL_CICD: EnhancedSkill = {
 export const SKILL_NGINX: EnhancedSkill = {
   id: 40,
   title: "Nginx",
-  icon: "i-devicon-nginx",
+  icon: "i-simple-icons-nginx",
   proficiency: 0.7,
   category: "Cloud & DevOps",
   relatedSkills: ["Self-hosting", "Linux"],
