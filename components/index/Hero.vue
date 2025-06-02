@@ -14,7 +14,7 @@ const roleTexts = ref<TextWithIcon[]>([
 </script>
 
 <template>
-  <div class="hero flex items-center py-16">
+  <div class="hero flex items-center py-8">
     <UContainer>
       <div class="w-full">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
@@ -26,19 +26,10 @@ const roleTexts = ref<TextWithIcon[]>([
           <div class="hero-content text-center lg:text-left order-last lg:order-first">
             <div class="mb-3">
               <h1 class="text-4xl md:text-5xl font-bold mb-1">
-                Hi, I'm <span class="text-primary">Pouyan</span>
+                Hi, I'm <span class="text-primary">Pouyan Norouzi</span>
               </h1>
               <p class="text-xl md:text-2xl font-medium text-gray-700 dark:text-gray-200">
                 <CyclingTexts :texts="roleTexts" text-class="font-medium text-secondary" />
-              </p>
-            </div>
-            <div class="space-y-2">
-              <p class="text-lg text-gray-500 dark:text-gray-400 max-w-2xl lg:max-w-none">
-                I create digital experiences that bridge the gap between design and functionality,
-                building web applications that users love and businesses rely on.
-                <span class="font-medium text-gray-600 dark:text-gray-300"
-                  >Let's build something amazing together.</span
-                >
               </p>
             </div>
             <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mt-8">

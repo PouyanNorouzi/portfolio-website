@@ -5,5 +5,8 @@ useHead({
 </script>
 
 <template>
-  <IndexHero />
+  <div>
+    <IndexHero />
+    <IndexOverview />
+  </div>
 </template>
