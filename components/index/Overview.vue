@@ -8,8 +8,8 @@
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
         <!-- Left column with section heading -->
         <div class="lg:col-span-4">
-          <h2 class="text-3xl font-bold mb-4 text-gray-800 dark:text-white">
-            About <span class="text-primary">Me</span>
+          <h2 class="text-xl md:text-3xl font-bold mb-4 text-gray-800 dark:text-white">
+              Overview
           </h2>
           <div class="h-1 w-24 bg-primary mb-6" />
           <p class="text-lg text-gray-600 dark:text-gray-300">
