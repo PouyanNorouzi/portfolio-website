@@ -145,7 +145,7 @@ onUnmounted(() => {
       v-show="showIcon"
       :name="currentIcon"
       class="items-center ml-1"
-      size="24px" />
+       />
     <span class="cursor ml-0.5" :class="{ 'cursor-blink': showCursor }">|</span>
   </span>
 </template>
