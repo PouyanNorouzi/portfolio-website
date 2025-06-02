@@ -182,7 +182,10 @@ export const SKILL_OS: EnhancedSkill = {
 export const SKILL_RASPBERRY_PI: EnhancedSkill = {
   id: 21,
   title: "Raspberry Pi",
-  icon: { lightIcon: "i-skill-icons-raspberrypi-light", darkIcon: "i-skill-icons-raspberrypi-dark" },
+  icon: {
+    lightIcon: "i-skill-icons-raspberrypi-light",
+    darkIcon: "i-skill-icons-raspberrypi-dark",
+  },
   proficiency: 0.8,
   category: "Systems",
   relatedSkills: ["Linux", "Self-hosting"],
@@ -218,7 +221,10 @@ export const SKILL_SECURITY: EnhancedSkill = {
 export const SKILL_ANDROID: EnhancedSkill = {
   id: 25,
   title: "Android",
-  icon: { lightIcon: "i-skill-icons-androidstudio-light", darkIcon: "i-skill-icons-androidstudio-dark" },
+  icon: {
+    lightIcon: "i-skill-icons-androidstudio-light",
+    darkIcon: "i-skill-icons-androidstudio-dark",
+  },
   proficiency: 0.65,
   category: "Systems",
   relatedSkills: ["Kotlin", "Java"],
@@ -361,6 +367,105 @@ export const SKILL_NGINX: EnhancedSkill = {
   relatedSkills: ["Self-hosting", "Linux"],
 };
 
+export const SKILL_OPENAI_API: EnhancedSkill = {
+  id: 41,
+  title: "OpenAI API",
+  icon: "i-simple-icons-openai",
+  proficiency: 0.7,
+  category: "Web Technologies",
+  relatedSkills: ["Nodejs", "Python"],
+};
+
+export const SKILL_LIBSSH: EnhancedSkill = {
+  id: 42,
+  title: "libssh",
+  icon: "i-lucide-key",
+  proficiency: 0.7,
+  category: "Systems",
+  relatedSkills: ["C", "SSH", "SFTP", "Networking"],
+};
+
+export const SKILL_SSH: EnhancedSkill = {
+  id: 43,
+  title: "SSH",
+  icon: "i-lucide-terminal",
+  proficiency: 0.7,
+  category: "Systems",
+  relatedSkills: ["C", "SSH", "libssh", "Networking"],
+};
+
+export const SKILL_SFTP: EnhancedSkill = {
+  id: 44,
+  title: "SFTP",
+  icon: "i-lucide-cloud-upload",
+  proficiency: 0.7,
+  category: "Systems",
+  relatedSkills: ["C", "SSH", "libssh", "Networking"],
+};
+
+export const SKILL_AWS: EnhancedSkill = {
+  id: 45,
+  title: "AWS",
+  icon: { lightIcon: "i-skill-icons-aws-light", darkIcon: "i-skill-icons-aws-dark" },
+  proficiency: 0.7,
+  category: "Cloud & DevOps",
+  relatedSkills: ["EC2", "S3", "Lambda", "DynamoDB", "RDS"]
+}
+
+export const SKILL_REDIS: EnhancedSkill = {
+  id: 46,
+  title: "Redis",
+  icon: { lightIcon: "i-skill-icons-redis-light", darkIcon: "i-skill-icons-redis-dark" },
+  proficiency: 0.8,
+  category: "Data",
+  relatedSkills: ["MongoDB", "Caching", "Pub/Sub"],
+};
+
+export const SKILL_WEBSOCKET: EnhancedSkill = {
+  id: 47,
+  title: "WebSockets",
+  icon: "i-lucide-plug",
+  proficiency: 0.75,
+  category: "Web Technologies",
+  relatedSkills: ["JavaScript", "Node.js", "Real-time Communication"],
+};
+
+export const SKILL_ZUSTAND: EnhancedSkill = {
+  id: 48,
+  title: "Zustand",
+  icon: "i-devicon-zustand",
+  proficiency: 0.75,
+  category: "Web Technologies",
+  relatedSkills: ["React", "State Management", "JavaScript"],
+};
+
+export const SKILL_NEXTAUTH: EnhancedSkill = {
+  id: 49,
+  title: "NextAuth",
+  icon: "i-lucide-shield-check",
+  proficiency: 0.8,
+  category: "Web Technologies",
+  relatedSkills: ["Next.js", "Authentication", "OAuth"],
+};
+
+export const SKILL_STRIPE: EnhancedSkill = {
+  id: 50,
+  title: "Stripe",
+  icon: "i-simple-icons-stripe",
+  proficiency: 0.7,
+  category: "Web Technologies",
+  relatedSkills: ["Payments", "Node.js", "JavaScript"],
+};
+
+export const SKILL_TAILWIND: EnhancedSkill = {
+  id: 51,
+  title: "Tailwind CSS",
+  icon: { lightIcon: "i-skill-icons-tailwindcss-light", darkIcon: "i-skill-icons-tailwindcss-dark" },
+  proficiency: 0.85,
+  category: "Web Technologies",
+  relatedSkills: ["CSS", "HTML", "Web Design"],
+};
+
 // Export a skills array for easier access
 export const SKILLS: EnhancedSkill[] = [
   SKILL_JAVASCRIPT,
@@ -403,4 +508,5 @@ export const SKILLS: EnhancedSkill[] = [
   SKILL_SELFHOSTING,
   SKILL_CICD,
   SKILL_NGINX,
+  SKILL_REDIS,
 ];
