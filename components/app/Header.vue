@@ -93,11 +93,11 @@ onMounted(() => {
   }
 });
 
+const headerBackgroundOpacity = computed(() => (isScrolled.value ? 90 : 50));
+
 // Dynamic header styles based on scroll position
 const headerClass = computed(() => {
   return {
-    "bg-opacity-90 backdrop-blur-md shadow-sm": isScrolled.value,
-    "bg-opacity-50": !isScrolled.value,
     "py-2": isScrolled.value,
     "py-3": !isScrolled.value,
     "transition-all duration-300": true,
@@ -108,7 +108,10 @@ const headerClass = computed(() => {
 <template>
   <header
     ref="headerRef"
-    :class="[headerClass, 'fixed top-0 left-0 w-full z-50 bg-white dark:bg-gray-900']">
+    :class="[
+      headerClass,
+      `fixed top-0 left-0 w-full z-50 bg-white/${headerBackgroundOpacity} dark:bg-gray-900/${headerBackgroundOpacity}`,
+    ]">
     <UContainer>
       <div class="flex items-center justify-between gap-4">
         <!-- Logo/Name -->
