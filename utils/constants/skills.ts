@@ -1,7 +1,7 @@
 export const SKILL_JAVASCRIPT: EnhancedSkill = {
   id: 1,
   title: "JavaScript",
-  icon: "i-devicon-javascript",
+  icon: "i-skill-icons-javascript",
   proficiency: 0.9,
   category: "Software Development",
   relatedSkills: ["TypeScript", "Node.js", "React", "Vue"],
@@ -10,7 +10,7 @@ export const SKILL_JAVASCRIPT: EnhancedSkill = {
 export const SKILL_TYPESCRIPT: EnhancedSkill = {
   id: 2,
   title: "TypeScript",
-  icon: "i-devicon-typescript",
+  icon: "i-skill-icons-typescript",
   proficiency: 0.9,
   category: "Software Development",
   relatedSkills: ["JavaScript", "Node.js", "React", "Vue"],
@@ -19,7 +19,7 @@ export const SKILL_TYPESCRIPT: EnhancedSkill = {
 export const SKILL_PYTHON: EnhancedSkill = {
   id: 3,
   title: "Python",
-  icon: "i-devicon-python",
+  icon: { lightIcon: "i-skill-icons-python-light", darkIcon: "i-skill-icons-python-dark" },
   proficiency: 0.95,
   category: "Software Development",
   relatedSkills: ["Django", "Flask"],
@@ -28,7 +28,7 @@ export const SKILL_PYTHON: EnhancedSkill = {
 export const SKILL_JAVA: EnhancedSkill = {
   id: 4,
   title: "Java",
-  icon: "i-devicon-java",
+  icon: { lightIcon: "i-skill-icons-java-light", darkIcon: "i-skill-icons-java-dark" },
   proficiency: 0.9,
   category: "Software Development",
 };
@@ -36,7 +36,7 @@ export const SKILL_JAVA: EnhancedSkill = {
 export const SKILL_CSHARP: EnhancedSkill = {
   id: 5,
   title: "C#",
-  icon: "i-devicon-csharp",
+  icon: "i-skill-icons-cs",
   proficiency: 0.6,
   category: "Software Development",
   relatedSkills: ["Java", ".NET"],
@@ -45,7 +45,7 @@ export const SKILL_CSHARP: EnhancedSkill = {
 export const SKILL_C: EnhancedSkill = {
   id: 6,
   title: "C",
-  icon: "i-devicon-c",
+  icon: "i-skill-icons-c",
   proficiency: 0.99,
   category: "Software Development",
   relatedSkills: [],
@@ -54,7 +54,7 @@ export const SKILL_C: EnhancedSkill = {
 export const SKILL_KOTLIN: EnhancedSkill = {
   id: 7,
   title: "Kotlin",
-  icon: "i-devicon-kotlin",
+  icon: { lightIcon: "i-skill-icons-kotlin-light", darkIcon: "i-skill-icons-kotlin-dark" },
   proficiency: 0.7,
   category: "Software Development",
   relatedSkills: ["Java", "Android"],
@@ -64,7 +64,7 @@ export const SKILL_KOTLIN: EnhancedSkill = {
 export const SKILL_HTML: EnhancedSkill = {
   id: 8,
   title: "HTML",
-  icon: "i-devicon-html5",
+  icon: "i-skill-icons-html",
   proficiency: 1,
   category: "Web Technologies",
   relatedSkills: ["CSS", "JavaScript"],
@@ -73,7 +73,7 @@ export const SKILL_HTML: EnhancedSkill = {
 export const SKILL_CSS: EnhancedSkill = {
   id: 9,
   title: "CSS",
-  icon: "i-devicon-css3",
+  icon: "i-skill-icons-css",
   proficiency: 0.75,
   category: "Web Technologies",
   relatedSkills: ["HTML"],
@@ -82,7 +82,7 @@ export const SKILL_CSS: EnhancedSkill = {
 export const SKILL_REACT: EnhancedSkill = {
   id: 10,
   title: "React",
-  icon: "i-devicon-react",
+  icon: { lightIcon: "i-skill-icons-react-light", darkIcon: "i-skill-icons-react-dark" },
   proficiency: 0.7,
   category: "Web Technologies",
   relatedSkills: ["JavaScript", "Next.js"],
@@ -91,7 +91,7 @@ export const SKILL_REACT: EnhancedSkill = {
 export const SKILL_VUE: EnhancedSkill = {
   id: 11,
   title: "Vue",
-  icon: "i-devicon-vuejs",
+  icon: { lightIcon: "i-skill-icons-vuejs-light", darkIcon: "i-skill-icons-vuejs-dark" },
   proficiency: 0.85,
   category: "Web Technologies",
   relatedSkills: ["JavaScript", "Nuxt"],
@@ -100,7 +100,7 @@ export const SKILL_VUE: EnhancedSkill = {
 export const SKILL_NEXTJS: EnhancedSkill = {
   id: 12,
   title: "Next.js",
-  icon: "i-devicon-nextjs",
+  icon: { lightIcon: "i-skill-icons-nextjs-light", darkIcon: "i-skill-icons-nextjs-dark" },
   proficiency: 0.75,
   category: "Web Technologies",
   relatedSkills: ["React", "JavaScript"],
@@ -109,7 +109,7 @@ export const SKILL_NEXTJS: EnhancedSkill = {
 export const SKILL_NUXT: EnhancedSkill = {
   id: 13,
   title: "Nuxt",
-  icon: "i-devicon-nuxtjs",
+  icon: { lightIcon: "i-skill-icons-nuxtjs-light", darkIcon: "i-skill-icons-nuxtjs-dark" },
   proficiency: 0.85,
   category: "Web Technologies",
   relatedSkills: ["Vue", "JavaScript"],
@@ -118,7 +118,7 @@ export const SKILL_NUXT: EnhancedSkill = {
 export const SKILL_JQUERY: EnhancedSkill = {
   id: 14,
   title: "jQuery",
-  icon: "i-devicon-jquery",
+  icon: "i-skill-icons-jquery",
   proficiency: 0.8,
   category: "Web Technologies",
   relatedSkills: ["JavaScript"],
@@ -127,7 +127,7 @@ export const SKILL_JQUERY: EnhancedSkill = {
 export const SKILL_NODEJS: EnhancedSkill = {
   id: 15,
   title: "Node.js",
-  icon: "i-devicon-nodejs",
+  icon: { lightIcon: "i-skill-icons-nodejs-light", darkIcon: "i-skill-icons-nodejs-dark" },
   proficiency: 0.9,
   category: "Web Technologies",
   relatedSkills: ["JavaScript", "Express.js"],
@@ -136,7 +136,7 @@ export const SKILL_NODEJS: EnhancedSkill = {
 export const SKILL_EXPRESSJS: EnhancedSkill = {
   id: 16,
   title: "Express.js",
-  icon: "i-simple-icons-express",
+  icon: { lightIcon: "i-skill-icons-expressjs-light", darkIcon: "i-skill-icons-expressjs-dark" },
   proficiency: 0.9,
   category: "Web Technologies",
   relatedSkills: ["Node.js", "JavaScript"],
@@ -155,7 +155,7 @@ export const SKILL_EJS: EnhancedSkill = {
 export const SKILL_LINUX: EnhancedSkill = {
   id: 18,
   title: "Linux",
-  icon: "i-devicon-linux",
+  icon: { lightIcon: "i-skill-icons-linux-light", darkIcon: "i-skill-icons-linux-dark" },
   proficiency: 0.7,
   category: "Systems",
   relatedSkills: ["Bash", "Raspberry Pi"],
@@ -164,7 +164,7 @@ export const SKILL_LINUX: EnhancedSkill = {
 export const SKILL_BASH: EnhancedSkill = {
   id: 19,
   title: "Bash",
-  icon: "i-devicon-plain-bash",
+  icon: { lightIcon: "i-skill-icons-bash-light", darkIcon: "i-skill-icons-bash-dark" },
   proficiency: 0.65,
   category: "Systems",
   relatedSkills: ["Linux"],
@@ -182,7 +182,7 @@ export const SKILL_OS: EnhancedSkill = {
 export const SKILL_RASPBERRY_PI: EnhancedSkill = {
   id: 21,
   title: "Raspberry Pi",
-  icon: "i-devicon-raspberrypi",
+  icon: { lightIcon: "i-skill-icons-raspberrypi-light", darkIcon: "i-skill-icons-raspberrypi-dark" },
   proficiency: 0.8,
   category: "Systems",
   relatedSkills: ["Linux", "Self-hosting"],
@@ -218,7 +218,7 @@ export const SKILL_SECURITY: EnhancedSkill = {
 export const SKILL_ANDROID: EnhancedSkill = {
   id: 25,
   title: "Android",
-  icon: "i-devicon-android",
+  icon: { lightIcon: "i-skill-icons-androidstudio-light", darkIcon: "i-skill-icons-androidstudio-dark" },
   proficiency: 0.65,
   category: "Systems",
   relatedSkills: ["Kotlin", "Java"],
@@ -228,7 +228,7 @@ export const SKILL_ANDROID: EnhancedSkill = {
 export const SKILL_MONGODB: EnhancedSkill = {
   id: 26,
   title: "MongoDB",
-  icon: "i-devicon-mongodb",
+  icon: "i-skill-icons-mongodb",
   proficiency: 0.85,
   category: "Data",
   relatedSkills: ["Node.js", "DynamoDB"],
@@ -237,7 +237,7 @@ export const SKILL_MONGODB: EnhancedSkill = {
 export const SKILL_MYSQL: EnhancedSkill = {
   id: 27,
   title: "MySQL",
-  icon: "i-devicon-mysql",
+  icon: { lightIcon: "i-skill-icons-mysql-light", darkIcon: "i-skill-icons-mysql-dark" },
   proficiency: 0.75,
   category: "Data",
   relatedSkills: ["PostgreSQL", "RDS"],
@@ -246,7 +246,7 @@ export const SKILL_MYSQL: EnhancedSkill = {
 export const SKILL_POSTGRESQL: EnhancedSkill = {
   id: 28,
   title: "PostgreSQL",
-  icon: "i-devicon-postgresql",
+  icon: { lightIcon: "i-skill-icons-postgresql-light", darkIcon: "i-skill-icons-postgresql-dark" },
   proficiency: 0.75,
   category: "Data",
   relatedSkills: ["MySQL", "RDS"],
@@ -264,7 +264,7 @@ export const SKILL_FIREBASE: EnhancedSkill = {
 export const SKILL_PRISMA: EnhancedSkill = {
   id: 30,
   title: "Prisma",
-  icon: "i-simple-icons-prisma",
+  icon: "i-skill-icons-prisma",
   proficiency: 0.9,
   category: "Data",
   relatedSkills: ["PostgreSQL", "MySQL"],
@@ -273,7 +273,7 @@ export const SKILL_PRISMA: EnhancedSkill = {
 export const SKILL_DYNAMODB: EnhancedSkill = {
   id: 31,
   title: "DynamoDB",
-  icon: "i-devicon-dynamodb",
+  icon: { lightIcon: "i-skill-icons-dynamodb-light", darkIcon: "i-skill-icons-dynamodb-dark" },
   proficiency: 0.85,
   category: "Data",
   relatedSkills: ["MongoDB", "AWS"],
@@ -319,7 +319,7 @@ export const SKILL_S3: EnhancedSkill = {
 export const SKILL_GIT: EnhancedSkill = {
   id: 36,
   title: "Git",
-  icon: "i-devicon-git",
+  icon: "i-skill-icons-git",
   proficiency: 0.9,
   category: "Cloud & DevOps",
   relatedSkills: ["CI/CD"],
@@ -328,7 +328,7 @@ export const SKILL_GIT: EnhancedSkill = {
 export const SKILL_DOCKER: EnhancedSkill = {
   id: 37,
   title: "Docker",
-  icon: "i-devicon-docker",
+  icon: "i-skill-icons-docker",
   proficiency: 0.75,
   category: "Cloud & DevOps",
   relatedSkills: ["Virtualization", "CI/CD"],
@@ -355,7 +355,7 @@ export const SKILL_CICD: EnhancedSkill = {
 export const SKILL_NGINX: EnhancedSkill = {
   id: 40,
   title: "Nginx",
-  icon: "i-simple-icons-nginx",
+  icon: "i-skill-icons-nginx",
   proficiency: 0.7,
   category: "Cloud & DevOps",
   relatedSkills: ["Self-hosting", "Linux"],
@@ -402,5 +402,5 @@ export const SKILLS: EnhancedSkill[] = [
   SKILL_DOCKER,
   SKILL_SELFHOSTING,
   SKILL_CICD,
-  SKILL_NGINX
+  SKILL_NGINX,
 ];
