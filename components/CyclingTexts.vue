@@ -3,19 +3,29 @@ import { ref, onMounted, onUnmounted, computed } from "vue";
 
 interface Props {
   /**
-   * Array of strings to cycle through
+   * Array of strings or TextWithIcon objects to cycle through
    */
   texts: TextWithIcon[];
 
   /**
-   * Duration each text is displayed in milliseconds
+   * Speed of typing in milliseconds per character
    */
-  cycleDuration?: number;
+  typingSpeed?: number;
 
   /**
-   * Duration of the fade transition in milliseconds
+   * Delay in milliseconds before erasing
    */
-  transitionDuration?: number;
+  pauseDelay?: number;
+
+  /**
+   * Speed of erasing in milliseconds per character
+   */
+  erasingSpeed?: number;
+
+  /**
+   * Delay in milliseconds before typing next text
+   */
+  nextTextDelay?: number;
 
   /**
    * CSS class(es) to apply to the text element
@@ -24,82 +34,140 @@ interface Props {
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  cycleDuration: 3000,
-  transitionDuration: 500,
+  typingSpeed: 50,
+  pauseDelay: 2000,
+  erasingSpeed: 25,
+  nextTextDelay: 500,
   textClass: "",
 });
 
 // Reactive state
 const currentIndex = ref(0);
-const isVisible = ref(true);
+const displayText = ref("");
+const isErasing = ref(false);
+const showCursor = ref(true);
+const showIcon = ref(false);
+// Timer references for cleanup
+let animationTimer: number | null = null;
+let cursorTimer: number | null = null;
+let iconTimer: number | null = null;
 
-// Timers
-let cycleTimer: number | null = null;
-let transitionTimer: number | null = null;
+// Get current text content
+const currentTextContent = computed(() => {
+  const currentText = props.texts[currentIndex.value];
+  if (typeof currentText === "string") {
+    return currentText;
+  } else {
+    return currentText.text;
+  }
+});
 
-// Computed for better readability
-const currentTextWithIcon = computed(() => props.texts[currentIndex.value]);
-
-// Animation style with dynamic transition duration
-const animationStyle = computed(() => {
-  return {
-    transition: `opacity ${props.transitionDuration}ms ease-in-out`,
-  };
+// Get current icon if available
+const currentIcon = computed(() => {
+  const currentText = props.texts[currentIndex.value];
+  if (typeof currentText === "string") {
+    return null;
+  } else {
+    return currentText.icon;
+  }
 });
 
 /**
- * Cycle to the next text with fade out/in animation
+ * Type the current text character by character
  */
-const cycleText = () => {
-  // Start fade out
-  isVisible.value = false;
+const typeText = () => {
+  const textToType = currentTextContent.value;
+  const textLength = textToType.length;
+  const charIndex = displayText.value.length;
 
-  // Wait for fade out to complete
-  transitionTimer = window.setTimeout(() => {
-    // Update to next text
-    currentIndex.value = (currentIndex.value + 1) % props.texts.length;
+  if (charIndex < textLength) {
+    displayText.value = textToType.substring(0, charIndex + 1);
+    animationTimer = window.setTimeout(typeText, props.typingSpeed);
+  } else {
+    iconTimer = window.setTimeout(() => {
+      showIcon.value = true;
+    }, props.typingSpeed);
 
-    // Start fade in
-    isVisible.value = true;
-
-    // Schedule next cycle
-    cycleTimer = window.setTimeout(cycleText, props.cycleDuration);
-  }, props.transitionDuration);
+    // Finished typing, pause before erasing
+    animationTimer = window.setTimeout(() => {
+      isErasing.value = true;
+      // erase the icon
+      showIcon.value = false;
+      // wait the required amound before deleting the rest
+      window.setTimeout(eraseText, props.typingSpeed)
+    }, props.pauseDelay);
+  }
 };
 
-// Start the animation when component is mounted
-onMounted(() => {
-  // Set first text visible
-  isVisible.value = true;
-
-  // Schedule first text transition after first cycle
-  if (props.texts.length > 1) {
-    cycleTimer = window.setTimeout(cycleText, props.cycleDuration);
+/**
+ * Erase the current text character by character
+ */
+const eraseText = () => {
+  if (displayText.value.length > 0) {
+    displayText.value = displayText.value.substring(0, displayText.value.length - 1);
+    animationTimer = window.setTimeout(eraseText, props.erasingSpeed);
+  } else {
+    // Finished erasing, move to next text
+    isErasing.value = false;
+    currentIndex.value = (currentIndex.value + 1) % props.texts.length;
+    animationTimer = window.setTimeout(typeText, props.nextTextDelay);
   }
+};
+
+/**
+ * Create blinking cursor effect
+ */
+const blinkCursor = () => {
+  cursorTimer = window.setInterval(() => {
+    showCursor.value = !showCursor.value;
+  }, 500);
+};
+
+// Start animation sequence when component is mounted
+onMounted(() => {
+  blinkCursor();
+  animationTimer = window.setTimeout(typeText, props.nextTextDelay);
 });
 
 // Clean up timers when component is unmounted
 onUnmounted(() => {
-  if (cycleTimer !== null) clearTimeout(cycleTimer);
-  if (transitionTimer !== null) clearTimeout(transitionTimer);
+  if (animationTimer) clearTimeout(animationTimer);
+  if (cursorTimer) clearInterval(cursorTimer);
+  if (iconTimer) clearTimeout(iconTimer);
 });
 </script>
 
 <template>
-  <span
-    :class="[
-      textClass,
-      { 'opacity-0': !isVisible, 'opacity-100': isVisible },
-      'inline-block h-8 relative align-middle',
-    ]"
-    :style="animationStyle">
-    {{ currentTextWithIcon.text }}
+  <span :class="[textClass, 'inline-flex items-center']">
+    {{ displayText }}
     <UIcon
-      v-if="currentTextWithIcon.icon"
-      :name="currentTextWithIcon.icon"
-      class="align-middle"
+      v-if="currentIcon"
+      v-show="showIcon"
+      :name="currentIcon"
+      class="items-center ml-1"
       size="24px" />
+    <span class="cursor ml-0.5" :class="{ 'cursor-blink': showCursor }">|</span>
   </span>
 </template>
 
-<style scoped></style>
+<style scoped>
+.cursor {
+  display: inline-block;
+  font-weight: 100;
+  color: currentColor;
+  margin-left: 1px;
+}
+
+.cursor-blink {
+  opacity: 1;
+}
+
+.cursor:not(.cursor-blink) {
+  opacity: 0;
+}
+
+.text-content {
+  min-height: 1.5em;
+  display: inline-block;
+}
+</style>

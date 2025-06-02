@@ -24,8 +24,8 @@ const roleTexts = ref<TextWithIcon[]>([
             <IndexHeroAvatar image-url="/me/3.png" text="P" />
           </div>
           <div class="hero-content text-center lg:text-left order-last lg:order-first">
-            <div class="mb-2.5">
-              <h1 class="text-4xl md:text-5xl font-bold">
+            <div class="mb-3">
+              <h1 class="text-4xl md:text-5xl font-bold mb-1">
                 Hi, I'm <span class="text-primary">Pouyan</span>
               </h1>
               <p class="text-xl md:text-2xl font-medium text-gray-700 dark:text-gray-200">
