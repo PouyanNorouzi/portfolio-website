@@ -4,13 +4,6 @@ interface Props {
 }
 
 defineProps<Props>();
-
-const formatDate = (date: Date) => {
-  return new Intl.DateTimeFormat("en-US", {
-    month: "short",
-    year: "numeric",
-  }).format(date);
-};
 </script>
 
 <template>
@@ -40,7 +33,7 @@ const formatDate = (date: Date) => {
 
           <div class="mb-4">
             <p class="text-xs text-gray-500 dark:text-gray-400 mb-2">
-              {{ formatDate(project.startDate) }} - {{ formatDate(project.endDate) }}
+              {{ formatProjectDates(project) }}
             </p>
           </div>
 
