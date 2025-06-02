@@ -6,7 +6,19 @@ interface Props {
   color?: "primary" | "secondary" | "success" | "info" | "warning" | "error" | "neutral";
 }
 
-withDefaults(defineProps<Props>(), {
+const colorMode = useColorMode();
+
+const isDarkMode = computed(() => colorMode.value === "dark");
+
+const icon = computed(() => {
+  const icon = props.skill.icon;
+
+  if (typeof icon === "string") return icon;
+
+  return isDarkMode.value ? icon.darkIcon : icon.lightIcon;
+});
+
+const props = withDefaults(defineProps<Props>(), {
   size: "md",
   variant: "outline",
   color: undefined,
@@ -21,7 +33,7 @@ withDefaults(defineProps<Props>(), {
     :color="color"
     class="flex items-center gap-1 py-1 px-2">
     <template #leading>
-      <UIcon :name="skill.icon" class="mr-1 text-lg" />
+      <UIcon :name="icon" class="mr-1 text-lg" />
     </template>
   </UBadge>
 </template>

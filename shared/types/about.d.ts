@@ -6,10 +6,15 @@ declare interface AboutCardItem {
   color: string;
 }
 
+declare interface LightAndDarkIcon {
+  lightIcon: string;
+  darkIcon: string;
+}
+
 // Basic skill interface (original definition, without proficiency)
 declare interface Skill {
   title: string;
-  icon: string;
+  icon: string | LightAndDarkIcon;
 }
 
 // Skill categories
