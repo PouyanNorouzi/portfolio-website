@@ -7,7 +7,11 @@
     <UContainer>
       <div class="w-full">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-          <div class="hero-content text-center lg:text-left space-y-6">
+          <!-- Avatar appears first on mobile, second on desktop -->
+          <div class="hero-visual flex justify-center lg:justify-end order-first lg:order-last mb-4 lg:mb-0">
+            <IndexHeroAvatar image-url="/me/3.png" text="P" />
+          </div>
+          <div class="hero-content text-center lg:text-left space-y-6 order-last lg:order-first">
             <h1 class="text-4xl md:text-6xl font-bold">
               Hi, I'm <span class="text-primary">Pouyan</span>
             </h1>
@@ -25,9 +29,6 @@
               </UButton>
             </div>
           </div>
-          <div class="hero-visual flex justify-center lg:justify-end">
-            <IndexHeroAvatar image-url="/me/3.png" text="P" />
-          </div>
         </div>
       </div>
     </UContainer>
@@ -41,6 +42,16 @@
 
 .hero-visual {
   animation: fadeInRight 0.8s ease-out;
+}
+
+@media (max-width: 1023px) {
+  .hero-visual {
+    animation: fadeInDown 0.8s ease-out;
+  }
+  
+  .hero-content {
+    animation: fadeInUp 0.8s ease-out;
+  }
 }
 
 
@@ -67,5 +78,26 @@
   }
 }
 
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 
 </style>
