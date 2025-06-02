@@ -2,38 +2,23 @@
 interface Props {
   text?: string;
   imageUrl?: string;
-  size?: "sm" | "md" | "lg";
 }
 
 withDefaults(defineProps<Props>(), {
-  size: "lg",
   imageUrl: undefined,
   text: "Avatar",
 });
 
-const sizeClasses = {
-  sm: "w-32 h-32 text-2xl",
-  md: "w-48 h-48 text-4xl",
-  lg: "w-64 h-64 text-5xl",
-};
 </script>
 
 <template>
   <div class="hero-avatar">
     <!-- Image Avatar -->
-    <UAvatar
-      v-if="imageUrl"
-      :src="imageUrl"
-      :alt="text"
-      :class="[sizeClasses[size], 'avatar-float']" />
-
+    <NuxtImg v-if="imageUrl" :src="imageUrl" :alt="text" class="avatar-float rounded-full w-64 h-64 object-cover" />
     <!-- Text Avatar -->
     <div
       v-else
-      :class="[
-        'avatar-placeholder avatar-float rounded-full flex items-center justify-center font-bold text-white',
-        sizeClasses[size],
-      ]">
+      class="avatar-placeholder avatar-float rounded-full flex items-center justify-center font-bold text-white">
       {{ text }}
     </div>
   </div>
