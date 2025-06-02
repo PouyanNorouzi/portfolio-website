@@ -25,10 +25,10 @@ const roleTexts = ref<TextWithIcon[]>([
           </div>
           <div class="hero-content text-center lg:text-left order-last lg:order-first">
             <div class="mb-3">
-              <h1 class="text-4xl md:text-5xl font-bold mb-1">
+              <h1 class="text-2xl md:text-5xl font-bold mb-1">
                 Hi, I'm <span class="text-primary">Pouyan Norouzi</span>
               </h1>
-              <p class="text-xl md:text-2xl font-medium text-gray-700 dark:text-gray-200">
+              <p class="text-md md:text-2xl font-medium text-gray-700 dark:text-gray-200">
                 <CyclingTexts :texts="roleTexts" text-class="font-medium text-secondary" />
               </p>
             </div>
