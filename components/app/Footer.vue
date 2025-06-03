@@ -1,5 +1,5 @@
 <template>
-  <footer class="bg-secondary p-4">
+  <footer class="p-4">
     <div class="container mx-auto">
       <div class="flex flex-col md:flex-row justify-between items-center">
         <!-- Socials and email in one row on desktop, stacked on mobile -->
@@ -14,7 +14,7 @@
               <UIcon name="i-logos-linkedin-icon" class="text-2xl" />
             </ULink>
             <ULink to="https://github.com/PouyanNorouzi" target="_blank" external class="mx-2">
-              <UIcon name="i-logos-github-icon" class="text-2xl" />
+              <UIcon name="i-simple-icons-github" class="text-2xl" />
             </ULink>
           </div>
           <!-- Email -->
