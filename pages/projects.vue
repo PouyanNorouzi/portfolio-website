@@ -36,6 +36,8 @@ useHead({
   title: "Pouyan - Projects",
 });
 
+const config = useRuntimeConfig();
+
 // Project data
 const projects = ref<Project[]>([
   {
@@ -144,6 +146,7 @@ const projects = ref<Project[]>([
     tags: ["Personal Project", "Frontend", "UX/UI"],
     image: "/img/projects/portfolio.png",
     github: "https://github.com/PouyanNorouzi/portfolio-website",
+    liveDemo: config.public.siteUrl as string,
   },
 ]);
 </script>
