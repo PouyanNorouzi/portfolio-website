@@ -21,7 +21,7 @@ const roleTexts = ref<TextWithIcon[]>([
           <!-- Avatar appears first on mobile, second on desktop -->
           <div
             class="hero-visual flex justify-center lg:justify-end order-first lg:order-last mb-4 lg:mb-0">
-            <IndexHeroAvatar image-url="/me/3.png" text="P" />
+            <IndexHeroAvatar image-url="/me/1.png" text="P" />
           </div>
           <div class="hero-content text-center lg:text-left order-last lg:order-first">
             <div class="mb-3">
