@@ -69,15 +69,17 @@ const socialLinks = ref([
   },
 ]);
 
+const DEFAULT_HEADER_HEIGHT = 64; // A reasonable default in pixels
+
 // Scroll behavior tracking
 const isScrolled = ref(false);
-const headerHeight = ref(0);
+const headerHeight = ref(DEFAULT_HEADER_HEIGHT);
 const headerRef = ref<HTMLElement | null>(null);
 
 // Update header state based on scroll position
 onMounted(() => {
   if (import.meta.client) {
-    headerHeight.value = headerRef.value?.offsetHeight || 0;
+    headerHeight.value = headerRef.value?.offsetHeight || DEFAULT_HEADER_HEIGHT;
 
     const handleScroll = () => {
       isScrolled.value = window.scrollY > 10;
