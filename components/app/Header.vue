@@ -95,13 +95,13 @@ onMounted(() => {
   }
 });
 
-const headerBackgroundOpacity = computed(() => (isScrolled.value ? 90 : 50));
-
 // Dynamic header styles based on scroll position
 const headerClass = computed(() => {
   return {
-    "py-2": isScrolled.value,
-    "py-3": !isScrolled.value,
+    "bg-gray-200/90 dark:bg-gray-900/80": isScrolled.value,
+    "bg-gray-200/50 dark:bg-gray-800/0": !isScrolled.value,
+    "pb-1 pe-0": isScrolled.value,
+    "py-2": !isScrolled.value,
     "transition-all duration-300": true,
   };
 });
@@ -112,7 +112,7 @@ const headerClass = computed(() => {
     ref="headerRef"
     :class="[
       headerClass,
-      `fixed top-0 left-0 w-full z-50 bg-white/${headerBackgroundOpacity} dark:bg-gray-900/${headerBackgroundOpacity}`,
+      `fixed top-0 left-0 w-full z-50`,
     ]">
     <UContainer>
       <div class="flex items-center justify-between gap-4">
