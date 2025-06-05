@@ -36,6 +36,10 @@ useHead({
   title: "Pouyan - Projects",
 });
 
+definePageMeta({
+  middleware: ["transition"],
+});
+
 const config = useRuntimeConfig();
 
 // Project data

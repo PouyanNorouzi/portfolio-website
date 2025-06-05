@@ -2,6 +2,10 @@
 useHead({
   title: "Pouyan - Home",
 });
+
+definePageMeta({
+  middleware: ["transition"],
+});
 </script>
 
 <template>

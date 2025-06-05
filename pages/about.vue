@@ -3,6 +3,10 @@ useHead({
   title: "Pouyan - About",
 });
 
+definePageMeta({
+  middleware: ["transition"],
+});
+
 // Education data
 const education = ref([
   {
@@ -97,7 +101,8 @@ const experience = ref([
       </section>
 
       <!-- Contact & Resume Section -->
-      <section class="text-center animate-fade-in-delay-5 bg-gray-50 dark:bg-gray-800 p-8 rounded-lg">
+      <section
+        class="text-center animate-fade-in-delay-5 bg-gray-50 dark:bg-gray-800 p-8 rounded-lg">
         <AboutResume />
       </section>
     </UContainer>
