@@ -109,7 +109,7 @@ const headerClass = computed(() => {
 </script>
 
 <template>
-  <header ref="headerRef" :class="[headerClass, `fixed top-0 left-0 w-full z-50`]">
+  <header ref="headerRef" :class="[headerClass, `fixed top-0 left-0 max-w-[100vw] w-full z-50`]">
     <UContainer>
       <div class="flex items-center justify-between gap-4">
         <!-- Logo/Name -->
