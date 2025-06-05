@@ -4,6 +4,7 @@ import { EMAIL, GITHUB_LINK, LINKEDIN_LINK } from "~/utils/constants/socials";
 
 const route = useRoute();
 const colorMode = useColorMode();
+const viewPort = useViewport();
 
 // Navigation links
 const navItems = ref<TabsItem[]>([
@@ -108,12 +109,7 @@ const headerClass = computed(() => {
 </script>
 
 <template>
-  <header
-    ref="headerRef"
-    :class="[
-      headerClass,
-      `fixed top-0 left-0 w-full z-50`,
-    ]">
+  <header ref="headerRef" :class="[headerClass, `fixed top-0 left-0 w-full z-50`]">
     <UContainer>
       <div class="flex items-center justify-between gap-4">
         <!-- Logo/Name -->
@@ -126,17 +122,14 @@ const headerClass = computed(() => {
         <div class="flex-1 px-4 md:max-w-md mx-auto flex items-center">
           <UTabs
             v-model="activeTab"
-            :items="navItems"
-            class="hidden md:flex justify-center w-full"
-            :ui="{ root: 'gap-0' }" />
-          <UTabs
-            v-model="activeTab"
             :items="
-              navItems.map((item) => {
-                return { icon: item.icon, value: item.value };
-              })
+              viewPort.isLessThan('md')
+                ? navItems.map((item) => {
+                    return { icon: item.icon, value: item.value };
+                  })
+                : navItems
             "
-            class="sm:flex md:hidden justify-center w-full"
+            class="justify-center w-full"
             :ui="{ root: 'gap-0' }" />
         </div>
 
