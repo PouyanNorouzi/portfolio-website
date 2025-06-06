@@ -75,11 +75,11 @@ function handleCurrentSiteLiveDemo(e: MouseEvent, liveDemo: string | undefined) 
 </script>
 
 <template>
-  <UCard class="project-card overflow-hidden" variant="soft">
+  <UCard class="project-card" variant="soft">
     <div class="flex flex-col md:flex-row gap-4 h-full">
       <!-- Left side - Image -->
-      <div class="relative md:w-1/3 md:flex md:items-stretch overflow-hidden md:min-h-[250px]">
-        <div class="relative w-full h-full">
+      <div class="relative md:w-1/3 md:flex md:items-stretch overflow-hidden md:min-h-[250px] image-container">
+        <div class="relative w-full h-full transition-all duration-500">
           <NuxtImg
             :src="project.image"
             :alt="project.name"
@@ -144,19 +144,52 @@ function handleCurrentSiteLiveDemo(e: MouseEvent, liveDemo: string | undefined) 
 <style scoped>
 .project-card {
   transition:
-    transform 0.2s ease-in-out,
-    box-shadow 0.2s ease-in-out;
+    transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 0.3s ease-in-out,
+    border-color 0.3s ease;
+  position: relative;
+  overflow: hidden;
 }
 
 .project-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  transform: translateY(-6px) scale(1.01);
+  box-shadow: 0 12px 28px var(--color-shadow);
+  border-color: var(--color-primary);
+}
+
+.project-card:hover::before {
+  opacity: 1;
+}
+
+.project-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
 
 /* Add deep selector to ensure card inner container has full height */
 @media (min-width: 768px) {
   .project-card:deep(.u-card-inner) {
     height: 100%;
+  }
+}
+
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(var(--color-primary), 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 8px rgba(var(--color-primary), 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(var(--color-primary), 0);
   }
 }
 </style>

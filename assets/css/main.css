@@ -1,2 +1,10 @@
 @import "tailwindcss";
 @import "@nuxt/ui";
+
+:root {
+    --color-shadow: var(--color-neutral-400)
+}
+
+.dark {
+    --color-shadow: var(--color-neutral-600)
+}
