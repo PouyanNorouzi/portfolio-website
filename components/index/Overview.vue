@@ -3,23 +3,21 @@
 </script>
 
 <template>
-  <section class="overview-section pb-5 bg-gray-50 dark:bg-gray-900">
+  <section class="overview-section pb-1 lg:pb-5">
     <UContainer>
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+      <div class="flex flex-col lg:grid lg:grid-cols-12">
         <!-- Left column with section heading -->
         <div class="lg:col-span-4">
-          <h2 class="text-xl md:text-3xl font-bold mb-4 text-gray-800 dark:text-white">
-              Overview
-          </h2>
-          <div class="h-1 w-24 bg-primary mb-6" />
-          <p class="text-lg text-gray-600 dark:text-gray-300">
+          <h2 class="text-xl md:text-3xl font-bold mb-4">Overview</h2>
+          <div class="h-1 w-24 bg-primary mb-3 lg:mb-6" />
+          <p class="text-lg text-muted hidden lg:block">
             Get to know my journey, approach to development, and what drives me to create impactful
             digital experiences.
           </p>
         </div>
 
         <!-- Right column with overview content -->
-        <div class="lg:col-span-8 space-y-6 text-gray-600 dark:text-gray-300">
+        <div class="lg:col-span-8 space-y-6">
           <p class="leading-relaxed">I'm Pouyan, a developer who enjoys learning by building.</p>
           <p class="leading-relaxed">
             I'm especially interested in how different parts of a project come together, from user
@@ -57,17 +55,19 @@
             in a home lab environment.
           </p>
 
-          <p class="leading-relaxed">
+          <p class="leading-relaxed mb-1.5">
             Right now, I'm exploring different areas of development and building tools that are
             accessible, maintainable, and performant. This site was built with Nuxt, one of my
             favorite tools I've picked up along the way.
           </p>
 
-          <div class="flex flex-wrap pt-2">
-            <UButton to="/about" variant="ghost" trailing-icon="i-lucide-arrow-right" class="mt-4">
-              Learn more about my journey
-            </UButton>
-          </div>
+          <UButton
+            to="/about"
+            variant="ghost"
+            trailing-icon="i-lucide-arrow-right"
+            :ui="{ base: 'px-0' }">
+            Learn more about my journey
+          </UButton>
         </div>
       </div>
     </UContainer>
