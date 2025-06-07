@@ -1,6 +1,4 @@
-import { ref, onMounted, onBeforeUnmount } from "vue";
-
-export function useInView(threshold = 0.1) {
+export function useInView(options?: IntersectionObserverInit) {
   const element = ref<HTMLElement | null>(null);
   const component = useTemplateRef<ComponentPublicInstance>("transitionElement");
   const isVisible = ref(false);
@@ -13,14 +11,14 @@ export function useInView(threshold = 0.1) {
     }
 
     observer = new IntersectionObserver(
-      ([entry]) => {
+      ([entry], observe) => {
         if (entry.isIntersecting) {
           isVisible.value = true;
-          console.log("entry.isIntersecting", entry)
-          observer.disconnect();
+          console.log("entry.isIntersecting", entry);
+          observe.disconnect();
         }
       },
-      { threshold }
+      options ?? { threshold: 0.1 }
     );
 
     if (element.value) {

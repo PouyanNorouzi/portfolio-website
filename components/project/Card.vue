@@ -73,7 +73,7 @@ function handleCurrentSiteLiveDemo(e: MouseEvent, liveDemo: string | undefined) 
   }
 }
 
-const { isVisible } = useInView(0.5);
+const { isVisible } = useInView({ threshold: 0.5 });
 </script>
 
 <template>
@@ -111,13 +111,13 @@ const { isVisible } = useInView(0.5);
           </p>
 
           <div class="mb-4">
-            <p class="text-xs text-gray-500 dark:text-gray-400 mb-2">
+            <p class="text-xs text-dimmed mb-2">
               {{ formatProjectDates(project) }}
             </p>
           </div>
 
           <div class="mb-4">
-            <h4 class="text-sm font-medium mb-2 text-gray-700 dark:text-gray-200">Tech Stack:</h4>
+            <h4 class="text-sm font-medium mb-2">Tech Stack:</h4>
             <div class="flex flex-wrap gap-1">
               <SkillBadge v-for="tech in project.techStack" :key="tech.title" :skill="tech" />
             </div>
