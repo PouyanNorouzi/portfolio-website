@@ -8,7 +8,6 @@ export default defineNuxtRouteMiddleware((to, from) => {
     from.meta.pageTransition = { mode: "out-in" };
   }
 
-  console.log(PAGES.indexOf(to.path), PAGES.indexOf(from.path));
   from.meta.pageTransition.name =
     PAGES.indexOf(to.path) > PAGES.indexOf(from.path) ? "slide-left" : "slide-right";
   to.meta.pageTransition.name =
