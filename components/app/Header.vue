@@ -70,7 +70,7 @@ const socialLinks = ref([
   },
 ]);
 
-const DEFAULT_HEADER_HEIGHT = 64; // A reasonable default in pixels
+const DEFAULT_HEADER_HEIGHT = viewPort.isLessThan("md") ? 50 : 56; //starting header height based on size of screen
 
 // Scroll behavior tracking
 const isScrolled = ref(false);
