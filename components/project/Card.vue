@@ -7,6 +7,7 @@ defineProps<Props>();
 
 const url = useRequestURL();
 const toast = useToast();
+const viewPort = useViewport();
 
 const alreadyHereNotifications = ref<ToastNotification[]>([
   {
@@ -73,7 +74,7 @@ function handleCurrentSiteLiveDemo(e: MouseEvent, liveDemo: string | undefined) 
   }
 }
 
-const { isVisible } = useInView({ threshold: 0.5 });
+const { isVisible } = useInView({ threshold: viewPort.isLessThan("md") ? 0.1 : 0.5 });
 </script>
 
 <template>
