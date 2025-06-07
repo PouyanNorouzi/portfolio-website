@@ -6,19 +6,7 @@ interface Props {
   color?: NuxtUIColor;
 }
 
-const colorMode = useColorMode();
-
-const isDarkMode = computed(() => colorMode.value === "dark");
-
-const icon = computed(() => {
-  const icon = props.skill.icon;
-
-  if (typeof icon === "string") return icon;
-
-  return isDarkMode.value ? icon.darkIcon : icon.lightIcon;
-});
-
-const props = withDefaults(defineProps<Props>(), {
+withDefaults(defineProps<Props>(), {
   size: "md",
   variant: "outline",
   color: undefined,
@@ -34,7 +22,7 @@ const props = withDefaults(defineProps<Props>(), {
       :color="color"
       class="flex items-center gap-1 py-1 px-2">
       <template #leading>
-        <UIcon :name="icon" class="mr-1 text-lg" />
+        <LightDarkIcon :icon="skill.icon" />
       </template>
     </UBadge>
     <template #content>
