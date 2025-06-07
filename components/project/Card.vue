@@ -72,13 +72,24 @@ function handleCurrentSiteLiveDemo(e: MouseEvent, liveDemo: string | undefined) 
     clickedAmount.value++;
   }
 }
+
+const { isVisible } = useInView(0.75);
 </script>
 
 <template>
-  <UCard class="project-card" variant="soft">
+  <UCard
+    ref="transitionElement"
+    class="project-card"
+    variant="soft"
+    :style="{
+      opacity: isVisible ? 1 : 0,
+      transform: isVisible ? 'translateY(0)' : 'translateY(20px)',
+      transition: `all 0.5s`,
+    }">
     <div class="flex flex-col md:flex-row gap-4 h-full">
       <!-- Left side - Image -->
-      <div class="relative md:w-1/3 md:flex md:items-stretch overflow-hidden md:min-h-[250px] image-container">
+      <div
+        class="relative md:w-1/3 md:flex md:items-stretch overflow-hidden md:min-h-[250px] image-container">
         <div class="relative w-full h-full transition-all duration-500">
           <NuxtImg
             :src="project.image"
@@ -162,7 +173,7 @@ function handleCurrentSiteLiveDemo(e: MouseEvent, liveDemo: string | undefined) 
 }
 
 .project-card::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
@@ -179,7 +190,6 @@ function handleCurrentSiteLiveDemo(e: MouseEvent, liveDemo: string | undefined) 
     height: 100%;
   }
 }
-
 
 @keyframes pulse {
   0% {

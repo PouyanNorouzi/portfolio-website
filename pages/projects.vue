@@ -41,13 +41,6 @@ definePageMeta({
 });
 
 const config = useRuntimeConfig();
-const isVisible = ref(false);
-
-onMounted(() => {
-  setTimeout(() => {
-    isVisible.value = true;
-  }, 100);
-});
 
 // Project data
 const projects = ref<Project[]>([
@@ -163,42 +156,16 @@ const projects = ref<Project[]>([
 </script>
 
 <template>
-  <div class="projects-container py-12">
+  <div class="py-12">
     <UContainer>
-      <h1 class="text-3xl md:text-4xl font-bold mb-8 animate-fade-in">My Projects</h1>
+      <h1 class="text-3xl md:text-4xl font-bold mb-8">My Projects</h1>
       <div class="flex flex-col gap-6 w-full">
         <ProjectCard
-          v-for="(project, index) in projects"
+          v-for="project in projects"
           :key="project.id"
           :project="project"
-          :style="{
-            opacity: isVisible ? 1 : 0,
-            transform: isVisible ? 'translateY(0)' : 'translateY(20px)',
-            transition: `all 0.5s ease-out ${index * 0.1 + 0.2}s`
-          }"
           class="transition-all" />
       </div>
     </UContainer>
   </div>
 </template>
-
-<style scoped>
-.animate-fade-in {
-  animation: fadeIn 0.8s ease-out forwards;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.projects-container {
-  min-height: 80vh;
-}
-</style>
