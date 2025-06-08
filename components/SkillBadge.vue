@@ -7,7 +7,7 @@ interface Props {
 }
 
 withDefaults(defineProps<Props>(), {
-  size: "md",
+  size: "lg",
   variant: "outline",
   color: undefined,
 });
@@ -42,7 +42,7 @@ withDefaults(defineProps<Props>(), {
       <div v-if="skill.relatedSkills && skill.relatedSkills.length" class="text-xs">
         <span class="font-semibold block mb-1">Related skills:</span>
         <div class="flex flex-wrap gap-1">
-          <UBadge v-for="related in skill.relatedSkills" :key="related" size="xs" variant="soft">
+          <UBadge v-for="related in skill.relatedSkills" :key="related" size="sm" variant="soft">
             {{ related }}
           </UBadge>
         </div>
