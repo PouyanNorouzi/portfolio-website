@@ -157,8 +157,8 @@ const headerClass = computed(() => {
           </template>
 
           <!-- Mobile Navigation Menu -->
-          <UDropdownMenu :items="socialLinks" class="md:hidden">
-            <UButton variant="ghost" icon="i-lucide-menu" :ui="{ base: 'rounded-full' }" />
+          <UDropdownMenu :items="socialLinks" class="sm:hidden">
+            <UButton variant="ghost" icon="i-lucide-phone" :ui="{ base: 'rounded-full' }" />
           </UDropdownMenu>
         </div>
       </div>
