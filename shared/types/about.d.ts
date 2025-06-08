@@ -3,7 +3,7 @@ declare interface AboutCardItem {
   title: string;
   icon: string;
   description: string;
-  color: string;
+  color: NuxtUIColor;
 }
 
 declare interface LightAndDarkIcon {

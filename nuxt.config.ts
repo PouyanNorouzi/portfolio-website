@@ -23,14 +23,20 @@ export default defineNuxtConfig({
 
   css: ["~/assets/css/main.css"],
 
+  ui: {
+    theme: {
+      colors: ["primary", "secondary", "tertiary", "info", "success", "warning", "error"],
+    },
+  },
+
   colorMode: {
     preference: "dark",
   },
 
   fonts: {
     defaults: {
-      weights: [400, 700]
-    }
+      weights: [400, 700],
+    },
   },
 
   viewport: {
