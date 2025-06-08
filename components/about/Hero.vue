@@ -34,9 +34,9 @@ const cards = ref<AboutCardItem[]>([
         <div
           v-for="(card, index) in cards"
           :key="index"
-          class="flex h-full"
+          class="flex h-full w-full"
           :class="[`animate-fade-slide-up-${index}`]">
-          <UCard :ui="{ body: 'p-5' }" class="h-full flex flex-col">
+          <UCard :ui="{ body: 'p-5' }" class="h-full w-full flex flex-col">
             <div class="text-center flex flex-col flex-1">
               <div :class="`card-icon bg-${card.color}-50 dark:bg-${card.color}-900/30 mb-4`">
                 <UIcon :name="card.icon" :class="`text-${card.color}-500 text-3xl`" />
