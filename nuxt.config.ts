@@ -27,6 +27,12 @@ export default defineNuxtConfig({
     preference: "dark",
   },
 
+  fonts: {
+    defaults: {
+      weights: [400, 700]
+    }
+  },
+
   viewport: {
     breakpoints: {
       "xs": 320,

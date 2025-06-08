@@ -2,9 +2,14 @@
 @import "@nuxt/ui";
 
 :root {
-    --color-shadow: var(--color-neutral-400)
+  --color-shadow: var(--color-neutral-400);
 }
 
 .dark {
-    --color-shadow: var(--color-neutral-600)
+  --color-shadow: var(--color-neutral-600);
+}
+
+@theme {
+  --font-sans: "Monda", sans-serif;
+  --font-name: "Tourney", sans-serif;
 }

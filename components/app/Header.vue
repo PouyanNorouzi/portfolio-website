@@ -115,7 +115,7 @@ const headerClass = computed(() => {
         <!-- Logo/Name -->
         <NuxtLink to="/" class="flex items-center space-x-2 text-lg font-bold text-primary">
           <UIcon name="i-lucide-code" class="text-xl" />
-          <span class="hidden sm:inline">Pouyan Norouzi</span>
+          <span class="hidden sm:inline font-name">Pouyan Norouzi</span>
         </NuxtLink>
 
         <!-- Navigation - centered on desktop, hidden on mobile -->

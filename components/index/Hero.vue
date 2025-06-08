@@ -17,16 +17,16 @@ const roleTexts = ref<TextWithIcon[]>([
   <div class="hero flex items-center py-8">
     <UContainer>
       <div class="w-full">
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-center">
           <!-- Avatar appears first on mobile, second on desktop -->
           <div
-            class="hero-visual flex justify-center lg:justify-end order-first lg:order-last mb-4 lg:mb-0">
+            class="hero-visual flex justify-center lg:col-span-1 lg:justify-end order-first lg:order-last mb-4 lg:mb-0">
             <IndexHeroAvatar image-url="/me/1.png" text="P" />
           </div>
-          <div class="hero-content text-center lg:text-left order-last lg:order-first">
+          <div class="hero-content text-center lg:col-span-2 lg:text-left order-last lg:order-first">
             <div class="mb-3">
               <h1 class="text-2xl md:text-5xl font-bold mb-1">
-                Hi, I'm <span class="text-primary">Pouyan Norouzi</span>
+                Hi, I'm <span class="text-primary font-name">Pouyan Norouzi</span>
               </h1>
               <p class="text-md md:text-2xl font-medium text-gray-700 dark:text-gray-200">
                 <CyclingTexts :texts="roleTexts" text-class="font-medium text-secondary" />
