@@ -1,7 +1,12 @@
 {
-  "name": "nuxt-app",
+  "name": "portfolio-site",
   "private": true,
   "type": "module",
+  "version": "1.0.0",
+  "author": {
+    "name": "Pouyan"
+  },
+  "description": "This is my portfolio website",
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev",
