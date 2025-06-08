@@ -5,6 +5,7 @@ export const SKILL_JAVASCRIPT: EnhancedSkill = {
   proficiency: 0.9,
   category: "Software Development",
   relatedSkills: ["TypeScript", "Node.js", "React", "Vue"],
+  color: "#F7DF1E",
 };
 
 export const SKILL_TYPESCRIPT: EnhancedSkill = {
@@ -14,6 +15,7 @@ export const SKILL_TYPESCRIPT: EnhancedSkill = {
   proficiency: 0.9,
   category: "Software Development",
   relatedSkills: ["JavaScript", "Node.js", "React", "Vue"],
+  color: "#3178C6",
 };
 
 export const SKILL_PYTHON: EnhancedSkill = {
@@ -23,6 +25,7 @@ export const SKILL_PYTHON: EnhancedSkill = {
   proficiency: 0.95,
   category: "Software Development",
   relatedSkills: ["Django", "Flask"],
+  color: "#3776AB",
 };
 
 export const SKILL_JAVA: EnhancedSkill = {
@@ -31,6 +34,7 @@ export const SKILL_JAVA: EnhancedSkill = {
   icon: { lightIcon: "i-skill-icons-java-light", darkIcon: "i-skill-icons-java-dark" },
   proficiency: 0.9,
   category: "Software Development",
+  color: "#ED8B00",
 };
 
 export const SKILL_CSHARP: EnhancedSkill = {
@@ -40,6 +44,7 @@ export const SKILL_CSHARP: EnhancedSkill = {
   proficiency: 0.6,
   category: "Software Development",
   relatedSkills: ["Java", ".NET"],
+  color: "#239120",
 };
 
 export const SKILL_C: EnhancedSkill = {
@@ -49,6 +54,7 @@ export const SKILL_C: EnhancedSkill = {
   proficiency: 0.99,
   category: "Software Development",
   relatedSkills: [],
+  color: "#A8B9CC",
 };
 
 export const SKILL_KOTLIN: EnhancedSkill = {
@@ -58,6 +64,7 @@ export const SKILL_KOTLIN: EnhancedSkill = {
   proficiency: 0.7,
   category: "Software Development",
   relatedSkills: ["Java", "Android"],
+  color: "#7F52FF",
 };
 
 // Web Technologies
@@ -68,6 +75,7 @@ export const SKILL_HTML: EnhancedSkill = {
   proficiency: 1,
   category: "Web Technologies",
   relatedSkills: ["CSS", "JavaScript"],
+  color: "#E34F26",
 };
 
 export const SKILL_CSS: EnhancedSkill = {
@@ -77,6 +85,7 @@ export const SKILL_CSS: EnhancedSkill = {
   proficiency: 0.75,
   category: "Web Technologies",
   relatedSkills: ["HTML"],
+  color: "#1572B6",
 };
 
 export const SKILL_REACT: EnhancedSkill = {
@@ -86,6 +95,7 @@ export const SKILL_REACT: EnhancedSkill = {
   proficiency: 0.7,
   category: "Web Technologies",
   relatedSkills: ["JavaScript", "Next.js"],
+  color: "#61DAFB",
 };
 
 export const SKILL_VUE: EnhancedSkill = {
@@ -95,6 +105,7 @@ export const SKILL_VUE: EnhancedSkill = {
   proficiency: 0.85,
   category: "Web Technologies",
   relatedSkills: ["JavaScript", "Nuxt"],
+  color: "#4FC08D",
 };
 
 export const SKILL_NEXTJS: EnhancedSkill = {
@@ -104,6 +115,7 @@ export const SKILL_NEXTJS: EnhancedSkill = {
   proficiency: 0.75,
   category: "Web Technologies",
   relatedSkills: ["React", "JavaScript"],
+  color: "#000000",
 };
 
 export const SKILL_NUXT: EnhancedSkill = {
@@ -113,6 +125,7 @@ export const SKILL_NUXT: EnhancedSkill = {
   proficiency: 0.85,
   category: "Web Technologies",
   relatedSkills: ["Vue", "JavaScript"],
+  color: "#00DC82",
 };
 
 export const SKILL_JQUERY: EnhancedSkill = {
@@ -122,6 +135,7 @@ export const SKILL_JQUERY: EnhancedSkill = {
   proficiency: 0.8,
   category: "Web Technologies",
   relatedSkills: ["JavaScript"],
+  color: "#0769AD",
 };
 
 export const SKILL_NODEJS: EnhancedSkill = {
@@ -131,6 +145,7 @@ export const SKILL_NODEJS: EnhancedSkill = {
   proficiency: 0.9,
   category: "Web Technologies",
   relatedSkills: ["JavaScript", "Express.js"],
+  color: "#339933",
 };
 
 export const SKILL_EXPRESSJS: EnhancedSkill = {
@@ -140,6 +155,7 @@ export const SKILL_EXPRESSJS: EnhancedSkill = {
   proficiency: 0.9,
   category: "Web Technologies",
   relatedSkills: ["Node.js", "JavaScript"],
+  color: "#000000",
 };
 
 export const SKILL_EJS: EnhancedSkill = {
@@ -149,6 +165,7 @@ export const SKILL_EJS: EnhancedSkill = {
   proficiency: 0.6,
   category: "Web Technologies",
   relatedSkills: ["HTML", "JavaScript", "Node.js"],
+  color: "#A91E50",
 };
 
 // Systems
@@ -159,6 +176,7 @@ export const SKILL_LINUX: EnhancedSkill = {
   proficiency: 0.7,
   category: "Systems",
   relatedSkills: ["Bash", "Raspberry Pi"],
+  color: "#FCC624",
 };
 
 export const SKILL_BASH: EnhancedSkill = {
@@ -168,6 +186,7 @@ export const SKILL_BASH: EnhancedSkill = {
   proficiency: 0.65,
   category: "Systems",
   relatedSkills: ["Linux"],
+  color: "#4EAA25",
 };
 
 export const SKILL_OS: EnhancedSkill = {
@@ -177,6 +196,7 @@ export const SKILL_OS: EnhancedSkill = {
   proficiency: 0.6,
   category: "Systems",
   relatedSkills: ["Linux"],
+  color: "#0078D6",
 };
 
 export const SKILL_RASPBERRY_PI: EnhancedSkill = {
@@ -189,6 +209,7 @@ export const SKILL_RASPBERRY_PI: EnhancedSkill = {
   proficiency: 0.8,
   category: "Systems",
   relatedSkills: ["Linux", "Self-hosting"],
+  color: "#C51A4A",
 };
 
 export const SKILL_VIRTUALIZATION: EnhancedSkill = {
@@ -198,6 +219,7 @@ export const SKILL_VIRTUALIZATION: EnhancedSkill = {
   proficiency: 0.5,
   category: "Systems",
   relatedSkills: ["Linux", "Docker"],
+  color: "#167EFB",
 };
 
 export const SKILL_NETWORKING: EnhancedSkill = {
@@ -207,6 +229,7 @@ export const SKILL_NETWORKING: EnhancedSkill = {
   proficiency: 0.55,
   category: "Systems",
   relatedSkills: ["Linux", "EC2"],
+  color: "#0078D7",
 };
 
 export const SKILL_SECURITY: EnhancedSkill = {
@@ -216,6 +239,7 @@ export const SKILL_SECURITY: EnhancedSkill = {
   proficiency: 0.7,
   category: "Systems",
   relatedSkills: ["Linux", "Networking"],
+  color: "#FF4500",
 };
 
 export const SKILL_ANDROID: EnhancedSkill = {
@@ -228,6 +252,7 @@ export const SKILL_ANDROID: EnhancedSkill = {
   proficiency: 0.65,
   category: "Systems",
   relatedSkills: ["Kotlin", "Java"],
+  color: "#3DDC84",
 };
 
 // Data
@@ -238,6 +263,7 @@ export const SKILL_MONGODB: EnhancedSkill = {
   proficiency: 0.85,
   category: "Data",
   relatedSkills: ["Node.js", "DynamoDB"],
+  color: "#47A248",
 };
 
 export const SKILL_MYSQL: EnhancedSkill = {
@@ -247,6 +273,7 @@ export const SKILL_MYSQL: EnhancedSkill = {
   proficiency: 0.75,
   category: "Data",
   relatedSkills: ["PostgreSQL", "RDS"],
+  color: "#4479A1",
 };
 
 export const SKILL_POSTGRESQL: EnhancedSkill = {
@@ -256,6 +283,7 @@ export const SKILL_POSTGRESQL: EnhancedSkill = {
   proficiency: 0.75,
   category: "Data",
   relatedSkills: ["MySQL", "RDS"],
+  color: "#4169E1",
 };
 
 export const SKILL_FIREBASE: EnhancedSkill = {
@@ -265,6 +293,7 @@ export const SKILL_FIREBASE: EnhancedSkill = {
   proficiency: 0.6,
   category: "Data",
   relatedSkills: ["DynamoDB"],
+  color: "#FFCA28",
 };
 
 export const SKILL_PRISMA: EnhancedSkill = {
@@ -274,6 +303,7 @@ export const SKILL_PRISMA: EnhancedSkill = {
   proficiency: 0.9,
   category: "Data",
   relatedSkills: ["PostgreSQL", "MySQL"],
+  color: "#2D3748",
 };
 
 export const SKILL_DYNAMODB: EnhancedSkill = {
@@ -283,6 +313,7 @@ export const SKILL_DYNAMODB: EnhancedSkill = {
   proficiency: 0.85,
   category: "Data",
   relatedSkills: ["MongoDB", "AWS"],
+  color: "#4053D6",
 };
 
 export const SKILL_RDS: EnhancedSkill = {
@@ -292,6 +323,7 @@ export const SKILL_RDS: EnhancedSkill = {
   proficiency: 0.75,
   category: "Data",
   relatedSkills: ["MySQL", "PostgreSQL", "AWS"],
+  color: "#3B48CC",
 };
 
 // Cloud & DevOps
@@ -302,6 +334,7 @@ export const SKILL_EC2: EnhancedSkill = {
   proficiency: 0.75,
   category: "Cloud & DevOps",
   relatedSkills: ["AWS", "Linux", "Self-hosting"],
+  color: "#FF9900",
 };
 
 export const SKILL_LAMBDA: EnhancedSkill = {
@@ -311,6 +344,7 @@ export const SKILL_LAMBDA: EnhancedSkill = {
   proficiency: 0.5,
   category: "Cloud & DevOps",
   relatedSkills: ["AWS", "JavaScript", "Node.js"],
+  color: "#FF9900",
 };
 
 export const SKILL_S3: EnhancedSkill = {
@@ -320,6 +354,7 @@ export const SKILL_S3: EnhancedSkill = {
   proficiency: 0.8,
   category: "Cloud & DevOps",
   relatedSkills: ["AWS"],
+  color: "#569A31",
 };
 
 export const SKILL_GIT: EnhancedSkill = {
@@ -329,6 +364,7 @@ export const SKILL_GIT: EnhancedSkill = {
   proficiency: 0.9,
   category: "Cloud & DevOps",
   relatedSkills: ["CI/CD"],
+  color: "#F05032",
 };
 
 export const SKILL_DOCKER: EnhancedSkill = {
@@ -338,6 +374,7 @@ export const SKILL_DOCKER: EnhancedSkill = {
   proficiency: 0.75,
   category: "Cloud & DevOps",
   relatedSkills: ["Virtualization", "CI/CD"],
+  color: "#2496ED",
 };
 
 export const SKILL_SELFHOSTING: EnhancedSkill = {
@@ -347,6 +384,7 @@ export const SKILL_SELFHOSTING: EnhancedSkill = {
   proficiency: 0.8,
   category: "Cloud & DevOps",
   relatedSkills: ["Raspberry Pi", "Linux", "Docker"],
+  color: "#7B68EE",
 };
 
 export const SKILL_CICD: EnhancedSkill = {
@@ -356,6 +394,7 @@ export const SKILL_CICD: EnhancedSkill = {
   proficiency: 0.65,
   category: "Cloud & DevOps",
   relatedSkills: ["Git", "Docker"],
+  color: "#4078C0",
 };
 
 export const SKILL_NGINX: EnhancedSkill = {
@@ -365,6 +404,7 @@ export const SKILL_NGINX: EnhancedSkill = {
   proficiency: 0.7,
   category: "Cloud & DevOps",
   relatedSkills: ["Self-hosting", "Linux"],
+  color: "#009639",
 };
 
 export const SKILL_OPENAI_API: EnhancedSkill = {
@@ -374,6 +414,7 @@ export const SKILL_OPENAI_API: EnhancedSkill = {
   proficiency: 0.7,
   category: "Web Technologies",
   relatedSkills: ["Nodejs", "Python"],
+  color: "#412991",
 };
 
 export const SKILL_LIBSSH: EnhancedSkill = {
@@ -383,6 +424,7 @@ export const SKILL_LIBSSH: EnhancedSkill = {
   proficiency: 0.7,
   category: "Systems",
   relatedSkills: ["C", "SSH", "SFTP", "Networking"],
+  color: "#3E64A0",
 };
 
 export const SKILL_SSH: EnhancedSkill = {
@@ -392,6 +434,7 @@ export const SKILL_SSH: EnhancedSkill = {
   proficiency: 0.7,
   category: "Systems",
   relatedSkills: ["C", "SSH", "libssh", "Networking"],
+  color: "#232F3E",
 };
 
 export const SKILL_SFTP: EnhancedSkill = {
@@ -401,6 +444,7 @@ export const SKILL_SFTP: EnhancedSkill = {
   proficiency: 0.7,
   category: "Systems",
   relatedSkills: ["C", "SSH", "libssh", "Networking"],
+  color: "#00AEF0",
 };
 
 export const SKILL_AWS: EnhancedSkill = {
@@ -409,7 +453,8 @@ export const SKILL_AWS: EnhancedSkill = {
   icon: { lightIcon: "i-skill-icons-aws-light", darkIcon: "i-skill-icons-aws-dark" },
   proficiency: 0.7,
   category: "Cloud & DevOps",
-  relatedSkills: ["EC2", "S3", "Lambda", "DynamoDB", "RDS"]
+  relatedSkills: ["EC2", "S3", "Lambda", "DynamoDB", "RDS"],
+  color: "#FF9900"
 }
 
 export const SKILL_REDIS: EnhancedSkill = {
@@ -419,6 +464,7 @@ export const SKILL_REDIS: EnhancedSkill = {
   proficiency: 0.8,
   category: "Data",
   relatedSkills: ["MongoDB", "Caching", "Pub/Sub"],
+  color: "#DC382D",
 };
 
 export const SKILL_WEBSOCKET: EnhancedSkill = {
@@ -428,6 +474,7 @@ export const SKILL_WEBSOCKET: EnhancedSkill = {
   proficiency: 0.75,
   category: "Web Technologies",
   relatedSkills: ["JavaScript", "Node.js", "Real-time Communication"],
+  color: "#4353A4",
 };
 
 export const SKILL_ZUSTAND: EnhancedSkill = {
@@ -437,6 +484,7 @@ export const SKILL_ZUSTAND: EnhancedSkill = {
   proficiency: 0.75,
   category: "Web Technologies",
   relatedSkills: ["React", "State Management", "JavaScript"],
+  color: "#443E38",
 };
 
 export const SKILL_NEXTAUTH: EnhancedSkill = {
@@ -446,6 +494,7 @@ export const SKILL_NEXTAUTH: EnhancedSkill = {
   proficiency: 0.8,
   category: "Web Technologies",
   relatedSkills: ["Next.js", "Authentication", "OAuth"],
+  color: "#2F855A",
 };
 
 export const SKILL_STRIPE: EnhancedSkill = {
@@ -455,6 +504,7 @@ export const SKILL_STRIPE: EnhancedSkill = {
   proficiency: 0.7,
   category: "Web Technologies",
   relatedSkills: ["Payments", "Node.js", "JavaScript"],
+  color: "#635BFF",
 };
 
 export const SKILL_TAILWIND: EnhancedSkill = {
@@ -464,6 +514,7 @@ export const SKILL_TAILWIND: EnhancedSkill = {
   proficiency: 0.85,
   category: "Web Technologies",
   relatedSkills: ["CSS", "HTML", "Web Design"],
+  color: "#06B6D4",
 };
 
 // Export a skills array for easier access
@@ -509,4 +560,14 @@ export const SKILLS: EnhancedSkill[] = [
   SKILL_CICD,
   SKILL_NGINX,
   SKILL_REDIS,
+  SKILL_WEBSOCKET,
+  SKILL_ZUSTAND,
+  SKILL_NEXTAUTH,
+  SKILL_STRIPE,
+  SKILL_TAILWIND,
+  SKILL_OPENAI_API,
+  SKILL_LIBSSH,
+  SKILL_SSH,
+  SKILL_SFTP,
+  SKILL_AWS,
 ];
