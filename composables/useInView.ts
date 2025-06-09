@@ -14,7 +14,6 @@ export function useInView(options?: IntersectionObserverInit) {
       ([entry], observe) => {
         if (entry.isIntersecting) {
           isVisible.value = true;
-          console.log("entry.isIntersecting", entry);
           observe.disconnect();
         }
       },
