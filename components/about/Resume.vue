@@ -4,7 +4,7 @@ const resumeFormats = ref<ResumeFormat[]>([
   {
     type: "PDF",
     icon: "i-codicon-file-pdf",
-    link: "/files/Pouyan_Norouzi_Resume.docx",
+    link: "/files/Pouyan_Norouzi_Resume.pdf",
   },
   {
     type: "DOCX",
