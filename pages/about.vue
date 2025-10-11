@@ -20,18 +20,19 @@ const education = ref([
 // Experience data
 const experience = ref([
   {
-    position: "Home Solutions Advisor",
-    company: "Best Buy",
-    location: "Coquitlam",
-    period: "August 2023 – January 2024",
-    description: "Seasonal position helping with sales during busy season",
+    position: "TECH Specialist",
+    company: "London Drugs",
+    location: "Burnaby, BC",
+    period: "June 2025 – Present",
+    description:
+      "Provide technical customer support for electronics, manage inventory and restocking, and process sales transactions.",
   },
   {
-    position: "Sales Assistant",
-    company: "Mehr Shop",
-    location: "Iran",
-    period: "June 2019 – February 2020",
-    description: "Assisted with restocking and sales",
+    position: "Home Solutions Advisor",
+    company: "Best Buy",
+    location: "Coquitlam, BC",
+    period: "August 2023 – January 2024",
+    description: "Seasonal position helping with sales during busy season",
   },
 ]);
 </script>
