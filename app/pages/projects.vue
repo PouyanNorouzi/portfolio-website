@@ -152,7 +152,7 @@ const projects = ref<Project[]>([
     github: "https://github.com/PouyanNorouzi/portfolio-website",
     liveDemo: config.public.siteUrl as string,
   },
-]);
+  ].reverse());
 </script>
 
 <template>
