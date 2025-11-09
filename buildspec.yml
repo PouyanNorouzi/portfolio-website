@@ -1,0 +1,14 @@
+version: 0.2
+
+phases:
+  install:
+    commands:
+      - npm install -g pnpm
+  build:
+    commands:
+      - pnpm install
+      - pnpm run build
+
+artifacts:
+  files:
+    - '**/*'
