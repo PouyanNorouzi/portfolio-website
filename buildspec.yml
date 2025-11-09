@@ -2,11 +2,17 @@ version: 0.2
 
 phases:
   install:
+    runtime-versions:
+      nodejs: 20
     commands:
       - npm install -g pnpm
+  pre_build:
+    commands:
+      - rm -rf node_modules package-lock.json pnpm-lock.yaml
   build:
     commands:
-      - pnpm install
+      - pnpm install --no-optional
+      - pnpm rebuild
       - pnpm run build
 
 artifacts:
