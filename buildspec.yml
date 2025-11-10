@@ -17,5 +17,6 @@ phases:
 
 artifacts:
   files:
-    - "**/*"
-  base-directory: .output
+    - scripts/**/*
+    - .output/**/*
+    - ecosystem.config.cjs
