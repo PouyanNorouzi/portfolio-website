@@ -3,6 +3,7 @@
 
 :root {
   --color-shadow: var(--color-neutral-400);
+  font-size: 15px;
 }
 
 .dark {
