@@ -58,10 +58,10 @@ const clickedAmount = ref(0);
 
 const currentNotification = computed<ToastNotification | null>(() => {
   const clicked = clickedAmount.value;
-  const notifications = alreadyHereNotifications.value;
+  const notifications = alreadyHereNotifications.value as ToastNotification[];
 
   if (clicked >= 0 && clicked < notifications.length) {
-    return notifications[clicked];
+    return notifications[clicked]!;
   }
   return null;
 });

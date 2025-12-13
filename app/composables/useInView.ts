@@ -12,7 +12,7 @@ export function useInView(options?: IntersectionObserverInit) {
 
     observer = new IntersectionObserver(
       ([entry], observe) => {
-        if (entry.isIntersecting) {
+        if (entry?.isIntersecting) {
           isVisible.value = true;
           observe.disconnect();
         }

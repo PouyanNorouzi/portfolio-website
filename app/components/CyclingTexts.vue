@@ -54,7 +54,7 @@ let iconTimer: number | null = null;
 
 // Get current text content
 const currentTextContent = computed(() => {
-  const currentText = props.texts[currentIndex.value];
+  const currentText = props.texts[currentIndex.value]!;
   if (typeof currentText === "string") {
     return currentText;
   } else {
@@ -64,7 +64,7 @@ const currentTextContent = computed(() => {
 
 // Get current icon if available
 const currentIcon = computed(() => {
-  const currentText = props.texts[currentIndex.value];
+  const currentText = props.texts[currentIndex.value]!;
   if (typeof currentText === "string") {
     return null;
   } else {
