@@ -80,7 +80,7 @@ const { isVisible } = useInView({ threshold: viewPort.isLessThan("md") ? 0.1 : 0
 <template>
   <UCard
     ref="transitionElement"
-    class="project-card"
+    class="project-card bg-accented dark:bg-elevated"
     variant="soft"
     :style="{
       opacity: isVisible ? 1 : 0,
@@ -90,15 +90,15 @@ const { isVisible } = useInView({ threshold: viewPort.isLessThan("md") ? 0.1 : 0
     <div class="flex flex-col md:flex-row gap-4 h-full">
       <!-- Left side - Image -->
       <div
-        class="relative md:w-1/3 md:flex md:items-stretch overflow-hidden md:min-h-[250px] image-container">
+        class="relative md:w-1/3 md:flex md:items-stretch overflow-hidden md:min-h-[250px]">
         <div class="relative w-full h-full transition-all duration-500">
           <NuxtImg
             :src="project.image"
             :alt="project.name"
-            class="w-full md:h-full object-fill md:absolute md:inset-0 md:rounded-l-lg"
+            class="w-full md:h-full object-fill md:absolute md:inset-0 md:rounded-lg"
             preload />
           <div class="absolute top-2 right-2 flex gap-2">
-            <UBadge v-for="tag in project.tags" :key="tag" :label="tag" variant="solid" size="xs" />
+            <UBadge v-for="tag in project.tags" :key="tag" :label="tag" class="rounded-full" size="sm" />
           </div>
         </div>
       </div>
@@ -107,7 +107,7 @@ const { isVisible } = useInView({ threshold: viewPort.isLessThan("md") ? 0.1 : 0
       <div class="flex flex-col flex-1 justify-between">
         <div>
           <h3 class="text-xl font-semibold mb-2">{{ project.name }}</h3>
-          <p class="text-gray-600 dark:text-gray-300 mb-4 text-sm">
+          <p class="text-muted mb-4 text-sm">
             {{ project.description }}
           </p>
 

@@ -38,9 +38,10 @@ const experience = ref([
 </script>
 
 <template>
-  <div class="about-page">
+  <div>
+    <PageHeader>About Me</PageHeader>
     <!-- Hero Section with Card Showcase -->
-    <AboutHero />
+    <AboutHero class="pb-10 md:pb-12 pt-1" />
 
     <UContainer class="py-8">
       <!-- Skills Section -->

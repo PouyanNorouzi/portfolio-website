@@ -23,13 +23,8 @@ const cards = ref<AboutCardItem[]>([
 </script>
 
 <template>
-  <section class="about-hero py-10 md:py-12">
+  <section class="about-hero">
     <UContainer>
-      <div class="text-center mb-6">
-        <h1 class="text-4xl md:text-5xl font-bold mb-3">About Me</h1>
-        <div class="w-20 h-1 bg-primary mx-auto" />
-      </div>
-
       <div class="cards-container grid md:grid-cols-3 gap-6 mb-8">
         <AboutCard
           v-for="(card, index) in cards"

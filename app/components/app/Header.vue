@@ -99,8 +99,8 @@ onMounted(() => {
 // Dynamic header styles based on scroll position
 const headerClass = computed(() => {
   return {
-    "bg-gray-200/90 dark:bg-gray-900/80": isScrolled.value,
-    "bg-gray-200/50 dark:bg-gray-800/0": !isScrolled.value,
+    "bg-accented/90 dark:bg-default/80": isScrolled.value,
+    "bg-accented/50 dark:bg-default/0": !isScrolled.value,
     "pb-1 pe-0": isScrolled.value,
     "py-2": !isScrolled.value,
     "transition-all duration-300": true,
@@ -138,9 +138,15 @@ const headerClass = computed(() => {
           <!-- Theme Toggle -->
           <UButton
             variant="ghost"
-            :icon="isDarkMode ? 'i-lucide-sun' : 'i-lucide-moon'"
-            :ui="{ base: 'rounded-full' }"
-            @click="isDarkMode = !isDarkMode" />
+            :ui="{ base: 'rounded-full theme-toggle-btn' }"
+            @click="isDarkMode = !isDarkMode">
+            <template #default>
+              <Transition name="theme-icon" mode="out-in">
+                <UIcon v-if="isDarkMode" key="sun" name="i-lucide-sun" />
+                <UIcon v-else key="moon" name="i-lucide-moon" />
+              </Transition>
+            </template>
+          </UButton>
 
           <!-- Social Links - Show only on larger screens -->
           <template v-for="link in socialLinks" :key="link.label">
@@ -168,3 +174,30 @@ const headerClass = computed(() => {
   <!-- Spacer to prevent content from hiding behind fixed header -->
   <div :style="{ height: `${headerHeight}px` }" />
 </template>
+
+<style scoped>
+.theme-toggle-btn {
+  overflow: hidden;
+}
+
+.theme-icon-enter-active,
+.theme-icon-leave-active {
+  transition: all 0.3s ease;
+}
+
+.theme-icon-enter-from {
+  opacity: 0;
+  transform: scale(0.5) rotate(-180deg);
+}
+
+.theme-icon-leave-to {
+  opacity: 0;
+  transform: scale(0.5) rotate(180deg);
+}
+
+.theme-icon-enter-to,
+.theme-icon-leave-from {
+  opacity: 1;
+  transform: scale(1) rotate(0deg);
+}
+</style>
