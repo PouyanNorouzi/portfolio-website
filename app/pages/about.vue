@@ -12,7 +12,7 @@ const education = ref([
   {
     institution: "British Columbia Institute of Technology",
     degree: "Computer Systems Diploma",
-    period: "January 2024 - December 2025 (Expected)",
+    period: "January 2024 - December 2024",
     location: "Burnaby, BC",
   },
 ]);
@@ -41,14 +41,14 @@ const experience = ref([
   <div>
     <PageHeader>About Me</PageHeader>
     <!-- Hero Section with Card Showcase -->
-    <AboutHero class="pb-10 md:pb-12 pt-1" />
+    <AboutHero class="pb-8 md:pb-12 pt-1" />
 
-    <UContainer class="py-8">
+    <UContainer class="pb-8">
       <!-- Skills Section -->
       <AboutSkills />
 
       <!-- Education Section -->
-      <section class="mb-16 animate-fade-in-delay-2">
+      <section class="mb-8 animate-fade-in-delay-2">
         <h2 class="text-3xl font-bold mb-6 text-center">Education</h2>
 
         <div class="space-y-6">
@@ -61,13 +61,13 @@ const experience = ref([
               <UBadge :label="edu.period" variant="soft" />
             </div>
             <p class="font-medium mb-1">{{ edu.degree }}</p>
-            <p class="text-sm text-gray-600 dark:text-gray-300">{{ edu.location }}</p>
+            <p class="text-sm text-dimmed">{{ edu.location }}</p>
           </div>
         </div>
       </section>
 
       <!-- Experience Section -->
-      <section class="mb-16 animate-fade-in-delay-3">
+      <section class="mb-8 animate-fade-in-delay-3">
         <h2 class="text-3xl font-bold mb-6 text-center">Experience</h2>
 
         <div class="space-y-6">
@@ -81,14 +81,14 @@ const experience = ref([
               </h3>
               <UBadge :label="exp.period" variant="soft" />
             </div>
-            <p class="text-sm text-gray-600 dark:text-gray-300 mb-2">{{ exp.location }}</p>
+            <p class="text-sm text-dimmed mb-2">{{ exp.location }}</p>
             <p>{{ exp.description }}</p>
           </div>
         </div>
       </section>
 
       <!-- Projects Section with redirect -->
-      <section class="mb-16 animate-fade-in-delay-4">
+      <section class="mb-8 animate-fade-in-delay-4">
         <div class="text-center">
           <h2 class="text-3xl font-bold mb-4">My Projects</h2>
           <p class="mb-8 max-w-2xl mx-auto">

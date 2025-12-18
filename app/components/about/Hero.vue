@@ -8,9 +8,9 @@ const cards = ref<AboutCardItem[]>([
     color: "primary",
   },
   {
-    title: "BCIT Student",
+    title: "BCIT Graduate",
     icon: "i-lucide-graduation-cap",
-    description: "Computer Systems Technology, Cloud Computing Option",
+    description: "Computer Systems Diploma, Cloud Computing Option",
     color: "secondary",
   },
   {
@@ -34,17 +34,11 @@ const cards = ref<AboutCardItem[]>([
         />
       </div>
 
-      <div class="overview mt-12 md:mt-16 md:w-3/4 mx-auto text-center animate-fade-in-delay">
-        <p class="text-lg md:text-xl mb-6">
-          I'm a Computer Systems student at BCIT with a focus on cloud computing. My education
-          combines theoretical foundations with practical projects, allowing me to develop skills
-          across the entire development stack.
-        </p>
-
-        <p class="text-gray-600 dark:text-gray-400">
-          When I'm not studying, I enjoy building side projects and experimenting with new
-          technologies. My approach centers on writing maintainable code that solves real problems
-          while delivering great user experiences.
+      <div class="overview mt-6 md:mt-8 md:w-3/4 mx-auto text-center animate-fade-in-delay">
+        <p class="md:text-lg">
+          I'm a recent BCIT graduate with a Computer Systems Diploma, specializing in cloud computing.
+          My education combined theoretical foundations with practical projects, allowing me to develop
+          skills across the entire development stack.
         </p>
       </div>
     </UContainer>

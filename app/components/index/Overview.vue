@@ -18,7 +18,7 @@
 
         <!-- Right column with overview content -->
         <div class="lg:col-span-8 space-y-6">
-          <p class="leading-relaxed">I'm Pouyan, a developer who enjoys learning by building.</p>
+          <p class="leading-relaxed">I'm Pouyan, a recent BCIT graduate who enjoys learning by building.</p>
           <p class="leading-relaxed">
             I'm especially interested in how different parts of a project come together, from user
             interfaces and backend logic to deployment and infrastructure. I like working across the
@@ -49,16 +49,26 @@
           </p>
 
           <p class="leading-relaxed">
-            Outside of school, I maintain a Raspberry Pi running Pi OS where I host many of my
-            projects. As part of the Cloud Computing option at BCIT, this setup has given me
-            hands-on experience with self-hosting, deployment, and working with real-world systems
-            in a home lab environment.
+            Another significant experience was collaborating with an 11-person team on
+            <NuxtLink to="/projects#project-9" class="text-primary hover:underline"
+              >FaaSify</NuxtLink
+            >, a serverless e-commerce platform. Deploying a larger application on AWS taught me
+            about orchestrating multiple services, managing infrastructure at scale, and the
+            complexities of serverless architecture. Working with a larger team taught me valuable
+            lessons about code coordination and integrating my work with others' contributions.
+          </p>
+
+          <p class="leading-relaxed">
+            I maintain a Raspberry Pi running Pi OS where I host many of my projects. During my
+            studies in the Cloud Computing option at BCIT, this setup gave me hands-on experience
+            with self-hosting, deployment, and working with real-world systems in a home lab
+            environment.
           </p>
 
           <p class="leading-relaxed mb-1.5">
-            Right now, I'm exploring different areas of development and building tools that are
-            accessible, maintainable, and performant. This site was built with Nuxt, one of my
-            favorite tools I've picked up along the way.
+            I'm exploring different areas of development and building tools that are accessible,
+            maintainable, and performant. This site was built with Nuxt, one of my favorite tools
+            I've picked up along the way.
           </p>
 
           <UButton
@@ -119,6 +129,10 @@ p:nth-child(5) {
 
 p:nth-child(6) {
   --i: 6;
+}
+
+p:nth-child(7) {
+  --i: 7;
 }
 
 @keyframes fadeInUp {

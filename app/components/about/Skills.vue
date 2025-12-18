@@ -10,7 +10,7 @@ import {
   type ChartData,
 } from "chart.js";
 import { Radar } from "vue-chartjs";
-import { SKILLS } from "~/utils/constants/skills";
+import { FEATURED_SKILLS } from "~/utils/constants/skills";
 import { CATEGORIES } from "~/utils/constants/categories";
 import { SkillBadge } from "#components";
 
@@ -20,7 +20,7 @@ const colorMode = useColorMode();
 ChartJS.register(RadialLinearScale, PointElement, LineElement, Tooltip, Legend);
 
 // Skills data
-const skillsData = ref<EnhancedSkill[]>(SKILLS);
+const skillsData = ref<EnhancedSkill[]>(FEATURED_SKILLS);
 
 const skillCategories = ref<SkillCategory[]>(CATEGORIES);
 
