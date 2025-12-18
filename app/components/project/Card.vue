@@ -79,6 +79,7 @@ const { isVisible } = useInView({ threshold: viewPort.isLessThan("md") ? 0.1 : 0
 
 <template>
   <UCard
+    :id="`project-${project.id}`"
     ref="transitionElement"
     class="project-card bg-accented dark:bg-elevated"
     variant="soft"

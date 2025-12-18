@@ -40,7 +40,7 @@
           </p>
           <p class="leading-relaxed">
             One project I'm particularly proud of is a real time multiplayer Pong game (<NuxtLink
-              to="/projects"
+              to="/projects#project-5"
               class="text-primary hover:underline"
               >TDP Games</NuxtLink
             >) built with Socket.io. It was a team effort, and it taught me a lot about
