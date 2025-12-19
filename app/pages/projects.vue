@@ -206,6 +206,7 @@ const projects = ref<Project[]>(
       tags: ["Academic Project", "Machine Learning", "Full Stack"],
       image: "/img/projects/memeify.png",
       github: "https://github.com/PouyanNorouzi/memeify-backend",
+      liveDemo: "https://memeify.pouyannorouzi.com/",
     },
     {
       id: 10,
