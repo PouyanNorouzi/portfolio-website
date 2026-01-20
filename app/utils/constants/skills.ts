@@ -527,6 +527,26 @@ export const SKILL_BUN: EnhancedSkill = {
   color: "#FBF0DF",
 };
 
+export const SKILL_FRAMER_MOTION: EnhancedSkill = {
+  id: 53,
+  title: "Framer Motion",
+  icon: "i-simple-icons-framer",
+  proficiency: 0.7,
+  category: "Web Technologies",
+  relatedSkills: ["React", "JavaScript", "Animations"],
+  color: "#0055FF",
+};
+
+export const SKILL_VERCEL: EnhancedSkill = {
+  id: 54,
+  title: "Vercel",
+  icon: { lightIcon: "i-skill-icons-vercel-light", darkIcon: "i-skill-icons-vercel-dark" },
+  proficiency: 0.8,
+  category: "Cloud & DevOps",
+  relatedSkills: ["Next.js", "CI/CD", "Deployment"],
+  color: "#000000",
+};
+
 // Export a skills array for easier access
 export const SKILLS: EnhancedSkill[] = [
   SKILL_JAVASCRIPT,
@@ -581,6 +601,8 @@ export const SKILLS: EnhancedSkill[] = [
   SKILL_SSH,
   SKILL_SFTP,
   SKILL_AWS,
+  SKILL_FRAMER_MOTION,
+  SKILL_VERCEL,
 ];
 
 export const FEATURED_SKILLS: EnhancedSkill[] = [

@@ -10,6 +10,7 @@ import {
   SKILL_EJS,
   SKILL_EXPRESSJS,
   SKILL_FIREBASE,
+  SKILL_FRAMER_MOTION,
   SKILL_HTML,
   SKILL_JAVASCRIPT,
   SKILL_JQUERY,
@@ -34,6 +35,7 @@ import {
   SKILL_STRIPE,
   SKILL_TAILWIND,
   SKILL_TYPESCRIPT,
+  SKILL_VERCEL,
   SKILL_VUE,
   SKILL_WEBSOCKET,
   SKILL_ZUSTAND,
@@ -219,6 +221,19 @@ const projects = ref<Project[]>(
       tags: ["Academic Project", "Serverless", "E-Commerce"],
       image: "/img/projects/faasify.png",
       github: "https://github.com/faasify-official",
+    },
+    {
+      id: 11,
+      name: "SafeDev",
+      description:
+        "A developer-first security platform built in 24 hours during a hackathon with a partner. SafeDev helps find and fix security issues before they ship by scanning GitHub repositories for secrets, validating JWTs, and delivering actionable security insights. Features real-time GitHub scanning with secret detection, JWT inspector for decoding and validation, and an AI-powered security advisor using GPT-4o that provides a unified security score with prioritized remediation steps.",
+      startDate: new Date("2026-12-15"),
+      endDate: new Date("2026-12-16"),
+      techStack: [SKILL_NEXTJS, SKILL_TYPESCRIPT, SKILL_TAILWIND, SKILL_FRAMER_MOTION, SKILL_NEXTAUTH, SKILL_OPENAI_API, SKILL_VERCEL],
+      tags: ["Hackathon", "Security", "AI Integration"],
+      image: "/img/projects/safedev.png",
+      github: "https://github.com/dipenvir/SafeDev",
+      liveDemo: "https://safe-dev-rrw4.vercel.app/",
     },
   ].reverse()
 );

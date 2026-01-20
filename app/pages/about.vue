@@ -12,7 +12,7 @@ const education = ref([
   {
     institution: "British Columbia Institute of Technology",
     degree: "Computer Systems Diploma",
-    period: "January 2024 - December 2024",
+    period: "January 2024 - December 2025",
     location: "Burnaby, BC",
   },
 ]);
