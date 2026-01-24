@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import {
+  SKILL_ANDROID,
   SKILL_AWS,
   SKILL_BUN,
   SKILL_C,
@@ -14,6 +15,7 @@ import {
   SKILL_HTML,
   SKILL_JAVASCRIPT,
   SKILL_JQUERY,
+  SKILL_KOTLIN,
   SKILL_LAMBDA,
   SKILL_LIBSSH,
   SKILL_LINUX,
@@ -154,6 +156,21 @@ const projects = ref<Project[]>(
     },
     {
       id: 6,
+      name: "Mouyan",
+      description:
+        "A modern Android movie discovery and rating application built with Jetpack Compose. Features comprehensive movie search powered by The Movie Database (TMDb) API, personal movie rating system with comments, and beautiful Material Design 3 interface. Users can browse popular movies, search for specific titles, view detailed movie information including cast and crew, and maintain their personal rating history.",
+      startDate: new Date("2025-03-07"),
+      endDate: new Date("2025-04-25"),
+      techStack: [
+        SKILL_KOTLIN,
+        SKILL_ANDROID,
+      ],
+      tags: ["Mobile App", "Movie Discovery", "Material Design"],
+      image: "/img/projects/mouyan.png",
+      github: "https://github.com/PouyanNorouzi/COMP3717_Project",
+    },
+    {
+      id: 7,
       name: "Conscious Connections",
       description:
         "An Industry-Sponsored Student Project building the best platform on the web for conscious dating and connections. A full-stack application with comprehensive user profiles, matching algorithms, and secure communication channels.",
@@ -174,7 +191,7 @@ const projects = ref<Project[]>(
       image: "/img/projects/conscious-connections.png",
     },
     {
-      id: 7,
+      id: 8,
       name: "Portfolio Website",
       description:
         "My personal portfolio website built with modern web technologies. Features responsive design, dark mode, project showcase, and contact form.",
@@ -187,7 +204,7 @@ const projects = ref<Project[]>(
       liveDemo: config.public.siteUrl as string,
     },
     {
-      id: 8,
+      id: 9,
       name: "Accountium",
       description:
         "An industry-sponsored project to improve the UI of an existing accounting software and create a new marketing website. The application was built with a C# backend and vanilla HTML, CSS, and JavaScript frontend with jQuery. I focused on creating a reusable table component that allowed programmatic table generation with consistent styling, addressing the challenge of copy-pasted styles throughout the codebase.",
@@ -198,7 +215,7 @@ const projects = ref<Project[]>(
       image: "/img/projects/accountium.png",
     },
     {
-      id: 9,
+      id: 10,
       name: "Memeify",
       description:
         "A full-stack meme generation platform that uses AI to create captions for uploaded images. The system consists of a TypeScript backend API, HTML/CSS/JavaScript frontend, and a Python-based FastAPI microservice that leverages the BLIP (Bootstrapping Language-Image Pre-training) model for intelligent image captioning. Features include user authentication, image upload, and AI-powered meme caption generation.",
@@ -211,7 +228,7 @@ const projects = ref<Project[]>(
       liveDemo: "https://memeify.pouyannorouzi.com/",
     },
     {
-      id: 10,
+      id: 11,
       name: "FaaSify",
       description:
         "A serverless e-commerce storefront platform built on AWS cloud architecture. This collaborative project with an 11-person team features a React frontend, serverless Lambda backend with DynamoDB, and real-time chat functionality. I focused on developing the WebSocket server using TypeScript and Bun, implementing real-time messaging, typing indicators, read receipts, and presence tracking.",
@@ -223,7 +240,7 @@ const projects = ref<Project[]>(
       github: "https://github.com/faasify-official",
     },
     {
-      id: 11,
+      id: 12,
       name: "SafeDev",
       description:
         "A developer-first security platform built in 24 hours during a hackathon with a partner. SafeDev helps find and fix security issues before they ship by scanning GitHub repositories for secrets, validating JWTs, and delivering actionable security insights. Features real-time GitHub scanning with secret detection, JWT inspector for decoding and validation, and an AI-powered security advisor using GPT-4o that provides a unified security score with prioritized remediation steps.",
