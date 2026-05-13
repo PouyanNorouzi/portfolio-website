@@ -547,6 +547,16 @@ export const SKILL_VERCEL: EnhancedSkill = {
   color: "#000000",
 };
 
+export const SKILL_SVELTEKIT: EnhancedSkill = {
+  id: 55,
+  title: "SvelteKit",
+  icon: "i-skill-icons-svelte",
+  proficiency: 0.75,
+  category: "Web Technologies",
+  relatedSkills: ["JavaScript", "Svelte", "TypeScript"],
+  color: "#FF3E00",
+};
+
 // Export a skills array for easier access
 export const SKILLS: EnhancedSkill[] = [
   SKILL_JAVASCRIPT,
@@ -603,6 +613,7 @@ export const SKILLS: EnhancedSkill[] = [
   SKILL_AWS,
   SKILL_FRAMER_MOTION,
   SKILL_VERCEL,
+  SKILL_SVELTEKIT,
 ];
 
 export const FEATURED_SKILLS: EnhancedSkill[] = [
