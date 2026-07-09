@@ -1,0 +1,14 @@
+allowBuilds:
+  "@parcel/watcher": true
+  "@tailwindcss/oxide": true
+  esbuild: true
+  sharp: true
+  unrs-resolver: true
+  vue-demi: true
+
+supportedArchitectures:
+  os:
+  - linux
+  cpu:
+  - x64
+  - arm64

@@ -661,4 +661,5 @@ export const FEATURED_SKILLS: EnhancedSkill[] = [
   SKILL_STRIPE,
   SKILL_TAILWIND,
   SKILL_SSH,
+  SKILL_SVELTEKIT
 ];

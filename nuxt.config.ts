@@ -64,4 +64,10 @@ export default defineNuxtConfig({
       siteUrl: process.env.NUXT_PUBLIC_SITE_URL || "https://pouyannorouzi.com",
     },
   },
+
+  vite: {
+    optimizeDeps: {
+      include: ["chart.js", "vue-chartjs"],
+    },
+  },
 });

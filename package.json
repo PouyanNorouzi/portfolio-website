@@ -15,49 +15,31 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
+    "@nuxt/content": "^3.15.0",
     "@nuxt/eslint": "1.4.1",
     "@nuxt/fonts": "0.11.4",
     "@nuxt/icon": "1.13.0",
     "@nuxt/image": "1.10.0",
-    "@nuxt/ui": "^4.7.1",
+    "@nuxt/ui": "^4.9.0",
     "chart.js": "^4.5.1",
     "eslint": "^9.39.4",
-    "nuxt": "^4.4.5",
+    "nuxt": "^4.4.8",
     "nuxt-viewport": "2.3.1",
     "sharp": "^0.34.5",
-    "tailwindcss": "^4.3.0",
+    "tailwindcss": "^4.3.2",
     "typescript": "^5.9.3",
-    "vue": "^3.5.34",
-    "vue-chartjs": "^5.3.3",
+    "vue": "^3.5.39",
+    "vue-chartjs": "^5.3.4",
     "vue-router": "^4.6.4"
   },
-  "packageManager": "pnpm@10.25.0+sha512.5e82639027af37cf832061bcc6d639c219634488e0f2baebe785028a793de7b525ffcd3f7ff574f5e9860654e098fe852ba8ac5dd5cefe1767d23a020a92f501",
+  "packageManager": "pnpm@11.10.0+sha512.0b7f8b98060031904c017e3a41eb187a16d40eeb829b95c4f8cb03681761fc4ab53dd219115b9b447f4dce1a05a214764461e7d3703392a9f32f9511ce8c86c8",
   "devDependencies": {
-    "@iconify-json/codicon": "^1.2.53",
+    "@iconify-json/codicon": "^1.2.63",
     "@iconify-json/devicon": "^1.2.62",
     "@iconify-json/devicon-plain": "^1.2.57",
     "@iconify-json/logos": "^1.2.11",
-    "@iconify-json/lucide": "^1.2.107",
-    "@iconify-json/simple-icons": "^1.2.82",
+    "@iconify-json/lucide": "^1.2.116",
+    "@iconify-json/simple-icons": "^1.2.89",
     "@iconify-json/skill-icons": "^1.2.4"
-  },
-  "pnpm": {
-    "onlyBuiltDependencies": [
-      "@parcel/watcher",
-      "@tailwindcss/oxide",
-      "esbuild",
-      "sharp",
-      "unrs-resolver",
-      "vue-demi"
-    ],
-    "supportedArchitectures": {
-      "os": [
-        "linux"
-      ],
-      "cpu": [
-        "x64",
-        "arm64"
-      ]
-    }
   }
 }
