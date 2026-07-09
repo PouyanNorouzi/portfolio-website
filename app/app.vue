@@ -1,10 +1,11 @@
-<script setup lang="ts">
-</script>
+<script setup lang="ts"></script>
 
 <template>
   <UApp>
-    <AppHeader />
-    <NuxtPage />
-    <AppFooter />
+    <UContainer class="min-h-screen flex flex-col">
+      <AppHeader />
+      <NuxtPage class="grow"/>
+      <AppFooter />
+    </UContainer>
   </UApp>
 </template>

@@ -21,6 +21,7 @@
     "@nuxt/icon": "1.13.0",
     "@nuxt/image": "1.10.0",
     "@nuxt/ui": "^4.9.0",
+    "better-sqlite3": "^12.11.1",
     "chart.js": "^4.5.1",
     "eslint": "^9.39.4",
     "nuxt": "^4.4.8",
@@ -40,6 +41,7 @@
     "@iconify-json/logos": "^1.2.11",
     "@iconify-json/lucide": "^1.2.116",
     "@iconify-json/simple-icons": "^1.2.89",
-    "@iconify-json/skill-icons": "^1.2.4"
+    "@iconify-json/skill-icons": "^1.2.4",
+    "zod": "^4.4.3"
   }
 }

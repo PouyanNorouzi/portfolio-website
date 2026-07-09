@@ -139,7 +139,11 @@ const headerClass = computed(() => {
           <UButton
             variant="ghost"
             :ui="{ base: 'rounded-full theme-toggle-btn' }"
-            @click="isDarkMode = !isDarkMode">
+            @click="
+              () => {
+                isDarkMode = !isDarkMode;
+              }
+            ">
             <template #default>
               <Transition name="theme-icon" mode="out-in">
                 <UIcon v-if="isDarkMode" key="sun" name="i-lucide-sun" />

@@ -1,12 +1,35 @@
 <script setup lang="ts">
-// No additional setup needed for this component
+import type { BlogPostProps } from "@nuxt/ui";
+
+const route = useRoute();
+
+const { data: posts } = await useAsyncData(() =>
+  queryCollection("blog").order("date", "DESC").limit(3).all()
+);
 </script>
 
 <template>
   <section class="overview-section pb-1 lg:pb-5">
     <UContainer>
-      <div class="flex flex-col lg:grid lg:grid-cols-12">
-        <!-- Left column with section heading -->
+      <div>learn more about me from my first blog post</div>
+      <div>
+        <h2 class="text-xl md:text-3xl font-bold mb-4">Most Recent Blog Posts</h2>
+        <div class="h-1 w-24 bg-primary mb-3 lg:mb-6" />
+        <UBlogPosts :posts="posts" />
+      </div>
+
+      <div>
+        <h2 class="text-xl md:text-3xl font-bold mb-4">Featured Projects</h2>
+        <div class="h-1 w-24 bg-primary mb-3 lg:mb-6" />
+      </div>
+
+      <div>
+        <h2 class="text-xl md:text-3xl font-bold mb-4">Featured Projects</h2>
+        <div class="h-1 w-24 bg-primary mb-3 lg:mb-6" />
+      </div>
+
+
+      <!-- <div class="flex flex-col lg:grid lg:grid-cols-12">
         <div class="lg:col-span-4">
           <h2 class="text-xl md:text-3xl font-bold mb-4">Overview</h2>
           <div class="h-1 w-24 bg-primary mb-3 lg:mb-6" />
@@ -16,9 +39,10 @@
           </p>
         </div>
 
-        <!-- Right column with overview content -->
         <div class="lg:col-span-8 space-y-6">
-          <p class="leading-relaxed">I'm Pouyan, a recent BCIT graduate who enjoys learning by building.</p>
+          <p class="leading-relaxed">
+            I'm Pouyan, a recent BCIT graduate who enjoys learning by building.
+          </p>
           <p class="leading-relaxed">
             I'm especially interested in how different parts of a project come together, from user
             interfaces and backend logic to deployment and infrastructure. I like working across the
@@ -79,7 +103,7 @@
             Learn more about my journey
           </UButton>
         </div>
-      </div>
+      </div> -->
     </UContainer>
   </section>
 </template>

@@ -1,6 +1,6 @@
 <template>
-  <footer class="p-4">
-    <div class="container mx-auto">
+  <footer>
+    <div>
       <div class="flex flex-col md:flex-row justify-between items-center">
         <!-- Socials and email in one row on desktop, stacked on mobile -->
         <div class="flex flex-col md:flex-row items-center mb-3 md:mb-0">
