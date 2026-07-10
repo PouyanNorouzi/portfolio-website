@@ -2,6 +2,7 @@ declare interface Project {
   id: number;
   name: string;
   description: string;
+  shortDescription: string;
   startDate: Date;
   endDate: Date;
   techStack: EnhancedSkill[];

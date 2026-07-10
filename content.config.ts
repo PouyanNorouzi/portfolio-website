@@ -12,7 +12,8 @@ export default defineContentConfig({
         date: z.date(),
         title: z.string(),
         num: z.number(),
-        description: z.string()
+        description: z.string(),
+        to: z.string()
       }),
     }),
   },

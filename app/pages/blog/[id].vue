@@ -4,12 +4,16 @@ const route = useRoute();
 const { data: page } = await useAsyncData(() =>
   queryCollection("blog").where("num", "=", route.params.id).first()
 );
+
+if (!page.value) {
+  throw createError({ status: 404, statusText: "Page Not Found" });
+}
 </script>
 
 <template>
-  <UContainer>
-    <PageHeader v-if="page">{{ page.title }}</PageHeader>
+  <UContainer class="flex flex-col" v-if="page">
+    <PageHeader>{{ page.title }}</PageHeader>
+    <NuxtImg class="max-w-[40vw] self-center mb-3" :src="page.image" />
     <ContentRenderer v-if="page" :value="page" />
-    <div v-else>na uh</div>
   </UContainer>
 </template>

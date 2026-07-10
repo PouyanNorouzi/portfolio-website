@@ -67,7 +67,9 @@ const radarData = computed((): { data: number[]; labels: string[]; colors: strin
   }
   const data = skillMap[activeCategory.value].value.map((skill) => skill.proficiency * 100);
   const labels: string[] = skillMap[activeCategory.value].value.map((skill) => skill.title);
-  const colors: string[] = skillMap[activeCategory.value].value.map((skill) => skill.color || "blue");
+  const colors: string[] = skillMap[activeCategory.value].value.map(
+    (skill) => skill.color || "blue"
+  );
 
   return { data, labels, colors };
 });
@@ -171,7 +173,11 @@ const chartOptions = computed<ChartOptions<"radar">>(() => ({
               variant="ghost"
               :color="activeCategory === 'all' ? 'primary' : 'secondary'"
               block
-              @click="activeCategory = 'all'">
+              @click="
+                () => {
+                  activeCategory = 'all';
+                }
+              ">
               <template #leading>
                 <UIcon name="i-lucide-layers" />
               </template>
@@ -184,7 +190,11 @@ const chartOptions = computed<ChartOptions<"radar">>(() => ({
               variant="ghost"
               :color="activeCategory === category.name ? 'primary' : 'secondary'"
               block
-              @click="activeCategory = category.name">
+              @click="
+                () => {
+                  activeCategory = category.name;
+                }
+              ">
               <template #leading>
                 <UIcon :name="category.icon" :style="`color: ${category.color}`" />
               </template>

@@ -91,7 +91,7 @@ const { isVisible } = useInView({ threshold: viewPort.isLessThan("md") ? 0.1 : 0
     <div class="flex flex-col md:flex-row gap-4 h-full">
       <!-- Left side - Image -->
       <div
-        class="relative md:w-1/3 md:flex md:items-stretch overflow-hidden md:min-h-[250px]">
+        class="relative md:w-1/3 md:flex md:items-stretch overflow-hidden md:min-h-62.5">
         <div class="relative w-full h-full transition-all duration-500">
           <NuxtImg
             :src="project.image"

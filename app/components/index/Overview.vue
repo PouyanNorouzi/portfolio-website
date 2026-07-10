@@ -1,109 +1,68 @@
 <script setup lang="ts">
-import type { BlogPostProps } from "@nuxt/ui";
-
-const route = useRoute();
+import SmallCard from "~/components/project/SmallCard.vue";
+import { FEATURED_PROJECT } from "~/utils/constants/projects";
+import { FEATURED_SKILLS } from "~/utils/constants/skills";
 
 const { data: posts } = await useAsyncData(() =>
   queryCollection("blog").order("date", "DESC").limit(3).all()
 );
+
+const { data: introductionPost } = await useAsyncData(() =>
+  queryCollection("blog").where("num", "=", 2).first()
+);
+
+console.log(introductionPost.value);
 </script>
 
 <template>
   <section class="overview-section pb-1 lg:pb-5">
-    <UContainer>
-      <div>learn more about me from my first blog post</div>
-      <div>
-        <h2 class="text-xl md:text-3xl font-bold mb-4">Most Recent Blog Posts</h2>
-        <div class="h-1 w-24 bg-primary mb-3 lg:mb-6" />
+    <UContainer class="flex flex-col gap-4">
+      <div class="flex flex-col items-center">
+        <h2 class="text-xl md:text-3xl font-bold mb-2">Get to Know Me</h2>
+        <div class="h-1 w-24 bg-primary mb-3" />
+        <UBlogPost
+          v-bind="introductionPost"
+          orientation="horizontal"
+          class="w-[60vw] object-contain" />
+      </div>
+
+      <div class="flex flex-col items-center">
+        <h2 class="text-xl md:text-3xl font-bold mb-2">Most Recent Blog Posts</h2>
+        <div class="h-1 w-24 bg-primary mb-3" />
         <UBlogPosts :posts="posts" />
       </div>
 
-      <div>
-        <h2 class="text-xl md:text-3xl font-bold mb-4">Featured Projects</h2>
-        <div class="h-1 w-24 bg-primary mb-3 lg:mb-6" />
+      <div class="flex flex-col items-center">
+        <h2 class="text-xl md:text-3xl font-bold mb-2">Featured Projects</h2>
+        <div class="h-1 w-24 bg-primary mb-3" />
+        <div class="grid gap-3 w-full md:grid-cols-2 xl:grid-cols-5">
+          <SmallCard v-for="project in FEATURED_PROJECT" :key="project.id" :project="project" />
+        </div>
       </div>
 
-      <div>
-        <h2 class="text-xl md:text-3xl font-bold mb-4">Featured Projects</h2>
-        <div class="h-1 w-24 bg-primary mb-3 lg:mb-6" />
+      <div class="flex flex-col items-center">
+        <h2 class="text-xl md:text-3xl font-bold mb-2">Featured Skills</h2>
+        <div class="h-1 w-24 bg-primary mb-3" />
+        <UMarquee pause-on-hover :ui="{ root: '[--gap:--spacing(4)]', content: 'w-auto py-1' }">
+          <SkillBadge
+            v-for="skill in FEATURED_SKILLS.slice(FEATURED_SKILLS.length / 2)"
+            :skill="skill"
+            ignore-label
+            size="xl"
+            icon-size="3xl" />
+        </UMarquee>
+        <UMarquee
+          reverse
+          pause-on-hover
+          :ui="{ root: '[--gap:--spacing(4)]', content: 'w-auto py-1' }">
+          <SkillBadge
+            v-for="skill in FEATURED_SKILLS.slice(0, FEATURED_SKILLS.length / 2)"
+            :skill="skill"
+            ignore-label
+            size="xl"
+            icon-size="3xl" />
+        </UMarquee>
       </div>
-
-
-      <!-- <div class="flex flex-col lg:grid lg:grid-cols-12">
-        <div class="lg:col-span-4">
-          <h2 class="text-xl md:text-3xl font-bold mb-4">Overview</h2>
-          <div class="h-1 w-24 bg-primary mb-3 lg:mb-6" />
-          <p class="text-lg text-muted hidden lg:block">
-            Get to know my journey, approach to development, and what drives me to create impactful
-            digital experiences.
-          </p>
-        </div>
-
-        <div class="lg:col-span-8 space-y-6">
-          <p class="leading-relaxed">
-            I'm Pouyan, a recent BCIT graduate who enjoys learning by building.
-          </p>
-          <p class="leading-relaxed">
-            I'm especially interested in how different parts of a project come together, from user
-            interfaces and backend logic to deployment and infrastructure. I like working across the
-            stack and exploring new technologies through
-            <NuxtLink to="/projects" class="text-primary hover:underline"
-              >hands-on experience</NuxtLink
-            >, both in class and on my own.
-          </p>
-
-          <p class="leading-relaxed">
-            I started out with
-            <NuxtLink to="/about" class="text-primary hover:underline"
-              >JavaScript and Python</NuxtLink
-            >, and over time I've expanded my skills to include tools like
-            <NuxtLink to="/about" class="text-primary hover:underline">Vue, Nuxt, Node.js</NuxtLink
-            >, and various databases. Most of this learning has come from personal projects and
-            experimenting outside of school, which has helped me build a solid, practical
-            foundation.
-          </p>
-          <p class="leading-relaxed">
-            One project I'm particularly proud of is a real time multiplayer Pong game (<NuxtLink
-              to="/projects#project-5"
-              class="text-primary hover:underline"
-              >TDP Games</NuxtLink
-            >) built with Socket.io. It was a team effort, and it taught me a lot about
-            collaboration, communication, and building something functional and responsive under
-            real time constraints.
-          </p>
-
-          <p class="leading-relaxed">
-            Another significant experience was collaborating with an 11-person team on
-            <NuxtLink to="/projects#project-9" class="text-primary hover:underline"
-              >FaaSify</NuxtLink
-            >, a serverless e-commerce platform. Deploying a larger application on AWS taught me
-            about orchestrating multiple services, managing infrastructure at scale, and the
-            complexities of serverless architecture. Working with a larger team taught me valuable
-            lessons about code coordination and integrating my work with others' contributions.
-          </p>
-
-          <p class="leading-relaxed">
-            I maintain a Raspberry Pi running Pi OS where I host many of my projects. During my
-            studies in the Cloud Computing option at BCIT, this setup gave me hands-on experience
-            with self-hosting, deployment, and working with real-world systems in a home lab
-            environment.
-          </p>
-
-          <p class="leading-relaxed mb-1.5">
-            I'm exploring different areas of development and building tools that are accessible,
-            maintainable, and performant. This site was built with Nuxt, one of my favorite tools
-            I've picked up along the way.
-          </p>
-
-          <UButton
-            to="/about"
-            variant="ghost"
-            trailing-icon="i-lucide-arrow-right"
-            :ui="{ base: 'px-0' }">
-            Learn more about my journey
-          </UButton>
-        </div>
-      </div> -->
     </UContainer>
   </section>
 </template>

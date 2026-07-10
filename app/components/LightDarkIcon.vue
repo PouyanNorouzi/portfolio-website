@@ -1,7 +1,7 @@
 <script setup lang="ts">
 interface Props {
   icon: LightAndDarkIcon | string;
-  size?: "sm" | "md" | "lg";
+  size?: "xs" | "sm" | "md" | "lg" | "xl" | "2xl" | "3xl";
 }
 
 withDefaults(defineProps<Props>(), {
