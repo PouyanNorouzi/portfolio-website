@@ -10,8 +10,6 @@ const { data: posts } = await useAsyncData(() =>
 const { data: introductionPost } = await useAsyncData(() =>
   queryCollection("blog").where("num", "=", 2).first()
 );
-
-console.log(introductionPost.value);
 </script>
 
 <template>
