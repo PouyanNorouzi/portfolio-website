@@ -149,7 +149,8 @@ export const PROJECT_CONSCIOUS_CONNECTIONS: Project = {
   name: "Conscious Connections",
   description:
     "An Industry-Sponsored Student Project building the best platform on the web for conscious dating and connections. A full-stack application with comprehensive user profiles, matching algorithms, and secure communication channels.",
-  shortDescription: "Industry-Sponsored - modern dating platform with matching and secure messaging.",
+  shortDescription:
+    "Industry-Sponsored - modern dating platform with matching and secure messaging.",
   startDate: new Date(2025, 3),
   endDate: new Date(2025, 4),
   techStack: [
@@ -187,7 +188,8 @@ export const PROJECT_ACCOUNTIUM: Project = {
   name: "Accountium",
   description:
     "An industry-sponsored project to improve the UI of an existing accounting software and create a new marketing website. The application was built with a C# backend and vanilla HTML, CSS, and JavaScript frontend with jQuery. I focused on creating a reusable table component that allowed programmatic table generation with consistent styling, addressing the challenge of copy-pasted styles throughout the codebase.",
-  shortDescription: "Industry-Sponsored - UI modernization and marketing site for accounting software.",
+  shortDescription:
+    "Industry-Sponsored - UI modernization and marketing site for accounting software.",
   startDate: new Date(2025, 8),
   endDate: new Date(2025, 11),
   techStack: [SKILL_CSHARP, SKILL_HTML, SKILL_CSS, SKILL_JAVASCRIPT, SKILL_JQUERY],
@@ -318,4 +320,5 @@ export const FEATURED_PROJECT: Project[] = [
   PROJECT_FAASIFY,
   PROJECT_CONSCIOUS_CONNECTIONS,
   PROJECT_TDP_GAMES,
+  PROJECT_ACCOUNTIUM,
 ];

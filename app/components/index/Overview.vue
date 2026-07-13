@@ -21,7 +21,7 @@ const { data: introductionPost } = await useAsyncData(() =>
         <UBlogPost
           v-bind="introductionPost"
           orientation="horizontal"
-          class="w-[60vw] object-contain" />
+          class="md:w-[60vw] sm:w-full object-contain" />
       </div>
 
       <div class="flex flex-col items-center">
@@ -33,7 +33,7 @@ const { data: introductionPost } = await useAsyncData(() =>
       <div class="flex flex-col items-center">
         <h2 class="text-xl md:text-3xl font-bold mb-2">Featured Projects</h2>
         <div class="h-1 w-24 bg-primary mb-3" />
-        <div class="grid gap-3 w-full md:grid-cols-2 xl:grid-cols-5">
+        <div class="project-grid grid gap-3 w-full md:grid-cols-3 xl:grid-cols-5">
           <SmallCard v-for="project in FEATURED_PROJECT" :key="project.id" :project="project" />
         </div>
       </div>
@@ -69,6 +69,12 @@ const { data: introductionPost } = await useAsyncData(() =>
 .overview-section {
   position: relative;
   overflow: hidden;
+}
+
+@media (min-width: 80rem) {
+  .project-grid > :nth-child(n + 6) {
+    display: none;
+  }
 }
 
 .overview-section::before {
