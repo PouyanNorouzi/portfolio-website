@@ -97,8 +97,8 @@ export const PROJECT_POUYAN_WEB_SERVICES: Project = {
   description:
     "A cross-platform C-based client using libssh that connects to an SSH server for file management and remote terminal access. Works on both Linux and Windows operating systems. Primarily designed for interacting with a Raspberry Pi server used for hosting and storage, with SFTP functionality for seamless file transfers.",
   shortDescription: "Cross-platform SSH client for remote server management.",
-  startDate: new Date(2024, 11),
-  endDate: new Date(2024, 11),
+  startDate: new Date(2025, 0),
+  endDate: new Date(2025, 0),
   techStack: [SKILL_C, SKILL_LIBSSH, SKILL_SSH, SKILL_SFTP, SKILL_RASPBERRY_PI, SKILL_LINUX],
   tags: ["Personal Project", "System Programming"],
   image: "/img/projects/pws.png",
