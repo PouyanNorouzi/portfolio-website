@@ -7,5 +7,6 @@
       <NuxtPage class="grow"/>
       <AppFooter />
     </UContainer>
+    <span class="font-fancy hidden">a</span>
   </UApp>
 </template>
