@@ -7,7 +7,7 @@ to: /blog/2
 description: Learn more about me and why I am starting to write blogs
 ---
 
-> I like to yap a lot so if you want you can skip to the summary on the bottom if just want the gist of it
+> I like to yap a lot so if you want you can skip to the [summary](#summary) on the bottom if just want the gist of it
 
 I graduated from BCIT about 7 months ago and since then I have had nothing new to add to the experience section of my resume. Like any other person existing in this job market I am a bit fatigued with the whole thing but I understand why I may not be the first choice of the recruiters looking at my resume even if I believe that I should be looked at more seriously as a candidate.
 
