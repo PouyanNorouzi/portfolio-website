@@ -53,6 +53,6 @@ So now I will go read a book. Bye
 
 ## Summary
 
-So to recap: I graduated, the job market humbled me a little, and I have decided to build this blog to try to show my ablities a bit. I've made a database engine from scratch, an e-commerce platform with a team of eleven, a meme generator, and a handful of other things that nobody asked for. I'm not done either, PWS is getting a rewrite the second I actually learn C++. This blog is basically me putting my money where my mouth is instead of just claiming I can build stuff.
+So to recap: I graduated, the job market humbled me a little, and I have decided to build this blog to try to show my abilities a bit. I've made a database engine from scratch, an e-commerce platform with a team of eleven, a meme generator, and a handful of other things that nobody asked for. I'm not done either, PWS is getting a rewrite the second I actually learn C++. This blog is basically me putting my money where my mouth is instead of just claiming I can build stuff.
 
 TLDR; I am great please hire me
