@@ -13,7 +13,10 @@ if (!page.value) {
 <template>
   <UContainer class="flex flex-col" v-if="page">
     <PageHeader>{{ page.title }}</PageHeader>
-    <NuxtImg class="max-w-[40vw] self-center mb-3" :src="page.image" />
+    <NuxtImg
+      class="w-full sm:w-auto sm:max-h-[30vh] self-center mb-3 object-contain"
+      :src="page.image"
+    />
     <ContentRenderer v-if="page" :value="page" />
   </UContainer>
 </template>
