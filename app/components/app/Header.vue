@@ -19,6 +19,11 @@ const navItems = ref<TabsItem[]>([
     value: "/projects",
   },
   {
+    label: "Blog",
+    icon: "i-lucide-newspaper",
+    value: "/blog",
+  },
+  {
     label: "About",
     icon: "i-lucide-info",
     value: "/about",
@@ -28,6 +33,9 @@ const navItems = ref<TabsItem[]>([
 // Active navigation tab tracking
 const activeTab = computed({
   get() {
+    if (route.path.startsWith("/blog")) {
+      return "/blog";
+    }
     return route.path;
   },
   set(tab) {
@@ -119,7 +127,7 @@ const headerClass = computed(() => {
         </NuxtLink>
 
         <!-- Navigation - centered on desktop, hidden on mobile -->
-        <div class="flex-1 px-4 md:max-w-md mx-auto flex items-center">
+        <div class="flex-1 px-4 md:max-w-lg mx-auto flex items-center">
           <UTabs
             v-model="activeTab"
             :items="
@@ -130,7 +138,7 @@ const headerClass = computed(() => {
                 : navItems
             "
             class="justify-center w-full"
-            :ui="{ root: 'gap-0' }" />
+            :ui="{ root: 'gap-0', list: 'w-full', trigger: 'flex-1 whitespace-nowrap' }" />
         </div>
 
         <!-- Right Side Utilities -->

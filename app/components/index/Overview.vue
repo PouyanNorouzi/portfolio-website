@@ -25,7 +25,14 @@ const { data: introductionPost } = await useAsyncData(() =>
       </div>
 
       <div class="flex flex-col items-center">
-        <h2 class="text-xl md:text-3xl font-bold mb-2">Most Recent Blog Posts</h2>
+        <div class="relative w-full flex justify-center mb-2">
+          <h2 class="text-xl md:text-3xl font-bold">Most Recent Blog Posts</h2>
+          <NuxtLink
+            to="/blog"
+            class="absolute right-0 top-1/2 -translate-y-1/2 text-sm md:text-base text-primary hover:underline whitespace-nowrap">
+            View all
+          </NuxtLink>
+        </div>
         <div class="h-1 w-24 bg-primary mb-3" />
         <UBlogPosts :posts="posts" />
       </div>

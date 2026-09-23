@@ -32,7 +32,7 @@ const experience = ref([
     company: "Best Buy",
     location: "Coquitlam, BC",
     period: "August 2023 – January 2024",
-    description: "Seasonal position helping with sales during busy season",
+    description: "Seasonal position helping with sales during busy season.",
   },
 ]);
 </script>
