@@ -1,6 +1,6 @@
 ---
 title: PWS2 Announcement
-image: /img/blogs/pws-announce/thumbnail.png
+image: /img/blogs/pws-announce/thumbnail.webp
 date: 2026, 7, 29
 num: 4
 to: /blog/4
@@ -13,7 +13,7 @@ So in my [first blog](/blog/2#what-now) I talked about what PWS was and how I pl
 
 Before actually starting to put in resources to develop the sequel I decided to ask current PWS users if they would want a sequel to be made to their beloved sftp clone. So I made the survey and left it for a couple days, only expecting a couple of responses. When the results came in even I couldn't believe it. I'll let you have a look at it yourself. 
 
-![Survey Results](/img/blogs/pws-announce/survey.png)
+![Survey Results](/img/blogs/pws-announce/survey.webp)
 
 That's right! %100 of current PWS users would want a sequel! Such a thing is unheard of in the history of surveys. It means that the entirety of humanity has united under one banner for the first time in a long time. All of this support has motivated me to make the best possible PWS 2 that I can. I just hope that I am strong enough to not crumble under such immense pressure.
 

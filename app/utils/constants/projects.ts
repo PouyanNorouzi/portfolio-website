@@ -56,7 +56,7 @@ export const PROJECT_TEXTBOOK_HERO: Project = {
   endDate: new Date(2024, 4),
   techStack: [SKILL_HTML, SKILL_CSS, SKILL_JAVASCRIPT, SKILL_FIREBASE],
   tags: ["Academic Project", "E-Commerce", "Mobile-First"],
-  image: "/img/projects/textbook-hero.png",
+  image: "/img/projects/textbook-hero.webp",
   github: "https://github.com/PouyanNorouzi/1800_202410_BBY09",
   liveDemo: "https://textbookhero-19cac.web.app/",
 };
@@ -71,7 +71,7 @@ export const PROJECT_DISASTERNOT: Project = {
   endDate: new Date(2024, 4),
   techStack: [SKILL_HTML, SKILL_CSS, SKILL_EJS, SKILL_NODEJS, SKILL_MONGODB, SKILL_OPENAI_API],
   tags: ["Academic Project", "AI Integration"],
-  image: "/img/projects/disasternot.png",
+  image: "/img/projects/disasternot.webp",
   github: "https://github.com/PouyanNorouzi/2800-202410-BBY28",
   liveDemo: "https://disasternot.pouyannorouzi.com/",
 };
@@ -86,7 +86,7 @@ export const PROJECT_MULTICULTURAL_CALENDAR: Project = {
   endDate: new Date(2024, 7),
   techStack: [SKILL_VUE, SKILL_JAVASCRIPT, SKILL_NODEJS, SKILL_MONGODB],
   tags: ["Personal Project", "Interactive Calendar"],
-  image: "/img/projects/multicultural-calendar.png",
+  image: "/img/projects/multicultural-calendar.webp",
   github: "https://github.com/PouyanNorouzi/multicultural-calender",
   liveDemo: "https://calendar.pouyannorouzi.com",
 };
@@ -101,7 +101,7 @@ export const PROJECT_POUYAN_WEB_SERVICES: Project = {
   endDate: new Date(2025, 0),
   techStack: [SKILL_C, SKILL_LIBSSH, SKILL_SSH, SKILL_SFTP, SKILL_RASPBERRY_PI, SKILL_LINUX],
   tags: ["Personal Project", "System Programming"],
-  image: "/img/projects/pws.png",
+  image: "/img/projects/pws.webp",
   github: "https://github.com/PouyanNorouzi/pws",
 };
 
@@ -125,7 +125,7 @@ export const PROJECT_TDP_GAMES: Project = {
     SKILL_CSS,
   ],
   tags: ["Cloud Computing", "Gaming", "Real Time"],
-  image: "/img/projects/tdp.png",
+  image: "/img/projects/tdp.webp",
   github: "https://github.com/rockclimber147/CloudComputingTermProject",
   liveDemo: "https://tdp.pouyannorouzi.com",
 };
@@ -140,7 +140,7 @@ export const PROJECT_MOUYAN: Project = {
   endDate: new Date(2025, 3),
   techStack: [SKILL_KOTLIN, SKILL_ANDROID],
   tags: ["Mobile App", "Movie Discovery", "Material Design"],
-  image: "/img/projects/mouyan.png",
+  image: "/img/projects/mouyan.webp",
   github: "https://github.com/PouyanNorouzi/COMP3717_Project",
 };
 
@@ -165,7 +165,7 @@ export const PROJECT_CONSCIOUS_CONNECTIONS: Project = {
     SKILL_ZUSTAND,
   ],
   tags: ["Industry-Sponsored", "Dating Platform", "Full Stack"],
-  image: "/img/projects/conscious-connections.png",
+  image: "/img/projects/conscious-connections.webp",
 };
 
 export const PROJECT_PORTFOLIO_WEBSITE: Project = {
@@ -178,7 +178,7 @@ export const PROJECT_PORTFOLIO_WEBSITE: Project = {
   endDate: new Date(2025, 4),
   techStack: [SKILL_VUE, SKILL_NUXT, SKILL_TYPESCRIPT, SKILL_TAILWIND],
   tags: ["Personal Project", "UX/UI"],
-  image: "/img/projects/portfolio.png",
+  image: "/img/projects/portfolio.webp",
   github: "https://github.com/PouyanNorouzi/portfolio-website",
   liveDemo: SITE_URL,
 };
@@ -194,7 +194,7 @@ export const PROJECT_ACCOUNTIUM: Project = {
   endDate: new Date(2025, 11),
   techStack: [SKILL_CSHARP, SKILL_HTML, SKILL_CSS, SKILL_JAVASCRIPT, SKILL_JQUERY],
   tags: ["Industry-Sponsored", "UI/UX", "Legacy Code"],
-  image: "/img/projects/accountium.png",
+  image: "/img/projects/accountium.webp",
 };
 
 export const PROJECT_MEMEIFY: Project = {
@@ -215,7 +215,7 @@ export const PROJECT_MEMEIFY: Project = {
     SKILL_DOCKER,
   ],
   tags: ["Academic Project", "Machine Learning", "Full Stack"],
-  image: "/img/projects/memeify.png",
+  image: "/img/projects/memeify.webp",
   github: "https://github.com/PouyanNorouzi/memeify-backend",
   liveDemo: "https://memeify.pouyannorouzi.com/",
 };
@@ -241,7 +241,7 @@ export const PROJECT_FAASIFY: Project = {
     SKILL_STRIPE,
   ],
   tags: ["Academic Project", "Serverless", "E-Commerce"],
-  image: "/img/projects/faasify.png",
+  image: "/img/projects/faasify.webp",
   github: "https://github.com/faasify-official",
 };
 
@@ -263,7 +263,7 @@ export const PROJECT_SAFEDEV: Project = {
     SKILL_VERCEL,
   ],
   tags: ["Hackathon", "Security", "AI Integration"],
-  image: "/img/projects/safedev.png",
+  image: "/img/projects/safedev.webp",
   github: "https://github.com/dipenvir/SafeDev",
   liveDemo: "https://safe-dev-rrw4.vercel.app/",
 };
@@ -278,7 +278,7 @@ export const PROJECT_POUDB: Project = {
   endDate: new Date(2026, 4),
   techStack: [SKILL_C, SKILL_LINUX, SKILL_NETWORKING],
   tags: ["Personal Project", "Systems Programming", "Database"],
-  image: "/img/projects/poudb.png",
+  image: "/img/projects/poudb.webp",
   github: "https://github.com/PouyanNorouzi/poudb",
 };
 
@@ -292,7 +292,7 @@ export const PROJECT_FLUX: Project = {
   endDate: new Date(2026, 4),
   techStack: [SKILL_SVELTEKIT, SKILL_TAILWIND],
   tags: ["Personal Project", "Full Stack", "Recipe App"],
-  image: "/img/projects/flux.png",
+  image: "/img/projects/flux.webp",
   github: "https://github.com/PouyanNorouzi/flux",
   liveDemo: "https://flux.pouyannorouzi.com",
 };

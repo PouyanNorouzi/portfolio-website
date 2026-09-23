@@ -1,6 +1,6 @@
 ---
 title: Introduction to Me
-image: /me/2.jpg
+image: /me/2.webp
 date: 2026, 7, 14
 num: 2
 to: /blog/2

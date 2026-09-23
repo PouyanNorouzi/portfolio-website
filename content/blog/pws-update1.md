@@ -1,6 +1,6 @@
 ---
 title: "PWS2 Update #1"
-image: /img/blogs/update.png
+image: /img/blogs/update.webp
 date: 2026, 8, 28
 num: 5
 to: /blog/5
