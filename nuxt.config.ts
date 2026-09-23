@@ -24,6 +24,14 @@ export default defineNuxtConfig({
 
   css: ["~/assets/css/main.css"],
 
+  routeRules: {
+    "/": { prerender: true },
+    "/about": { prerender: true },
+    "/projects": { prerender: true },
+    "/blog": { swr: 3600 },
+    "/blog/**": { swr: 3600 },
+  },
+
   ui: {
     theme: {
       colors: ["primary", "secondary", "tertiary", "info", "success", "warning", "error"],

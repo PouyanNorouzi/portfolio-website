@@ -17,8 +17,10 @@ defineProps<Props>();
         <NuxtImg
           :src="project.image"
           :alt="project.name"
+          width="400"
+          height="128"
+          loading="lazy"
           class="h-32 w-full rounded-md object-cover"
-          preload
         />
         <h3 class="text-base font-semibold">{{ project.name }}</h3>
         <p class="text-sm text-muted leading-relaxed">

@@ -14,7 +14,14 @@ withDefaults(defineProps<Props>(), {
 <template>
   <div class="hero-avatar">
     <!-- Image Avatar -->
-    <NuxtImg v-if="imageUrl" :src="imageUrl" :alt="text" class="avatar-float rounded-full w-64 h-64 object-cover" />
+    <NuxtImg
+      v-if="imageUrl"
+      :src="imageUrl"
+      :alt="text"
+      width="256"
+      height="256"
+      preload
+      class="avatar-float rounded-full w-64 h-64 object-cover" />
     <!-- Text Avatar -->
     <div
       v-else

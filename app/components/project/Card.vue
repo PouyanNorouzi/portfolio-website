@@ -96,8 +96,10 @@ const { isVisible } = useInView({ threshold: viewPort.isLessThan("md") ? 0.1 : 0
           <NuxtImg
             :src="project.image"
             :alt="project.name"
-            class="w-full md:h-full object-fill md:absolute md:inset-0 md:rounded-lg"
-            preload />
+            width="500"
+            height="300"
+            loading="lazy"
+            class="w-full md:h-full object-fill md:absolute md:inset-0 md:rounded-lg" />
           <div class="absolute top-2 right-2 flex gap-2">
             <UBadge v-for="tag in project.tags" :key="tag" :label="tag" class="rounded-full" size="sm" />
           </div>
