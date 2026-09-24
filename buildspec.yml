@@ -13,10 +13,8 @@ phases:
     commands:
       - pnpm install
       - pnpm rebuild
-      - pnpm run build
+      - pnpm run generate
 
 artifacts:
   files:
-    - scripts/**/*
-    - .output/**/*
-    - ecosystem.config.cjs
+    - .output/public/**/*
