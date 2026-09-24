@@ -1,7 +1,7 @@
 ---
 title: "PWS2 Update #2"
 image: /img/blogs/update.webp
-date: 2026, 9, 28
+date: 2026, 9, 23
 num: 6
 to: /blog/6
 description: "Spoiler Alert: More of not getting much done"
