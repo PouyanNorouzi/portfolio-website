@@ -1,7 +1,7 @@
 <script setup lang="ts">
 const route = useRoute();
 
-const { data: page } = await useAsyncData(() =>
+const { data: page } = await useAsyncData(`blog-${route.params.id}`, () =>
   queryCollection("blog").where("num", "=", route.params.id).first()
 );
 
