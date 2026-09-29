@@ -81,73 +81,74 @@ const { isVisible } = useInView({ threshold: viewPort.isLessThan("md") ? 0.1 : 0
   <UCard
     :id="`project-${project.id}`"
     ref="transitionElement"
-    class="project-card bg-accented dark:bg-elevated"
     variant="soft"
-    :style="{
-      opacity: isVisible ? 1 : 0,
-      transform: isVisible ? 'translateY(0)' : 'translateY(20px)',
-      transition: `all 0.5s`,
-    }">
-    <div class="flex flex-col md:flex-row gap-4 h-full">
-      <!-- Left side - Image -->
-      <div
-        class="relative md:w-1/3 md:flex md:items-stretch overflow-hidden md:min-h-62.5">
-        <div class="relative w-full h-full transition-all duration-500">
-          <NuxtImg
-            :src="project.image"
-            :alt="project.name"
-            width="500"
-            height="300"
-            loading="lazy"
-            class="w-full md:h-full object-fill md:absolute md:inset-0 md:rounded-lg" />
-          <div class="absolute top-2 right-2 flex gap-2">
-            <UBadge v-for="tag in project.tags" :key="tag" :label="tag" class="rounded-full" size="sm" />
-          </div>
-        </div>
+    class="group scroll-mt-24 border border-default bg-default transition-[opacity,translate,border-color] duration-500 hover:border-primary motion-reduce:transition-colors motion-reduce:duration-300"
+    :class="isVisible ? 'translate-y-0 opacity-100' : 'motion-safe:translate-y-5 motion-safe:opacity-0'"
+    :ui="{ body: 'p-3.5 sm:p-3.5' }">
+    <div class="flex flex-col gap-5 md:flex-row">
+      <div class="relative aspect-video overflow-hidden rounded-md bg-elevated md:w-2/5 md:shrink-0 md:self-start">
+        <NuxtImg
+          :src="project.image"
+          :alt="project.name"
+          width="640"
+          height="360"
+          loading="lazy"
+          class="size-full object-cover contrast-110 grayscale transition duration-300 group-hover:grayscale-0" />
       </div>
 
-      <!-- Right side - Content -->
-      <div class="flex flex-col flex-1 justify-between">
-        <div>
-          <h3 class="text-xl font-semibold mb-2">{{ project.name }}</h3>
-          <p class="text-muted mb-4 text-sm">
-            {{ project.description }}
-          </p>
+      <div class="flex flex-1 flex-col gap-2.5 px-2 pb-1">
+        <div class="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+          <CaseFileLabel>INCIDENT · {{ formatProjectDates(project).toUpperCase() }}</CaseFileLabel>
+          <span class="font-mono text-xs tracking-widest text-primary">
+            FILE OP-{{ String(project.id).padStart(3, "0") }}
+          </span>
+        </div>
 
-          <div class="mb-4">
-            <p class="text-xs text-dimmed mb-2">
-              {{ formatProjectDates(project) }}
-            </p>
-          </div>
+        <h3 class="font-name text-xl font-bold text-highlighted md:text-2xl">{{ project.name }}</h3>
 
-          <div class="mb-4">
-            <h4 class="text-sm font-medium mb-2">Tech Stack:</h4>
-            <div class="flex flex-wrap gap-1">
-              <SkillBadge v-for="tech in project.techStack" :key="tech.title" :skill="tech" />
-            </div>
+        <div v-if="project.tags.length" class="flex flex-wrap gap-1.5">
+          <UBadge
+            v-for="tag in project.tags"
+            :key="tag"
+            :label="tag"
+            variant="outline"
+            color="neutral"
+            size="sm"
+            class="font-mono tracking-wider uppercase" />
+        </div>
+
+        <p class="text-sm leading-relaxed text-pretty text-muted">
+          {{ project.description }}
+        </p>
+
+        <div class="flex flex-col gap-2 border-t border-dashed border-default pt-3">
+          <CaseFileLabel>EQUIPMENT USED</CaseFileLabel>
+          <div class="flex flex-wrap gap-1">
+            <SkillBadge v-for="tech in project.techStack" :key="tech.title" :skill="tech" />
           </div>
         </div>
 
-        <div class="flex gap-2 justify-end">
-          <UTooltip text="View Code">
+        <div class="mt-auto flex justify-end gap-2 pt-1">
+          <UTooltip v-if="project.github" text="View Code">
             <UButton
-              v-if="project.github"
               :to="project.github"
               target="_blank"
               variant="ghost"
+              color="neutral"
               size="sm"
-              icon="i-lucide-github" />
+              icon="i-lucide-github"
+              aria-label="View Code" />
           </UTooltip>
 
-          <UTooltip text="View Live Demo">
+          <UTooltip v-if="project.liveDemo" text="View Live Demo">
             <UButton
-              v-if="project.liveDemo"
               :to="project.liveDemo"
               target="_blank"
               variant="ghost"
               size="sm"
               icon="i-lucide-external-link"
               color="primary"
+              aria-label="View Live Demo"
               @click="(e) => handleCurrentSiteLiveDemo(e, project.liveDemo)" />
           </UTooltip>
         </div>
@@ -155,55 +156,3 @@ const { isVisible } = useInView({ threshold: viewPort.isLessThan("md") ? 0.1 : 0
     </div>
   </UCard>
 </template>
-
-<style scoped>
-.project-card {
-  transition:
-    transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
-    box-shadow 0.3s ease-in-out,
-    border-color 0.3s ease;
-  position: relative;
-  overflow: hidden;
-}
-
-.project-card:hover {
-  transform: translateY(-6px) scale(1.01);
-  box-shadow: 0 12px 28px var(--color-shadow);
-  border-color: var(--color-primary);
-}
-
-.project-card:hover::before {
-  opacity: 1;
-}
-
-.project-card::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 4px;
-  background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-/* Add deep selector to ensure card inner container has full height */
-@media (min-width: 768px) {
-  .project-card:deep(.u-card-inner) {
-    height: 100%;
-  }
-}
-
-@keyframes pulse {
-  0% {
-    box-shadow: 0 0 0 0 rgba(var(--color-primary), 0.4);
-  }
-  70% {
-    box-shadow: 0 0 0 8px rgba(var(--color-primary), 0);
-  }
-  100% {
-    box-shadow: 0 0 0 0 rgba(var(--color-primary), 0);
-  }
-}
-</style>
