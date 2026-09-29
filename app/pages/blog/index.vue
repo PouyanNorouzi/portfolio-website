@@ -22,7 +22,10 @@ const transmissionCount = computed(() => posts.value?.length ?? 0);
 
 <template>
   <UContainer>
-    <PageHeader plain :number="section.number" :label="`CASE FILE ${CASE_FILE_ID} · ${section.tocLabel}`">
+    <PageHeader
+      plain
+      :number="section.number"
+      :label="`CASE FILE ${CASE_FILE_ID} · ${section.tocLabel}`">
       {{ section.title }}
     </PageHeader>
     <div class="mx-auto flex w-full max-w-4xl flex-col gap-6 pb-12">
@@ -36,7 +39,7 @@ const transmissionCount = computed(() => posts.value?.length ?? 0);
           All transmissions intercepted from the subject to date, most recent first.
         </p>
       </div>
-      <CaseFileExhibitList :posts="posts ?? []" plain />
+      <CaseFileExhibitList :posts="posts ?? []" />
     </div>
   </UContainer>
 </template>
