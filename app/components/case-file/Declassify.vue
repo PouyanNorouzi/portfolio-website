@@ -5,16 +5,37 @@ const declassified = useDeclassified();
 const OPEN_LABEL = "▸ DECLASSIFY FULL FILE";
 const CLOSE_LABEL = "▾ RESEAL FILE";
 
-const { text: label, run } = useScramble(OPEN_LABEL);
+const GLITCH_MS = 600;
 
-function toggle() {
+const origin = useDeclassifyOrigin();
+const { text: label, run } = useScramble(OPEN_LABEL);
+const glitching = ref(false);
+let glitchTimer: ReturnType<typeof setTimeout> | undefined;
+
+function toggle(event: MouseEvent) {
+  const rect = (event.currentTarget as HTMLElement).getBoundingClientRect();
+  origin.value = { x: rect.left + rect.width / 2, y: rect.top + rect.height / 2 };
   declassified.value = !declassified.value;
   run(declassified.value ? CLOSE_LABEL : OPEN_LABEL);
+
+  if (declassified.value && !prefersReducedMotion()) {
+    clearTimeout(glitchTimer);
+    glitching.value = true;
+    glitchTimer = setTimeout(() => (glitching.value = false), GLITCH_MS);
+  }
 }
+
+onBeforeUnmount(() => clearTimeout(glitchTimer));
 </script>
 
 <template>
   <section class="flex flex-col items-center gap-3.5 text-center">
+    <Teleport to="body">
+      <div
+        v-if="glitching"
+        aria-hidden="true"
+        class="pointer-events-none fixed inset-0 z-90 bg-[repeating-linear-gradient(0deg,color-mix(in_oklab,var(--ui-primary)_18%,transparent)_0_2px,transparent_2px_5px)] animate-glitch" />
+    </Teleport>
     <UButton
       :label="label"
       :color="declassified ? 'error' : 'neutral'"

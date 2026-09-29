@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { CASE_FILE_NUMBER } from "~/utils/constants/case-file";
 const dates = useCaseFileDates();
+const declassified = useDeclassified();
 const typed = ref("");
 
 onMounted(() => {
@@ -30,6 +31,14 @@ onMounted(() => {
         <span class="size-2 rounded-full bg-primary motion-safe:animate-pulse" />
         STATUS: OPEN TO WORK
       </span>
+      <Transition enter-active-class="motion-safe:animate-reveal-in">
+        <span
+          v-if="declassified"
+          class="inline-flex items-center gap-1.5 font-mono text-xs font-semibold tracking-widest text-error">
+          <UIcon name="i-lucide-lock-open" class="size-3.5" />
+          CLEARANCE: ELEVATED
+        </span>
+      </Transition>
     </div>
     <div class="mx-6 mt-3.5 border-t-4 border-double border-default" />
   </div>

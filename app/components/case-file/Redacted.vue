@@ -6,9 +6,30 @@
 defineProps<{ lines?: { hidden: string; shown: string }[] }>();
 
 const declassified = useDeclassified();
+const origin = useDeclassifyOrigin();
+const root = useTemplateRef<HTMLElement>("root");
 const hovered = ref(false);
 const pinned = ref(false);
 const revealed = computed(() => declassified.value || hovered.value || pinned.value);
+
+// Declassifying peels the bars in a wave from the button, nearest first. The delay
+// is cleared once the bar has moved so hover and tap reveals stay instant.
+const waveDelay = ref(0);
+let waveTimer: ReturnType<typeof setTimeout> | undefined;
+
+watch(declassified, () => {
+  clearTimeout(waveTimer);
+  const rect = root.value?.getBoundingClientRect();
+  if (!rect || !origin.value || prefersReducedMotion()) return;
+  const distance = Math.hypot(
+    rect.left + rect.width / 2 - origin.value.x,
+    rect.top + rect.height / 2 - origin.value.y
+  );
+  waveDelay.value = Math.min(distance / 1200, 0.9);
+  waveTimer = setTimeout(() => (waveDelay.value = 0), (waveDelay.value + 0.5) * 1000);
+});
+
+onBeforeUnmount(() => clearTimeout(waveTimer));
 
 // Shared by both root variants. A mouse hover peeks, while click, tap, Enter and
 // Space pin it open. Touch is ignored for hover so a tap doesn't reveal then re-hide.
@@ -38,6 +59,7 @@ const toggle = computed(() => ({
 <template>
   <span
     v-if="lines"
+    ref="root"
     v-bind="toggle"
     class="inline-flex cursor-help flex-col items-start gap-1 rounded-sm outline-offset-2 focus-visible:outline-2 focus-visible:outline-primary focus-visible:outline-solid">
     <span
@@ -52,12 +74,15 @@ const toggle = computed(() => ({
       <span
         aria-hidden="true"
         class="pointer-events-none absolute inset-0 origin-right rounded-sm bg-inverted transition-transform duration-500 ease-in-out"
-        :class="revealed ? 'scale-x-0' : 'scale-x-100'" />
+        :class="revealed ? 'scale-x-0' : 'scale-x-100'"
+        :style="{ transitionDelay: `${waveDelay}s` }" />
     </span>
   </span>
   <span
     v-else
+    ref="root"
     v-bind="toggle"
+    :style="{ transitionDelay: `${waveDelay}s` }"
     class="cursor-help rounded-sm bg-[linear-gradient(var(--ui-bg-inverted),var(--ui-bg-inverted))] bg-right bg-no-repeat box-decoration-clone px-1 outline-1 outline-dashed transition-[background-size,color,outline-color] duration-500 ease-in-out focus-visible:outline-2 focus-visible:outline-primary focus-visible:outline-solid"
     :class="
       revealed
