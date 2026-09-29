@@ -13,6 +13,20 @@ if (!page.value) {
   throw createError({ status: 404, statusText: "Page Not Found" });
 }
 
+// Older and newer posts for the previous/next links. Posts link by `to`
+// (/blog/2), not by content path, so find the neighbours by `num`.
+const { data: neighbours } = await useAsyncData(
+  `blog-${route.params.id}-neighbours`,
+  async () => {
+    const posts = await queryCollection("blog")
+      .order("date", "ASC")
+      .select("title", "to", "num")
+      .all();
+    const index = posts.findIndex((post) => post.num === page.value?.num);
+    return { previous: posts[index - 1], next: posts[index + 1] };
+  }
+);
+
 usePageSeo({
   title: `Pouyan - ${page.value.title}`,
   description: page.value.description,
@@ -38,6 +52,8 @@ usePageSeo({
       </figcaption>
     </figure>
     <ContentRenderer v-if="page" :value="page" />
-    <CaseFileTransmissionFooter />
+    <CaseFileTransmissionFooter
+      :previous="neighbours?.previous"
+      :next="neighbours?.next" />
   </UContainer>
 </template>
