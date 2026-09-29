@@ -30,7 +30,7 @@ I am now going to introduce myself and experience a bit because this is supposed
 
 As you might have learned from the domain of this website my name is Pouyan Norouzi and I am a recent graduate from the CST program at BCIT.
 
-I'm currently working part-time as an Apple Service Technician at London Drugs. I started as a general Tech Specialist and got promoted into the Apple role, which has been its own crash course in troubleshooting under pressure (people are a lot less patient than compilers).
+I'm currently working part-time as a TECH Specialist at London Drugs. Despite the name it's a general retail job: helping customers pick out electronics, restocking shelves and running the till. It has still been its own crash course in dealing with people under pressure (they are a lot less patient than compilers).
 
 As well as computers I'm very passionate about games, music, movies and football (soccer).
 
