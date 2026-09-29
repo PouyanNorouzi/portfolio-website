@@ -1,16 +1,74 @@
 <script setup lang="ts">
 import { CASE_FILE_SECTIONS, CASE_FILE_TIMELINE } from "~/utils/constants/case-file";
+
+const list = useTemplateRef<HTMLElement>("list");
+const pins = useTemplateRef<HTMLElement[]>("pins");
+
+// The red line fills as the reader scrolls, and each pin lights once the line reaches it.
+// Until the page is hydrated (and with reduced motion) the whole line is drawn.
+const fill = ref(1);
+const reached = ref(CASE_FILE_TIMELINE.length);
+const animated = ref(false);
+
+function update() {
+  if (!list.value) return;
+  const trigger = window.innerHeight * 0.6;
+  const rect = list.value.getBoundingClientRect();
+  fill.value = Math.min(Math.max((trigger - rect.top) / rect.height, 0), 1);
+  reached.value = (pins.value ?? []).filter((pin) => {
+    const box = pin.getBoundingClientRect();
+    return box.top + box.height / 2 <= trigger;
+  }).length;
+}
+
+onMounted(() => {
+  if (prefersReducedMotion()) return;
+  animated.value = true;
+  update();
+  window.addEventListener("scroll", update, { passive: true });
+  window.addEventListener("resize", update, { passive: true });
+});
+
+onBeforeUnmount(() => {
+  window.removeEventListener("scroll", update);
+  window.removeEventListener("resize", update);
+});
 </script>
 
 <template>
   <CaseFileSection :section="CASE_FILE_SECTIONS[3]!">
-    <div class="flex flex-col gap-2">
+    <div ref="list" class="relative flex flex-col gap-5">
+      <!-- The rail sits in the middle column of the entry grid: 5.5rem date + 1rem gap + half of the 1rem rail. -->
       <div
-        v-for="entry in CASE_FILE_TIMELINE"
+        aria-hidden="true"
+        class="absolute inset-y-0 left-[7rem] w-0.5 -translate-x-1/2 bg-accented" />
+      <div
+        aria-hidden="true"
+        class="absolute top-0 left-[7rem] w-0.5 -translate-x-1/2 bg-error shadow-[0_0_8px_var(--ui-error)] transition-[height] duration-150 ease-out motion-reduce:transition-none"
+        :style="{ height: `${fill * 100}%` }" />
+      <div
+        v-for="(entry, index) in CASE_FILE_TIMELINE"
         :key="entry.date"
-        class="grid grid-cols-[5.5rem_minmax(0,1fr)] gap-4 leading-relaxed">
-        <strong class="font-mono font-semibold text-primary">{{ entry.date }}</strong>
-        <span>{{ entry.event }}</span>
+        class="grid grid-cols-[5.5rem_1rem_minmax(0,1fr)] items-start gap-x-4 leading-relaxed">
+        <strong
+          class="font-mono font-semibold transition-colors duration-300"
+          :class="!animated || index < reached ? 'text-primary' : 'text-muted'">
+          {{ entry.date }}
+        </strong>
+        <span
+          ref="pins"
+          aria-hidden="true"
+          class="relative z-10 mt-2 size-3 justify-self-center rounded-full border-2 transition-[background-color,border-color,box-shadow] duration-300"
+          :class="
+            !animated || index < reached
+              ? 'border-error bg-error shadow-[0_0_10px_var(--ui-error)]'
+              : 'border-accented bg-default'
+          " />
+        <span
+          class="transition-[opacity,translate] duration-500"
+          :class="!animated || index < reached ? '' : 'translate-x-2 opacity-50'">
+          {{ entry.event }}
+        </span>
       </div>
     </div>
   </CaseFileSection>
