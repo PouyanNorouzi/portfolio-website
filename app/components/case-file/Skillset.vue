@@ -1,5 +1,24 @@
 <script setup lang="ts">
 import { CASE_FILE_SECTIONS, CASE_FILE_TOOLS_OF_CHOICE } from "~/utils/constants/case-file";
+
+const MAX_TILT_DEG = 6;
+
+// Cards lean toward the mouse, like a folder being picked up. Touch and reduced motion skip it.
+function tilt(event: PointerEvent) {
+  if (event.pointerType !== "mouse" || prefersReducedMotion()) return;
+  const card = event.currentTarget as HTMLElement;
+  const rect = card.getBoundingClientRect();
+  const x = (event.clientX - rect.left) / rect.width - 0.5;
+  const y = (event.clientY - rect.top) / rect.height - 0.5;
+  const rotateX = (-y * 2 * MAX_TILT_DEG).toFixed(2);
+  const rotateY = (x * 2 * MAX_TILT_DEG).toFixed(2);
+  // Set inline only while hovered, so idle cards carry no 3D transform.
+  card.style.transform = `perspective(700px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+}
+
+function level(event: PointerEvent) {
+  (event.currentTarget as HTMLElement).style.transform = "";
+}
 </script>
 
 <template>
@@ -11,7 +30,10 @@ import { CASE_FILE_SECTIONS, CASE_FILE_TOOLS_OF_CHOICE } from "~/utils/constants
       <UCard
         v-for="tool in CASE_FILE_TOOLS_OF_CHOICE"
         :key="tool.skill.id"
-        :ui="{ body: 'flex h-full flex-col gap-3' }">
+        class="transition-transform duration-150 ease-out motion-reduce:transition-none"
+        :ui="{ body: 'flex h-full flex-col gap-3' }"
+        @pointermove="tilt"
+        @pointerleave="level">
         <div class="flex items-center gap-3">
           <LightDarkIcon :icon="tool.skill.icon" size="3xl" />
           <span class="font-name text-lg font-bold">{{ tool.skill.title }}</span>
