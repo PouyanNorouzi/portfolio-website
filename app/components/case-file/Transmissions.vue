@@ -1,13 +1,12 @@
 <script setup lang="ts">
 import { CASE_FILE_SECTIONS } from "~/utils/constants/case-file";
-const INTRODUCTION_POST_NUM = 2;
 const RECENT_POST_COUNT = 3;
 
 const { data: posts } = await useAsyncData("home-case-file-posts", async () => {
   const all = await queryCollection("blog").order("date", "DESC").all();
-  const introduction = all.filter((post) => post.num === INTRODUCTION_POST_NUM);
-  const recent = all.filter((post) => post.num !== INTRODUCTION_POST_NUM);
-  return [...recent.slice(0, RECENT_POST_COUNT), ...introduction];
+  const pinned = all.filter((post) => post.pinned);
+  const recent = all.filter((post) => !post.pinned);
+  return [...recent.slice(0, RECENT_POST_COUNT), ...pinned];
 });
 
 const formatDate = new Intl.DateTimeFormat("en-US", { dateStyle: "medium" });

@@ -13,7 +13,8 @@ export default defineContentConfig({
         title: z.string(),
         num: z.number(),
         description: z.string(),
-        to: z.string()
+        to: z.string(),
+        pinned: z.boolean().default(false)
       }),
     }),
   },
