@@ -36,7 +36,7 @@ withDefaults(defineProps<Props>(), {
         <span class="font-semibold">Category:</span> {{ skill.category }}
       </div>
       <div class="mb-2 text-xs">
-        <span class="font-semibold">Proficiency:</span>
+        <span class="font-semibold">Clearance:</span>
         <UProgress
           class="mt-1"
           :model-value="skill.proficiency"
