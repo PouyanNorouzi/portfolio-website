@@ -4,7 +4,10 @@ export default function (project: Project) {
     year: "numeric",
   });
 
-  if (project.startDate.getMonth() === project.endDate.getMonth()) {
+  if (
+    project.startDate.getMonth() === project.endDate.getMonth() &&
+    project.startDate.getFullYear() === project.endDate.getFullYear()
+  ) {
     return format.format(project.startDate);
   }
 
