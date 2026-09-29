@@ -1,4 +1,6 @@
 <script setup lang="ts">
+definePageMeta({ middleware: ["transition"] });
+
 const route = useRoute();
 
 const { data: page } = await useAsyncData(`blog-${route.params.id}`, () =>
