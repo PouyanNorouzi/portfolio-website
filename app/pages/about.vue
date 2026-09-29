@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { EDUCATION, EXPERIENCE, formatCareerPeriod } from "~/utils/constants/career";
 
-useHead({
+usePageSeo({
   title: "Pouyan - About",
+  description:
+    "About Pouyan Norouzi: education at BCIT, work experience and background.",
 });
 
 definePageMeta({

@@ -1,6 +1,7 @@
 <script setup lang="ts">
-useHead({
+usePageSeo({
   title: "Pouyan - Blog",
+  description: "Blog posts by Pouyan Norouzi: project updates, announcements and whatever else is on his mind.",
 });
 
 definePageMeta({

@@ -10,6 +10,13 @@ const { data: page } = await useAsyncData(`blog-${route.params.id}`, () =>
 if (!page.value) {
   throw createError({ status: 404, statusText: "Page Not Found" });
 }
+
+usePageSeo({
+  title: `Pouyan - ${page.value.title}`,
+  description: page.value.description,
+  image: page.value.image,
+  type: "article",
+});
 </script>
 
 <template>
