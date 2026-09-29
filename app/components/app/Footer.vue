@@ -19,7 +19,7 @@ import { EMAIL, EMAIL_ADDRESS, GITHUB_LINK, LINKEDIN_LINK } from "~/utils/consta
           </div>
           <!-- Email -->
           <div class="email">
-            <ULink raw :to="EMAIL" class="hover:text-primary">{{ EMAIL_ADDRESS }} </ULink>
+            <ULink raw :to="EMAIL" class="hover:text-primary">{{ EMAIL_ADDRESS }}</ULink>
           </div>
         </div>
         <!-- Copyright notice -->

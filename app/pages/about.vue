@@ -11,7 +11,7 @@ definePageMeta({
   middleware: ["transition"],
 });
 
-const education = EDUCATION.map((edu) => ({ ...edu, period: formatCareerPeriod(edu, " - ") }));
+const education = EDUCATION.map((edu) => ({ ...edu, period: formatCareerPeriod(edu) }));
 
 const experience = EXPERIENCE.map((exp) => ({ ...exp, period: formatCareerPeriod(exp) }));
 </script>

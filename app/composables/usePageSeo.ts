@@ -13,7 +13,9 @@ export function usePageSeo({
   type = "website",
 }: PageSeoOptions) {
   const siteUrl = useRuntimeConfig().public.siteUrl.replace(/\/$/, "");
-  const ogImage = /^https?:\/\//.test(image) ? image : `${siteUrl}${image.startsWith("/") ? "" : "/"}${image}`;
+  const ogImage = /^https?:\/\//.test(image)
+    ? image
+    : `${siteUrl}${image.startsWith("/") ? "" : "/"}${image}`;
 
   useSeoMeta({
     title,

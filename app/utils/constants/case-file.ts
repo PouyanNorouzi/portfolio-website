@@ -20,7 +20,20 @@ const REPORT_YEAR = 2026;
 const REPORT_MONTH = 9;
 const REPORT_DAY = 28;
 
-const MONTHS = ["JAN", "FEB", "MAR", "APR", "MAY", "JUNE", "JULY", "AUG", "SEPT", "OCT", "NOV", "DEC"];
+const MONTHS = [
+  "JAN",
+  "FEB",
+  "MAR",
+  "APR",
+  "MAY",
+  "JUNE",
+  "JULY",
+  "AUG",
+  "SEPT",
+  "OCT",
+  "NOV",
+  "DEC",
+];
 const REPORT_MONTH_NAME = MONTHS[REPORT_MONTH - 1];
 const pad = (n: number) => String(n).padStart(2, "0");
 

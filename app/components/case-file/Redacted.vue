@@ -7,23 +7,24 @@ defineProps<{ lines?: { hidden: string; shown: string }[] }>();
 
 const declassified = useDeclassified();
 const hovered = ref(false);
-const revealed = computed(() => declassified.value || hovered.value);
+const pinned = ref(false);
+const revealed = computed(() => declassified.value || hovered.value || pinned.value);
 
-// Shared by both root variants so mouse, touch and keyboard behave identically.
-// Focus reveals (like hover) and Enter/Space toggle (like click).
+// Shared by both root variants. A mouse hover peeks, while click, tap, Enter and
+// Space pin it open. Touch is ignored for hover so a tap doesn't reveal then re-hide.
 const toggle = computed(() => ({
   "role": "button",
   "tabindex": 0,
   "aria-pressed": revealed.value,
-  "onMouseenter": () => (hovered.value = true),
-  "onMouseleave": () => (hovered.value = false),
-  "onFocus": () => (hovered.value = true),
-  "onBlur": () => (hovered.value = false),
-  "onClick": () => (hovered.value = !hovered.value),
+  "onPointerenter": (event: PointerEvent) => {
+    if (event.pointerType === "mouse") hovered.value = true;
+  },
+  "onPointerleave": () => (hovered.value = false),
+  "onClick": () => (pinned.value = !pinned.value),
   "onKeydown": (event: KeyboardEvent) => {
     if (event.key !== "Enter" && event.key !== " ") return;
     event.preventDefault();
-    hovered.value = !hovered.value;
+    pinned.value = !pinned.value;
   },
 }));
 </script>
