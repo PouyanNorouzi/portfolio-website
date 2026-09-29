@@ -1,3 +1,7 @@
+<script setup lang="ts">
+import { EMAIL, EMAIL_ADDRESS, GITHUB_LINK, LINKEDIN_LINK } from "~/utils/constants/socials";
+</script>
+
 <template>
   <footer>
     <div>
@@ -6,22 +10,16 @@
         <div class="flex flex-col md:flex-row items-center mb-3 md:mb-0">
           <!-- Social links -->
           <div class="social-links flex items-center mb-3 md:mb-0 md:mr-6">
-            <ULink
-              to="https://www.linkedin.com/in/pouyan-norouzi/"
-              target="_blank"
-              external
-              class="mx-2">
+            <ULink :to="LINKEDIN_LINK" target="_blank" external class="mx-2">
               <UIcon name="i-logos-linkedin-icon" class="text-2xl" />
             </ULink>
-            <ULink to="https://github.com/PouyanNorouzi" target="_blank" external class="mx-2">
+            <ULink :to="GITHUB_LINK" target="_blank" external class="mx-2">
               <UIcon name="i-simple-icons-github" class="text-2xl" />
             </ULink>
           </div>
           <!-- Email -->
           <div class="email">
-            <ULink raw to="mailto:pouyannorouzii@gmail.com" class="hover:text-primary"
-              >pouyannorouzii@gmail.com
-            </ULink>
+            <ULink raw :to="EMAIL" class="hover:text-primary">{{ EMAIL_ADDRESS }} </ULink>
           </div>
         </div>
         <!-- Copyright notice -->

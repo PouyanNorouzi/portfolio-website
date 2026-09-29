@@ -1,10 +1,18 @@
 <script setup lang="ts">
 import { CASE_FILE_SECTIONS } from "~/utils/constants/case-file";
-import { EMAIL, GITHUB_LINK, LINKEDIN_LINK } from "~/utils/constants/socials";
+import { RESUME_DOCX_PATH, RESUME_PDF_PATH } from "~/utils/constants/resume";
+import {
+  EMAIL,
+  EMAIL_ADDRESS,
+  GITHUB_LINK,
+  GITHUB_USERNAME,
+  LINKEDIN_HANDLE,
+  LINKEDIN_LINK,
+} from "~/utils/constants/socials";
 const contacts = [
-  { label: "EMAIL", text: "pouyannorouzii@gmail.com", to: EMAIL },
-  { label: "LINKEDIN", text: "pouyan-norouzi", to: LINKEDIN_LINK },
-  { label: "GITHUB", text: "PouyanNorouzi", to: GITHUB_LINK },
+  { label: "EMAIL", text: EMAIL_ADDRESS, to: EMAIL },
+  { label: "LINKEDIN", text: LINKEDIN_HANDLE, to: LINKEDIN_LINK },
+  { label: "GITHUB", text: GITHUB_USERNAME, to: GITHUB_LINK },
 ];
 </script>
 
@@ -29,12 +37,12 @@ const contacts = [
     </UCard>
     <div class="flex flex-wrap gap-2.5">
       <UButton
-        to="/files/Pouyan_Norouzi_Resume.pdf"
+        :to="RESUME_PDF_PATH"
         external
         target="_blank"
         label="Download PDF" />
       <UButton
-        to="/files/Pouyan_Norouzi_Resume.docx"
+        :to="RESUME_DOCX_PATH"
         external
         variant="outline"
         label="Download DOCX" />
