@@ -12,6 +12,10 @@ let timer: ReturnType<typeof setInterval> | undefined;
 function toggle() {
   declassified.value = !declassified.value;
   const target = declassified.value ? CLOSE_LABEL : OPEN_LABEL;
+  if (prefersReducedMotion()) {
+    label.value = target;
+    return;
+  }
   const total = 14;
   let frame = 0;
   clearInterval(timer);

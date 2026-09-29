@@ -4,6 +4,10 @@ const dates = useCaseFileDates();
 const typed = ref("");
 
 onMounted(() => {
+  if (prefersReducedMotion()) {
+    typed.value = CASE_FILE_NUMBER;
+    return;
+  }
   let i = 0;
   const timer = setInterval(() => {
     i++;

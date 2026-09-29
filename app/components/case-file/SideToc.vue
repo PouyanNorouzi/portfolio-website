@@ -12,7 +12,7 @@ function onScroll() {
 }
 
 function go(id: string) {
-  document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+  document.getElementById(id)?.scrollIntoView({ behavior: prefersReducedMotion() ? "auto" : "smooth" });
 }
 
 onMounted(() => {
