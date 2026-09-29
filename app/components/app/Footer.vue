@@ -1,5 +1,8 @@
 <script setup lang="ts">
 import { EMAIL, EMAIL_ADDRESS, GITHUB_LINK, LINKEDIN_LINK } from "~/utils/constants/socials";
+
+const now = useNow();
+const year = computed(() => new Date(now.value).getFullYear());
 </script>
 
 <template>
@@ -24,7 +27,7 @@ import { EMAIL, EMAIL_ADDRESS, GITHUB_LINK, LINKEDIN_LINK } from "~/utils/consta
         </div>
         <!-- Copyright notice -->
         <p class="text-xs text-center md:text-right">
-          © {{ new Date().getFullYear() }} Pouyan Norouzi. All rights reserved.
+          © {{ year }} Pouyan Norouzi. All rights reserved.
         </p>
       </div>
     </div>
