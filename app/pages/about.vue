@@ -1,6 +1,8 @@
 <script setup lang="ts">
-useHead({
+usePageSeo({
   title: "Pouyan - About",
+  description:
+    "About Pouyan Norouzi: education at BCIT, work experience and background.",
 });
 
 definePageMeta({

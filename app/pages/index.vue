@@ -1,10 +1,7 @@
 <script setup lang="ts">
-useSeoMeta({
+usePageSeo({
   title: "Pouyan - Home",
   description:
-    "Pouyan Norouzi's portfolio, presented as his own case file: projects, blog posts, skills and contact details.",
-  ogTitle: "Pouyan - Home",
-  ogDescription:
     "Pouyan Norouzi's portfolio, presented as his own case file: projects, blog posts, skills and contact details.",
 });
 

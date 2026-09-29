@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { ALL_PROJECTS } from '~/utils/constants/projects';
 
-useHead({
+usePageSeo({
   title: "Pouyan - Projects",
+  description:
+    "Software projects built by Pouyan Norouzi, with the tech used and links to source and demos.",
 });
 
 definePageMeta({
