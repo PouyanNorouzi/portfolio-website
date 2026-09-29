@@ -85,11 +85,14 @@ onMounted(() => {
   typeLine(0);
 });
 
-// Stop the page behind the boot screen from scrolling while it is open.
+// Stop the page behind the boot screen from scrolling while it is open. The
+// boot screen is baked into the prerendered HTML, so hide it up front when it
+// would never play: without JavaScript and with reduced motion.
 useHead({
   bodyAttrs: {
-    class: computed(() => (booting.value ? "overflow-hidden" : "")),
+    class: computed(() => (booting.value ? "overflow-hidden motion-reduce:overflow-auto" : "")),
   },
+  noscript: [{ innerHTML: "<style>#case-file-intro{display:none}body{overflow:auto}</style>" }],
 });
 
 onBeforeUnmount(() => {
@@ -102,7 +105,8 @@ onBeforeUnmount(() => {
   <Transition leave-active-class="transition-opacity duration-500" leave-to-class="opacity-0">
     <div
       v-if="booting"
-      class="fixed inset-0 z-100 flex cursor-pointer items-center justify-center bg-neutral-950 p-4"
+      id="case-file-intro"
+      class="fixed inset-0 z-100 flex cursor-pointer items-center justify-center bg-neutral-950 p-4 motion-reduce:hidden"
       role="presentation"
       @click="close">
       <div class="w-full max-w-2xl overflow-hidden rounded-md border border-neutral-800 shadow-lg">
