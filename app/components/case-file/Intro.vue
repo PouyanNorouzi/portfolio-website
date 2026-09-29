@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { CASE_FILE_PATH } from "~/utils/constants/case-file";
+
 interface TerminalLine {
   kind: "command" | "output" | "success" | "error";
   text: string;
@@ -7,9 +9,9 @@ interface TerminalLine {
 const SCRIPT: TerminalLine[] = [
   { kind: "command", text: "ssh pouyan@field-office-bc" },
   { kind: "output", text: "Connection established." },
-  { kind: "command", text: "cat /case-files/PN-0013" },
+  { kind: "command", text: `cat ${CASE_FILE_PATH}` },
   { kind: "error", text: "Permission denied: this file is classified." },
-  { kind: "command", text: "sudo cat /case-files/PN-0013" },
+  { kind: "command", text: `sudo cat ${CASE_FILE_PATH}` },
   { kind: "success", text: "ACCESS GRANTED. Loading file..." },
   { kind: "command", text: "rm -rf embarrassing_stuff/" },
 ];

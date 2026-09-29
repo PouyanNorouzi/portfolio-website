@@ -8,9 +8,25 @@ import {
 } from "./skills";
 import { PROJECT_CONSCIOUS_CONNECTIONS, PROJECT_FAASIFY, PROJECT_FLUX } from "./projects";
 
-export const CASE_FILE_NUMBER = "CASE FILE NO. PN-0013";
+export const CASE_FILE_ID = "PN-0013";
 
-export const CASE_FILE_DATE = "SEPT 28, 2026";
+const REPORT_YEAR = 2026;
+const REPORT_MONTH = 9;
+const REPORT_DAY = 28;
+
+const MONTHS = ["JAN", "FEB", "MAR", "APR", "MAY", "JUNE", "JULY", "AUG", "SEPT", "OCT", "NOV", "DEC"];
+const REPORT_MONTH_NAME = MONTHS[REPORT_MONTH - 1];
+const pad = (n: number) => String(n).padStart(2, "0");
+
+export const CASE_FILE_NUMBER = `CASE FILE NO. ${CASE_FILE_ID}`;
+
+export const CASE_FILE_PATH = `/case-files/${CASE_FILE_ID}`;
+
+export const CASE_FILE_DATE = `${REPORT_MONTH_NAME} ${REPORT_DAY}, ${REPORT_YEAR}`;
+
+export const CASE_FILE_STAMP_DATE = `${REPORT_MONTH_NAME} ${REPORT_DAY} ${REPORT_YEAR}`;
+
+export const CASE_FILE_BARCODE = `${CASE_FILE_ID}-${REPORT_YEAR}-${pad(REPORT_MONTH)}${pad(REPORT_DAY)}`;
 
 export const CASE_FILE_SECTIONS: CaseFileSection[] = [
   { id: "s01", number: "01", title: "Agent's Summary", tocLabel: "Summary" },
