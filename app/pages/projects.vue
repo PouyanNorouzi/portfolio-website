@@ -36,7 +36,7 @@ watch(() => route.hash, (newHash) => {
 
 // Project data
 const projects = ref<Project[]>(
-  ALL_PROJECTS.reverse()
+  [...ALL_PROJECTS].reverse()
 );
 </script>
 
