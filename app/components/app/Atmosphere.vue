@@ -2,8 +2,7 @@
      scanlines and a vignette in dark mode, plus a slow sweep line behind the page. -->
 <template>
   <div aria-hidden="true" class="pointer-events-none fixed inset-0 z-40 overflow-hidden">
-    <div
-      class="absolute inset-0 bg-(image:--paper-grain) opacity-40 mix-blend-multiply dark:hidden" />
+    <div class="absolute inset-0 bg-(image:--paper-grain) opacity-40 dark:hidden" />
     <div class="hidden dark:block">
       <div
         class="absolute inset-0 bg-[repeating-linear-gradient(transparent_0_2px,rgb(0_0_0/0.06)_2px_3px)]" />

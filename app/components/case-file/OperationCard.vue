@@ -12,26 +12,24 @@ const { tilt = 0 } = defineProps<{
 <template>
   <NuxtLink
     :to="`/projects#project-${operation.project.id}`"
-    class="group case-sheet flex flex-col overflow-hidden rounded-lg border border-default transition-colors hover:border-primary">
-    <CaseFileHazardBanner v-if="featured" size="sm">★ MOST WANTED ★</CaseFileHazardBanner>
+    class="group case-sheet flex flex-col overflow-hidden rounded-lg border bg-default border-default transition-colors hover:border-primary">
     <div class="flex gap-5 p-3.5" :class="featured ? 'flex-1 flex-wrap' : 'flex-1 flex-col'">
       <div
-        class="relative rotate-(--tilt) bg-default p-2 pb-8 shadow-md ring-1 ring-default transition duration-300 group-hover:-translate-y-1 group-hover:rotate-0 group-hover:shadow-xl motion-reduce:transition-none"
+        class="relative rotate-(--tilt) bg-white/60 p-2 pb-8 shadow-md ring-1 ring-default transition duration-300 dark:bg-default group-hover:-translate-y-1 group-hover:rotate-0 group-hover:shadow-xl motion-reduce:transition-none"
         :class="featured ? 'flex-1 basis-96' : ''"
         :style="{ '--tilt': `${tilt}deg` }">
         <span
           aria-hidden="true"
-          class="absolute -top-2 -left-1.5 h-4 w-12 -rotate-35 bg-tertiary-200/60 backdrop-blur-[1px]" />
+          class="absolute -top-2 -left-1.5 h-4 w-12 -rotate-35 bg-tertiary-200/60" />
         <span
           aria-hidden="true"
-          class="absolute -top-2 -right-1.5 h-4 w-12 rotate-35 bg-tertiary-200/60 backdrop-blur-[1px]" />
+          class="absolute -top-2 -right-1.5 h-4 w-12 rotate-35 bg-tertiary-200/60" />
         <div class="aspect-video overflow-hidden bg-elevated p-2">
           <NuxtImg
             :src="operation.project.image"
             :alt="operation.project.name"
             width="640"
             height="360"
-            loading="lazy"
             class="size-full object-contain transition duration-300 [@media(hover:hover)]:contrast-110 [@media(hover:hover)]:grayscale group-hover:contrast-100 group-hover:grayscale-0" />
         </div>
         <span
@@ -41,6 +39,12 @@ const { tilt = 0 } = defineProps<{
         </span>
       </div>
       <div class="flex flex-1 flex-col gap-2.5 px-2 pb-1" :class="featured ? 'basis-72' : ''">
+        <UBadge
+          v-if="featured"
+          label="★ MOST WANTED"
+          color="error"
+          variant="subtle"
+          class="self-start font-mono tracking-widest" />
         <CaseFileLabel
           >INCIDENT · {{ formatProjectDates(operation.project).toUpperCase() }}</CaseFileLabel
         >
