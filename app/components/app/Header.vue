@@ -4,7 +4,6 @@ import { EMAIL, GITHUB_LINK, LINKEDIN_LINK } from "~/utils/constants/socials";
 
 const route = useRoute();
 const colorMode = useColorMode();
-const viewPort = useViewport();
 
 // Navigation links
 const navItems = ref<TabsItem[]>([
@@ -78,17 +77,17 @@ const socialLinks = ref([
   },
 ]);
 
-const DEFAULT_HEADER_HEIGHT = viewPort.isLessThan("md") ? 50 : 56; //starting header height based on size of screen
-
 // Scroll behavior tracking
 const isScrolled = ref(false);
-const headerHeight = ref(DEFAULT_HEADER_HEIGHT);
+// Measured on mount; until then the spacer uses CSS breakpoints so the
+// prerendered HTML matches every screen size.
+const headerHeight = ref<number | null>(null);
 const headerRef = ref<HTMLElement | null>(null);
 
 // Update header state based on scroll position
 onMounted(() => {
   if (import.meta.client) {
-    headerHeight.value = headerRef.value?.offsetHeight || DEFAULT_HEADER_HEIGHT;
+    headerHeight.value = headerRef.value?.offsetHeight || null;
 
     const handleScroll = () => {
       isScrolled.value = window.scrollY > 10;
@@ -130,15 +129,14 @@ const headerClass = computed(() => {
         <div class="flex-1 px-4 md:max-w-lg mx-auto flex items-center">
           <UTabs
             v-model="activeTab"
-            :items="
-              viewPort.isLessThan('md')
-                ? navItems.map((item) => {
-                    return { icon: item.icon, value: item.value };
-                  })
-                : navItems
-            "
+            :items="navItems"
             class="justify-center w-full"
-            :ui="{ root: 'gap-0', list: 'w-full', trigger: 'flex-1 whitespace-nowrap' }" />
+            :ui="{
+              root: 'gap-0',
+              list: 'w-full',
+              trigger: 'flex-1 whitespace-nowrap',
+              label: 'hidden md:inline',
+            }" />
         </div>
 
         <!-- Right Side Utilities -->
@@ -184,7 +182,9 @@ const headerClass = computed(() => {
   </header>
 
   <!-- Spacer to prevent content from hiding behind fixed header -->
-  <div :style="{ height: `${headerHeight}px` }" />
+  <div
+    class="h-[50px] md:h-14"
+    :style="headerHeight ? { height: `${headerHeight}px` } : undefined" />
 </template>
 
 <style scoped>
