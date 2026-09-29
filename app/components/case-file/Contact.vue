@@ -14,6 +14,18 @@ const contacts = [
   { label: "LINKEDIN", text: LINKEDIN_HANDLE, to: LINKEDIN_LINK },
   { label: "GITHUB", text: GITHUB_USERNAME, to: GITHUB_LINK },
 ];
+
+const toast = useToast();
+
+async function copy(text: string) {
+  await navigator.clipboard.writeText(text);
+  toast.add({
+    title: "COPIED TO DEAD DROP",
+    description: text,
+    icon: "i-lucide-check",
+    color: "success",
+  });
+}
 </script>
 
 <template>
@@ -26,6 +38,14 @@ const contacts = [
           <ULink :to="contact.to" class="font-semibold break-all text-primary">
             {{ contact.text }}
           </ULink>
+          <UButton
+            icon="i-lucide-copy"
+            size="xs"
+            color="neutral"
+            variant="ghost"
+            :aria-label="`Copy ${contact.label.toLowerCase()}`"
+            class="-my-1"
+            @click="copy(contact.text)" />
         </div>
         <div class="flex flex-wrap gap-x-2">
           <CaseFileLabel class="inline-block min-w-24">PHONE</CaseFileLabel>
@@ -36,16 +56,8 @@ const contacts = [
       </div>
     </UCard>
     <div class="flex flex-wrap gap-2.5">
-      <UButton
-        :to="RESUME_PDF_PATH"
-        external
-        target="_blank"
-        label="Download PDF" />
-      <UButton
-        :to="RESUME_DOCX_PATH"
-        external
-        variant="outline"
-        label="Download DOCX" />
+      <UButton :to="RESUME_PDF_PATH" external target="_blank" label="Download PDF" />
+      <UButton :to="RESUME_DOCX_PATH" external variant="outline" label="Download DOCX" />
     </div>
   </CaseFileSection>
 </template>
