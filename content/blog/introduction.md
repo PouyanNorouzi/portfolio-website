@@ -3,6 +3,7 @@ title: Introduction to Me
 image: /me/2.webp
 date: 2026, 7, 14
 num: 2
+pinned: true
 to: /blog/2
 description: Learn more about me and why I am starting to write blogs
 ---
