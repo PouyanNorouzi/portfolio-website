@@ -24,6 +24,77 @@
   --color-shadow: var(--color-neutral-600);
 }
 
+/* Light mode is a manila folder: cream paper sheets and warm ink on a folder-colored desk.
+   Scoped with :not(.dark) because unlayered rules beat Nuxt UI's layered .dark tokens. */
+:root:not(.dark) {
+  --ui-primary: var(--color-emerald-700);
+  --ui-bg: #f2e7c9;
+  --ui-bg-muted: #ecdfba;
+  --ui-bg-elevated: #e6d6a9;
+  --ui-bg-accented: #d9c48f;
+  --ui-bg-inverted: #2a2317;
+  --ui-border: #d3bf8c;
+  --ui-border-muted: #ddcb9c;
+  --ui-border-accented: #bda56d;
+  --ui-border-inverted: #2a2317;
+  --ui-text: #3b3223;
+  --ui-text-toned: #57492f;
+  --ui-text-muted: #75664a;
+  --ui-text-dimmed: #9d8d6b;
+  --ui-text-highlighted: #1e1a10;
+  --ui-text-inverted: #f2e7c9;
+  --paper-grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.35  0 0 0 0 0.26  0 0 0 0 0.1  0 0 0 0.55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
+}
+
+:root:not(.dark) body {
+  background: var(--paper-grain), #d6bf86;
+}
+
+/* Dark mode is an agency terminal: a faint dotted grid behind everything. */
+.dark body {
+  background:
+    radial-gradient(color-mix(in oklab, var(--ui-primary) 10%, transparent) 1px, transparent 1px) 0
+      0 / 24px 24px,
+    var(--ui-bg);
+}
+
+.dark .text-primary {
+  text-shadow: 0 0 10px color-mix(in oklab, var(--ui-primary) 45%, transparent);
+}
+
+/* Cards: a sheet of paper in the folder, or a HUD panel with corner brackets. */
+:root:not(.dark) .case-sheet {
+  box-shadow:
+    0 1px 2px rgb(60 45 15 / 0.08),
+    0 8px 20px -8px rgb(90 65 20 / 0.35);
+}
+
+.dark .case-sheet {
+  --bracket: linear-gradient(var(--ui-primary), var(--ui-primary));
+  background-image:
+    var(--bracket), var(--bracket), var(--bracket), var(--bracket), var(--bracket), var(--bracket),
+    var(--bracket), var(--bracket);
+  background-size:
+    14px 2px,
+    2px 14px,
+    14px 2px,
+    2px 14px,
+    14px 2px,
+    2px 14px,
+    14px 2px,
+    2px 14px;
+  background-position:
+    top left,
+    top left,
+    top right,
+    top right,
+    bottom left,
+    bottom left,
+    bottom right,
+    bottom right;
+  background-repeat: no-repeat;
+}
+
 @theme {
   --font-sans: "Monda", sans-serif;
   --font-name: "Tourney", sans-serif;
@@ -38,6 +109,7 @@
   --animate-reveal-down: reveal-down 0.8s cubic-bezier(0.65, 0, 0.35, 1) 0.15s both;
   --animate-scan-down: scan-down 0.8s cubic-bezier(0.65, 0, 0.35, 1) 0.15s both;
   --animate-stamp-in: stamp-in 0.9s ease-out both;
+  --animate-sweep: sweep 9s linear infinite;
   --animate-glitch: glitch 0.6s steps(1) both;
   --animate-sign:
     sign-stroke 0.6s ease-in-out var(--sign-delay, 0s) both,
@@ -186,6 +258,14 @@
     }
     100% {
       opacity: 0;
+    }
+  }
+  @keyframes sweep {
+    0% {
+      transform: translateY(-20vh);
+    }
+    100% {
+      transform: translateY(120vh);
     }
   }
 }

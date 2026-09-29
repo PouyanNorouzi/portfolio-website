@@ -2,6 +2,7 @@
 
 <template>
   <UApp>
+    <AppAtmosphere />
     <UContainer class="min-h-screen flex flex-col">
       <AppHeader />
       <NuxtPage class="grow"/>

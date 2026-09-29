@@ -12,7 +12,7 @@ const { tilt = 0 } = defineProps<{
 <template>
   <NuxtLink
     :to="`/projects#project-${operation.project.id}`"
-    class="group flex flex-col overflow-hidden rounded-lg border border-default transition-colors hover:border-primary">
+    class="group case-sheet flex flex-col overflow-hidden rounded-lg border border-default transition-colors hover:border-primary">
     <CaseFileHazardBanner v-if="featured" size="sm">★ MOST WANTED ★</CaseFileHazardBanner>
     <div class="flex gap-5 p-3.5" :class="featured ? 'flex-1 flex-wrap' : 'flex-1 flex-col'">
       <div
