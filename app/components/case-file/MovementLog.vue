@@ -15,6 +15,11 @@ function update() {
   const trigger = window.innerHeight * 0.6;
   const rect = list.value.getBoundingClientRect();
   fill.value = Math.min(Math.max((trigger - rect.top) / rect.height, 0), 1);
+  // Far from the viewport nothing changes, so skip measuring every pin.
+  if (rect.bottom < 0 || rect.top > window.innerHeight) {
+    reached.value = rect.top > window.innerHeight ? 0 : CASE_FILE_TIMELINE.length;
+    return;
+  }
   reached.value = (pins.value ?? []).filter((pin) => {
     const box = pin.getBoundingClientRect();
     return box.top + box.height / 2 <= trigger;
