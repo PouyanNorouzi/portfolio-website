@@ -1,6 +1,30 @@
 <script setup lang="ts">
 import { CASE_FILE_FACTS, CASE_FILE_ID, CASE_FILE_PRINT_FACT } from "~/utils/constants/case-file";
 const scanning = ref(false);
+
+// The match percentage counts up from zero each time the scan starts.
+const MATCH_PERCENT = 99.7;
+const MATCH_COUNT_MS = 900;
+const match = ref(MATCH_PERCENT);
+let matchFrame: number | undefined;
+
+watch(scanning, (active) => {
+  cancelAnimationFrame(matchFrame!);
+  if (!active || prefersReducedMotion()) {
+    match.value = MATCH_PERCENT;
+    return;
+  }
+  const start = performance.now();
+  const tick = (now: number) => {
+    const t = Math.min((now - start) / MATCH_COUNT_MS, 1);
+    match.value = MATCH_PERCENT * (1 - (1 - t) ** 3);
+    if (t < 1) matchFrame = requestAnimationFrame(tick);
+  };
+  match.value = 0;
+  matchFrame = requestAnimationFrame(tick);
+});
+
+onBeforeUnmount(() => cancelAnimationFrame(matchFrame!));
 const printOpen = ref(false);
 </script>
 
@@ -31,12 +55,13 @@ const printOpen = ref(false);
               alt="Pouyan Norouzi"
               width="176"
               height="176"
-              class="size-full object-cover contrast-110 grayscale" />
+              class="size-full object-cover transition duration-500"
+              :class="scanning ? 'contrast-100 grayscale-0' : 'contrast-110 grayscale'" />
             <template v-if="scanning">
               <div
                 class="pointer-events-none absolute inset-x-0 h-1/5 bg-linear-to-b from-transparent via-primary/50 to-transparent motion-safe:animate-scan" />
               <UBadge
-                label="MATCH 99.7%"
+                :label="`MATCH ${match.toFixed(1)}%`"
                 variant="outline"
                 class="absolute top-5 left-1/2 z-10 -translate-x-1/2 bg-inverted font-mono tracking-wider" />
             </template>

@@ -17,15 +17,7 @@ import { CASE_FILE_SECTIONS, CASE_FILE_TOOLS_OF_CHOICE } from "~/utils/constants
           <span class="font-name text-lg font-bold">{{ tool.skill.title }}</span>
         </div>
         <p class="text-sm text-muted">{{ tool.note }}</p>
-        <div class="mt-auto flex flex-col gap-1">
-          <div class="flex justify-between">
-            <CaseFileLabel>CLEARANCE</CaseFileLabel>
-            <CaseFileLabel class="text-primary">
-              {{ Math.round(tool.skill.proficiency * 100) }}%
-            </CaseFileLabel>
-          </div>
-          <UProgress :model-value="tool.skill.proficiency" :max="1" size="xs" />
-        </div>
+        <CaseFileSkillMeter :value="tool.skill.proficiency" class="mt-auto" />
       </UCard>
     </div>
     <CaseFileLabel class="border-t border-dashed border-default pt-3.5">
