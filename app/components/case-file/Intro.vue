@@ -19,6 +19,8 @@ const SCRIPT: TerminalLine[] = [
 const TYPE_DELAY_MS = 15;
 const LINE_DELAY_MS = 250;
 const CLOSE_DELAY_MS = 800;
+// Remembers that the boot screen already played this browser session.
+const BOOTED_KEY = "case-file-booted";
 
 // Only the initial load of the site plays the boot screen. Navigating back to
 // the home page later, or landing on another page first, never shows it.
@@ -39,6 +41,11 @@ const lineClass: Record<TerminalLine["kind"], string> = {
 function close() {
   clearTimeout(timer);
   booting.value = false;
+  try {
+    sessionStorage.setItem(BOOTED_KEY, "1");
+  } catch {
+    // Storage can be unavailable (e.g. blocked cookies); the boot screen just plays again.
+  }
 }
 
 function typeLine(index: number) {
@@ -77,7 +84,10 @@ function onKeydown() {
 
 onMounted(() => {
   if (!booting.value) return;
-  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+  if (
+    document.documentElement.classList.contains(BOOTED_KEY) ||
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches
+  ) {
     close();
     return;
   }
@@ -87,11 +97,22 @@ onMounted(() => {
 
 // Stop the page behind the boot screen from scrolling while it is open. The
 // boot screen is baked into the prerendered HTML, so hide it up front when it
-// would never play: without JavaScript and with reduced motion.
+// would never play: without JavaScript, with reduced motion, and when it
+// already played this session (checked by an inline script before first paint).
 useHead({
   bodyAttrs: {
     class: computed(() => (booting.value ? "overflow-hidden motion-reduce:overflow-auto" : "")),
   },
+  script: [
+    {
+      innerHTML: `try{sessionStorage.getItem("${BOOTED_KEY}")&&document.documentElement.classList.add("${BOOTED_KEY}")}catch(e){}`,
+    },
+  ],
+  style: [
+    {
+      innerHTML: `.${BOOTED_KEY} #case-file-intro{display:none}.${BOOTED_KEY} body{overflow:auto}`,
+    },
+  ],
   noscript: [{ innerHTML: "<style>#case-file-intro{display:none}body{overflow:auto}</style>" }],
 });
 
