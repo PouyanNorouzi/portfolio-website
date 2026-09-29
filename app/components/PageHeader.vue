@@ -3,6 +3,8 @@ defineProps<{
   title?: string;
   number?: string;
   label?: string;
+  // Uses the regular body font instead of the display font, for long titles.
+  plain?: boolean;
 }>();
 </script>
 
@@ -10,7 +12,8 @@ defineProps<{
   <header class="flex flex-col items-center gap-2.5 py-6 text-center">
     <CaseFileLabel v-if="label">{{ label }}</CaseFileLabel>
     <h1
-      class="font-name text-3xl font-bold tracking-widest text-balance wrap-break-word text-highlighted uppercase md:text-4xl">
+      class="text-3xl font-bold text-balance wrap-break-word text-highlighted md:text-4xl"
+      :class="plain ? 'font-sans' : 'font-name tracking-widest uppercase'">
       <span v-if="number" class="mr-[0.5ch] font-mono font-normal tracking-wider text-primary">
         {{ number }} /
       </span>
