@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { EDUCATION, EXPERIENCE, formatCareerPeriod } from "~/utils/constants/career";
+
 useHead({
   title: "Pouyan - About",
 });
@@ -7,34 +9,9 @@ definePageMeta({
   middleware: ["transition"],
 });
 
-// Education data
-const education = ref([
-  {
-    institution: "British Columbia Institute of Technology",
-    degree: "Computer Systems Diploma",
-    period: "January 2024 - December 2025",
-    location: "Burnaby, BC",
-  },
-]);
+const education = EDUCATION.map((edu) => ({ ...edu, period: formatCareerPeriod(edu, " - ") }));
 
-// Experience data
-const experience = ref([
-  {
-    position: "TECH Specialist",
-    company: "London Drugs",
-    location: "Burnaby, BC",
-    period: "June 2025 – Present",
-    description:
-      "Provide technical customer support for electronics, manage inventory and restocking, and process sales transactions.",
-  },
-  {
-    position: "Home Solutions Advisor",
-    company: "Best Buy",
-    location: "Coquitlam, BC",
-    period: "August 2023 – January 2024",
-    description: "Seasonal position helping with sales during busy season.",
-  },
-]);
+const experience = EXPERIENCE.map((exp) => ({ ...exp, period: formatCareerPeriod(exp) }));
 </script>
 
 <template>
