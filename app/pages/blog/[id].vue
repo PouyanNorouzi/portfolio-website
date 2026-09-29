@@ -29,7 +29,7 @@ usePageSeo({
       <div
         class="overflow-hidden rounded-md border border-default p-1.5 transition-colors group-hover:border-primary">
         <NuxtImg
-          class="w-full rounded-sm object-contain contrast-110 grayscale transition-[filter] duration-500 group-hover:contrast-100 group-hover:grayscale-0 sm:max-h-[30vh] sm:w-auto"
+          class="w-full rounded-sm object-contain sm:max-h-[30vh] sm:w-auto"
           :src="page.image"
           :alt="page.title" />
       </div>

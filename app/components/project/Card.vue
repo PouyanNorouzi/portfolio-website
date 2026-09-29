@@ -93,7 +93,7 @@ const { isVisible } = useInView({ threshold: viewPort.isLessThan("md") ? 0.1 : 0
           width="640"
           height="360"
           loading="lazy"
-          class="size-full object-cover contrast-110 grayscale transition duration-300 group-hover:grayscale-0" />
+          class="size-full object-cover" />
       </div>
 
       <div class="flex flex-1 flex-col gap-2.5 px-2 pb-1">

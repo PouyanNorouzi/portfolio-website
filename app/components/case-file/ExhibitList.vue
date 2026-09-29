@@ -3,6 +3,8 @@ import type { BlogCollectionItem } from "@nuxt/content";
 
 defineProps<{
   posts: Pick<BlogCollectionItem, "title" | "description" | "date" | "to" | "num" | "pinned">[];
+  // Uses the regular body font instead of the display font.
+  plain?: boolean;
 }>();
 
 // Content dates are stored as UTC midnight, so format in UTC to keep the day.
@@ -26,7 +28,9 @@ function exhibitLetter(index: number): string {
       :to="post.to"
       class="grid gap-x-4 gap-y-1 px-5 py-3.5 transition-colors hover:bg-elevated sm:grid-cols-[7.5rem_minmax(0,1fr)]">
       <span class="flex flex-col gap-1 pt-0.5">
-        <span class="font-name text-sm font-bold tracking-widest text-primary">
+        <span
+          class="text-sm font-bold tracking-widest text-primary"
+          :class="{ 'font-name': !plain }">
           EXHIBIT {{ exhibitLetter(index) }}
         </span>
         <span class="font-mono text-xs text-muted">{{
@@ -35,7 +39,9 @@ function exhibitLetter(index: number): string {
       </span>
       <span class="flex flex-col gap-0.5">
         <span class="flex flex-wrap items-center gap-2.5">
-          <span class="font-name text-base font-semibold">{{ post.title }}</span>
+          <span class="text-base font-semibold" :class="{ 'font-name': !plain }">{{
+            post.title
+          }}</span>
           <UBadge
             label="INTERCEPTED"
             color="error"

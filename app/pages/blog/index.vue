@@ -36,7 +36,7 @@ const transmissionCount = computed(() => posts.value?.length ?? 0);
           All transmissions intercepted from the subject to date, most recent first.
         </p>
       </div>
-      <CaseFileExhibitList :posts="posts ?? []" />
+      <CaseFileExhibitList :posts="posts ?? []" plain />
     </div>
   </UContainer>
 </template>
