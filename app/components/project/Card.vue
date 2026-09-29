@@ -152,36 +152,36 @@ const { isVisible } = useInView({ threshold: viewPort.isLessThan("md") ? 0.1 : 0
           {{ project.description }}
         </p>
 
-        <div class="flex flex-col gap-2 border-t border-dashed border-default pt-3">
+        <div class="mt-auto flex flex-col gap-2 border-t border-dashed border-default pt-3">
           <CaseFileLabel>EQUIPMENT USED</CaseFileLabel>
-          <div class="flex flex-wrap gap-1">
+          <div class="flex flex-wrap items-center gap-1">
             <SkillBadge v-for="tech in project.techStack" :key="tech.title" :skill="tech" />
+
+            <div class="ml-auto flex gap-1">
+              <UTooltip v-if="project.github" text="View Code">
+                <UButton
+                  :to="project.github"
+                  target="_blank"
+                  variant="ghost"
+                  color="neutral"
+                  size="sm"
+                  icon="i-lucide-github"
+                  aria-label="View Code" />
+              </UTooltip>
+
+              <UTooltip v-if="project.liveDemo" text="View Live Demo">
+                <UButton
+                  :to="project.liveDemo"
+                  target="_blank"
+                  variant="ghost"
+                  size="sm"
+                  icon="i-lucide-external-link"
+                  color="primary"
+                  aria-label="View Live Demo"
+                  @click="(e) => handleCurrentSiteLiveDemo(e, project.liveDemo)" />
+              </UTooltip>
+            </div>
           </div>
-        </div>
-
-        <div class="mt-auto flex justify-end gap-2 pt-1">
-          <UTooltip v-if="project.github" text="View Code">
-            <UButton
-              :to="project.github"
-              target="_blank"
-              variant="ghost"
-              color="neutral"
-              size="sm"
-              icon="i-lucide-github"
-              aria-label="View Code" />
-          </UTooltip>
-
-          <UTooltip v-if="project.liveDemo" text="View Live Demo">
-            <UButton
-              :to="project.liveDemo"
-              target="_blank"
-              variant="ghost"
-              size="sm"
-              icon="i-lucide-external-link"
-              color="primary"
-              aria-label="View Live Demo"
-              @click="(e) => handleCurrentSiteLiveDemo(e, project.liveDemo)" />
-          </UTooltip>
         </div>
       </div>
     </div>
