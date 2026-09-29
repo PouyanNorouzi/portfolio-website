@@ -86,15 +86,46 @@ const { isVisible } = useInView({ threshold: viewPort.isLessThan("md") ? 0.1 : 0
     :class="isVisible ? 'translate-y-0 opacity-100' : 'motion-safe:translate-y-5 motion-safe:opacity-0'"
     :ui="{ body: 'p-3.5 sm:p-3.5' }">
     <div class="flex flex-col gap-5 md:flex-row">
-      <div class="relative aspect-video overflow-hidden rounded-md bg-elevated md:w-2/5 md:shrink-0 md:self-start">
-        <NuxtImg
-          :src="project.image"
-          :alt="project.name"
-          width="640"
-          height="360"
-          loading="lazy"
-          class="size-full object-cover" />
-      </div>
+      <UModal
+        :title="project.name"
+        :description="`Screenshot of ${project.name}`"
+        :ui="{ content: 'sm:max-w-6xl' }">
+        <button
+          type="button"
+          :aria-label="`Enlarge ${project.name} screenshot`"
+          class="group/image relative aspect-video cursor-zoom-in overflow-hidden rounded-md bg-elevated p-2 md:aspect-auto md:min-h-56 md:w-2/5 md:shrink-0">
+          <NuxtImg
+            :src="project.image"
+            :alt="project.name"
+            width="640"
+            height="360"
+            loading="lazy"
+            class="size-full object-contain md:absolute md:inset-0 md:p-2" />
+          <span
+            class="absolute right-2 bottom-2 flex size-8 items-center justify-center rounded-md bg-default/80 text-muted opacity-0 transition-opacity group-hover/image:opacity-100 group-focus-visible/image:opacity-100">
+            <UIcon name="i-lucide-zoom-in" class="size-4" />
+          </span>
+        </button>
+
+        <template #content="{ close }">
+          <div class="flex flex-col gap-3 p-3">
+            <div class="flex items-center justify-between gap-4 px-1">
+              <CaseFileLabel>EVIDENCE · {{ project.name }}</CaseFileLabel>
+              <UButton
+                icon="i-lucide-x"
+                variant="ghost"
+                color="neutral"
+                size="sm"
+                aria-label="Close"
+                @click="close" />
+            </div>
+            <NuxtImg
+              :src="project.image"
+              :alt="project.name"
+              class="max-h-[80vh] w-full rounded-md bg-elevated object-contain" />
+          </div>
+        </template>
+      </UModal>
 
       <div class="flex flex-1 flex-col gap-2.5 px-2 pb-1">
         <div class="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
