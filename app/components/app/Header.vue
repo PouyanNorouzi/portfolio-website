@@ -61,19 +61,19 @@ const socialLinks = ref([
     label: "GitHub",
     icon: "i-lucide-github",
     to: GITHUB_LINK,
-    target: "_blank",
+    target: "_blank" as const,
   },
   {
     label: "LinkedIn",
     icon: "i-lucide-linkedin",
     to: LINKEDIN_LINK,
-    target: "_blank",
+    target: "_blank" as const,
   },
   {
     label: "Email",
     icon: "i-lucide-mail",
     to: EMAIL,
-    target: "_blank",
+    target: undefined,
   },
 ]);
 
@@ -166,7 +166,7 @@ const headerClass = computed(() => {
                 :icon="link.icon"
                 :ui="{ base: 'rounded-full' }"
                 :to="link.to"
-                target="_blank"
+                :target="link.target"
                 rel="noopener noreferrer"
                 class="hidden sm:flex" />
             </UTooltip>
