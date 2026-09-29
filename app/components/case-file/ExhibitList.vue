@@ -5,7 +5,8 @@ defineProps<{
   posts: Pick<BlogCollectionItem, "title" | "description" | "date" | "to" | "num" | "pinned">[];
 }>();
 
-const formatDate = new Intl.DateTimeFormat("en-US", { dateStyle: "medium" });
+// Content dates are stored as UTC midnight, so format in UTC to keep the day.
+const formatDate = new Intl.DateTimeFormat("en-US", { dateStyle: "medium", timeZone: "UTC" });
 
 // A, B, ..., Z, AA, AB, ... (spreadsheet-style column letters)
 function exhibitLetter(index: number): string {

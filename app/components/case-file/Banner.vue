@@ -16,13 +16,7 @@ onMounted(() => {
 
 <template>
   <div>
-    <div
-      class="bg-[repeating-linear-gradient(45deg,var(--ui-error)_0_14px,var(--color-neutral-950)_14px_28px)] py-1.5">
-      <div
-        class="bg-neutral-950 px-5 py-3.5 text-center font-name text-base font-bold tracking-[0.3em] text-neutral-50 motion-safe:animate-banner-in sm:text-xl">
-        CLASSIFIED // EYES ONLY
-      </div>
-    </div>
+    <CaseFileHazardBanner>CLASSIFIED // EYES ONLY</CaseFileHazardBanner>
     <div class="flex flex-wrap justify-between gap-x-4 gap-y-2 px-6 pt-4">
       <CaseFileLabel class="min-w-[21ch]">{{ typed }}</CaseFileLabel>
       <CaseFileLabel>ASSIGNED AGENT: C.</CaseFileLabel>

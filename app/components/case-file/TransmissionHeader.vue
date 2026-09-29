@@ -18,13 +18,7 @@ const transmissionDate = computed(() => formatDate.format(new Date(props.date)).
 
 <template>
   <div class="mb-6 flex flex-col">
-    <div
-      class="bg-[repeating-linear-gradient(45deg,var(--ui-error)_0_8px,var(--color-neutral-950)_8px_16px)] py-1">
-      <div
-        class="bg-neutral-950 px-4 py-2 text-center font-name text-xs font-bold tracking-[0.3em] text-neutral-50 motion-safe:animate-banner-in sm:text-sm">
-        INTERCEPTED TRANSMISSION // DECLASSIFIED
-      </div>
-    </div>
+    <CaseFileHazardBanner size="sm">INTERCEPTED TRANSMISSION // DECLASSIFIED</CaseFileHazardBanner>
     <div class="flex flex-wrap justify-between gap-x-4 gap-y-2 pt-3.5">
       <CaseFileLabel>TRANSMISSION NO. {{ transmissionNumber }}</CaseFileLabel>
       <CaseFileLabel>DATE: {{ transmissionDate }}</CaseFileLabel>

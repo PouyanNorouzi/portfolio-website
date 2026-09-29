@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { CASE_FILE_ID } from "~/utils/constants/case-file";
+
 definePageMeta({ middleware: ["transition"] });
 
 const route = useRoute();
@@ -21,10 +23,11 @@ usePageSeo({
 
 <template>
   <UContainer v-if="page" class="flex flex-col">
-    <PageHeader>{{ page.title }}</PageHeader>
+    <PageHeader :label="`CASE FILE ${CASE_FILE_ID} · TRANSMISSION`">{{ page.title }}</PageHeader>
     <CaseFileTransmissionHeader :num="page.num" :date="page.date" />
     <figure class="group mb-5 flex flex-col items-center gap-2 self-center">
-      <div class="overflow-hidden rounded-md border border-default p-1.5 transition-colors group-hover:border-primary">
+      <div
+        class="overflow-hidden rounded-md border border-default p-1.5 transition-colors group-hover:border-primary">
         <NuxtImg
           class="w-full rounded-sm object-contain contrast-110 grayscale transition-[filter] duration-500 group-hover:contrast-100 group-hover:grayscale-0 sm:max-h-[30vh] sm:w-auto"
           :src="page.image"
