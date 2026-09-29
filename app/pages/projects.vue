@@ -45,12 +45,13 @@ const projects = ref<Project[]>(
 <template>
   <UContainer>
     <PageHeader>My Projects</PageHeader>
-    <div class="flex flex-col gap-6 w-full">
-      <ProjectCard
-        v-for="project in projects"
-        :key="project.id"
-        :project="project"
-        class="transition-all" />
+    <div class="mx-auto flex w-full max-w-4xl flex-col gap-6 pb-12">
+      <div
+        class="flex flex-col items-center gap-1 border-y-4 border-double border-default py-3 text-center">
+        <CaseFileLabel>// {{ projects.length }} OPERATIONS ON FILE</CaseFileLabel>
+        <p class="text-sm text-muted">Subject's known operations, most recent first.</p>
+      </div>
+      <ProjectCard v-for="project in projects" :key="project.id" :project="project" />
     </div>
   </UContainer>
 </template>
