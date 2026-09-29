@@ -2,6 +2,14 @@
 import { CASE_FILE_FACTS, CASE_FILE_ID, CASE_FILE_PRINT_FACT } from "~/utils/constants/case-file";
 const scanning = ref(false);
 
+// Where each crosshair bracket sits, and where it slides in from.
+const CORNERS = [
+  { place: "top-0 left-0 border-t-2 border-l-2", away: "-translate-x-2 -translate-y-2" },
+  { place: "top-0 right-0 border-t-2 border-r-2", away: "translate-x-2 -translate-y-2" },
+  { place: "bottom-0 left-0 border-b-2 border-l-2", away: "-translate-x-2 translate-y-2" },
+  { place: "bottom-0 right-0 border-r-2 border-b-2", away: "translate-x-2 translate-y-2" },
+];
+
 // The match percentage counts up from zero each time the scan starts.
 const MATCH_PERCENT = 99.7;
 const MATCH_COUNT_MS = 900;
@@ -46,25 +54,37 @@ const printOpen = ref(false);
               class="absolute -top-2.5 left-1/2 size-5 -translate-x-1/2 text-muted" />
             Hire this guy. Seriously. -C.
           </div>
-          <div
-            class="relative size-44 overflow-hidden rounded-full border-2 border-primary"
-            @mouseenter="scanning = true"
-            @mouseleave="scanning = false">
-            <NuxtImg
-              src="/me/1.webp"
-              alt="Pouyan Norouzi"
-              width="176"
-              height="176"
-              class="size-full object-cover transition duration-500"
-              :class="scanning ? 'contrast-100 grayscale-0' : 'contrast-110 grayscale'" />
-            <template v-if="scanning">
-              <div
-                class="pointer-events-none absolute inset-x-0 h-1/5 bg-linear-to-b from-transparent via-primary/50 to-transparent motion-safe:animate-scan" />
-              <UBadge
-                :label="`MATCH ${match.toFixed(1)}%`"
-                variant="outline"
-                class="absolute top-5 left-1/2 z-10 -translate-x-1/2 bg-inverted font-mono tracking-wider" />
-            </template>
+          <div class="relative size-44">
+            <div
+              class="relative size-44 overflow-hidden rounded-full border-2 border-primary"
+              @mouseenter="scanning = true"
+              @mouseleave="scanning = false">
+              <NuxtImg
+                src="/me/1.webp"
+                alt="Pouyan Norouzi"
+                width="176"
+                height="176"
+                class="size-full object-cover transition duration-500"
+                :class="scanning ? 'contrast-100 grayscale-0' : 'contrast-110 grayscale'" />
+              <template v-if="scanning">
+                <div
+                  class="pointer-events-none absolute inset-x-0 h-1/5 bg-linear-to-b from-transparent via-primary/50 to-transparent motion-safe:animate-scan" />
+                <UBadge
+                  :label="`MATCH ${match.toFixed(1)}%`"
+                  variant="outline"
+                  class="absolute top-5 left-1/2 z-10 -translate-x-1/2 bg-inverted font-mono tracking-wider" />
+              </template>
+            </div>
+            <!-- Crosshair brackets snap onto the corners while the photo is being scanned. -->
+            <span
+              v-for="corner in CORNERS"
+              :key="corner.place"
+              aria-hidden="true"
+              class="pointer-events-none absolute size-5 border-primary transition duration-200 motion-reduce:transition-none"
+              :class="[
+                corner.place,
+                scanning ? 'translate-0 opacity-100' : `${corner.away} opacity-0`,
+              ]" />
           </div>
           <CaseFileLabel>SURVEILLANCE PHOTO</CaseFileLabel>
         </div>
