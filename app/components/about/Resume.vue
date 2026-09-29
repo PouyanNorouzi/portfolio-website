@@ -1,23 +1,20 @@
 <script setup lang="ts">
+import { RESUME_DOCX_PATH, RESUME_PDF_PATH } from "~/utils/constants/resume";
+import { EMAIL, LINKEDIN_LINK } from "~/utils/constants/socials";
+
 // Available resume formats
 const resumeFormats = ref<ResumeFormat[]>([
   {
     type: "PDF",
     icon: "i-codicon-file-pdf",
-    link: "/files/Pouyan_Norouzi_Resume.pdf",
+    link: RESUME_PDF_PATH,
   },
   {
     type: "DOCX",
     icon: "i-simple-icons-microsoftword",
-    link: "/files/Pouyan_Norouzi_Resume.docx",
+    link: RESUME_DOCX_PATH,
   },
 ]);
-
-// Track download clicks
-const trackDownload = (formatType: string): void => {
-  // This could be connected to analytics in the future
-  console.log(`Resume downloaded in ${formatType} format`);
-};
 </script>
 
 <template>
@@ -34,8 +31,7 @@ const trackDownload = (formatType: string): void => {
         size="lg"
         color="primary"
         :variant="format.type === 'PDF' ? 'solid' : 'outline'"
-        target="_blank"
-        @click="trackDownload(format.type)">
+        target="_blank">
         <template #leading>
           <UIcon :name="format.icon" />
         </template>
@@ -44,14 +40,14 @@ const trackDownload = (formatType: string): void => {
 
       <!-- Contact buttons -->
       <UButton
-        to="mailto:pouyannorouzii@gmail.com"
+        :to="EMAIL"
         size="lg"
         icon="i-lucide-mail"
         color="secondary">
         Email Me
       </UButton>
       <UButton
-        to="https://www.linkedin.com/in/pouyan-norouzi/"
+        :to="LINKEDIN_LINK"
         target="_blank"
         size="lg"
         icon="i-logos-linkedin-icon"
