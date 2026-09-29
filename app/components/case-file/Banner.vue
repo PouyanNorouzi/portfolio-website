@@ -26,17 +26,21 @@ onMounted(() => {
       <CaseFileLabel class="min-w-[21ch]">{{ typed }}</CaseFileLabel>
       <CaseFileLabel>ASSIGNED AGENT: C.</CaseFileLabel>
       <CaseFileLabel>DATE OF REPORT: {{ dates.report }}</CaseFileLabel>
-      <span
-        class="inline-flex items-center gap-2 font-mono text-xs font-semibold tracking-widest text-primary">
-        <span class="size-2 rounded-full bg-primary motion-safe:animate-pulse" />
-        STATUS: OPEN TO WORK
-      </span>
-      <Transition enter-active-class="motion-safe:animate-reveal-in">
+      <!-- Declassifying the file swaps the open-to-work status for the raised clearance. -->
+      <Transition mode="out-in" enter-active-class="motion-safe:animate-reveal-in">
         <span
           v-if="declassified"
-          class="inline-flex items-center gap-1.5 font-mono text-xs font-semibold tracking-widest text-error">
+          key="clearance"
+          class="inline-flex items-center gap-2 font-mono text-xs font-semibold tracking-widest text-error">
           <UIcon name="i-lucide-lock-open" class="size-3.5" />
           CLEARANCE: ELEVATED
+        </span>
+        <span
+          v-else
+          key="status"
+          class="inline-flex items-center gap-2 font-mono text-xs font-semibold tracking-widest text-primary">
+          <span class="size-2 rounded-full bg-primary motion-safe:animate-pulse" />
+          STATUS: OPEN TO WORK
         </span>
       </Transition>
     </div>
