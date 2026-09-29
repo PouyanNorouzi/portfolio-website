@@ -42,6 +42,10 @@ export default defineNuxtConfig({
     defaults: {
       weights: [400, 700],
     },
+    families: [
+      // only used in markdown blog content, so the scanner can't detect it
+      { name: "Ballet", global: true },
+    ],
   },
 
   viewport: {
