@@ -4,38 +4,13 @@ const declassified = useDeclassified();
 
 const OPEN_LABEL = "▸ DECLASSIFY FULL FILE";
 const CLOSE_LABEL = "▾ RESEAL FILE";
-const GLYPHS = "█▓▒░#%&@$01<>/\\";
 
-const label = ref(OPEN_LABEL);
-let timer: ReturnType<typeof setInterval> | undefined;
+const { text: label, run } = useScramble(OPEN_LABEL);
 
 function toggle() {
   declassified.value = !declassified.value;
-  const target = declassified.value ? CLOSE_LABEL : OPEN_LABEL;
-  if (prefersReducedMotion()) {
-    label.value = target;
-    return;
-  }
-  const total = 14;
-  let frame = 0;
-  clearInterval(timer);
-  timer = setInterval(() => {
-    frame++;
-    if (frame >= total) {
-      clearInterval(timer);
-      label.value = target;
-      return;
-    }
-    const done = Math.floor((frame / total) * target.length);
-    label.value = [...target]
-      .map((ch, i) =>
-        i < done || ch === " " ? ch : GLYPHS[Math.floor(Math.random() * GLYPHS.length)]
-      )
-      .join("");
-  }, 40);
+  run(declassified.value ? CLOSE_LABEL : OPEN_LABEL);
 }
-
-onBeforeUnmount(() => clearInterval(timer));
 </script>
 
 <template>
