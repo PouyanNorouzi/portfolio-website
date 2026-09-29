@@ -22,7 +22,7 @@ usePageSeo({
 </script>
 
 <template>
-  <UContainer v-if="page" class="flex flex-col">
+  <UContainer v-if="page" class="flex flex-col pb-12">
     <PageHeader plain :label="`CASE FILE ${CASE_FILE_ID} · TRANSMISSION`">{{ page.title }}</PageHeader>
     <CaseFileTransmissionHeader :num="page.num" :date="page.date" />
     <figure class="group mb-5 flex flex-col items-center gap-2 self-center">
