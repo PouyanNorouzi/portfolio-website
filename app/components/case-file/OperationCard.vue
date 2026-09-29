@@ -19,7 +19,7 @@ defineProps<{
         width="640"
         height="360"
         loading="lazy"
-        class="size-full object-cover contrast-110 grayscale transition duration-300 group-hover:grayscale-0" />
+        class="size-full object-cover transition duration-300 [@media(hover:hover)]:contrast-110 [@media(hover:hover)]:grayscale group-hover:contrast-100 group-hover:grayscale-0" />
     </div>
     <div class="flex flex-1 flex-col gap-2.5 px-2 pb-1" :class="featured ? 'basis-72' : ''">
       <UBadge
