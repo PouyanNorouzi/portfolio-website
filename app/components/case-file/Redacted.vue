@@ -8,15 +8,31 @@ defineProps<{ lines?: { hidden: string; shown: string }[] }>();
 const declassified = useDeclassified();
 const hovered = ref(false);
 const revealed = computed(() => declassified.value || hovered.value);
+
+// Shared by both root variants so mouse, touch and keyboard behave identically.
+// Focus reveals (like hover) and Enter/Space toggle (like click).
+const toggle = computed(() => ({
+  "role": "button",
+  "tabindex": 0,
+  "aria-pressed": revealed.value,
+  "onMouseenter": () => (hovered.value = true),
+  "onMouseleave": () => (hovered.value = false),
+  "onFocus": () => (hovered.value = true),
+  "onBlur": () => (hovered.value = false),
+  "onClick": () => (hovered.value = !hovered.value),
+  "onKeydown": (event: KeyboardEvent) => {
+    if (event.key !== "Enter" && event.key !== " ") return;
+    event.preventDefault();
+    hovered.value = !hovered.value;
+  },
+}));
 </script>
 
 <template>
   <span
     v-if="lines"
-    class="inline-flex cursor-help flex-col items-start gap-1"
-    @mouseenter="hovered = true"
-    @mouseleave="hovered = false"
-    @click="hovered = !hovered">
+    v-bind="toggle"
+    class="inline-flex cursor-help flex-col items-start gap-1 rounded-sm outline-offset-2 focus-visible:outline-2 focus-visible:outline-primary focus-visible:outline-solid">
     <span
       v-for="line in lines"
       :key="line.hidden"
@@ -34,11 +50,9 @@ const revealed = computed(() => declassified.value || hovered.value);
   </span>
   <span
     v-else
-    class="relative inline-block cursor-help rounded-sm px-1 outline-1 outline-dashed transition-colors duration-300"
-    :class="revealed ? 'outline-error' : 'outline-transparent'"
-    @mouseenter="hovered = true"
-    @mouseleave="hovered = false"
-    @click="hovered = !hovered">
+    v-bind="toggle"
+    class="relative inline-block cursor-help rounded-sm px-1 outline-1 outline-dashed transition-colors duration-300 focus-visible:outline-2 focus-visible:outline-primary focus-visible:outline-solid"
+    :class="revealed ? 'outline-error' : 'outline-transparent'">
     <slot />
     <span
       aria-hidden="true"
