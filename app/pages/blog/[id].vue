@@ -22,10 +22,19 @@ usePageSeo({
 <template>
   <UContainer v-if="page" class="flex flex-col">
     <PageHeader>{{ page.title }}</PageHeader>
-    <NuxtImg
-      class="w-full sm:w-auto sm:max-h-[30vh] self-center mb-3 object-contain"
-      :src="page.image"
-    />
+    <CaseFileTransmissionHeader :num="page.num" :date="page.date" />
+    <figure class="group mb-5 flex flex-col items-center gap-2 self-center">
+      <div class="overflow-hidden rounded-md border border-default p-1.5 transition-colors group-hover:border-primary">
+        <NuxtImg
+          class="w-full rounded-sm object-contain contrast-110 grayscale transition-[filter] duration-500 group-hover:contrast-100 group-hover:grayscale-0 sm:max-h-[30vh] sm:w-auto"
+          :src="page.image"
+          :alt="page.title" />
+      </div>
+      <figcaption>
+        <CaseFileLabel>RECOVERED IMAGE</CaseFileLabel>
+      </figcaption>
+    </figure>
     <ContentRenderer v-if="page" :value="page" />
+    <CaseFileTransmissionFooter />
   </UContainer>
 </template>
