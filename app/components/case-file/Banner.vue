@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { CASE_FILE_NUMBER, CASE_FILE_DATE } from "~/utils/constants/case-file";
+import { CASE_FILE_NUMBER } from "~/utils/constants/case-file";
+const dates = useCaseFileDates();
 const typed = ref("");
 
 onMounted(() => {
@@ -25,7 +26,7 @@ onMounted(() => {
     <div class="flex flex-wrap justify-between gap-x-4 gap-y-2 px-6 pt-4">
       <CaseFileLabel class="min-w-[21ch]">{{ typed }}</CaseFileLabel>
       <CaseFileLabel>ASSIGNED AGENT: C.</CaseFileLabel>
-      <CaseFileLabel>DATE OF REPORT: {{ CASE_FILE_DATE }}</CaseFileLabel>
+      <CaseFileLabel>DATE OF REPORT: {{ dates.report }}</CaseFileLabel>
       <span
         class="inline-flex items-center gap-2 font-mono text-xs font-semibold tracking-widest text-primary">
         <span class="size-2 rounded-full bg-primary motion-safe:animate-pulse" />

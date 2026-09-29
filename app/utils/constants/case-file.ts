@@ -16,10 +16,6 @@ import {
 
 export const CASE_FILE_ID = "PN-0013";
 
-const REPORT_YEAR = 2026;
-const REPORT_MONTH = 9;
-const REPORT_DAY = 28;
-
 const MONTHS = [
   "JAN",
   "FEB",
@@ -34,18 +30,23 @@ const MONTHS = [
   "NOV",
   "DEC",
 ];
-const REPORT_MONTH_NAME = MONTHS[REPORT_MONTH - 1];
 const pad = (n: number) => String(n).padStart(2, "0");
 
 export const CASE_FILE_NUMBER = `CASE FILE NO. ${CASE_FILE_ID}`;
 
 export const CASE_FILE_PATH = `/case-files/${CASE_FILE_ID}`;
 
-export const CASE_FILE_DATE = `${REPORT_MONTH_NAME} ${REPORT_DAY}, ${REPORT_YEAR}`;
-
-export const CASE_FILE_STAMP_DATE = `${REPORT_MONTH_NAME} ${REPORT_DAY} ${REPORT_YEAR}`;
-
-export const CASE_FILE_BARCODE = `${CASE_FILE_ID}-${REPORT_YEAR}-${pad(REPORT_MONTH)}${pad(REPORT_DAY)}`;
+export function formatCaseFileDates(date: Date) {
+  const year = date.getFullYear();
+  const month = date.getMonth() + 1;
+  const day = date.getDate();
+  const monthName = MONTHS[month - 1];
+  return {
+    report: `${monthName} ${day}, ${year}`,
+    stamp: `${monthName} ${day} ${year}`,
+    barcode: `${CASE_FILE_ID}-${year}-${pad(month)}${pad(day)}`,
+  };
+}
 
 export const CASE_FILE_SECTIONS: CaseFileSection[] = [
   { id: "s01", number: "01", title: "Agent's Summary", tocLabel: "Summary" },

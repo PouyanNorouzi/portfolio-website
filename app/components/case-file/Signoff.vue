@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { CASE_FILE_STAMP_DATE, CASE_FILE_BARCODE } from "~/utils/constants/case-file";
+const dates = useCaseFileDates();
 </script>
 
 <template>
@@ -15,13 +15,13 @@ import { CASE_FILE_STAMP_DATE, CASE_FILE_BARCODE } from "~/utils/constants/case-
     <CaseFileStamp
       class="border-double px-4 py-2 text-center font-name text-xl leading-tight font-bold tracking-widest">
       FILE CLOSED
-      <span class="block font-mono text-xs font-normal tracking-widest">{{ CASE_FILE_STAMP_DATE }}</span>
+      <span class="block font-mono text-xs font-normal tracking-widest">{{ dates.stamp }}</span>
     </CaseFileStamp>
     <div class="flex flex-col items-end gap-1">
       <div
         aria-hidden="true"
         class="h-11 w-48 bg-[repeating-linear-gradient(90deg,var(--ui-text-highlighted)_0_2px,transparent_2px_4px,var(--ui-text-highlighted)_4px_5px,transparent_5px_8px,var(--ui-text-highlighted)_8px_11px,transparent_11px_12px,var(--ui-text-highlighted)_12px_13px,transparent_13px_16px)]" />
-      <span class="font-mono text-xs tracking-[0.25em] text-muted">{{ CASE_FILE_BARCODE }}</span>
+      <span class="font-mono text-xs tracking-[0.25em] text-muted">{{ dates.barcode }}</span>
     </div>
   </section>
 </template>
