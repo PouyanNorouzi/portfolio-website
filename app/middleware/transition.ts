@@ -1,5 +1,24 @@
 import { PAGES } from "~/utils/constants/pages";
 
+// Resolve a path to the index of its section in PAGES (e.g. "/blog/3" -> "/blog")
+function getSectionIndex(path: string) {
+  return PAGES.findIndex((page) => path === page || (page !== "/" && path.startsWith(`${page}/`)));
+}
+
+function getDirection(toPath: string, fromPath: string) {
+  const toIndex = getSectionIndex(toPath);
+  const fromIndex = getSectionIndex(fromPath);
+
+  if (toIndex !== fromIndex) {
+    return toIndex > fromIndex ? "slide-left" : "slide-right";
+  }
+
+  // Same section: index -> child slides left, child -> index slides right
+  const isToRoot = toPath === PAGES[toIndex];
+  const isFromRoot = fromPath === PAGES[fromIndex];
+  return isToRoot && !isFromRoot ? "slide-right" : "slide-left";
+}
+
 export default defineNuxtRouteMiddleware((to, from) => {
   if (!to.meta.pageTransition || typeof to.meta.pageTransition === "boolean") {
     to.meta.pageTransition = { mode: "out-in" };
@@ -8,8 +27,7 @@ export default defineNuxtRouteMiddleware((to, from) => {
     from.meta.pageTransition = { mode: "out-in" };
   }
 
-  from.meta.pageTransition.name =
-    PAGES.indexOf(to.path) > PAGES.indexOf(from.path) ? "slide-left" : "slide-right";
-  to.meta.pageTransition.name =
-    PAGES.indexOf(to.path) > PAGES.indexOf(from.path) ? "slide-left" : "slide-right";
+  const name = getDirection(to.path, from.path);
+  from.meta.pageTransition.name = name;
+  to.meta.pageTransition.name = name;
 });
