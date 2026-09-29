@@ -85,19 +85,26 @@ const printOpen = ref(false);
                 >
                 {{ CASE_FILE_PRINT_FACT }}
               </div>
-              <template v-if="printOpen">
-                <div class="col-start-1 row-start-1 motion-safe:animate-reveal-in">
+              <!-- Closing plays the reveal backwards: the text wipes away as the scan bar returns.
+                   Only the text wipes; the closed label leaves straight away so opening isn't held up. -->
+              <Transition
+                mode="out-in"
+                :leave-active-class="printOpen ? '' : 'motion-safe:animate-reveal-out!'">
+                <div v-if="printOpen" class="col-start-1 row-start-1 motion-safe:animate-reveal-in">
                   <span class="block font-mono text-xs tracking-widest text-primary">
                     PRINT MATCHED · ARCHIVE 2024
                   </span>
                   {{ CASE_FILE_PRINT_FACT }}
                 </div>
+                <CaseFileLabel v-else class="col-start-1 row-start-1">
+                  LATENT PRINT RECOVERED. CLICK THE PRINT TO EXAMINE.
+                </CaseFileLabel>
+              </Transition>
+              <Transition leave-active-class="motion-safe:animate-scan-bar-back!">
                 <span
+                  v-if="printOpen"
                   class="pointer-events-none absolute inset-y-0 w-[3px] bg-primary shadow-[0_0_12px_var(--ui-primary)] motion-safe:animate-scan-bar" />
-              </template>
-              <CaseFileLabel v-else class="col-start-1 row-start-1">
-                LATENT PRINT RECOVERED. CLICK THE PRINT TO EXAMINE.
-              </CaseFileLabel>
+              </Transition>
             </div>
           </div>
         </div>

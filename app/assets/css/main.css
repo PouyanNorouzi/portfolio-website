@@ -106,6 +106,8 @@
   --animate-scan: scan 1.3s linear infinite;
   --animate-reveal-in: reveal-in 0.7s cubic-bezier(0.65, 0, 0.35, 1) both;
   --animate-scan-bar: scan-bar 0.7s cubic-bezier(0.65, 0, 0.35, 1) both;
+  --animate-reveal-out: reveal-out 0.7s cubic-bezier(0.65, 0, 0.35, 1) both;
+  --animate-scan-bar-back: scan-bar-back 0.7s cubic-bezier(0.65, 0, 0.35, 1) both;
   --animate-reveal-down: reveal-down 0.8s cubic-bezier(0.65, 0, 0.35, 1) 0.15s both;
   --animate-scan-down: scan-down 0.8s cubic-bezier(0.65, 0, 0.35, 1) 0.15s both;
   --animate-stamp-in: stamp-in 0.9s ease-out both;
@@ -266,6 +268,37 @@
     }
     100% {
       transform: translateY(120vh);
+    }
+  }
+  @keyframes reveal-out {
+    0% {
+      opacity: 1;
+      clip-path: inset(0 0 0 0);
+    }
+    40% {
+      opacity: 1;
+      filter: blur(0);
+    }
+    100% {
+      opacity: 0;
+      clip-path: inset(0 100% 0 0);
+      filter: blur(3px);
+    }
+  }
+  @keyframes scan-bar-back {
+    0% {
+      left: 100%;
+      opacity: 0;
+    }
+    10% {
+      opacity: 1;
+    }
+    90% {
+      opacity: 1;
+    }
+    100% {
+      left: 0;
+      opacity: 0;
     }
   }
 }
