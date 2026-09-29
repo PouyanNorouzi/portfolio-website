@@ -26,4 +26,108 @@ html {
   --font-sans: "Monda", sans-serif;
   --font-name: "Tourney", sans-serif;
   --font-fancy: "Ballet", sans-serif;
+  --font-mono: "Share Tech Mono", monospace;
+  --font-hand: "Caveat", cursive;
+
+  --animate-banner-in: banner-in 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) 0.15s both;
+  --animate-scan: scan 1.3s linear infinite;
+  --animate-reveal-in: reveal-in 0.7s cubic-bezier(0.65, 0, 0.35, 1) both;
+  --animate-scan-bar: scan-bar 0.7s cubic-bezier(0.65, 0, 0.35, 1) both;
+  --animate-reveal-down: reveal-down 0.8s cubic-bezier(0.65, 0, 0.35, 1) 0.15s both;
+  --animate-scan-down: scan-down 0.8s cubic-bezier(0.65, 0, 0.35, 1) 0.15s both;
+  --animate-stamp-in: stamp-in 0.9s ease-out both;
+
+  @keyframes banner-in {
+    0% {
+      transform: scale(1.6);
+      opacity: 0;
+      letter-spacing: 20px;
+    }
+    60% {
+      transform: scale(0.97);
+      opacity: 1;
+    }
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+  @keyframes scan {
+    0% {
+      top: -20%;
+    }
+    100% {
+      top: 100%;
+    }
+  }
+  @keyframes reveal-in {
+    0% {
+      opacity: 0;
+      clip-path: inset(0 100% 0 0);
+      filter: blur(3px);
+    }
+    60% {
+      opacity: 1;
+      filter: blur(0);
+    }
+    100% {
+      opacity: 1;
+      clip-path: inset(0 0 0 0);
+    }
+  }
+  @keyframes scan-bar {
+    0% {
+      left: 0;
+      opacity: 1;
+    }
+    90% {
+      opacity: 1;
+    }
+    100% {
+      left: 100%;
+      opacity: 0;
+    }
+  }
+  @keyframes reveal-down {
+    0% {
+      opacity: 0;
+      clip-path: inset(0 0 100% 0);
+      filter: blur(3px);
+    }
+    60% {
+      opacity: 1;
+      filter: blur(0);
+    }
+    100% {
+      opacity: 1;
+      clip-path: inset(0 0 0 0);
+    }
+  }
+  @keyframes scan-down {
+    0% {
+      top: 0;
+      opacity: 1;
+    }
+    90% {
+      opacity: 1;
+    }
+    100% {
+      top: 100%;
+      opacity: 0;
+    }
+  }
+  @keyframes stamp-in {
+    0% {
+      transform: rotate(-8deg) scale(2.2);
+      opacity: 0;
+    }
+    60% {
+      transform: rotate(-8deg) scale(0.94);
+      opacity: 1;
+    }
+    100% {
+      transform: rotate(-8deg) scale(1);
+      opacity: 0.88;
+    }
+  }
 }

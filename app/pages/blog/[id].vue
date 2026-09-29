@@ -11,7 +11,7 @@ if (!page.value) {
 </script>
 
 <template>
-  <UContainer class="flex flex-col" v-if="page">
+  <UContainer v-if="page" class="flex flex-col">
     <PageHeader>{{ page.title }}</PageHeader>
     <NuxtImg
       class="w-full sm:w-auto sm:max-h-[30vh] self-center mb-3 object-contain"

@@ -65,7 +65,7 @@ export default defineNuxtConfig({
 
   runtimeConfig: {
     public: {
-      // @ts-ignore
+      // @ts-expect-error runtimeConfig.public typing
       siteUrl: process.env.NUXT_PUBLIC_SITE_URL || "https://pouyannorouzi.com",
     },
   },

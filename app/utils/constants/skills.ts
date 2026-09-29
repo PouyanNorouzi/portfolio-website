@@ -51,10 +51,20 @@ export const SKILL_C: EnhancedSkill = {
   id: 6,
   title: "C",
   icon: "i-skill-icons-c",
-  proficiency: 0.99,
+  proficiency: 0.8,
   category: "Software Development",
   relatedSkills: [],
   color: "#A8B9CC",
+};
+
+export const SKILL_CPP: EnhancedSkill = {
+  id: 56,
+  title: "C++",
+  icon: "i-skill-icons-cpp",
+  proficiency: 0.65,
+  category: "Software Development",
+  relatedSkills: ["C"],
+  color: "#00599C",
 };
 
 export const SKILL_KOTLIN: EnhancedSkill = {
@@ -565,6 +575,7 @@ export const SKILLS: EnhancedSkill[] = [
   SKILL_JAVA,
   SKILL_CSHARP,
   SKILL_C,
+  SKILL_CPP,
   SKILL_KOTLIN,
   SKILL_HTML,
   SKILL_CSS,
@@ -623,6 +634,7 @@ export const FEATURED_SKILLS: EnhancedSkill[] = [
   SKILL_JAVA,
   SKILL_CSHARP,
   SKILL_C,
+  SKILL_CPP,
   SKILL_KOTLIN,
   SKILL_HTML,
   SKILL_CSS,

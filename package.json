@@ -12,6 +12,8 @@
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
+    "lint": "eslint .",
+    "typecheck": "nuxt typecheck",
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
@@ -42,6 +44,7 @@
     "@iconify-json/lucide": "^1.2.116",
     "@iconify-json/simple-icons": "^1.2.89",
     "@iconify-json/skill-icons": "^1.2.4",
+    "vue-tsc": "^3.3.11",
     "zod": "^4.4.3"
   }
 }

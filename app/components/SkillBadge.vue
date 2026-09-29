@@ -12,6 +12,7 @@ withDefaults(defineProps<Props>(), {
   size: "lg",
   variant: "outline",
   color: undefined,
+  iconSize: undefined,
   ignoreLabel: false,
 });
 </script>
