@@ -20,7 +20,13 @@ const toggle = computed(() => ({
     if (event.pointerType === "mouse") hovered.value = true;
   },
   "onPointerleave": () => (hovered.value = false),
-  "onClick": () => (pinned.value = !pinned.value),
+  // Redactions can sit inside links (e.g. operation cards), so a tap should only
+  // toggle the redaction and not follow the link.
+  "onClick": (event: MouseEvent) => {
+    event.preventDefault();
+    event.stopPropagation();
+    pinned.value = !pinned.value;
+  },
   "onKeydown": (event: KeyboardEvent) => {
     if (event.key !== "Enter" && event.key !== " ") return;
     event.preventDefault();
@@ -52,12 +58,12 @@ const toggle = computed(() => ({
   <span
     v-else
     v-bind="toggle"
-    class="relative inline-block cursor-help rounded-sm px-1 outline-1 outline-dashed transition-colors duration-300 focus-visible:outline-2 focus-visible:outline-primary focus-visible:outline-solid"
-    :class="revealed ? 'outline-error' : 'outline-transparent'">
+    class="cursor-help rounded-sm bg-[linear-gradient(var(--ui-bg-inverted),var(--ui-bg-inverted))] bg-right bg-no-repeat box-decoration-clone px-1 outline-1 outline-dashed transition-[background-size,color,outline-color] duration-500 ease-in-out focus-visible:outline-2 focus-visible:outline-primary focus-visible:outline-solid"
+    :class="
+      revealed
+        ? 'bg-size-[0%_100%] outline-error'
+        : 'bg-size-[100%_100%] text-transparent outline-transparent'
+    ">
     <slot />
-    <span
-      aria-hidden="true"
-      class="pointer-events-none absolute inset-0 origin-right rounded-sm bg-inverted transition-transform duration-500 ease-in-out"
-      :class="revealed ? 'scale-x-0' : 'scale-x-100'" />
   </span>
 </template>
