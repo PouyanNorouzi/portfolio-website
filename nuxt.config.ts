@@ -19,7 +19,6 @@ export default defineNuxtConfig({
     "@nuxt/image",
     "@nuxt/ui",
     "@nuxt/content",
-    "nuxt-viewport",
   ],
 
   css: ["~/assets/css/main.css"],
@@ -46,25 +45,6 @@ export default defineNuxtConfig({
       // only used in markdown blog content, so the scanner can't detect it
       { name: "Ballet", global: true },
     ],
-  },
-
-  viewport: {
-    breakpoints: {
-      "xs": 320,
-      "sm": 640,
-      "md": 768,
-      "lg": 1024,
-      "xl": 1280,
-      "2xl": 1536,
-    },
-
-    defaultBreakpoints: {
-      desktop: "lg",
-      mobile: "xs",
-      tablet: "md",
-    },
-
-    fallbackBreakpoint: "lg",
   },
 
   runtimeConfig: {

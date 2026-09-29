@@ -1,4 +1,4 @@
-export function useInView(options?: IntersectionObserverInit) {
+export function useInView(options?: IntersectionObserverInit | (() => IntersectionObserverInit)) {
   const element = ref<HTMLElement | null>(null);
   const component = useTemplateRef<ComponentPublicInstance>("transitionElement");
   const isVisible = ref(false);
@@ -17,7 +17,7 @@ export function useInView(options?: IntersectionObserverInit) {
           observe.disconnect();
         }
       },
-      options ?? { threshold: 0.1 }
+      (typeof options === "function" ? options() : options) ?? { threshold: 0.1 }
     );
 
     if (element.value) {
