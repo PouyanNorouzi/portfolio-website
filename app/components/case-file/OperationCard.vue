@@ -11,7 +11,7 @@ defineProps<{
     class="group flex gap-5 rounded-lg border border-default p-3.5 transition-colors hover:border-primary"
     :class="featured ? 'flex-wrap' : 'flex-col'">
     <div
-      class="aspect-video overflow-hidden rounded-md bg-elevated"
+      class="aspect-video overflow-hidden rounded-md bg-elevated p-2"
       :class="featured ? 'flex-1 basis-96' : ''">
       <NuxtImg
         :src="operation.project.image"
@@ -19,7 +19,7 @@ defineProps<{
         width="640"
         height="360"
         loading="lazy"
-        class="size-full object-cover transition duration-300 [@media(hover:hover)]:contrast-110 [@media(hover:hover)]:grayscale group-hover:contrast-100 group-hover:grayscale-0" />
+        class="size-full object-contain transition duration-300 [@media(hover:hover)]:contrast-110 [@media(hover:hover)]:grayscale group-hover:contrast-100 group-hover:grayscale-0" />
     </div>
     <div class="flex flex-1 flex-col gap-2.5 px-2 pb-1" :class="featured ? 'basis-72' : ''">
       <UBadge
