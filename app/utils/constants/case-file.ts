@@ -7,6 +7,12 @@ import {
   SKILL_TYPESCRIPT,
 } from "./skills";
 import { PROJECT_CONSCIOUS_CONNECTIONS, PROJECT_FAASIFY, PROJECT_FLUX } from "./projects";
+import {
+  EDUCATION_BCIT,
+  EXPERIENCE_BEST_BUY,
+  EXPERIENCE_LONDON_DRUGS,
+  formatShortMonth,
+} from "./career";
 
 export const CASE_FILE_ID = "PN-0013";
 
@@ -81,15 +87,15 @@ export const CASE_FILE_TOOLS_OF_CHOICE: CaseFileTool[] = [
 
 export const CASE_FILE_TIMELINE: CaseFileTimelineEntry[] = [
   {
-    date: "08.2023",
+    date: formatShortMonth(EXPERIENCE_BEST_BUY.start),
     event: "Subject embedded at Best Buy, Coquitlam, as Home Solutions Advisor (seasonal)",
   },
   {
-    date: "01.2024",
+    date: formatShortMonth(EDUCATION_BCIT.start),
     event: "Subject enrolls at BCIT, Burnaby. Computer Systems, Cloud Computing Option",
   },
   {
-    date: "06.2025",
+    date: formatShortMonth(EXPERIENCE_LONDON_DRUGS.start),
     event:
       "Cover role established: TECH Specialist, London Drugs, Burnaby. Same month, work begins on a custom database in C",
   },
@@ -97,7 +103,7 @@ export const CASE_FILE_TIMELINE: CaseFileTimelineEntry[] = [
     date: "10.2025",
     event: "Subject joins an 11-person unit building a serverless platform on AWS",
   },
-  { date: "12.2025", event: "Subject graduates BCIT" },
+  { date: formatShortMonth(EDUCATION_BCIT.end!), event: "Subject graduates BCIT" },
   { date: "07.2026", event: "Subject begins publishing reports. PWS2 announced" },
 ];
 
