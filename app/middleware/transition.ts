@@ -1,9 +1,4 @@
-import { PAGES } from "~/utils/constants/pages";
-
-// Resolve a path to the index of its section in PAGES (e.g. "/blog/3" -> "/blog")
-function getSectionIndex(path: string) {
-  return PAGES.findIndex((page) => path === page || (page !== "/" && path.startsWith(`${page}/`)));
-}
+import { PAGES, getSectionIndex } from "~/utils/constants/pages";
 
 function getDirection(toPath: string, fromPath: string) {
   const toIndex = getSectionIndex(toPath);

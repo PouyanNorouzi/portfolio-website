@@ -19,17 +19,7 @@ const contacts = [
   { label: "GITHUB", text: GITHUB_USERNAME, to: GITHUB_LINK },
 ];
 
-const toast = useToast();
-
-async function copy(text: string) {
-  await navigator.clipboard.writeText(text);
-  toast.add({
-    title: "COPIED TO DEAD DROP",
-    description: text,
-    icon: "i-lucide-check",
-    color: "success",
-  });
-}
+const copy = useCopyToDeadDrop();
 </script>
 
 <template>
