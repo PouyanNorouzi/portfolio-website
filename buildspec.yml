@@ -5,13 +5,11 @@ phases:
     runtime-versions:
       nodejs: 22
     commands:
-      - npm install -g pnpm
-  pre_build:
-    commands:
-      - rm -rf node_modules package-lock.json pnpm-lock.yaml
+      # Keep in step with packageManager in package.json.
+      - npm install -g pnpm@11.10.0
   build:
     commands:
-      - pnpm install
+      - pnpm install --frozen-lockfile
       - pnpm rebuild
       - pnpm run generate
 
