@@ -21,7 +21,7 @@
     "@nuxt/eslint": "1.17.0",
     "@nuxt/fonts": "0.11.4",
     "@nuxt/icon": "1.13.0",
-    "@nuxt/image": "1.10.0",
+    "@nuxt/image": "2.1.0",
     "@nuxt/ui": "^4.11.2",
     "better-sqlite3": "^12.11.1",
     "chart.js": "^4.5.1",
