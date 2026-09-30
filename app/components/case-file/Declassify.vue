@@ -8,7 +8,9 @@ const CLOSE_LABEL = "▾ RESEAL FILE";
 const GLITCH_MS = 600;
 
 const origin = useDeclassifyOrigin();
-const { text: label, run } = useScramble(OPEN_LABEL);
+// The file stays declassified across pages, so the label starts from that state.
+const { text: label, run } = useScramble(declassified.value ? CLOSE_LABEL : OPEN_LABEL);
+const fragmentId = useId();
 const glitching = ref(false);
 let glitchTimer: ReturnType<typeof setTimeout> | undefined;
 
@@ -38,12 +40,16 @@ onBeforeUnmount(() => clearTimeout(glitchTimer));
     </Teleport>
     <UButton
       :label="label"
+      :aria-label="declassified ? 'Reseal file' : 'Declassify full file'"
+      :aria-expanded="declassified"
+      :aria-controls="fragmentId"
       :color="declassified ? 'error' : 'neutral'"
       variant="outline"
       size="lg"
       class="min-w-72 justify-center font-mono font-semibold tracking-widest"
       @click="toggle" />
     <div
+      :id="fragmentId"
       class="grid transition-[grid-template-rows] duration-700 ease-in-out"
       :class="declassified ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'"
       :inert="!declassified">
