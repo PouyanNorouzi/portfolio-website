@@ -3,8 +3,8 @@ import { CASE_FILE_ID } from "~/utils/constants/case-file";
 
 const props = defineProps<{ num: number; date: string | Date }>();
 
-// Content dates are stored as UTC midnight, so format in UTC to avoid
-// shifting the day for visitors west of Greenwich.
+// Content dates are stored as UTC midnight (the scripts build with TZ=UTC), so format in UTC
+// to avoid shifting the day for visitors west of Greenwich.
 const formatDate = new Intl.DateTimeFormat("en-US", {
   month: "short",
   day: "numeric",

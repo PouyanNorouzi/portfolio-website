@@ -8,9 +8,9 @@
   },
   "description": "This is my portfolio website",
   "scripts": {
-    "build": "NODE_OPTIONS=--max-old-space-size=4096 nuxt build",
-    "dev": "nuxt dev",
-    "generate": "NODE_OPTIONS=--max-old-space-size=4096 nuxt generate",
+    "build": "TZ=UTC NODE_OPTIONS=--max-old-space-size=4096 nuxt build",
+    "dev": "TZ=UTC nuxt dev",
+    "generate": "TZ=UTC NODE_OPTIONS=--max-old-space-size=4096 nuxt generate",
     "preview": "nuxt preview",
     "lint": "eslint .",
     "typecheck": "nuxt typecheck",

@@ -5,7 +5,8 @@ defineProps<{
   posts: Pick<BlogCollectionItem, "title" | "description" | "date" | "to" | "num" | "pinned">[];
 }>();
 
-// Content dates are stored as UTC midnight, so format in UTC to keep the day.
+// Content dates are stored as UTC midnight (the scripts build with TZ=UTC), so format in UTC to
+// keep the day.
 const formatDate = new Intl.DateTimeFormat("en-US", { dateStyle: "medium", timeZone: "UTC" });
 
 // A, B, ..., Z, AA, AB, ... (spreadsheet-style column letters)
