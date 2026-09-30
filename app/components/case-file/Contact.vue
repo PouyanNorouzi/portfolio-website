@@ -10,9 +10,6 @@ import {
   LINKEDIN_LINK,
 } from "~/utils/constants/socials";
 
-// The About page reuses this block under its own section heading.
-const { section = CASE_FILE_SECTIONS[7]! } = defineProps<{ section?: CaseFileSection }>();
-
 const contacts = [
   { label: "EMAIL", text: EMAIL_ADDRESS, to: EMAIL },
   { label: "LINKEDIN", text: LINKEDIN_HANDLE, to: LINKEDIN_LINK },
@@ -23,7 +20,7 @@ const copy = useCopyToDeadDrop();
 </script>
 
 <template>
-  <CaseFileSection :section="section">
+  <CaseFileSection :section="CASE_FILE_SECTIONS[7]!">
     <p class="leading-relaxed">Submit request for direct contact via the channels below:</p>
     <UCard>
       <div class="flex flex-col gap-2.5">
