@@ -7,6 +7,14 @@ const { text: title, run } = useScramble(section.title, {
   frames: 20,
 });
 const { element, isVisible } = useInView({ threshold: 0.6 });
+const words = computed(() => {
+  let start = 0;
+  return section.title.split(" ").map((text) => {
+    const word = { text, start };
+    start += [...text].length + 1;
+    return word;
+  });
+});
 watch(isVisible, (visible) => visible && run(section.title));
 </script>
 
@@ -16,12 +24,19 @@ watch(isVisible, (visible) => visible && run(section.title));
       :id="section.id"
       ref="element"
       class="scroll-mt-24 text-center font-name text-2xl font-bold tracking-widest text-highlighted uppercase md:text-3xl">
-      <span class="font-mono font-normal tracking-wider text-primary">{{ section.number }} /</span>
+      <span class="hidden font-mono font-normal tracking-wider text-primary sm:inline">{{ section.number }} /</span>
       <span class="sr-only">{{ section.title }}</span>
-      <!-- The invisible copy holds the real title's size while the visible one scrambles. -->
-      <span aria-hidden="true" class="ml-[0.3em] inline-grid">
-        <span class="invisible col-start-1 row-start-1">{{ section.title }}</span>
-        <span class="col-start-1 row-start-1">{{ title }}</span>
+      <!-- Each letter is sized by its real character while the visible one scrambles, and words never break, so the title wraps exactly like the real one. -->
+      <span aria-hidden="true" class="sm:ml-[0.3em]">
+        <template v-for="(word, w) in words" :key="w">
+          <template v-if="w > 0">{{ " " }}</template>
+          <span class="whitespace-nowrap">
+            <span v-for="(char, c) in [...word.text]" :key="c" class="inline-grid">
+              <span class="invisible col-start-1 row-start-1">{{ char }}</span>
+              <span class="col-start-1 row-start-1">{{ [...title][word.start + c] }}</span>
+            </span>
+          </span>
+        </template>
       </span>
     </h2>
     <slot />

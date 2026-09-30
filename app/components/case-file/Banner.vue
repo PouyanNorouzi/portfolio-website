@@ -2,28 +2,12 @@
 import { CASE_FILE_NUMBER } from "~/utils/constants/case-file";
 const dates = useCaseFileDates();
 const declassified = useDeclassified();
-const typed = ref("");
-
-onMounted(() => {
-  if (prefersReducedMotion()) {
-    typed.value = CASE_FILE_NUMBER;
-    return;
-  }
-  let i = 0;
-  const timer = setInterval(() => {
-    i++;
-    typed.value = CASE_FILE_NUMBER.slice(0, i) + (i < CASE_FILE_NUMBER.length ? "▌" : "");
-    if (i >= CASE_FILE_NUMBER.length) clearInterval(timer);
-  }, 55);
-  onBeforeUnmount(() => clearInterval(timer));
-});
 </script>
 
 <template>
   <div>
-    <CaseFileHazardBanner>CLASSIFIED // EYES ONLY</CaseFileHazardBanner>
     <div class="flex flex-wrap justify-between gap-x-4 gap-y-2 px-6 pt-4">
-      <CaseFileLabel class="min-w-[21ch]">{{ typed }}</CaseFileLabel>
+      <CaseFileLabel>{{ CASE_FILE_NUMBER }}</CaseFileLabel>
       <CaseFileLabel>ASSIGNED AGENT: C.</CaseFileLabel>
       <CaseFileLabel>DATE OF REPORT: {{ dates.report }}</CaseFileLabel>
       <!-- Declassifying the file swaps the open-to-work status for the raised clearance. -->

@@ -22,7 +22,7 @@ const projects = ref<Project[]>(
 
 <template>
   <UContainer>
-    <PageHeader :number="section.number" :label="`CASE FILE ${CASE_FILE_ID} · ${section.tocLabel}`">
+    <PageHeader :label="`CASE FILE ${CASE_FILE_ID} · ${section.tocLabel}`">
       {{ section.title }}
     </PageHeader>
     <div class="mx-auto flex w-full max-w-4xl flex-col gap-6 pb-12">

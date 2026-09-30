@@ -24,7 +24,6 @@ const transmissionCount = computed(() => posts.value?.length ?? 0);
   <UContainer>
     <PageHeader
       plain
-      :number="section.number"
       :label="`CASE FILE ${CASE_FILE_ID} · ${section.tocLabel}`">
       {{ section.title }}
     </PageHeader>
