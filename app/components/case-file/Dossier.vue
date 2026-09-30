@@ -119,7 +119,8 @@ const printOpen = ref(false);
               type="button"
               aria-label="Examine fingerprint"
               title="Examine fingerprint"
-              class="m-1.5 h-14 w-11 -rotate-12 cursor-pointer rounded-[50%_50%_46%_46%] bg-[repeating-radial-gradient(ellipse_50%_60%_at_50%_62%,transparent_0_2px,var(--ui-text-muted)_2px_3.2px)] opacity-55 transition-opacity hover:opacity-100"
+              :aria-expanded="printOpen"
+              class="m-1.5 h-14 w-11 -rotate-12 cursor-pointer rounded-[50%_50%_46%_46%] bg-[repeating-radial-gradient(ellipse_50%_60%_at_50%_62%,transparent_0_2px,var(--ui-text-muted)_2px_3.2px)] opacity-55 transition-opacity hover:opacity-100 focus-visible:opacity-100"
               @click="printOpen = !printOpen" />
             <div
               class="relative grid min-w-64 flex-1 items-center overflow-hidden rounded-md border border-dashed px-3 py-2 text-sm leading-relaxed transition-colors duration-500"

@@ -55,6 +55,7 @@ onBeforeUnmount(() => {
       v-for="section in CASE_FILE_SECTIONS"
       :key="section.id"
       type="button"
+      :aria-current="active === section.id ? 'location' : undefined"
       class="-ml-px flex cursor-pointer items-baseline gap-2 border-l-2 px-3 py-1.5 text-left font-mono text-xs tracking-widest uppercase transition-colors hover:text-primary"
       :class="
         active === section.id ? 'border-primary text-primary' : 'border-transparent text-muted'
