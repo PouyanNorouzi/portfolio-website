@@ -43,7 +43,7 @@ function level(event: PointerEvent) {
       </UCard>
     </div>
     <CaseFileLabel class="border-t border-dashed border-default pt-3.5">
-      // FULL EQUIPMENT AUDIT AVAILABLE ON THE
+      // FULL POLYGRAPH RESULTS ON THE
       <ULink to="/about" class="text-primary">ABOUT</ULink>
       FILE
     </CaseFileLabel>

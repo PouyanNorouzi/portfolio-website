@@ -95,6 +95,58 @@
   background-repeat: no-repeat;
 }
 
+/* Polygraph chart paper (About page). Ink stays dark on light paper in both themes. */
+.polygraph-paper {
+  /* Slightly faded ballpoint inks for the three pens. */
+  --pen-respiration: #33609f;
+  --pen-cardio: #b8423a;
+  --pen-gsr: #2f2d29;
+  --paper: #f5f1e6;
+  --ink: #2b2a26;
+  --ink-muted: #6e685b;
+  --ink-faint: #c9c0ab;
+  --grid-minor: rgb(184 66 58 / 0.07);
+  --grid-major: rgb(184 66 58 / 0.15);
+  /* Sprocket holes show whatever is behind the paper. */
+  --hole: #d6bf86;
+
+  position: relative;
+  color: var(--ink);
+  background:
+    repeating-linear-gradient(to bottom, var(--grid-major) 0 1px, transparent 1px 40px),
+    repeating-linear-gradient(to right, var(--grid-major) 0 1px, transparent 1px 40px),
+    repeating-linear-gradient(to bottom, var(--grid-minor) 0 1px, transparent 1px 8px),
+    repeating-linear-gradient(to right, var(--grid-minor) 0 1px, transparent 1px 8px), var(--paper);
+  /* The bottom edge is torn off the roll. */
+  mask: conic-gradient(from -45deg at bottom, #0000, #000 1deg 89deg, #0000 90deg) 50% / 14px 100%;
+}
+
+/* Dimmer paper so it doesn't glare against the dark terminal. */
+.dark .polygraph-paper {
+  --paper: #e3ddcc;
+  --grid-minor: rgb(184 66 58 / 0.09);
+  --hole: var(--ui-bg);
+}
+
+.polygraph-paper::before,
+.polygraph-paper::after {
+  content: "";
+  position: absolute;
+  inset-block: 0;
+  width: 14px;
+  background: radial-gradient(circle, var(--hole) 3.5px, transparent 4px) 50% 10px / 14px 28px
+    repeat-y;
+  pointer-events: none;
+}
+
+.polygraph-paper::before {
+  left: 2px;
+}
+
+.polygraph-paper::after {
+  right: 2px;
+}
+
 @theme {
   --font-sans: "Monda", sans-serif;
   --font-name: "Tourney", sans-serif;

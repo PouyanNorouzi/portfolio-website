@@ -19,19 +19,7 @@ declare interface Skill {
 
 // Skill categories
 declare type SkillName =
-  | "Software Development"
-  | "Web Technologies"
-  | "Systems"
-  | "Data"
-  | "Cloud & DevOps";
-
-// Category definition with styling properties
-declare interface SkillCategory {
-  id: number;
-  name: SkillName;
-  icon: string;
-  color: string;
-}
+  "Software Development" | "Web Technologies" | "Systems" | "Data" | "Cloud & DevOps";
 
 // Enhanced skill definition with network-focused properties
 declare interface EnhancedSkill extends Skill {
@@ -42,6 +30,38 @@ declare interface EnhancedSkill extends Skill {
   description?: string; // Optional: brief description of your experience with this skill
   color?: string; // optional color for the skill
 }
+
+// Polygraph examination (the About page script)
+declare type PolygraphVerdict = "TRUTHFUL" | "PROBABLE" | "INCONCLUSIVE" | "DECEPTIVE";
+
+// A claim the needles react to. Without an explicit verdict it is derived from the skill's
+// proficiency. `label` names a claim that is not a skill (e.g. a joke).
+declare interface PolygraphClaim {
+  skill?: EnhancedSkill;
+  label?: string;
+  verdict?: PolygraphVerdict;
+}
+
+declare interface PolygraphExchange {
+  question: string;
+  answer: string;
+  claims?: PolygraphClaim[];
+  // A project the answer refers to, linked beside it.
+  exhibit?: Project;
+  // Sweeps a highlighter over the answer.
+  highlight?: boolean;
+}
+
+declare interface PolygraphRapidItem {
+  skill: EnhancedSkill;
+  // Defaults to "Yes." or "Some." depending on the verdict.
+  answer?: string;
+  verdict?: PolygraphVerdict;
+}
+
+declare type PolygraphRound =
+  | { kind: "exchanges"; title: string; exchanges: PolygraphExchange[] }
+  | { kind: "rapid-fire"; title: string; intro: string; items: PolygraphRapidItem[] };
 
 // Base network node properties shared by all node types
 declare interface BaseNetworkNode {
