@@ -3,7 +3,14 @@ import type { TraceSpike } from "~/utils/polygraphTrace";
 
 // One row of the chart: its stretch of pen trace in the margin, and the printed content beside it.
 // Every row shares the margin width so the trace segments join into continuous pens.
-defineProps<{
+// `start` defaults to undefined rather than Vue's false for an absent boolean, so rows that don't
+// take over the timing still let the trace draw when it scrolls into view.
+const {
+  seed,
+  spikes = undefined,
+  start = undefined,
+  duration = undefined,
+} = defineProps<{
   seed: number;
   spikes?: TraceSpike[];
   // Hand the trace's draw timing to the row (see Trace.vue).

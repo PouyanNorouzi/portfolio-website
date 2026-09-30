@@ -41,10 +41,15 @@ const revealed = computed(() => claims.value.length + (exhibitLink.value ? 1 : 0
 // Takes its turn in the page's reveal queue; the next row waits for the claims to land too.
 // A row the reader has already scrolled away from by its turn just fills in.
 const queue = useRevealQueue();
+// Set when the row filled in at once because the reader had already scrolled past it.
+const filledIn = ref(false);
 watch(isVisible, (visible) => {
   if (!visible) return;
   queue.enqueue(async () => {
-    if (!isOnScreen(element.value)) return skip();
+    if (!isOnScreen(element.value)) {
+      filledIn.value = true;
+      return skip();
+    }
     await start();
     if (!queue.skipped.value && !prefersReducedMotion()) {
       await wait(revealed.value * CLAIM_STAGGER_MS);
@@ -54,7 +59,9 @@ watch(isVisible, (visible) => {
 watch(queue.skipped, (skipped) => skipped && skip(), { immediate: true });
 
 const traceDuration = computed(() =>
-  queue.skipped.value ? SKIPPED_TRACE_MS : duration.value + revealed.value * CLAIM_STAGGER_MS
+  queue.skipped.value || filledIn.value
+    ? SKIPPED_TRACE_MS
+    : duration.value + revealed.value * CLAIM_STAGGER_MS
 );
 
 // The needles spike level with each claim. Until the row is measured they sit evenly

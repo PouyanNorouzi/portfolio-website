@@ -37,10 +37,15 @@ const { typed, started, finished, active, duration, start, skip } = useTypewrite
 );
 
 const queue = useRevealQueue();
+// Set when the row filled in at once because the reader had already scrolled past it.
+const filledIn = ref(false);
 watch(isVisible, (visible) => {
   if (!visible) return;
   queue.enqueue(async () => {
-    if (!isOnScreen(element.value)) return skip();
+    if (!isOnScreen(element.value)) {
+      filledIn.value = true;
+      return skip();
+    }
     await start();
     if (!queue.skipped.value && !prefersReducedMotion()) {
       await wait(items.value.length * ITEM_STAGGER_MS);
@@ -50,7 +55,9 @@ watch(isVisible, (visible) => {
 watch(queue.skipped, (skipped) => skipped && skip(), { immediate: true });
 
 const traceDuration = computed(() =>
-  queue.skipped.value ? SKIPPED_TRACE_MS : duration.value + items.value.length * ITEM_STAGGER_MS
+  queue.skipped.value || filledIn.value
+    ? SKIPPED_TRACE_MS
+    : duration.value + items.value.length * ITEM_STAGGER_MS
 );
 const staggered = computed(() => finished.value && !queue.skipped.value);
 </script>
