@@ -4,299 +4,187 @@ import {
   RadialLinearScale,
   PointElement,
   LineElement,
+  Filler,
   Tooltip,
-  Legend,
   type ChartOptions,
   type ChartData,
 } from "chart.js";
 import { Radar } from "vue-chartjs";
 import { FEATURED_SKILLS } from "~/utils/constants/skills";
 import { CATEGORIES } from "~/utils/constants/categories";
-import { SkillBadge } from "#components";
+
+ChartJS.register(RadialLinearScale, PointElement, LineElement, Filler, Tooltip);
 
 const colorMode = useColorMode();
+const isDark = computed(() => colorMode.value === "dark");
 
-// Register Chart.js components
-ChartJS.register(RadialLinearScale, PointElement, LineElement, Tooltip, Legend);
+const groups = CATEGORIES.map((category) => ({
+  ...category,
+  skills: FEATURED_SKILLS.filter((skill) => skill.category === category.name).sort(
+    (a, b) => b.proficiency - a.proficiency
+  ),
+}));
 
-// Skills data
-const skillsData = ref<EnhancedSkill[]>(FEATURED_SKILLS);
-
-const skillCategories = ref<SkillCategory[]>(CATEGORIES);
-
-const softwareDevelopmentSkills = computed<EnhancedSkill[]>(() =>
-  skillsData.value.filter((s) => s.category === "Software Development")
-);
-
-const webSkills = computed<EnhancedSkill[]>(() =>
-  skillsData.value.filter((s) => s.category === "Web Technologies")
-);
-
-const systemsSkills = computed<EnhancedSkill[]>(() =>
-  skillsData.value.filter((s) => s.category === "Systems")
-);
-
-const dataSkills = computed<EnhancedSkill[]>(() =>
-  skillsData.value.filter((s) => s.category === "Data")
-);
-
-const cloudSkills = computed<EnhancedSkill[]>(() =>
-  skillsData.value.filter((s) => s.category === "Cloud & DevOps")
-);
-
-const skillMap: Record<SkillName, ComputedRef<EnhancedSkill[]>> = {
-  "Software Development": softwareDevelopmentSkills,
-  "Web Technologies": webSkills,
-  "Systems": systemsSkills,
-  "Data": dataSkills,
-  "Cloud & DevOps": cloudSkills,
-};
-
-// Determine the active category for displaying skills
 const activeCategory = ref<SkillName | "all">("all");
 
-const radarData = computed((): { data: number[]; labels: string[]; colors: string[] } => {
-  if (activeCategory.value === "all") {
-    const data = skillCategories.value.map(
-      (category) => calculateCategoryProficiency(category.name) * 100
-    );
-    const labels: string[] = skillCategories.value.map((category) => category.name);
-    const colors: string[] = skillCategories.value.map((category) => category.color);
+const visibleGroups = computed(() =>
+  activeCategory.value === "all"
+    ? groups
+    : groups.filter((group) => group.name === activeCategory.value)
+);
 
-    return { data, labels, colors };
+const radar = computed(() => {
+  const active = groups.find((group) => group.name === activeCategory.value);
+  if (!active) {
+    return {
+      labels: groups.map((group) => group.name),
+      values: groups.map(
+        (group) =>
+          (group.skills.reduce((sum, skill) => sum + skill.proficiency, 0) / group.skills.length) *
+          100
+      ),
+      colors: groups.map((group) => group.color),
+    };
   }
-  const data = skillMap[activeCategory.value].value.map((skill) => skill.proficiency * 100);
-  const labels: string[] = skillMap[activeCategory.value].value.map((skill) => skill.title);
-  const colors: string[] = skillMap[activeCategory.value].value.map(
-    (skill) => skill.color || "blue"
-  );
-
-  return { data, labels, colors };
-});
-
-// Helper function to calculate average proficiency for a category
-// should be moved later to utils when state manager is set up
-const calculateCategoryProficiency = (categorySkills: SkillName | "all"): number => {
-  if (categorySkills === "all") {
-    const sum = skillsData.value.reduce((acc, skill) => acc + (skill.proficiency || 0), 0);
-    return sum / skillsData.value.length;
-  }
-  const skills = skillMap[categorySkills].value;
-  const sum = skills.reduce((acc, skill) => acc + (skill.proficiency || 0), 0);
-  return sum / skills.length;
-};
-
-// Chart configuration
-const chartData = computed<ChartData<"radar">>(() => {
   return {
-    labels: radarData.value.labels,
-    datasets: [
-      {
-        label: "Skill Proficiency",
-        data: radarData.value.data,
-        backgroundColor: "rgba(54, 162, 235, 0.2)",
-        borderColor: "rgba(54, 162, 235, 1)",
-        pointBackgroundColor: radarData.value.colors,
-        pointRadius: 5,
-        pointHoverRadius: 7,
-        borderWidth: 2,
-      },
-    ],
+    labels: active.skills.map((skill) => skill.title),
+    values: active.skills.map((skill) => skill.proficiency * 100),
+    colors: active.skills.map((skill) => skill.color ?? active.color),
   };
 });
 
-// Dynamically check for dark mode
-const isDarkMode = computed(() => colorMode.value === "dark");
+// Chart.js draws on a canvas, so it can't read the theme tokens. These mirror them.
+const palette = computed(() =>
+  isDark.value
+    ? {
+        line: "#34d399",
+        fill: "rgba(52, 211, 153, 0.18)",
+        grid: "rgba(52, 211, 153, 0.22)",
+        text: "rgba(255, 255, 255, 0.72)",
+        tooltip: "rgba(0, 0, 0, 0.9)",
+        tooltipText: "rgba(255, 255, 255, 0.92)",
+      }
+    : {
+        line: "#047857",
+        fill: "rgba(4, 120, 87, 0.16)",
+        grid: "rgba(70, 50, 15, 0.25)",
+        text: "rgba(50, 35, 10, 0.8)",
+        tooltip: "#f2e7c9",
+        tooltipText: "rgba(50, 35, 10, 0.95)",
+      }
+);
 
-// Chart options
+const FONT = { family: "'Share Tech Mono', monospace", size: 12 };
+
+const chartData = computed<ChartData<"radar">>(() => ({
+  labels: radar.value.labels,
+  datasets: [
+    {
+      label: "Clearance",
+      data: radar.value.values,
+      fill: true,
+      backgroundColor: palette.value.fill,
+      borderColor: palette.value.line,
+      borderWidth: 2,
+      pointBackgroundColor: radar.value.colors,
+      pointBorderColor: palette.value.line,
+      pointRadius: 5,
+      pointHoverRadius: 7,
+    },
+  ],
+}));
+
 const chartOptions = computed<ChartOptions<"radar">>(() => ({
   responsive: true,
   maintainAspectRatio: false,
   scales: {
     r: {
-      angleLines: {
-        display: true,
-        color: isDarkMode.value ? "rgba(255, 255, 255, 0.2)" : "rgba(0, 0, 0, 0.1)",
-      },
-      grid: {
-        color: isDarkMode.value ? "rgba(255, 255, 255, 0.2)" : "rgba(0, 0, 0, 0.1)",
-      },
       suggestedMin: 0,
       suggestedMax: 100,
+      angleLines: { color: palette.value.grid },
+      grid: { color: palette.value.grid },
+      pointLabels: { color: palette.value.text, font: FONT },
       ticks: {
         stepSize: 20,
-        callback: (value) => {
-          return value + "%";
-        },
+        callback: (value) => `${value}%`,
         backdropColor: "transparent",
-        color: isDarkMode.value ? "rgba(255, 255, 255, 0.7)" : "rgba(0, 0, 0, 0.7)",
+        color: palette.value.text,
+        font: { ...FONT, size: 10 },
       },
     },
   },
   plugins: {
-    legend: {
-      display: false,
-    },
+    legend: { display: false },
     tooltip: {
-      callbacks: {
-        label: (context) => {
-          return `${context.dataset.label}: ${context.parsed.r.toFixed(1)}%`;
-        },
-      },
-      backgroundColor: isDarkMode.value ? "rgba(0, 0, 0, 0.8)" : "rgba(255, 255, 255, 0.8)",
-      titleColor: isDarkMode.value ? "rgba(255, 255, 255, 0.9)" : "rgba(0, 0, 0, 0.9)",
-      bodyColor: isDarkMode.value ? "rgba(255, 255, 255, 0.9)" : "rgba(0, 0, 0, 0.9)",
-      borderColor: isDarkMode.value ? "rgba(255, 255, 255, 0.2)" : "rgba(0, 0, 0, 0.2)",
+      backgroundColor: palette.value.tooltip,
+      titleColor: palette.value.tooltipText,
+      bodyColor: palette.value.tooltipText,
+      borderColor: palette.value.grid,
       borderWidth: 1,
+      titleFont: FONT,
+      bodyFont: FONT,
+      callbacks: {
+        label: (context) => `CLEARANCE ${context.parsed.r.toFixed(0)}%`,
+      },
     },
   },
 }));
 </script>
 
 <template>
-  <section class="skills-section mb-16">
-    <h2 class="text-3xl font-bold mb-6 text-center">Skills & Expertise</h2>
+  <div class="flex flex-col gap-6">
+    <p class="leading-relaxed text-pretty">
+      Full inventory of equipment the subject is cleared to operate. Filter by discipline to see
+      the shape of each.
+    </p>
 
-    <div class="grid md:grid-cols-5 gap-6">
-      <!-- Left Side: Skill Categories -->
-      <div class="md:col-span-2 skill-categories animate-fade-in-delay-1">
-        <UCard class="h-full">
-          <template #header>
-            <div class="flex items-center">
-              <UIcon name="i-lucide-sparkles" class="mr-2 text-primary" />
-              <h3 class="text-xl font-semibold">Skill Areas</h3>
-            </div>
-          </template>
+    <div class="flex flex-wrap gap-2" role="group" aria-label="Filter equipment by discipline">
+      <UButton
+        size="sm"
+        class="font-mono tracking-widest"
+        :variant="activeCategory === 'all' ? 'solid' : 'outline'"
+        :aria-pressed="activeCategory === 'all'"
+        @click="activeCategory = 'all'">
+        ALL · {{ FEATURED_SKILLS.length }}
+      </UButton>
+      <UButton
+        v-for="group in groups"
+        :key="group.name"
+        size="sm"
+        class="font-mono tracking-widest uppercase"
+        :variant="activeCategory === group.name ? 'solid' : 'outline'"
+        :aria-pressed="activeCategory === group.name"
+        :icon="group.icon"
+        @click="activeCategory = group.name">
+        {{ group.name }} · {{ group.skills.length }}
+      </UButton>
+    </div>
 
-          <div class="space-y-4">
-            <UButton
-              variant="ghost"
-              :color="activeCategory === 'all' ? 'primary' : 'secondary'"
-              block
-              @click="
-                () => {
-                  activeCategory = 'all';
-                }
-              ">
-              <template #leading>
-                <UIcon name="i-lucide-layers" />
-              </template>
-              All Skills
-            </UButton>
-
-            <UButton
-              v-for="category in skillCategories"
-              :key="category.name"
-              variant="ghost"
-              :color="activeCategory === category.name ? 'primary' : 'secondary'"
-              block
-              @click="
-                () => {
-                  activeCategory = category.name;
-                }
-              ">
-              <template #leading>
-                <UIcon :name="category.icon" :style="`color: ${category.color}`" />
-              </template>
-              {{ category.name }}
-              <UBadge
-                :label="skillMap[category.name].value.length.toString()"
-                size="xs"
-                variant="subtle"
-                class="ml-2" />
-            </UButton>
-          </div>
-        </UCard>
+    <UCard :ui="{ header: 'py-2.5' }">
+      <template #header>
+        <CaseFileLabel>
+          // {{ activeCategory === "all" ? "CLEARANCE BY DISCIPLINE" : `CLEARANCE · ${activeCategory}` }}
+        </CaseFileLabel>
+      </template>
+      <div class="h-80">
+        <Radar :data="chartData" :options="chartOptions" />
       </div>
+    </UCard>
 
-      <!-- Right Side: Radar Chart -->
-      <div class="md:col-span-3 chart-container animate-fade-in-delay-2">
-        <UCard class="h-full">
-          <template #header>
-            <div class="flex items-center">
-              <UIcon name="i-lucide-bar-chart-3" class="mr-2 text-primary" />
-              <h3 class="text-xl font-semibold">Skill Proficiency</h3>
-            </div>
-          </template>
-
-          <div class="chart-wrapper h-80">
-            <Radar :data="chartData" :options="chartOptions" />
-          </div>
-        </UCard>
+    <div v-for="group in visibleGroups" :key="group.name" class="flex flex-col gap-3">
+      <h3 class="flex items-center gap-2 border-b border-dashed border-default pb-2">
+        <UIcon :name="group.icon" class="size-5" :style="{ color: group.color }" />
+        <span class="font-name text-lg font-bold tracking-widest uppercase">{{ group.name }}</span>
+        <CaseFileLabel class="ml-auto">{{ group.skills.length }} ITEMS</CaseFileLabel>
+      </h3>
+      <div class="grid gap-x-8 gap-y-4 sm:grid-cols-2">
+        <AboutSkillRow v-for="skill in group.skills" :key="skill.id" :skill="skill" />
       </div>
     </div>
 
-    <!-- Skill Badges Section -->
-    <div class="mt-8 animate-fade-in-delay-3">
-      <UCard>
-        <template #header>
-          <div class="flex items-center justify-between">
-            <div class="flex items-center">
-              <UIcon name="i-lucide-list-checks" class="mr-2 text-primary" />
-              <h3 class="text-xl font-semibold">
-                {{ activeCategory === "all" ? "All Skills" : activeCategory + " Skills" }}
-              </h3>
-            </div>
-            <UBadge
-              v-if="activeCategory === 'all'"
-              :label="`${skillsData.length} Skills`"
-              variant="subtle" />
-          </div>
-        </template>
-        <!-- Display skill tags grouped by categories when 'all' is selected -->
-        <div v-if="activeCategory === 'all'">
-          <div v-for="category in skillCategories" :key="category.name" class="mb-6">
-            <h4 class="text-lg font-medium mb-2 flex items-center">
-              <UIcon :name="category.icon" class="mr-2" :style="`color: ${category.color}`" />
-              {{ category.name }}
-            </h4>
-            <div class="flex flex-wrap gap-2">
-              <SkillBadge
-                v-for="skill in skillMap[category.name].value"
-                :key="skill.title"
-                :label="skill.title"
-                :skill="skill" />
-            </div>
-          </div>
-        </div>
-
-        <!-- Display filtered skills when a specific category is selected -->
-        <div v-else class="flex flex-wrap gap-2">
-          <SkillBadge
-            v-for="skill in skillMap[activeCategory].value"
-            :key="skill.title"
-            :skill="skill" />
-        </div>
-      </UCard>
-    </div>
-  </section>
+    <CaseFileLabel class="border-t border-dashed border-default pt-3.5">
+      // EQUIPMENT IN THE FIELD:
+      <ULink to="/projects" class="text-primary">OPERATIONS ON RECORD</ULink>
+    </CaseFileLabel>
+  </div>
 </template>
-
-<style scoped>
-.chart-wrapper {
-  position: relative;
-}
-
-.animate-fade-in-delay-1 {
-  animation: fadeIn 0.8s ease-out 0.2s both;
-}
-
-.animate-fade-in-delay-2 {
-  animation: fadeIn 0.8s ease-out 0.4s both;
-}
-
-.animate-fade-in-delay-3 {
-  animation: fadeIn 0.8s ease-out 0.6s both;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-</style>

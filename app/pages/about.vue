@@ -1,128 +1,73 @@
 <script setup lang="ts">
 import { EDUCATION, EXPERIENCE, formatCareerPeriod } from "~/utils/constants/career";
+import { ABOUT_SECTIONS } from "~/utils/constants/about";
+import { CASE_FILE_ID } from "~/utils/constants/case-file";
 
 usePageSeo({
   title: "Pouyan - About",
   description:
-    "About Pouyan Norouzi: education at BCIT, work experience and background.",
+    "About Pouyan Norouzi: education at BCIT, work experience, skills and background.",
 });
 
 definePageMeta({
   middleware: ["transition"],
 });
 
-const education = EDUCATION.map((edu) => ({ ...edu, period: formatCareerPeriod(edu) }));
+const [interview, training, employment, equipment, notes, contact] = ABOUT_SECTIONS as [
+  CaseFileSection,
+  CaseFileSection,
+  CaseFileSection,
+  CaseFileSection,
+  CaseFileSection,
+  CaseFileSection,
+];
 
+const STAMP_STAGGER_S = 0.25;
+
+const education = EDUCATION.map((edu) => ({ ...edu, period: formatCareerPeriod(edu) }));
 const experience = EXPERIENCE.map((exp) => ({ ...exp, period: formatCareerPeriod(exp) }));
 </script>
 
 <template>
-  <div>
-    <PageHeader>About Me</PageHeader>
-    <!-- Hero Section with Card Showcase -->
-    <AboutHero class="pb-8 md:pb-12 pt-1" />
+  <UContainer>
+    <PageHeader :label="`CASE FILE ${CASE_FILE_ID} · PERSONNEL RECORD`">About the Subject</PageHeader>
+    <div class="mx-auto flex w-full max-w-4xl flex-col gap-12 pb-12">
+      <CaseFileSection :section="interview">
+        <AboutProfile />
+        <AboutInterview />
+      </CaseFileSection>
 
-    <UContainer class="pb-8">
-      <!-- Skills Section -->
-      <AboutSkills />
+      <CaseFileSection :section="training">
+        <AboutVerifiedRow
+          v-for="edu in education"
+          :key="edu.institution"
+          :title="edu.institution"
+          :subtitle="edu.degree"
+          :period="edu.period"
+          :location="edu.location"
+          stamp="GRADUATED" />
+      </CaseFileSection>
 
-      <!-- Education Section -->
-      <section class="mb-8 animate-fade-in-delay-2">
-        <h2 class="text-3xl font-bold mb-6 text-center">Education</h2>
+      <CaseFileSection :section="employment">
+        <AboutVerifiedRow
+          v-for="(exp, index) in experience"
+          :key="exp.company"
+          :title="`${exp.position} @ ${exp.company}`"
+          :period="exp.period"
+          :location="exp.location"
+          :description="exp.description"
+          :stamp-delay="0.2 + index * STAMP_STAGGER_S" />
+      </CaseFileSection>
 
-        <div class="space-y-6">
-          <div
-            v-for="(edu, index) in education"
-            :key="index"
-            class="bg-gray-50 dark:bg-gray-800 rounded-lg p-6 shadow-sm">
-            <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-2">
-              <h3 class="text-xl font-bold text-primary">{{ edu.institution }}</h3>
-              <UBadge :label="edu.period" variant="soft" />
-            </div>
-            <p class="font-medium mb-1">{{ edu.degree }}</p>
-            <p class="text-sm text-dimmed">{{ edu.location }}</p>
-          </div>
-        </div>
-      </section>
+      <CaseFileSection :section="equipment">
+        <AboutSkills />
+      </CaseFileSection>
 
-      <!-- Experience Section -->
-      <section class="mb-8 animate-fade-in-delay-3">
-        <h2 class="text-3xl font-bold mb-6 text-center">Experience</h2>
+      <CaseFileNotes :section="notes" />
 
-        <div class="space-y-6">
-          <div
-            v-for="(exp, index) in experience"
-            :key="index"
-            class="bg-gray-50 dark:bg-gray-800 rounded-lg p-6 shadow-sm">
-            <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-2">
-              <h3 class="text-xl font-bold">
-                {{ exp.position }} <span class="text-primary">@ {{ exp.company }}</span>
-              </h3>
-              <UBadge :label="exp.period" variant="soft" />
-            </div>
-            <p class="text-sm text-dimmed mb-2">{{ exp.location }}</p>
-            <p>{{ exp.description }}</p>
-          </div>
-        </div>
-      </section>
+      <CaseFileContact :section="contact" />
 
-      <!-- Projects Section with redirect -->
-      <section class="mb-8 animate-fade-in-delay-4">
-        <div class="text-center">
-          <h2 class="text-3xl font-bold mb-4">My Projects</h2>
-          <p class="mb-8 max-w-2xl mx-auto">
-            Check out my portfolio of projects, including web applications, academic work, and
-            personal passion projects.
-          </p>
-
-          <UButton to="/projects" size="lg" icon="i-lucide-folder" color="primary">
-            View All Projects
-          </UButton>
-        </div>
-      </section>
-
-      <!-- Contact & Resume Section -->
-      <section
-        class="text-center animate-fade-in-delay-5 bg-gray-50 dark:bg-gray-800 p-8 rounded-lg">
-        <AboutResume />
-      </section>
-    </UContainer>
-  </div>
+      <CaseFileSignoff />
+    </div>
+  </UContainer>
 </template>
-
-<style scoped>
-.animate-fade-in {
-  animation: fadeIn 0.8s ease-out;
-}
-
-.animate-fade-in-delay-1 {
-  animation: fadeIn 0.8s ease-out 0.2s both;
-}
-
-.animate-fade-in-delay-2 {
-  animation: fadeIn 0.8s ease-out 0.4s both;
-}
-
-.animate-fade-in-delay-3 {
-  animation: fadeIn 0.8s ease-out 0.6s both;
-}
-
-.animate-fade-in-delay-4 {
-  animation: fadeIn 0.8s ease-out 0.8s both;
-}
-
-.animate-fade-in-delay-5 {
-  animation: fadeIn 0.8s ease-out 1s both;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-</style>
