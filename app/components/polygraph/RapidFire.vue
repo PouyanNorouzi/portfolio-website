@@ -23,17 +23,56 @@ const spikes = computed<TraceSpike[]>(() =>
     verdict,
   }))
 );
+
+// The intro types out, then the questions fire in quick succession while the pens keep pace.
+const INTRO_MS_PER_CHAR = 6;
+const ITEM_STAGGER_MS = 25;
+const SKIPPED_TRACE_MS = 300;
+
+const { element, isVisible } = useInView({ rootMargin: "0px 0px -15% 0px" });
+const { typed, started, finished, active, duration, start, skip } = useTypewriter(
+  () => [props.round.intro],
+  [INTRO_MS_PER_CHAR],
+  0
+);
+
+const queue = useRevealQueue();
+watch(isVisible, (visible) => {
+  if (!visible) return;
+  queue.enqueue(async () => {
+    if (!isOnScreen(element.value)) return skip();
+    await start();
+    if (!queue.skipped.value && !prefersReducedMotion()) {
+      await wait(items.value.length * ITEM_STAGGER_MS);
+    }
+  });
+});
+watch(queue.skipped, (skipped) => skipped && skip(), { immediate: true });
+
+const traceDuration = computed(() =>
+  queue.skipped.value ? SKIPPED_TRACE_MS : duration.value + items.value.length * ITEM_STAGGER_MS
+);
+const staggered = computed(() => finished.value && !queue.skipped.value);
 </script>
 
 <template>
-  <PolygraphRow :seed="seed" :spikes="spikes">
+  <PolygraphRow
+    ref="transitionElement"
+    :seed="seed"
+    :spikes="spikes"
+    :start="started"
+    :duration="traceDuration">
     <div class="flex flex-col gap-3 py-3 pr-1 pl-2 sm:pr-4 sm:pl-5">
-      <PolygraphLine speaker="EXAMINER" :time="time">{{ round.intro }}</PolygraphLine>
+      <PolygraphLine speaker="EXAMINER" :time="time">
+        <PolygraphTyped :text="round.intro" :typed="typed[0] ?? 0" :caret="active === 0" />
+      </PolygraphLine>
       <ul class="grid grid-cols-1 gap-x-8 gap-y-1.5 sm:grid-cols-2">
         <li
-          v-for="{ item, answer, verdict } in items"
+          v-for="({ item, answer, verdict }, index) in items"
           :key="item.skill.id"
-          class="flex items-center gap-2">
+          class="flex items-center gap-2 transition-opacity duration-200 motion-reduce:transition-none"
+          :class="finished ? '' : 'motion-safe:opacity-0'"
+          :style="{ transitionDelay: staggered ? `${index * ITEM_STAGGER_MS}ms` : '0ms' }">
           <UIcon :name="paperIcon(item.skill)" class="size-4 shrink-0" />
           <span class="font-mono text-sm whitespace-nowrap">{{ item.skill.title }}?</span>
           <span

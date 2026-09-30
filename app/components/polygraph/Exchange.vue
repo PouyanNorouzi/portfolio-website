@@ -21,14 +21,49 @@ const exhibitLink = computed(() => {
   return project ? (project.liveDemo ?? project.github ?? "/projects") : undefined;
 });
 
+// Once the row scrolls in, the question and answer type out, then the claims and verdicts are
+// written in one by one. The pens draw down the row over the same stretch of time.
+const QUESTION_MS_PER_CHAR = 6;
+const ANSWER_MS_PER_CHAR = 9;
+const GAP_MS = 150;
+const CLAIM_STAGGER_MS = 90;
+// How long the pens take to catch up once the reveal is skipped.
+const SKIPPED_TRACE_MS = 300;
+
+const { element, isVisible } = useInView({ rootMargin: "0px 0px -15% 0px" });
+const { typed, started, finished, active, duration, start, skip } = useTypewriter(
+  () => [props.exchange.question, props.exchange.answer],
+  [QUESTION_MS_PER_CHAR, ANSWER_MS_PER_CHAR],
+  GAP_MS
+);
+const revealed = computed(() => claims.value.length + (exhibitLink.value ? 1 : 0));
+
+// Takes its turn in the page's reveal queue; the next row waits for the claims to land too.
+// A row the reader has already scrolled away from by its turn just fills in.
+const queue = useRevealQueue();
+watch(isVisible, (visible) => {
+  if (!visible) return;
+  queue.enqueue(async () => {
+    if (!isOnScreen(element.value)) return skip();
+    await start();
+    if (!queue.skipped.value && !prefersReducedMotion()) {
+      await wait(revealed.value * CLAIM_STAGGER_MS);
+    }
+  });
+});
+watch(queue.skipped, (skipped) => skipped && skip(), { immediate: true });
+
+const traceDuration = computed(() =>
+  queue.skipped.value ? SKIPPED_TRACE_MS : duration.value + revealed.value * CLAIM_STAGGER_MS
+);
+
 // The needles spike level with each claim. Until the row is measured they sit evenly
 // through the lower part of the row.
-const row = useTemplateRef<ComponentPublicInstance>("row");
 const claimElements: HTMLElement[] = [];
 const offsets = ref<number[]>([]);
 
 function measure() {
-  const height = (row.value?.$el as HTMLElement | undefined)?.offsetHeight;
+  const height = element.value?.offsetHeight;
   if (!height) return;
   offsets.value = claimElements.map((el) => (el.offsetTop + el.offsetHeight / 2) / height);
 }
@@ -37,7 +72,7 @@ let observer: ResizeObserver | undefined;
 onMounted(() => {
   measure();
   observer = new ResizeObserver(measure);
-  if (row.value) observer.observe(row.value.$el);
+  if (element.value) observer.observe(element.value);
 });
 onBeforeUnmount(() => observer?.disconnect());
 
@@ -47,15 +82,33 @@ const spikes = computed<TraceSpike[]>(() =>
     verdict,
   }))
 );
+
+function revealStyle(index: number) {
+  const staggered = finished.value && !queue.skipped.value;
+  return { transitionDelay: staggered ? `${index * CLAIM_STAGGER_MS}ms` : "0ms" };
+}
 </script>
 
 <template>
-  <PolygraphRow ref="row" :seed="seed" :spikes="spikes">
+  <PolygraphRow
+    ref="transitionElement"
+    :seed="seed"
+    :spikes="spikes"
+    :start="started"
+    :duration="traceDuration">
     <div class="flex flex-col gap-2 py-3 pr-1 pl-2 leading-relaxed sm:pr-4 sm:pl-5">
-      <PolygraphLine speaker="EXAMINER" :time="time">{{ exchange.question }}</PolygraphLine>
+      <PolygraphLine speaker="EXAMINER" :time="time">
+        <PolygraphTyped :text="exchange.question" :typed="typed[0] ?? 0" :caret="active === 0" />
+      </PolygraphLine>
       <PolygraphLine speaker="SUBJECT">
-        <CaseFileHighlight v-if="exchange.highlight">{{ exchange.answer }}</CaseFileHighlight>
-        <template v-else>{{ exchange.answer }}</template>
+        <CaseFileHighlight v-if="exchange.highlight" :start="finished">
+          <PolygraphTyped :text="exchange.answer" :typed="typed[1] ?? 0" :caret="active === 1" />
+        </CaseFileHighlight>
+        <PolygraphTyped
+          v-else
+          :text="exchange.answer"
+          :typed="typed[1] ?? 0"
+          :caret="active === 1" />
       </PolygraphLine>
 
       <ul
@@ -65,7 +118,9 @@ const spikes = computed<TraceSpike[]>(() =>
           v-for="({ claim, label, verdict }, index) in claims"
           :key="label"
           :ref="(el) => (claimElements[index] = el as HTMLElement)"
-          class="flex items-center gap-2">
+          class="flex items-center gap-2 transition-opacity duration-300 motion-reduce:transition-none"
+          :class="finished ? '' : 'motion-safe:opacity-0'"
+          :style="revealStyle(index)">
           <UIcon v-if="claim.skill" :name="paperIcon(claim.skill)" class="size-4 shrink-0" />
           <span class="font-mono text-sm tracking-wider whitespace-nowrap uppercase">
             {{ label }}
@@ -75,7 +130,11 @@ const spikes = computed<TraceSpike[]>(() =>
             class="flex-1 border-b-2 border-dotted border-(--ink-faint) sm:min-w-4" />
           <PolygraphVerdict :verdict="verdict" />
         </li>
-        <li v-if="exchange.exhibit && exhibitLink">
+        <li
+          v-if="exchange.exhibit && exhibitLink"
+          class="transition-opacity duration-300 motion-reduce:transition-none"
+          :class="finished ? '' : 'motion-safe:opacity-0'"
+          :style="revealStyle(claims.length)">
           <ULink
             :to="exhibitLink"
             :target="exhibitLink.startsWith('http') ? '_blank' : undefined"

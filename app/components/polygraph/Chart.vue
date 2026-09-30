@@ -32,6 +32,17 @@ const PENS = [
   { label: "GSR", color: "var(--pen-gsr)" },
 ];
 
+// Rows print one at a time; while anything is printing the reader can skip ahead, from the
+// floating button or with Escape.
+const queue = provideRevealQueue();
+const canSkip = computed(() => queue.busy.value && !queue.skipped.value);
+
+function onKeydown(event: KeyboardEvent) {
+  if (event.key === "Escape" && canSkip.value) queue.skip();
+}
+onMounted(() => window.addEventListener("keydown", onKeydown));
+onBeforeUnmount(() => window.removeEventListener("keydown", onKeydown));
+
 const dates = useCaseFileDates();
 const fields = computed(() => [
   { label: "SUBJECT", value: "Pouyan Norouzi" },
@@ -44,6 +55,26 @@ const contactSection = CASE_FILE_SECTIONS.find((section) => section.tocLabel ===
 
 <template>
   <div class="flex flex-col items-center gap-6">
+    <Transition
+      enter-from-class="translate-y-4 opacity-0"
+      leave-to-class="translate-y-4 opacity-0"
+      enter-active-class="transition duration-300 motion-reduce:transition-none"
+      leave-active-class="transition duration-300 motion-reduce:transition-none">
+      <div
+        v-if="canSkip"
+        class="pointer-events-none fixed inset-x-0 bottom-6 z-40 flex justify-center">
+        <UButton
+          color="neutral"
+          variant="solid"
+          icon="i-lucide-fast-forward"
+          class="pointer-events-auto font-mono tracking-widest shadow-lg"
+          @click="queue.skip()">
+          SKIP PRINTOUT
+          <UKbd value="Esc" class="ml-1" />
+        </UButton>
+      </div>
+    </Transition>
+
     <div class="w-full drop-shadow-[0_10px_18px_rgb(0_0_0/0.3)]">
       <article class="polygraph-paper px-5 pt-6 pb-10 sm:px-9">
         <header class="relative flex flex-col gap-5 pb-6">

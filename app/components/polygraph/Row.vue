@@ -6,13 +6,16 @@ import type { TraceSpike } from "~/utils/polygraphTrace";
 defineProps<{
   seed: number;
   spikes?: TraceSpike[];
+  // Hand the trace's draw timing to the row (see Trace.vue).
+  start?: boolean;
+  duration?: number;
 }>();
 </script>
 
 <template>
   <div class="relative grid grid-cols-[2.25rem_minmax(0,1fr)] sm:grid-cols-[5rem_minmax(0,1fr)]">
     <div class="relative">
-      <PolygraphTrace :seed="seed" :spikes="spikes" />
+      <PolygraphTrace :seed="seed" :spikes="spikes" :start="start" :duration="duration" />
     </div>
     <slot />
   </div>
