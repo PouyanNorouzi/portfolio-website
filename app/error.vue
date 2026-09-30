@@ -26,6 +26,7 @@ function returnToCaseFile() {
 
 <template>
   <UApp>
+    <AppAtmosphere />
     <UContainer class="flex min-h-screen flex-col">
       <AppHeader />
       <main class="flex grow items-center justify-center py-10">

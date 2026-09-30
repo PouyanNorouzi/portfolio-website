@@ -40,6 +40,7 @@ const lineClass: Record<TerminalLine["kind"], string> = {
 
 function close() {
   clearTimeout(timer);
+  window.removeEventListener("keydown", close);
   booting.value = false;
   try {
     sessionStorage.setItem(BOOTED_KEY, "1");
@@ -78,10 +79,6 @@ function typeLine(index: number) {
   timer = setTimeout(step, TYPE_DELAY_MS);
 }
 
-function onKeydown() {
-  close();
-}
-
 onMounted(() => {
   if (!booting.value) return;
   if (
@@ -91,7 +88,7 @@ onMounted(() => {
     close();
     return;
   }
-  window.addEventListener("keydown", onKeydown);
+  window.addEventListener("keydown", close);
   typeLine(0);
 });
 
@@ -118,7 +115,7 @@ useHead({
 
 onBeforeUnmount(() => {
   clearTimeout(timer);
-  window.removeEventListener("keydown", onKeydown);
+  window.removeEventListener("keydown", close);
 });
 </script>
 

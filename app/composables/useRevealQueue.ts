@@ -22,7 +22,11 @@ export function provideRevealQueue(): RevealQueue {
   const queue: RevealQueue = {
     enqueue(run) {
       pending.value++;
-      tail = tail.then(run).finally(() => pending.value--);
+      // A reveal that fails must not stop the ones queued behind it.
+      tail = tail
+        .then(run)
+        .catch(() => {})
+        .finally(() => pending.value--);
     },
     busy: computed(() => pending.value > 0),
     skipped: readonly(skipped),
