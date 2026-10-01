@@ -69,7 +69,7 @@ onBeforeUnmount(() => {
     <UContainer>
       <div
         class="flex items-center justify-between gap-3 border-b-4 border-double border-default transition-[padding] duration-300 motion-reduce:transition-none"
-        :class="isScrolled ? 'py-1.5' : 'py-2.5'">
+        :class="isScrolled ? 'py-0.5 md:py-1.5' : 'py-0.5 md:py-2.5'">
         <!-- Logo: a small rubber stamp with the file number -->
         <NuxtLink
           to="/"
@@ -78,22 +78,28 @@ onBeforeUnmount(() => {
           {{ CASE_FILE_ID }}
         </NuxtLink>
 
-        <nav aria-label="Main" class="flex min-w-0 flex-1 justify-center gap-1 sm:gap-3 lg:gap-5">
+        <!-- On mobile each tab is two lines, the number over a short name, and the tabs share
+             the row so each one is a full-height tap target. From md up it's one line. -->
+        <nav
+          aria-label="Main"
+          class="flex min-w-0 flex-1 justify-center gap-0.5 sm:gap-3 md:gap-3 lg:gap-5">
           <NuxtLink
             v-for="(page, index) in NAV_PAGES"
             :key="page.path"
             :to="page.path"
             :aria-current="index === activeIndex ? 'page' : undefined"
             :aria-label="page.label"
-            class="flex items-baseline gap-1 border-b-2 px-1 py-1 font-mono text-xs tracking-widest whitespace-nowrap uppercase transition-colors hover:text-primary sm:text-sm"
+            class="flex min-h-11 min-w-0 flex-1 flex-col items-center justify-center border-b-2 px-0.5 font-mono text-[0.65rem] leading-tight tracking-normal whitespace-nowrap uppercase max-[359px]:text-[0.6rem] sm:tracking-wider transition-colors hover:text-primary sm:text-xs md:min-h-0 md:flex-none md:flex-row md:items-baseline md:gap-1 md:px-1 md:py-1 md:text-sm md:tracking-widest"
             :class="
               index === activeIndex
                 ? 'border-primary text-highlighted'
                 : 'border-transparent text-muted'
             ">
-            <span class="text-primary">{{ page.number }}/</span>
-            <!-- On small screens only the active page shows its name. -->
-            <span :class="index === activeIndex ? 'inline' : 'hidden md:inline'">
+            <span class="text-primary"
+              >{{ page.number }}<span class="hidden md:inline">/</span></span
+            >
+            <span class="md:hidden">{{ page.short }}</span>
+            <span class="hidden md:inline">
               {{ index === activeIndex ? activeLabel.text.value : page.label }}
             </span>
           </NuxtLink>
@@ -104,17 +110,10 @@ onBeforeUnmount(() => {
             class="hidden items-center gap-4 font-mono text-xs tracking-widest transition-opacity duration-300 xl:flex"
             :class="{ 'pointer-events-none opacity-0': isScrolled }">
             <span class="text-muted">PG {{ pageNumber }}/{{ pageCount }}</span>
-            <Transition mode="out-in" enter-active-class="motion-safe:animate-reveal-in">
-              <span
-                v-if="declassified"
-                key="clearance"
-                class="flex items-center gap-1.5 text-error">
+            <Transition enter-active-class="motion-safe:animate-reveal-in">
+              <span v-if="declassified" class="flex items-center gap-1.5 text-error">
                 <UIcon name="i-lucide-lock-open" class="size-3.5" />
                 ELEVATED
-              </span>
-              <span v-else key="status" class="flex items-center gap-1.5 text-primary">
-                <span class="size-2 rounded-full bg-primary motion-safe:animate-pulse" />
-                OPEN TO WORK
               </span>
             </Transition>
           </div>
@@ -153,8 +152,9 @@ onBeforeUnmount(() => {
     </UContainer>
   </header>
 
-  <!-- Spacer to prevent content from hiding behind fixed header -->
+  <!-- Spacer to prevent content from hiding behind fixed header. The fallback heights match
+       the measured header (the root font size grows at 1400px), so nothing shifts on mount. -->
   <div
-    class="h-[70px] md:h-[76px]"
+    class="h-[78px] min-[1400px]:h-[86px]"
     :style="headerHeight ? { height: `${headerHeight}px` } : undefined" />
 </template>
