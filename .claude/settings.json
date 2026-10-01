@@ -1,0 +1,38 @@
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "f=$(jq -r '.tool_input.file_path // empty'); if echo \"$f\" | grep -qE '(^|/)(dist|\\.nuxt|\\.output|\\.data|playwright-report|test-results)/|(^|/)pnpm-lock\\.yaml$|(^|/)\\.env(\\.[^/]*)?$|(^|/)public/og-image\\.png$'; then echo \"Blocked: $f is generated (og-image.png is rendered from scripts/og-image.html), managed by pnpm, or an env file. Do not edit it by hand.\" >&2; exit 2; fi"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "f=$(jq -r '.tool_input.file_path // empty'); if echo \"$f\" | grep -qE '\\.(vue|ts|js|mjs|cjs)$'; then cd \"$CLAUDE_PROJECT_DIR\" && pnpm exec eslint --fix \"$f\" >&2 || exit 2; fi"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "i=$(cat); [ \"$(echo \"$i\" | jq -r '.stop_hook_active // false')\" = true ] && exit 0; cd \"$CLAUDE_PROJECT_DIR\" && git status --porcelain | grep -qE '\\.(vue|ts)$' || exit 0; out=$(pnpm typecheck 2>&1) || { echo \"$out\" | tail -40 >&2; exit 2; }",
+            "timeout": 300,
+            "statusMessage": "Type-checking..."
+          }
+        ]
+      }
+    ]
+  }
+}
