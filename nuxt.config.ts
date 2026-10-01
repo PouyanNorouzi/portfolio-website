@@ -19,6 +19,7 @@ export default defineNuxtConfig({
     "@nuxt/image",
     "@nuxt/ui",
     "@nuxt/content",
+    "@nuxt/test-utils/module",
   ],
 
   css: ["~/assets/css/main.css"],

@@ -14,7 +14,11 @@
     "preview": "nuxt preview",
     "lint": "eslint .",
     "typecheck": "nuxt typecheck",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare",
+    "test": "TZ=UTC vitest run",
+    "test:watch": "TZ=UTC vitest",
+    "test:e2e": "TZ=UTC NODE_OPTIONS=--max-old-space-size=4096 playwright test",
+    "test:e2e:ui": "TZ=UTC NODE_OPTIONS=--max-old-space-size=4096 playwright test --ui"
   },
   "dependencies": {
     "@nuxt/content": "^3.16.1",
@@ -41,6 +45,12 @@
     "@iconify-json/lucide": "^1.2.137",
     "@iconify-json/simple-icons": "^1.2.98",
     "@iconify-json/skill-icons": "^1.2.4",
+    "@nuxt/test-utils": "^4.3.2",
+    "@playwright/test": "^1.63.0",
+    "@vue/test-utils": "^2.5.1",
+    "happy-dom": "^20.14.5",
+    "playwright-core": "^1.63.0",
+    "vitest": "^5.0.2",
     "vue-tsc": "^3.3.11",
     "zod": "^4.6.5"
   }
