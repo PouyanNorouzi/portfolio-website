@@ -3,7 +3,9 @@
 // For `lines`, `hidden` is text of the same shape as the real content. It is never
 // visible; it only sizes each bar so every hidden line has its own realistic length.
 // `shown` is what that line reads once revealed.
-defineProps<{ lines?: { hidden: string; shown: string }[] }>();
+// `inLink` is for redactions inside a link (e.g. operation cards): a button can't sit inside a
+// link, so there it only peeks on mouse hover and is revealed by declassifying.
+const props = defineProps<{ lines?: CaseFileRedactedLine[]; inLink?: boolean }>();
 
 const declassified = useDeclassified();
 const origin = useDeclassifyOrigin();
@@ -33,27 +35,28 @@ onBeforeUnmount(() => clearTimeout(waveTimer));
 
 // Shared by both root variants. A mouse hover peeks, while click, tap, Enter and
 // Space pin it open. Touch is ignored for hover so a tap doesn't reveal then re-hide.
-const toggle = computed(() => ({
-  "role": "button",
-  "tabindex": 0,
-  "aria-pressed": revealed.value,
-  "onPointerenter": (event: PointerEvent) => {
+const hover = {
+  onPointerenter: (event: PointerEvent) => {
     if (event.pointerType === "mouse") hovered.value = true;
   },
-  "onPointerleave": () => (hovered.value = false),
-  // Redactions can sit inside links (e.g. operation cards), so a tap should only
-  // toggle the redaction and not follow the link.
-  "onClick": (event: MouseEvent) => {
-    event.preventDefault();
-    event.stopPropagation();
-    pinned.value = !pinned.value;
-  },
-  "onKeydown": (event: KeyboardEvent) => {
-    if (event.key !== "Enter" && event.key !== " ") return;
-    event.preventDefault();
-    pinned.value = !pinned.value;
-  },
-}));
+  onPointerleave: () => (hovered.value = false),
+};
+const toggle = computed(() =>
+  props.inLink
+    ? hover
+    : {
+        ...hover,
+        "role": "button",
+        "tabindex": 0,
+        "aria-pressed": revealed.value,
+        "onClick": () => (pinned.value = !pinned.value),
+        "onKeydown": (event: KeyboardEvent) => {
+          if (event.key !== "Enter" && event.key !== " ") return;
+          event.preventDefault();
+          pinned.value = !pinned.value;
+        },
+      }
+);
 </script>
 
 <template>

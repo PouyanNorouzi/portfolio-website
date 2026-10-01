@@ -3,7 +3,11 @@ import { CASE_FILE_SECTIONS } from "~/utils/constants/case-file";
 const RECENT_POST_COUNT = 3;
 
 const { data: posts } = await useAsyncData("home-case-file-posts", async () => {
-  const all = await queryCollection("blog").order("date", "DESC").all();
+  // Only what the list shows, so the post bodies stay out of the page payload.
+  const all = await queryCollection("blog")
+    .select("title", "description", "date", "to", "num", "pinned")
+    .order("date", "DESC")
+    .all();
   const pinned = all.filter((post) => post.pinned);
   const recent = all.filter((post) => !post.pinned);
   return [...recent.slice(0, RECENT_POST_COUNT), ...pinned];

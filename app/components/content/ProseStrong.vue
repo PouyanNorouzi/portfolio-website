@@ -1,3 +1,4 @@
+<!-- Keeps the <strong> element so assistive tech hears the emphasis, at the body text size. -->
 <template>
-  <span class="font-bold text-lg"><slot /></span>
+  <strong class="font-bold text-highlighted"><slot /></strong>
 </template>

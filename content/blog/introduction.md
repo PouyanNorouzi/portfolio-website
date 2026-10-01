@@ -14,7 +14,7 @@ I graduated from BCIT about 7 months ago and since then I have had nothing new t
 
 So what am I supposed to do then? Give up on trying to find a job until the market normalizes a bit? Well there is no way to know if it ever will.
 
-Should I just keep doing what I've been doing during the last half a year? As much as I like ramming my head into the same wall over and over I think something needs to change _somehow_. I need something [BIG]{.text-2xl .font-bold}, something [Fancy]{.font-fancy .font-bold .text-xl}, something that no recruiter can ever ignore.
+Should I just keep doing what I've been doing during the last half a year? As much as I like ramming my head into the same wall over and over I think something needs to change _somehow_. I need something [BIG]{.text-2xl .font-bold}, something [Fancy]{.font-fancy .text-xl}, something that no recruiter can ever ignore.
 
 After giving it a lot of thought I have come up with the perfect answer. I will create... _**A BLOG**_.
 

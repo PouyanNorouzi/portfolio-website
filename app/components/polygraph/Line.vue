@@ -8,7 +8,11 @@ defineProps<{
 
 <template>
   <p class="flex flex-wrap gap-x-3 sm:grid sm:grid-cols-[3rem_5.5rem_minmax(0,1fr)]">
-    <span class="font-mono text-sm text-(--ink-muted)">{{ time }}</span>
+    <!-- Without a time the cell stays as a grid column from sm up, but on mobile it would
+         still take a flex slot and indent the speaker, so it's hidden there. -->
+    <span class="font-mono text-sm text-(--ink-muted)" :class="{ 'hidden sm:block': !time }">
+      {{ time }}
+    </span>
     <span
       class="font-mono text-xs tracking-[0.2em] leading-6"
       :class="speaker === 'SUBJECT' ? 'text-(--pen-respiration)' : 'text-(--ink-muted)'">

@@ -31,7 +31,7 @@ watch(scanning, (active) => {
   }
   const start = performance.now();
   const tick = (now: number) => {
-    const t = Math.min((now - start) / MATCH_COUNT_MS, 1);
+    const t = Math.min(Math.max(0, (now - start) / MATCH_COUNT_MS), 1);
     match.value = MATCH_PERCENT * (1 - (1 - t) ** 3);
     if (t < 1) matchFrame = requestAnimationFrame(tick);
   };

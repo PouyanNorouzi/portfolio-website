@@ -44,7 +44,8 @@ import {
   SKILL_ZUSTAND,
 } from "~/utils/constants/skills";
 
-const SITE_URL = import.meta.env.NUXT_PUBLIC_SITE_URL || "https://pouyannorouzi.com";
+// This site in production. Its own project card links here, and recognizes the link.
+export const PORTFOLIO_URL = "https://pouyannorouzi.com";
 
 export const PROJECT_TEXTBOOK_HERO: Project = {
   id: 1,
@@ -180,7 +181,7 @@ export const PROJECT_PORTFOLIO_WEBSITE: Project = {
   tags: ["Personal Project", "UX/UI"],
   image: "/img/projects/portfolio.webp",
   github: "https://github.com/PouyanNorouzi/portfolio-website",
-  liveDemo: SITE_URL,
+  liveDemo: PORTFOLIO_URL,
 };
 
 export const PROJECT_ACCOUNTIUM: Project = {

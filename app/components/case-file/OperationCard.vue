@@ -52,7 +52,7 @@ const { tilt = 0 } = defineProps<{
           {{ operation.project.name }}
         </div>
         <div class="text-sm leading-relaxed text-pretty text-muted">
-          {{ operation.pre }}<CaseFileRedacted>{{ operation.redacted }}</CaseFileRedacted
+          {{ operation.pre }}<CaseFileRedacted in-link>{{ operation.redacted }}</CaseFileRedacted
           >{{ operation.post }}
         </div>
         <div class="mt-auto pt-1 font-mono text-sm tracking-wider text-primary">

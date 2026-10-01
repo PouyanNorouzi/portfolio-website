@@ -1,6 +1,9 @@
 @import "tailwindcss";
 @import "@nuxt/ui";
 
+/* Blog posts can use utility classes in MDC attributes ({.font-fancy}), so scan them too. */
+@source "../../../content";
+
 @media (prefers-reduced-motion: no-preference) {
   html {
     scroll-behavior: smooth;
@@ -228,6 +231,13 @@ html {
   --paper: #e3ddcc;
   --grid-minor: rgb(184 66 58 / 0.09);
   --hole: var(--ui-bg);
+}
+
+/* Pen-ink focus ring: the global primary ring is too faint on the cream paper. */
+.polygraph-paper :focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 3px;
+  border-radius: 2px;
 }
 
 .polygraph-paper::before,

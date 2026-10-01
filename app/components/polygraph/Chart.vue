@@ -41,6 +41,12 @@ function onKeydown(event: KeyboardEvent) {
   if (event.key === "Escape" && canSkip.value) queue.skip();
 }
 onMounted(() => window.addEventListener("keydown", onKeydown));
+
+// Keyboard users tabbing into the chart would land on rows that haven't printed yet (still
+// invisible), so focus anywhere on the paper prints the whole transcript at once.
+function onFocusin() {
+  if (!queue.skipped.value) queue.skip();
+}
 onBeforeUnmount(() => window.removeEventListener("keydown", onKeydown));
 
 const dates = useCaseFileDates();
@@ -76,7 +82,7 @@ const contactSection = CASE_FILE_SECTIONS.find((section) => section.tocLabel ===
     </Transition>
 
     <div class="w-full drop-shadow-[0_10px_18px_rgb(0_0_0/0.3)]">
-      <article class="polygraph-paper px-5 pt-6 pb-10 sm:px-9">
+      <article class="polygraph-paper px-5 pt-6 pb-10 sm:px-9" @focusin="onFocusin">
         <header class="relative flex flex-col gap-5 pb-6">
           <figure
             class="absolute top-3 right-0 hidden w-32 rotate-3 bg-white p-1.5 pb-5 shadow-md sm:block">

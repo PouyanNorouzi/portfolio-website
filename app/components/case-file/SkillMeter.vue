@@ -17,7 +17,8 @@ watch(isVisible, (visible) => {
   if (!visible || prefersReducedMotion()) return;
   const start = performance.now();
   const tick = (now: number) => {
-    const t = Math.min((now - start) / FILL_MS, 1);
+    // The first frame's timestamp can be slightly earlier than `start`, so clamp at 0.
+    const t = Math.min(Math.max(0, (now - start) / FILL_MS), 1);
     shown.value = value * (1 - (1 - t) ** 3);
     if (t < 1) frame = requestAnimationFrame(tick);
   };

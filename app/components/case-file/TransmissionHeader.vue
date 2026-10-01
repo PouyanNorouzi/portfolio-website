@@ -12,7 +12,7 @@ const formatDate = new Intl.DateTimeFormat("en-US", {
   timeZone: "UTC",
 });
 
-const transmissionNumber = computed(() => String(props.num).padStart(3, "0"));
+const transmissionNumber = computed(() => formatTransmissionNumber(props.num));
 const transmissionDate = computed(() => formatDate.format(new Date(props.date)).toUpperCase());
 </script>
 

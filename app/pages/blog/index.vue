@@ -10,7 +10,10 @@ usePageSeo({
 });
 
 const { data: posts } = await useAsyncData("blog-index-posts", () =>
-  queryCollection("blog").order("date", "DESC").all()
+  queryCollection("blog")
+    .select("title", "description", "date", "to", "num", "pinned")
+    .order("date", "DESC")
+    .all()
 );
 
 const transmissionCount = computed(() => posts.value?.length ?? 0);

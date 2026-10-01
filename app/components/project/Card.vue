@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { LIVE_DEMO_TOASTS } from "~/utils/constants/projects";
+import { LIVE_DEMO_TOASTS, PORTFOLIO_URL } from "~/utils/constants/projects";
 
 interface Props {
   project: Project;
@@ -8,6 +8,7 @@ interface Props {
 defineProps<Props>();
 
 const url = useRequestURL();
+const siteOrigin = new URL(useRuntimeConfig().public.siteUrl).origin;
 const toast = useToast();
 
 const clickedAmount = ref(0);
@@ -16,17 +17,34 @@ const currentNotification = computed<ToastNotification | null>(() => {
   return LIVE_DEMO_TOASTS[clickedAmount.value] ?? null;
 });
 
+// The live demo of this very site: production, the configured site URL, or whatever host is
+// serving it now (localhost, a preview deploy).
+const thisSite = new Set([new URL(PORTFOLIO_URL).origin, siteOrigin, url.origin]);
+function isThisSite(link: string | undefined) {
+  return !!link && thisSite.has(new URL(link).origin);
+}
+
 function handleCurrentSiteLiveDemo(e: MouseEvent, liveDemo: string | undefined) {
-  if (liveDemo === url.origin && currentNotification.value) {
+  // Let modified clicks (new tab, new window) through untouched.
+  if (e.ctrlKey || e.metaKey || e.shiftKey || e.altKey || e.button !== 0) return;
+  if (isThisSite(liveDemo) && currentNotification.value) {
     e.preventDefault();
     toast.add(currentNotification.value);
     clickedAmount.value++;
   }
 }
 
-const { isVisible } = useInView(() => ({
+const { element, isVisible } = useInView(() => ({
   threshold: window.matchMedia("(min-width: 768px)").matches ? 0.5 : 0.1,
 }));
+
+// Cards render visible, so the prerendered page, crawlers and visitors without JavaScript see
+// every project. Once mounted, only cards below the fold are hidden to fade in on scroll; the
+// ones already on screen stay put.
+const awaitingReveal = ref(false);
+onMounted(() => {
+  awaitingReveal.value = !!element.value && !isOnScreen(element.value);
+});
 </script>
 
 <template>
@@ -35,9 +53,7 @@ const { isVisible } = useInView(() => ({
     ref="transitionElement"
     variant="soft"
     class="group scroll-mt-24 border border-default bg-default transition-[opacity,translate,border-color] duration-500 hover:border-primary motion-reduce:transition-colors motion-reduce:duration-300"
-    :class="
-      isVisible ? 'translate-y-0 opacity-100' : 'motion-safe:translate-y-5 motion-safe:opacity-0'
-    "
+    :class="awaitingReveal && !isVisible ? 'motion-safe:translate-y-5 motion-safe:opacity-0' : ''"
     :ui="{ body: 'p-3.5 sm:p-3.5' }">
     <div class="flex flex-col gap-5 md:flex-row">
       <UModal
@@ -89,7 +105,7 @@ const { isVisible } = useInView(() => ({
           </span>
         </div>
 
-        <h3 class="font-name text-xl font-bold text-highlighted md:text-2xl">{{ project.name }}</h3>
+        <h2 class="font-name text-xl font-bold text-highlighted md:text-2xl">{{ project.name }}</h2>
 
         <div v-if="project.tags.length" class="flex flex-wrap gap-1.5">
           <UBadge
@@ -120,7 +136,7 @@ const { isVisible } = useInView(() => ({
                   color="neutral"
                   size="sm"
                   icon="i-lucide-github"
-                  aria-label="View Code" />
+                  :aria-label="`${project.name} source code (opens in a new tab)`" />
               </UTooltip>
 
               <UTooltip v-if="project.liveDemo" text="View Live Demo">
@@ -131,7 +147,7 @@ const { isVisible } = useInView(() => ({
                   size="sm"
                   icon="i-lucide-external-link"
                   color="primary"
-                  aria-label="View Live Demo"
+                  :aria-label="`${project.name} live demo (opens in a new tab)`"
                   @click="(e) => handleCurrentSiteLiveDemo(e, project.liveDemo)" />
               </UTooltip>
             </div>
