@@ -1,28 +1,27 @@
 # Personal Portfolio Website
 
-A modern, responsive portfolio website built with Nuxt 3, Vue 3, and Tailwind CSS. This site showcases my professional skills, projects, and background in a clean, interactive format.
+My portfolio and blog, built with Nuxt 4, Vue 3 and Tailwind CSS. The site is styled as a spy "case file": a dossier of my skills, projects and background, plus a blog.
 
 ## Features
 
-- **Responsive Design**: Looks great on all devices from mobile to desktop
-- **Modern UI**: Built with Nuxt UI components for a consistent, professional look
-- **Fast Performance**: Leverages Nuxt 3's performance optimizations
-- **Project Showcase**: Highlights my work with interactive project cards
-- **About Me**: Professional biography and skills section
-- **Dark/Light Mode**: Supports both viewing preferences
+- **Case-file theme**: dossier sections, redacted text, stamps and a polygraph, with animations that respect reduced-motion preferences
+- **Blog**: Markdown posts powered by Nuxt Content
+- **Responsive**: works from mobile to desktop
+- **Dark/Light Mode**: dark by default
+- **SEO**: per-page Open Graph and Twitter tags and canonical links
 
 ## Tech Stack
 
-- **Framework**: [Nuxt 3](https://nuxt.com/)
-- **UI Library**: [Nuxt UI](https://ui.nuxt.com/)
-- **Styling**: [Tailwind CSS](https://tailwindcss.com/)
-- **Icons**: Nuxt Icon with Iconify
-- **Image Optimization**: Nuxt Image
-- **Typography**: Nuxt Fonts
+- **Framework**: [Nuxt 4](https://nuxt.com/)
+- **UI Library**: [Nuxt UI 4](https://ui.nuxt.com/)
+- **Styling**: [Tailwind CSS 4](https://tailwindcss.com/)
+- **Content**: [Nuxt Content 3](https://content.nuxt.com/)
+- **Icons, images, fonts**: Nuxt Icon, Nuxt Image and Nuxt Fonts
+- **Testing**: Vitest with `@nuxt/test-utils`, and Playwright
 
 ## Setup
 
-Make sure to install the dependencies:
+Install dependencies with [pnpm](https://pnpm.io/):
 
 ```bash
 pnpm install
@@ -30,32 +29,44 @@ pnpm install
 
 ## Development
 
-Start the development server on `http://localhost:3000`:
+Start the dev server on `http://localhost:3000`:
 
 ```bash
 pnpm dev
 ```
 
+Other useful scripts:
+
+```bash
+pnpm lint        # ESLint
+pnpm typecheck   # vue-tsc via nuxt typecheck
+pnpm test        # Vitest (unit and Nuxt environment)
+pnpm test:e2e    # Playwright (builds the production output first)
+```
+
+The scripts set `TZ=UTC` so blog dates keep their day on any machine. Keep it if you run the tools directly.
+
 ## Building for Production
 
-Build the application for production:
+Generate the static site into `.output/public`:
+
+```bash
+pnpm generate
+```
+
+Or build the Nitro server and preview it:
 
 ```bash
 pnpm build
-```
-
-Preview the production build:
-
-```bash
 pnpm preview
 ```
 
 ## Customization
 
-- Edit `components/IndexHero.vue` to update the homepage hero section
-- Modify `pages/projects.vue` to showcase different projects
-- Update `pages/about.vue` to change your bio and skills
-- Adjust theme colors in the Tailwind configuration
+- Site content (career, skills, projects, socials, about copy) lives in `app/utils/constants/`
+- Pages are in `app/pages/` (`index`, `about`, `projects`, `blog/`)
+- Blog posts are Markdown files in `content/blog/`; the frontmatter schema is in `content.config.ts`
+- Set `NUXT_PUBLIC_SITE_URL` to change the base URL used in canonical and Open Graph links
 
 ## Contact
 
