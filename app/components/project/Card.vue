@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { LIVE_DEMO_TOASTS } from "~/utils/constants/projects";
+
 interface Props {
   project: Project;
 }
@@ -8,61 +10,10 @@ defineProps<Props>();
 const url = useRequestURL();
 const toast = useToast();
 
-const alreadyHereNotifications = ref<ToastNotification[]>([
-  {
-    title: "You're Already Here",
-    description: "No need to go anywhere — this is the live demo. Look around, stay awhile.",
-    icon: "i-lucide-eye",
-    color: "info",
-  },
-  {
-    title: "Déjà Vu?",
-    description: "You... clicked it again? This *is* the site. Nothing's changed, promise.",
-    icon: "i-lucide-refresh-cw",
-    color: "neutral",
-  },
-  {
-    title: "Bold Strategy",
-    description: "Clicking the live demo *again* might just make it more live. Let’s find out.",
-    icon: "i-lucide-zap",
-    color: "secondary",
-  },
-  {
-    title: "Seriously?",
-    description:
-      "This is like pressing the elevator button repeatedly. It doesn’t make it go faster.",
-    icon: "i-lucide-alert-triangle",
-    color: "warning",
-  },
-  {
-    title: "Fascinating Choice",
-    description: "You’re either testing me or just really committed to this bit.",
-    icon: "i-lucide-help-circle",
-    color: "warning",
-  },
-  {
-    title: "Stop It.",
-    description: "This isn’t a mirror. You're breaking the portfolio’s self-esteem.",
-    icon: "i-lucide-shield-off",
-    color: "error",
-  },
-  {
-    title: "Fine. Go Ahead.",
-    description: "You’ve broken my will. The next click actually opens it. Happy now?",
-    icon: "i-lucide-door-open",
-    color: "error",
-  },
-]);
 const clickedAmount = ref(0);
 
 const currentNotification = computed<ToastNotification | null>(() => {
-  const clicked = clickedAmount.value;
-  const notifications = alreadyHereNotifications.value as ToastNotification[];
-
-  if (clicked >= 0 && clicked < notifications.length) {
-    return notifications[clicked]!;
-  }
-  return null;
+  return LIVE_DEMO_TOASTS[clickedAmount.value] ?? null;
 });
 
 function handleCurrentSiteLiveDemo(e: MouseEvent, liveDemo: string | undefined) {
@@ -84,7 +35,9 @@ const { isVisible } = useInView(() => ({
     ref="transitionElement"
     variant="soft"
     class="group scroll-mt-24 border border-default bg-default transition-[opacity,translate,border-color] duration-500 hover:border-primary motion-reduce:transition-colors motion-reduce:duration-300"
-    :class="isVisible ? 'translate-y-0 opacity-100' : 'motion-safe:translate-y-5 motion-safe:opacity-0'"
+    :class="
+      isVisible ? 'translate-y-0 opacity-100' : 'motion-safe:translate-y-5 motion-safe:opacity-0'
+    "
     :ui="{ body: 'p-3.5 sm:p-3.5' }">
     <div class="flex flex-col gap-5 md:flex-row">
       <UModal

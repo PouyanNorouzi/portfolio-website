@@ -313,3 +313,50 @@ export const ALL_PROJECTS: Project[] = [
   PROJECT_POUDB,
   PROJECT_FLUX,
 ];
+
+// Clicking the live demo of this very site shows these one by one before it gives in.
+export const LIVE_DEMO_TOASTS: ToastNotification[] = [
+  {
+    title: "You're Already Here",
+    description: "No need to go anywhere — this is the live demo. Look around, stay awhile.",
+    icon: "i-lucide-eye",
+    color: "info",
+  },
+  {
+    title: "Déjà Vu?",
+    description: "You... clicked it again? This *is* the site. Nothing's changed, promise.",
+    icon: "i-lucide-refresh-cw",
+    color: "neutral",
+  },
+  {
+    title: "Bold Strategy",
+    description: "Clicking the live demo *again* might just make it more live. Let’s find out.",
+    icon: "i-lucide-zap",
+    color: "secondary",
+  },
+  {
+    title: "Seriously?",
+    description:
+      "This is like pressing the elevator button repeatedly. It doesn’t make it go faster.",
+    icon: "i-lucide-alert-triangle",
+    color: "warning",
+  },
+  {
+    title: "Fascinating Choice",
+    description: "You’re either testing me or just really committed to this bit.",
+    icon: "i-lucide-help-circle",
+    color: "warning",
+  },
+  {
+    title: "Stop It.",
+    description: "This isn’t a mirror. You're breaking the portfolio’s self-esteem.",
+    icon: "i-lucide-shield-off",
+    color: "error",
+  },
+  {
+    title: "Fine. Go Ahead.",
+    description: "You’ve broken my will. The next click actually opens it. Happy now?",
+    icon: "i-lucide-door-open",
+    color: "error",
+  },
+];

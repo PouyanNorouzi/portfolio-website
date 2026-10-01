@@ -27,7 +27,7 @@ Nuxt 4 app (`app/` is the source dir) using Nuxt UI 4, Tailwind 4 and Nuxt Conte
 
 **Blog** is Nuxt Content: `content/blog/*.md`, schema in `content.config.ts` (zod). Every field except `pinned` is required, including `num`, `image` and `to` (e.g. `to: /blog/2`). Frontmatter `date` is a bare `2026, 7, 14` value, which is why the UTC handling above matters. Custom MDC prose components are in `app/components/content/` (`ProseP`, `ProseImg`, and so on). The `Ballet` font is declared in `nuxt.config.ts` because the font scanner can't see it used in markdown.
 
-**Routing and transitions.** Pages are `index`, `about`, `projects` and `blog/[id]`. `middleware/transition.ts` picks a `slide-left` or `slide-right` page transition from the ordering in `utils/constants/pages.ts`, so a new top-level page must be added there. A missing blog post renders `error.vue` without leaving the site.
+**Routing and transitions.** Pages are `index`, `about`, `projects` and `blog/[id]`. The global `middleware/transition.global.ts` picks a `slide-left` or `slide-right` page transition from the ordering in `utils/constants/pages.ts`, so a new top-level page must be added there (pages don't opt in). The animation is in `main.css` and differs per theme: a paper slide and tilt in light mode, a `clip-path` wipe in dark mode. A missing blog post renders `error.vue` without leaving the site.
 
 **SEO.** Every page should call `usePageSeo({ title, description, image?, type? })`, which sets og/twitter tags and a canonical link from `runtimeConfig.public.siteUrl` (env `NUXT_PUBLIC_SITE_URL`, default `https://pouyannorouzi.com`). The default og image `public/og-image.png` is rendered from `scripts/og-image.html` at 1200x630.
 

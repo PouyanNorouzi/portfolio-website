@@ -8,7 +8,7 @@ const stripe = {
 };
 
 const inner = {
-  xs: "px-3 py-0.5 text-[0.6rem] sm:text-[0.65rem]",
+  xs: "px-3 py-0.5 text-xs leading-4",
   sm: "px-4 py-2 text-xs sm:text-sm motion-safe:animate-banner-in",
   md: "px-5 py-3.5 text-base sm:text-xl motion-safe:animate-banner-in",
 };

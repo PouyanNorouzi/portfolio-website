@@ -1,5 +1,12 @@
 <script setup lang="ts">
-import { CASE_FILE_FACTS, CASE_FILE_ID, CASE_FILE_PRINT_FACT } from "~/utils/constants/case-file";
+import {
+  CASE_FILE_ADDRESS,
+  CASE_FILE_FACTS,
+  CASE_FILE_ID,
+  CASE_FILE_PRINT_FACT,
+  CASE_FILE_STICKY_NOTE,
+  CASE_FILE_THREAT_LEVEL,
+} from "~/utils/constants/case-file";
 const scanning = ref(false);
 
 // Where each crosshair bracket sits, and where it slides in from.
@@ -52,7 +59,7 @@ const printOpen = ref(false);
             <UIcon
               name="i-lucide-paperclip"
               class="absolute -top-2.5 left-1/2 size-5 -translate-x-1/2 text-muted" />
-            Hire this guy. Seriously. -C.
+            {{ CASE_FILE_STICKY_NOTE }}
           </div>
           <div class="relative size-44">
             <div
@@ -99,18 +106,12 @@ const printOpen = ref(false);
             <div class="flex flex-col gap-0.5">
               <CaseFileLabel>HOME ADDRESS</CaseFileLabel>
               <span>
-                <CaseFileRedacted
-                  :lines="[
-                    { hidden: '1234 Classified Avenue', shown: 'nice' },
-                    { hidden: 'Coquitlam, BC', shown: 'try' },
-                  ]" />
+                <CaseFileRedacted :lines="CASE_FILE_ADDRESS" />
               </span>
             </div>
             <div class="flex flex-col gap-0.5">
               <CaseFileLabel>THREAT LEVEL</CaseFileLabel>
-              <span class="font-semibold text-error">
-                Minimal, unless you suggest he just use Postgres
-              </span>
+              <span class="font-semibold text-error">{{ CASE_FILE_THREAT_LEVEL }}</span>
             </div>
           </div>
 

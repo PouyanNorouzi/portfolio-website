@@ -1,20 +1,5 @@
 <script setup lang="ts">
-import { CASE_FILE_PATH } from "~/utils/constants/case-file";
-
-interface TerminalLine {
-  kind: "command" | "output" | "success" | "error";
-  text: string;
-}
-
-const SCRIPT: TerminalLine[] = [
-  { kind: "command", text: "ssh pouyan@field-office-bc" },
-  { kind: "output", text: "Connection established." },
-  { kind: "command", text: `cat ${CASE_FILE_PATH}` },
-  { kind: "error", text: "Permission denied: this file is classified." },
-  { kind: "command", text: `sudo cat ${CASE_FILE_PATH}` },
-  { kind: "success", text: "ACCESS GRANTED. Loading file..." },
-  { kind: "command", text: "rm -rf embarrassing_stuff/" },
-];
+import { CASE_FILE_BOOT_SCRIPT as SCRIPT } from "~/utils/constants/case-file";
 
 const TYPE_DELAY_MS = 15;
 const LINE_DELAY_MS = 250;
@@ -27,11 +12,11 @@ const BOOTED_KEY = "case-file-booted";
 const nuxtApp = useNuxtApp();
 const booting = useState("case-file-booting", () => import.meta.server || !!nuxtApp.isHydrating);
 
-const lines = ref<TerminalLine[]>([]);
+const lines = ref<CaseFileTerminalLine[]>([]);
 const typing = ref(false);
 let timer: ReturnType<typeof setTimeout> | undefined;
 
-const lineClass: Record<TerminalLine["kind"], string> = {
+const lineClass: Record<CaseFileTerminalLine["kind"], string> = {
   command: "text-neutral-50",
   output: "text-neutral-400",
   success: "font-semibold text-primary",
@@ -120,11 +105,13 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
+  <!-- The terminal is always dark, so it carries its own .dark class: that switches the
+       color tokens (e.g. the prompt's green) to the terminal palette in paper mode too. -->
   <Transition leave-active-class="transition-opacity duration-500" leave-to-class="opacity-0">
     <div
       v-if="booting"
       id="case-file-intro"
-      class="fixed inset-0 z-100 flex cursor-pointer items-center justify-center bg-neutral-950 p-4 motion-reduce:hidden"
+      class="dark fixed inset-0 z-100 flex cursor-pointer items-center justify-center bg-neutral-950 p-4 motion-reduce:hidden"
       role="presentation"
       @click="close">
       <div class="w-full max-w-2xl overflow-hidden rounded-md border border-neutral-800 shadow-lg">

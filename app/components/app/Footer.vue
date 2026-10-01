@@ -11,8 +11,11 @@ import {
 } from "~/utils/constants/socials";
 
 const route = useRoute();
-const now = useNow();
-const year = computed(() => new Date(now.value).getFullYear());
+const { now, isLocal } = useNow();
+const year = computed(() => {
+  const date = new Date(now.value);
+  return isLocal.value ? date.getFullYear() : date.getUTCFullYear();
+});
 const copy = useCopyToDeadDrop();
 
 const pageCount = String(NAV_PAGES.length).padStart(2, "0");
@@ -54,7 +57,7 @@ const contacts = [
         <CaseFileLabel class="text-highlighted">
           END OF FILE · {{ CASE_FILE_ID }} · PG {{ pageNumber }}/{{ pageCount }}
         </CaseFileLabel>
-        <CaseFileLabel class="text-[0.65rem]">
+        <CaseFileLabel class="text-xs">
           Property of the Bureau of Developer Investigations, Field Office BC. Unauthorized
           duplication is encouraged. © {{ year }} Pouyan Norouzi.
         </CaseFileLabel>

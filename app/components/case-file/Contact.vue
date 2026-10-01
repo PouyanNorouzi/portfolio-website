@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { CASE_FILE_SECTIONS } from "~/utils/constants/case-file";
+import { CASE_FILE_PHONE, CASE_FILE_SECTIONS } from "~/utils/constants/case-file";
 import { RESUME_DOCX_PATH, RESUME_PDF_PATH } from "~/utils/constants/resume";
 import {
   EMAIL,
@@ -41,7 +41,7 @@ const copy = useCopyToDeadDrop();
         <div class="flex flex-wrap gap-x-2">
           <CaseFileLabel class="inline-block min-w-24">PHONE</CaseFileLabel>
           <span>
-            <CaseFileRedacted :lines="[{ hidden: '+1 (604) 555-0123', shown: 'on request' }]" />
+            <CaseFileRedacted :lines="CASE_FILE_PHONE" />
           </span>
         </div>
       </div>

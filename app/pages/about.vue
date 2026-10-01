@@ -6,19 +6,15 @@ usePageSeo({
   description:
     "Pouyan Norouzi under polygraph examination: the languages, frameworks, cloud and systems he works with, and how much of it holds up.",
 });
-
-definePageMeta({
-  middleware: ["transition"],
-});
 </script>
 
 <template>
-  <UContainer>
+  <div>
     <PageHeader :label="`CASE FILE ${CASE_FILE_ID} · SUBJECT UNDER EXAMINATION`">
       The Polygraph
     </PageHeader>
     <div class="mx-auto w-full max-w-4xl pb-12">
       <PolygraphChart />
     </div>
-  </UContainer>
+  </div>
 </template>

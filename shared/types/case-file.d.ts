@@ -26,3 +26,30 @@ declare interface CaseFileOperation {
   redacted: string;
   post: string;
 }
+
+declare interface CaseFileTerminalLine {
+  kind: "command" | "output" | "success" | "error";
+  text: string;
+}
+
+// A multi-line redaction: `hidden` only sizes the bar, `shown` is what it reads once revealed.
+declare interface CaseFileRedactedLine {
+  hidden: string;
+  shown: string;
+}
+
+// Copy with at most one inline redaction: `pre`, then the redacted part, then `post`.
+declare interface CaseFileRedactedText {
+  pre: string;
+  redacted?: string;
+  post?: string;
+}
+
+declare interface CaseFileErrorCopy {
+  banner: string;
+  title: string;
+  stamp: string;
+  lead: CaseFileRedactedText;
+  // A muted line under the lead.
+  note?: CaseFileRedactedText;
+}

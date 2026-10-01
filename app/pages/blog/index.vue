@@ -9,10 +9,6 @@ usePageSeo({
     "Blog posts by Pouyan Norouzi: project updates, announcements and whatever else is on his mind.",
 });
 
-definePageMeta({
-  middleware: ["transition"],
-});
-
 const { data: posts } = await useAsyncData("blog-index-posts", () =>
   queryCollection("blog").order("date", "DESC").all()
 );
@@ -21,10 +17,8 @@ const transmissionCount = computed(() => posts.value?.length ?? 0);
 </script>
 
 <template>
-  <UContainer>
-    <PageHeader
-      plain
-      :label="`CASE FILE ${CASE_FILE_ID} · ${section.tocLabel}`">
+  <div>
+    <PageHeader :label="`CASE FILE ${CASE_FILE_ID} · ${section.tocLabel}`">
       {{ section.title }}
     </PageHeader>
     <div class="mx-auto flex w-full max-w-4xl flex-col gap-6 pb-12">
@@ -40,5 +34,5 @@ const transmissionCount = computed(() => posts.value?.length ?? 0);
       </div>
       <CaseFileExhibitList :posts="posts ?? []" />
     </div>
-  </UContainer>
+  </div>
 </template>

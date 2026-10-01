@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { ALL_PROJECTS } from '~/utils/constants/projects';
-import { CASE_FILE_ID, CASE_FILE_SECTIONS } from '~/utils/constants/case-file';
+import { ALL_PROJECTS } from "~/utils/constants/projects";
+import { CASE_FILE_ID, CASE_FILE_SECTIONS } from "~/utils/constants/case-file";
 
 const section = CASE_FILE_SECTIONS[4]!;
 
@@ -10,18 +10,12 @@ usePageSeo({
     "Software projects built by Pouyan Norouzi, with the tech used and links to source and demos.",
 });
 
-definePageMeta({
-  middleware: ["transition"],
-});
-
 // Project data
-const projects = ref<Project[]>(
-  [...ALL_PROJECTS].reverse()
-);
+const projects = ref<Project[]>([...ALL_PROJECTS].reverse());
 </script>
 
 <template>
-  <UContainer>
+  <div>
     <PageHeader :label="`CASE FILE ${CASE_FILE_ID} · ${section.tocLabel}`">
       {{ section.title }}
     </PageHeader>
@@ -33,5 +27,5 @@ const projects = ref<Project[]>(
       </div>
       <ProjectCard v-for="project in projects" :key="project.id" :project="project" />
     </div>
-  </UContainer>
+  </div>
 </template>

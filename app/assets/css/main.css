@@ -6,27 +6,91 @@
     scroll-behavior: smooth;
   }
 
-  /* Page transitions: middleware/transition.ts picks the direction from where the pages sit in
-     the nav. With reduced motion there is no transition, so pages simply swap. */
-  .slide-left-enter-active,
+  /* Page transitions: middleware/transition.global.ts names them slide-left (moving forward
+     through the nav) or slide-right (moving back). The old page leaves quickly so the gap
+     between pages stays short. With reduced motion there is no transition, so pages simply swap. */
   .slide-left-leave-active,
-  .slide-right-enter-active,
   .slide-right-leave-active {
     transition:
-      opacity 0.2s,
-      translate 0.2s;
+      opacity 0.15s ease-in,
+      translate 0.15s ease-in,
+      clip-path 0.15s ease-in;
   }
 
-  .slide-left-enter-from,
-  .slide-right-leave-to {
-    opacity: 0;
-    translate: 50px 0;
+  .slide-left-enter-active,
+  .slide-right-enter-active {
+    transition:
+      opacity 0.3s cubic-bezier(0.2, 0.8, 0.2, 1),
+      translate 0.3s cubic-bezier(0.2, 0.8, 0.2, 1),
+      rotate 0.3s cubic-bezier(0.2, 0.8, 0.2, 1),
+      clip-path 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
   }
 
-  .slide-left-leave-to,
-  .slide-right-enter-from {
+  /* Paper: the sheet is pulled out of the folder sideways and the next one is laid down,
+     settling flat from a slight tilt. The tilt pivots on the top edge, where the page starts. */
+  :root:not(.dark) :is(.slide-left-enter-active, .slide-right-enter-active) {
+    transform-origin: 50% 0;
+  }
+
+  :root:not(.dark)
+    :is(
+      .slide-left-leave-to,
+      .slide-right-leave-to,
+      .slide-left-enter-from,
+      .slide-right-enter-from
+    ) {
     opacity: 0;
-    translate: -50px 0;
+  }
+
+  :root:not(.dark) .slide-left-leave-to {
+    translate: -40px -4px;
+  }
+
+  :root:not(.dark) .slide-right-leave-to {
+    translate: 40px -4px;
+  }
+
+  :root:not(.dark) .slide-left-enter-from {
+    translate: 40px 0;
+    rotate: 1deg;
+  }
+
+  :root:not(.dark) .slide-right-enter-from {
+    translate: -40px 0;
+    rotate: -1deg;
+  }
+
+  /* Terminal: the screen is redrawn. The old page is wiped away and the new one is drawn in,
+     both sweeping in the direction of travel. clip-path can't animate from or to `none`,
+     so the fully drawn state is spelled out. */
+  .dark
+    :is(
+      .slide-left-enter-active,
+      .slide-left-leave-active,
+      .slide-right-enter-active,
+      .slide-right-leave-active
+    ) {
+    clip-path: inset(0);
+  }
+
+  .dark .slide-left-leave-to {
+    clip-path: inset(0 100% 0 0);
+    opacity: 0.4;
+  }
+
+  .dark .slide-right-leave-to {
+    clip-path: inset(0 0 0 100%);
+    opacity: 0.4;
+  }
+
+  .dark .slide-left-enter-from {
+    clip-path: inset(0 0 0 100%);
+    translate: 12px 0;
+  }
+
+  .dark .slide-right-enter-from {
+    clip-path: inset(0 100% 0 0);
+    translate: -12px 0;
   }
 }
 
@@ -48,14 +112,20 @@ html {
 }
 
 .dark {
+  color-scheme: dark;
   --ui-primary: var(--ui-color-primary-400);
   --color-shadow: var(--color-neutral-600);
 }
 
 /* Light mode is a manila folder: cream paper sheets and warm ink on a folder-colored desk.
-   Scoped with :not(.dark) because unlayered rules beat Nuxt UI's layered .dark tokens. */
+   Scoped with :not(.dark) because unlayered rules beat Nuxt UI's layered .dark tokens.
+   The ink colors are dark enough for AA contrast on the paper, and the text tokens on the
+   desk as well (labels, header and footer sit straight on it). */
 :root:not(.dark) {
-  --ui-primary: var(--color-emerald-700);
+  color-scheme: light;
+  --ui-primary: var(--color-emerald-800);
+  --ui-secondary: var(--ui-color-secondary-800);
+  --ui-error: var(--ui-color-error-800);
   --ui-bg: #f2e7c9;
   --ui-bg-muted: #ecdfba;
   --ui-bg-elevated: #e6d6a9;
@@ -67,11 +137,13 @@ html {
   --ui-border-inverted: #2a2317;
   --ui-text: #3b3223;
   --ui-text-toned: #57492f;
-  --ui-text-muted: #75664a;
-  --ui-text-dimmed: #9d8d6b;
+  --ui-text-muted: #574a33;
+  --ui-text-dimmed: #6f6045;
   --ui-text-highlighted: #1e1a10;
   --ui-text-inverted: #f2e7c9;
   --paper-grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.35  0 0 0 0 0.26  0 0 0 0 0.1  0 0 0 0.55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
+  /* The same grain, fainter, for the paper sheets. */
+  --paper-grain-sheet: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.35  0 0 0 0 0.26  0 0 0 0 0.1  0 0 0 0.22 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
 }
 
 :root:not(.dark) body {
@@ -86,12 +158,14 @@ html {
     var(--ui-bg);
 }
 
-.dark .text-primary {
+/* The glow only on display text: on small mono text it blurs the glyphs. */
+.dark :is(h1, h2, h3, .font-name).text-primary {
   text-shadow: 0 0 10px color-mix(in oklab, var(--ui-primary) 45%, transparent);
 }
 
 /* Cards: a sheet of paper in the folder, or a HUD panel with corner brackets. */
 :root:not(.dark) .case-sheet {
+  background-image: var(--paper-grain-sheet);
   box-shadow:
     0 1px 2px rgb(60 45 15 / 0.08),
     0 8px 20px -8px rgb(90 65 20 / 0.35);

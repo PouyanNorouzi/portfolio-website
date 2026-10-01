@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { CASE_FILE_SECTIONS } from "~/utils/constants/case-file";
+import { CASE_FILE_SECTIONS, CASE_FILE_SUMMARY_NOTE } from "~/utils/constants/case-file";
 
 // The margin note's arrow points at the redaction from directly below it. That only
 // works while the redaction is on the paragraph's last line, so the note is measured
@@ -55,7 +55,7 @@ onMounted(() => {
       <span
         class="absolute top-4 -rotate-2 whitespace-nowrap"
         :style="{ left: `${arrowX + 34}px` }">
-        the database. ask him about it. -C.
+        {{ CASE_FILE_SUMMARY_NOTE }}
       </span>
     </div>
     <CaseFileLabel>// HOVER OR TAP REDACTED LINES TO REVEAL</CaseFileLabel>

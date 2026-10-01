@@ -1,8 +1,6 @@
 <script setup lang="ts">
 import { CASE_FILE_ID } from "~/utils/constants/case-file";
 
-definePageMeta({ middleware: ["transition"] });
-
 const route = useRoute();
 
 const { data: page } = await useAsyncData(`blog-${route.params.id}`, () =>
@@ -33,7 +31,7 @@ usePageSeo({
 </script>
 
 <template>
-  <UContainer v-if="page" class="flex flex-col pb-12">
+  <div v-if="page" class="flex flex-col pb-12">
     <PageHeader plain :label="`CASE FILE ${CASE_FILE_ID} · TRANSMISSION`">{{
       page.title
     }}</PageHeader>
@@ -52,5 +50,5 @@ usePageSeo({
     </figure>
     <ContentRenderer v-if="page" :value="page" />
     <CaseFileTransmissionFooter :previous="neighbours?.previous" :next="neighbours?.next" />
-  </UContainer>
+  </div>
 </template>

@@ -1,3 +1,5 @@
+// Runs on every navigation, so each page gets a direction-aware transition without opting in.
+// The animation itself lives in main.css and differs per theme.
 import { PAGES, getSectionIndex } from "~/utils/constants/pages";
 
 function getDirection(toPath: string, fromPath: string) {

@@ -4,10 +4,6 @@ usePageSeo({
   description:
     "Pouyan Norouzi's portfolio, presented as his own case file: projects, blog posts, skills and contact details.",
 });
-
-definePageMeta({
-  middleware: ["transition"],
-});
 </script>
 
 <template>

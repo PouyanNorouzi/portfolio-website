@@ -50,7 +50,7 @@ onBeforeUnmount(() => clearTimeout(glitchTimer));
       @click="toggle" />
     <div
       :id="fragmentId"
-      class="grid transition-[grid-template-rows] duration-700 ease-in-out"
+      class="grid transition-[grid-template-rows] duration-700 ease-in-out motion-reduce:transition-none"
       :class="declassified ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'"
       :inert="!declassified">
       <div class="min-h-0 overflow-hidden">

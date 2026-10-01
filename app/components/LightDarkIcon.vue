@@ -4,19 +4,28 @@ interface Props {
   size?: "xs" | "sm" | "md" | "lg" | "xl" | "2xl" | "3xl";
 }
 
-withDefaults(defineProps<Props>(), {
-  size: "md",
-});
+const props = defineProps<Props>();
 
-const colorMode = useColorMode();
-
-const isDarkMode = computed(() => colorMode.value === "dark");
+// Full class names so Tailwind can find them when it scans this file. Without a size
+// the icon inherits the surrounding font size.
+const SIZE_CLASS: Record<NonNullable<Props["size"]>, string> = {
+  "xs": "text-xs",
+  "sm": "text-sm",
+  "md": "text-base",
+  "lg": "text-lg",
+  "xl": "text-xl",
+  "2xl": "text-2xl",
+  "3xl": "text-3xl",
+};
+const sizeClass = computed(() => (props.size ? SIZE_CLASS[props.size] : undefined));
 </script>
 
+<!-- Swapped with the dark: variant rather than in JavaScript, so the prerendered HTML
+     already shows the right icon for the visitor's theme. -->
 <template>
-  <UIcon v-if="typeof icon === 'string'" :name="icon" :class="`text-${size}`" />
+  <UIcon v-if="typeof icon === 'string'" :name="icon" :class="sizeClass" />
   <template v-else>
-    <UIcon v-show="!isDarkMode" :name="icon.lightIcon" :class="`text-${size}`" />
-    <UIcon v-show="isDarkMode" :name="icon.darkIcon" :class="`text-${size}`" />
+    <UIcon :name="icon.lightIcon" class="dark:hidden" :class="sizeClass" />
+    <UIcon :name="icon.darkIcon" class="hidden dark:inline-block" :class="sizeClass" />
   </template>
 </template>

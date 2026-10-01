@@ -73,7 +73,7 @@ const toggle = computed(() => ({
       <span class="col-start-1 row-start-1 text-center whitespace-nowrap">{{ line.shown }}</span>
       <span
         aria-hidden="true"
-        class="pointer-events-none absolute inset-0 origin-right rounded-sm bg-inverted transition-transform duration-500 ease-in-out"
+        class="pointer-events-none absolute inset-0 origin-right rounded-sm bg-inverted transition-transform duration-500 ease-in-out motion-reduce:transition-none"
         :class="revealed ? 'scale-x-0' : 'scale-x-100'"
         :style="{ transitionDelay: `${waveDelay}s` }" />
     </span>
@@ -83,7 +83,7 @@ const toggle = computed(() => ({
     ref="root"
     v-bind="toggle"
     :style="{ transitionDelay: `${waveDelay}s` }"
-    class="cursor-help rounded-sm bg-[linear-gradient(var(--ui-bg-inverted),var(--ui-bg-inverted))] bg-right bg-no-repeat box-decoration-clone px-1 outline-1 outline-dashed transition-[background-size,color,outline-color] duration-500 ease-in-out focus-visible:outline-2 focus-visible:outline-primary focus-visible:outline-solid"
+    class="cursor-help rounded-sm bg-[linear-gradient(var(--ui-bg-inverted),var(--ui-bg-inverted))] bg-right bg-no-repeat box-decoration-clone px-1 outline-1 outline-dashed transition-[background-size,color,outline-color] duration-500 ease-in-out motion-reduce:transition-none focus-visible:outline-2 focus-visible:outline-primary focus-visible:outline-solid"
     :class="
       revealed
         ? 'bg-size-[0%_100%] outline-error'

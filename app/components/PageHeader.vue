@@ -2,7 +2,8 @@
 defineProps<{
   title?: string;
   label?: string;
-  // Uses the regular body font instead of the display font, for long titles.
+  // Uses the regular body font instead of the display font. Only blog post titles use it:
+  // they are long, while every top-level section keeps the display face.
   plain?: boolean;
 }>();
 </script>

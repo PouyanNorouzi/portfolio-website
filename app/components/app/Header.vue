@@ -56,7 +56,7 @@ onBeforeUnmount(() => {
     :class="isScrolled ? 'bg-default/90 backdrop-blur-sm' : 'bg-default/0'">
     <!-- The band folds away once the page is scrolled, leaving just the nav row. -->
     <div
-      class="grid transition-[grid-template-rows] duration-300"
+      class="grid transition-[grid-template-rows] duration-300 motion-reduce:transition-none"
       :class="isScrolled ? 'grid-rows-[0fr]' : 'grid-rows-[1fr]'">
       <div class="overflow-hidden">
         <CaseFileHazardBanner size="xs">
@@ -68,7 +68,7 @@ onBeforeUnmount(() => {
     </div>
     <UContainer>
       <div
-        class="flex items-center justify-between gap-3 border-b-4 border-double border-default transition-[padding] duration-300"
+        class="flex items-center justify-between gap-3 border-b-4 border-double border-default transition-[padding] duration-300 motion-reduce:transition-none"
         :class="isScrolled ? 'py-1.5' : 'py-2.5'">
         <!-- Logo: a small rubber stamp with the file number -->
         <NuxtLink
@@ -119,7 +119,8 @@ onBeforeUnmount(() => {
             </Transition>
           </div>
 
-          <!-- Theme switch: manila paper or agency terminal -->
+          <!-- Theme switch: manila paper or agency terminal. The active look comes from the
+               dark: variant, so the prerendered HTML is right before the color mode loads. -->
           <div
             role="group"
             aria-label="Theme"
@@ -127,24 +128,24 @@ onBeforeUnmount(() => {
             <button
               type="button"
               :aria-pressed="!isDarkMode"
-              class="cursor-pointer px-1.5 py-0.5 transition-colors"
-              :class="
-                !isDarkMode ? 'bg-inverted text-inverted' : 'text-muted hover:text-highlighted'
-              "
+              class="cursor-pointer bg-inverted px-1.5 py-0.5 text-inverted transition-colors dark:bg-transparent dark:text-muted dark:hover:text-highlighted"
               @click="isDarkMode = false">
-              <span class="hidden sm:inline">PAPER</span>
-              <UIcon name="i-lucide-file-text" class="size-3.5 align-middle sm:hidden" />
+              <span class="sr-only sm:not-sr-only">PAPER</span>
+              <UIcon
+                name="i-lucide-file-text"
+                aria-hidden="true"
+                class="size-3.5 align-middle sm:hidden" />
             </button>
             <button
               type="button"
               :aria-pressed="isDarkMode"
-              class="cursor-pointer px-1.5 py-0.5 transition-colors"
-              :class="
-                isDarkMode ? 'bg-inverted text-inverted' : 'text-muted hover:text-highlighted'
-              "
+              class="cursor-pointer px-1.5 py-0.5 text-muted transition-colors hover:text-highlighted dark:bg-inverted dark:text-inverted dark:hover:text-inverted"
               @click="isDarkMode = true">
-              <span class="hidden sm:inline">TERMINAL</span>
-              <UIcon name="i-lucide-terminal" class="size-3.5 align-middle sm:hidden" />
+              <span class="sr-only sm:not-sr-only">TERMINAL</span>
+              <UIcon
+                name="i-lucide-terminal"
+                aria-hidden="true"
+                class="size-3.5 align-middle sm:hidden" />
             </button>
           </div>
         </div>

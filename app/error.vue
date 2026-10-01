@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { NuxtError } from "#app";
+import { CASE_FILE_FAILURE, CASE_FILE_NOT_FOUND } from "~/utils/constants/case-file";
 
 const props = defineProps<{
   error: NuxtError;
@@ -9,6 +10,7 @@ const route = useRoute();
 const dates = useCaseFileDates();
 
 const notFound = computed(() => props.error.statusCode === 404);
+const copy = computed(() => (notFound.value ? CASE_FILE_NOT_FOUND : CASE_FILE_FAILURE));
 const requestedPath = computed(() => route.path);
 const details = computed(
   () => props.error.statusMessage || props.error.message || "Unknown failure."
@@ -32,7 +34,7 @@ function returnToCaseFile() {
       <main class="flex grow items-center justify-center py-10">
         <UCard class="w-full max-w-2xl" :ui="{ root: 'overflow-hidden', body: 'p-0 sm:p-0' }">
           <CaseFileHazardBanner>
-            {{ notFound ? "RECORD EXPUNGED" : "SYSTEM FAILURE" }}
+            {{ copy.banner }}
           </CaseFileHazardBanner>
 
           <div class="flex flex-wrap justify-between gap-x-4 gap-y-2 px-6 pt-4">
@@ -44,11 +46,11 @@ function returnToCaseFile() {
           <div class="flex flex-col gap-5 p-6">
             <div class="flex flex-wrap items-center justify-between gap-6">
               <h1 class="font-name text-3xl font-bold tracking-wider text-highlighted sm:text-4xl">
-                {{ notFound ? "FILE NOT FOUND" : "ACCESS ERROR" }}
+                {{ copy.title }}
               </h1>
               <CaseFileStamp
                 class="border-double px-4 py-2 text-center font-name text-xl leading-tight font-bold tracking-widest">
-                {{ notFound ? "EXPUNGED" : "DENIED" }}
+                {{ copy.stamp }}
                 <span class="block font-mono text-xs font-normal tracking-widest">
                   {{ dates.stamp }}
                 </span>
@@ -57,27 +59,26 @@ function returnToCaseFile() {
 
             <CaseFileLabel class="break-all">// REQUESTED PATH: {{ requestedPath }}</CaseFileLabel>
 
-            <template v-if="notFound">
-              <p class="leading-relaxed">
-                This file was either never opened, or someone made sure it doesn't exist.
-              </p>
-              <p class="leading-relaxed text-muted">
-                Last known custodian:
-                <CaseFileRedacted>the intern who "cleaned up" the archive</CaseFileRedacted>
-              </p>
-            </template>
-            <template v-else>
-              <p class="leading-relaxed">
-                The archive failed to retrieve this file. The incident has been logged and the
-                responsible party will be
-                <CaseFileRedacted>asked nicely to fix it</CaseFileRedacted>.
-              </p>
-              <div
-                class="rounded-md border border-dashed border-error px-4 py-3 font-mono text-sm leading-relaxed">
-                <span class="block text-xs tracking-widest text-error">INCIDENT REPORT</span>
-                {{ details }}
-              </div>
-            </template>
+            <p class="leading-relaxed">
+              {{ copy.lead.pre
+              }}<CaseFileRedacted v-if="copy.lead.redacted">{{
+                copy.lead.redacted
+              }}</CaseFileRedacted
+              >{{ copy.lead.post }}
+            </p>
+            <p v-if="copy.note" class="leading-relaxed text-muted">
+              {{ copy.note.pre
+              }}<CaseFileRedacted v-if="copy.note.redacted">{{
+                copy.note.redacted
+              }}</CaseFileRedacted
+              >{{ copy.note.post }}
+            </p>
+            <div
+              v-if="!notFound"
+              class="rounded-md border border-dashed border-error px-4 py-3 font-mono text-sm leading-relaxed">
+              <span class="block text-xs tracking-widest text-error">INCIDENT REPORT</span>
+              {{ details }}
+            </div>
 
             <div class="border-t-4 border-double border-default pt-5">
               <UButton

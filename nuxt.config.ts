@@ -9,7 +9,6 @@ export default defineNuxtConfig({
         lang: "en",
       },
     },
-    pageTransition: { name: "page", mode: "out-in" },
   },
 
   modules: [
@@ -34,8 +33,10 @@ export default defineNuxtConfig({
     },
   },
 
+  // Follow the visitor's OS theme; the terminal look is the fallback when it can't be read.
   colorMode: {
-    preference: "dark",
+    preference: "system",
+    fallback: "dark",
   },
 
   fonts: {

@@ -1,11 +1,4 @@
-import {
-  SKILL_AWS,
-  SKILL_C,
-  SKILL_CPP,
-  SKILL_LINUX,
-  SKILL_NUXT,
-  SKILL_TYPESCRIPT,
-} from "./skills";
+import { SKILL_AWS, SKILL_C, SKILL_CPP, SKILL_LINUX, SKILL_NUXT, SKILL_TYPESCRIPT } from "./skills";
 import { PROJECT_CONSCIOUS_CONNECTIONS, PROJECT_FAASIFY, PROJECT_FLUX } from "./projects";
 import {
   EDUCATION_BCIT,
@@ -36,10 +29,10 @@ export const CASE_FILE_NUMBER = `CASE FILE NO. ${CASE_FILE_ID}`;
 
 export const CASE_FILE_PATH = `/case-files/${CASE_FILE_ID}`;
 
-export function formatCaseFileDates(date: Date) {
-  const year = date.getFullYear();
-  const month = date.getMonth() + 1;
-  const day = date.getDate();
+export function formatCaseFileDates(date: Date, utc = false) {
+  const year = utc ? date.getUTCFullYear() : date.getFullYear();
+  const month = (utc ? date.getUTCMonth() : date.getMonth()) + 1;
+  const day = utc ? date.getUTCDate() : date.getDate();
   const monthName = MONTHS[month - 1];
   return {
     report: `${monthName} ${day}, ${year}`,
@@ -59,12 +52,60 @@ export const CASE_FILE_SECTIONS: CaseFileSection[] = [
   { id: "s08", number: "08", title: "How to Make Contact", tocLabel: "Contact" },
 ];
 
+// The boot screen that plays over the home page on the first visit.
+export const CASE_FILE_BOOT_SCRIPT: CaseFileTerminalLine[] = [
+  { kind: "command", text: "ssh pouyan@field-office-bc" },
+  { kind: "output", text: "Connection established." },
+  { kind: "command", text: `cat ${CASE_FILE_PATH}` },
+  { kind: "error", text: "Permission denied: this file is classified." },
+  { kind: "command", text: `sudo cat ${CASE_FILE_PATH}` },
+  { kind: "success", text: "ACCESS GRANTED. Loading file..." },
+  { kind: "command", text: "rm -rf embarrassing_stuff/" },
+];
+
 export const CASE_FILE_FACTS: CaseFileFact[] = [
   { label: "KNOWN ALIASES", value: "PouyanNorouzi (GitHub)" },
   { label: "LAST KNOWN LOCATION", value: "Coquitlam, BC" },
   { label: "OCCUPATION (COVER)", value: "TECH Specialist @ London Drugs" },
   { label: "TRAINING", value: "BCIT, Computer Systems Diploma" },
 ];
+
+export const CASE_FILE_STICKY_NOTE = "Hire this guy. Seriously. -C.";
+
+export const CASE_FILE_ADDRESS: CaseFileRedactedLine[] = [
+  { hidden: "1234 Classified Avenue", shown: "nice" },
+  { hidden: "Coquitlam, BC", shown: "try" },
+];
+
+export const CASE_FILE_THREAT_LEVEL = "Minimal, unless you suggest he just use Postgres";
+
+export const CASE_FILE_SUMMARY_NOTE = "the database. ask him about it. -C.";
+
+export const CASE_FILE_ASSESSMENT =
+  "Subject is self-directed, curious about how things work underneath, and willing to build the hard version to find out. Recommend further contact.";
+
+export const CASE_FILE_PHONE: CaseFileRedactedLine[] = [
+  { hidden: "+1 (604) 555-0123", shown: "on request" },
+];
+
+export const CASE_FILE_NOT_FOUND: CaseFileErrorCopy = {
+  banner: "RECORD EXPUNGED",
+  title: "FILE NOT FOUND",
+  stamp: "EXPUNGED",
+  lead: { pre: "This file was either never opened, or someone made sure it doesn't exist." },
+  note: { pre: "Last known custodian: ", redacted: 'the intern who "cleaned up" the archive' },
+};
+
+export const CASE_FILE_FAILURE: CaseFileErrorCopy = {
+  banner: "SYSTEM FAILURE",
+  title: "ACCESS ERROR",
+  stamp: "DENIED",
+  lead: {
+    pre: "The archive failed to retrieve this file. The incident has been logged and the responsible party will be ",
+    redacted: "asked nicely to fix it",
+    post: ".",
+  },
+};
 
 export const CASE_FILE_PRINT_FACT =
   "First operation on file: Textbook Hero, a peer-to-peer textbook marketplace built during subject's first term at BCIT in 2024.";
