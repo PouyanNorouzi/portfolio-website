@@ -11,7 +11,7 @@ usePageSeo({
 });
 
 // Project data
-const projects = ref<Project[]>([...ALL_PROJECTS].reverse());
+const projects = [...ALL_PROJECTS].reverse();
 </script>
 
 <template>
@@ -25,7 +25,11 @@ const projects = ref<Project[]>([...ALL_PROJECTS].reverse());
         <CaseFileLabel>// {{ projects.length }} OPERATIONS ON FILE</CaseFileLabel>
         <p class="text-sm text-muted">Subject's known operations, most recent first.</p>
       </div>
-      <ProjectCard v-for="project in projects" :key="project.id" :project="project" />
+      <template v-for="(project, index) in projects" :key="project.id">
+        <!-- The first cards are on screen at load; the rest hydrate when scrolled to. -->
+        <ProjectCard v-if="index < 3" :project="project" />
+        <LazyProjectCard v-else :project="project" hydrate-on-visible />
+      </template>
     </div>
   </div>
 </template>

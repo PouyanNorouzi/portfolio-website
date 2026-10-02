@@ -26,17 +26,28 @@ function update() {
   }).length;
 }
 
+// Scroll events can fire several times per frame; measure once per frame instead.
+let frame: number | undefined;
+function schedule() {
+  if (frame !== undefined) return;
+  frame = requestAnimationFrame(() => {
+    frame = undefined;
+    update();
+  });
+}
+
 onMounted(() => {
   if (prefersReducedMotion()) return;
   animated.value = true;
   update();
-  window.addEventListener("scroll", update, { passive: true });
-  window.addEventListener("resize", update, { passive: true });
+  window.addEventListener("scroll", schedule, { passive: true });
+  window.addEventListener("resize", schedule, { passive: true });
 });
 
 onBeforeUnmount(() => {
-  window.removeEventListener("scroll", update);
-  window.removeEventListener("resize", update);
+  window.removeEventListener("scroll", schedule);
+  window.removeEventListener("resize", schedule);
+  if (frame !== undefined) cancelAnimationFrame(frame);
 });
 </script>
 
@@ -49,8 +60,8 @@ onBeforeUnmount(() => {
         class="absolute inset-y-0 left-[7rem] w-0.5 -translate-x-1/2 bg-accented" />
       <div
         aria-hidden="true"
-        class="absolute top-0 left-[7rem] w-0.5 -translate-x-1/2 bg-error shadow-[0_0_8px_var(--ui-error)] transition-[height] duration-150 ease-out motion-reduce:transition-none"
-        :style="{ height: `${fill * 100}%` }" />
+        class="absolute inset-y-0 left-[7rem] w-0.5 origin-top -translate-x-1/2 bg-error shadow-[0_0_8px_var(--ui-error)] transition-[scale] duration-150 ease-out motion-reduce:transition-none"
+        :style="{ scale: `1 ${fill}` }" />
       <div
         v-for="(entry, index) in CASE_FILE_TIMELINE"
         :key="entry.date"

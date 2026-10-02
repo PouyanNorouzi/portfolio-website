@@ -60,13 +60,15 @@ export function useTypewriter(
     const startTime = performance.now();
     const tick = (now: number) => {
       let remaining = now - startTime;
-      typed.value = lengths.map((length, index) => {
+      const next = lengths.map((length, index) => {
         const count = Math.min(length, Math.max(0, Math.floor(remaining / speedOf(index))));
         remaining -= length * speedOf(index) + gapMs;
         return count;
       });
+      // Most frames reveal no new character; assigning anyway would re-render the row every frame.
+      if (next.some((count, index) => count !== typed.value[index])) typed.value = next;
 
-      if (typed.value.every((count, index) => count === lengths[index])) finish();
+      if (next.every((count, index) => count === lengths[index])) finish();
       else frame = requestAnimationFrame(tick);
     };
     frame = requestAnimationFrame(tick);

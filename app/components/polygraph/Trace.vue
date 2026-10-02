@@ -26,7 +26,12 @@ const paths = computed(() =>
 let observer: ResizeObserver | undefined;
 let frame: number | undefined;
 
-onMounted(() => {
+const shouldDraw = computed(() => start ?? isVisible.value);
+
+// The pens only need pixel sizes once they are about to draw, so rows far down the transcript
+// don't measure (or recompute paths) until they are reached.
+function observe() {
+  if (observer || !element.value) return;
   observer = new ResizeObserver(([entry]) => {
     if (!entry) return;
     const width = Math.round(entry.contentRect.width);
@@ -34,13 +39,15 @@ onMounted(() => {
     if (size.value?.width !== width || size.value?.height !== height)
       size.value = { width, height };
   });
-  if (element.value) observer.observe(element.value);
+  observer.observe(element.value);
+}
+
+onMounted(() => {
+  watch(shouldDraw, (go) => go && observe(), { immediate: true });
 });
 
 // Wait a couple of frames after both are ready so the hidden paths are painted before the
 // dash offset transitions away.
-const shouldDraw = computed(() => start ?? isVisible.value);
-
 watch([shouldDraw, size], ([go, measured]) => {
   if (!go || !measured || drawn.value || frame !== undefined) return;
   frame = requestAnimationFrame(() => {

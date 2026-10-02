@@ -9,6 +9,8 @@ export function useNow() {
   const now = useState("now", () => Date.now());
   const isLocal = useState("now-local", () => false);
   onMounted(() => {
+    // Several components use this; the first one to mount swaps the time, the rest skip the extra render.
+    if (isLocal.value) return;
     now.value = Date.now();
     isLocal.value = true;
   });
