@@ -12,7 +12,14 @@ const BOOTED_KEY = "case-file-booted";
 const nuxtApp = useNuxtApp();
 const booting = useState("case-file-booting", () => import.meta.server || !!nuxtApp.isHydrating);
 
-const lines = ref<CaseFileTerminalLine[]>([]);
+// `full` is the line's final text. Lines are laid out at that width from the start (the part not
+// typed yet is invisible), so a word never jumps to the next row mid-typing.
+type BootLine = CaseFileTerminalLine & { full: string };
+const lines = ref<BootLine[]>([]);
+const layers = computed(() => [
+  { ghost: true, lines: SCRIPT.map((line) => ({ ...line, text: "", full: line.text })) },
+  { ghost: false, lines: lines.value },
+]);
 const typing = ref(false);
 let timer: ReturnType<typeof setTimeout> | undefined;
 
@@ -43,17 +50,21 @@ function typeLine(index: number) {
   }
 
   if (entry.kind !== "command") {
-    lines.value.push(entry);
+    lines.value.push({ ...entry, full: entry.text });
     timer = setTimeout(() => typeLine(index + 1), LINE_DELAY_MS);
     return;
   }
 
   typing.value = true;
-  lines.value.push({ kind: "command", text: "" });
+  lines.value.push({ kind: "command", text: "", full: entry.text });
   let i = 0;
   const step = () => {
     i++;
-    lines.value[lines.value.length - 1] = { kind: "command", text: entry.text.slice(0, i) };
+    lines.value[lines.value.length - 1] = {
+      kind: "command",
+      text: entry.text.slice(0, i),
+      full: entry.text,
+    };
     if (i < entry.text.length) {
       timer = setTimeout(step, TYPE_DELAY_MS);
     } else {
@@ -125,22 +136,31 @@ onBeforeUnmount(() => {
             <UIcon name="i-lucide-x" class="size-10 p-3 hover:bg-error hover:text-neutral-50" />
           </div>
         </div>
+        <!-- Both layers share one grid cell: the invisible one holds the whole script, so the window
+             has its final height from the first paint instead of growing (and re-centering) as
+             lines are typed and wrap. -->
         <div
-          class="min-h-72 space-y-1 px-3 py-3 font-mono text-sm leading-relaxed sm:text-base"
+          class="grid min-h-72 px-3 py-3 font-mono text-sm leading-relaxed sm:text-base"
           aria-hidden="true">
-          <div v-for="(line, index) in lines" :key="index" :class="lineClass[line.kind]">
-            <template v-if="line.kind === 'command'">
-              <span class="font-bold text-primary">pouyan@field-office-bc</span>
-              <span class="text-neutral-50">:</span>
-              <span class="font-bold text-info">~</span>
-              <span class="mr-2 text-neutral-50">$</span>
-            </template>
-            {{ line.text }}
-            <span
-              v-if="typing && index === lines.length - 1"
-              class="text-primary motion-safe:animate-pulse"
-              >▌</span
-            >
+          <div
+            v-for="layer in layers"
+            :key="layer.ghost ? 'ghost' : 'typed'"
+            class="col-start-1 row-start-1 space-y-1"
+            :class="{ invisible: layer.ghost }">
+            <div v-for="(line, index) in layer.lines" :key="index" :class="lineClass[line.kind]">
+              <template v-if="line.kind === 'command'">
+                <span class="font-bold text-primary">pouyan@field-office-bc</span>
+                <span class="text-neutral-50">:</span>
+                <span class="font-bold text-info">~</span>
+                <span class="mr-2 text-neutral-50">$</span>
+              </template>
+              {{ line.text
+              }}<span
+                v-if="!layer.ghost && typing && index === lines.length - 1"
+                class="inline-block w-0 overflow-visible text-primary motion-safe:animate-pulse"
+                >▌</span
+              ><span class="invisible">{{ line.full.slice(line.text.length) }}</span>
+            </div>
           </div>
         </div>
       </div>
