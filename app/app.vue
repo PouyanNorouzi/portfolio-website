@@ -1,6 +1,9 @@
 <script setup lang="ts">
 const colorMode = useColorMode();
 
+// Touch swipe between the top-level sections, with the page following the finger.
+useSectionSwipe();
+
 // Tints the mobile browser bar to match the folder desk or the terminal background.
 useHead({
   meta: [
@@ -25,7 +28,7 @@ useHead({
       <!-- NuxtPage wraps whatever its slot returns in the page transition, so the footer
            sits in the same wrapper and leaves and arrives together with the page. -->
       <NuxtPage v-slot="{ Component }">
-        <div class="flex grow flex-col">
+        <div class="page-shell flex grow flex-col">
           <main id="main" tabindex="-1" class="grow outline-none">
             <component :is="Component" />
           </main>
