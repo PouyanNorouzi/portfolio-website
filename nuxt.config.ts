@@ -42,6 +42,10 @@ export default defineNuxtConfig({
   fonts: {
     defaults: {
       weights: [400, 700],
+      styles: ["normal"],
+      // woff2 is supported by every current browser; skipping woff drops the duplicate files
+      formats: ["woff2"],
+      subsets: ["latin"],
     },
     families: [
       // only used in markdown blog content, so the scanner can't detect it
