@@ -27,7 +27,10 @@ const { data: neighbours } = await useAsyncData(`blog-${route.params.id}-neighbo
 });
 
 // Intrinsic sizes of the post hero images, so the browser reserves the right box before the
-// image loads. Add an entry when a post uses a new hero image.
+// image loads (from the sm breakpoint up the box has a definite height, because `width: auto`
+// with only an aspect ratio collapses to nothing until the file arrives). Add an entry when a
+// post uses a new hero image. NuxtImg's `1x, 2x` srcset makes the browser show the file at half
+// its pixel size when it is smaller than the 30vh cap, hence the halved height below.
 const HERO_SIZES: Record<string, { width: number; height: number }> = {
   "/me/2.webp": { width: 800, height: 600 },
   "/img/blogs/fm/fm26.webp": { width: 1280, height: 720 },
@@ -54,7 +57,8 @@ usePageSeo({
       <div
         class="overflow-hidden rounded-md border border-default p-1.5 transition-colors group-hover:border-primary">
         <NuxtImg
-          class="h-auto w-full rounded-sm object-contain sm:max-h-[30vh] sm:w-auto"
+          class="h-auto w-full rounded-sm object-contain sm:h-[min(30vh,var(--hero-h))] sm:w-auto"
+          :style="heroSize ? { aspectRatio: `${heroSize.width} / ${heroSize.height}`, '--hero-h': `${heroSize.height / 2}px` } : undefined"
           :src="page.image"
           :width="heroSize?.width"
           :height="heroSize?.height"
