@@ -77,7 +77,7 @@ const printOpen = ref(false);
                 :class="scanning ? 'contrast-100 grayscale-0' : 'contrast-110 grayscale'" />
               <template v-if="scanning">
                 <div
-                  class="pointer-events-none absolute inset-x-0 h-1/5 bg-linear-to-b from-transparent via-primary/50 to-transparent motion-safe:animate-scan" />
+                  class="pointer-events-none absolute inset-x-0 top-0 h-1/5 bg-linear-to-b from-transparent via-primary/50 to-transparent motion-safe:animate-scan" />
                 <UBadge
                   :label="`MATCH ${match.toFixed(1)}%`"
                   variant="outline"
@@ -152,7 +152,10 @@ const printOpen = ref(false);
               <Transition leave-active-class="motion-safe:animate-scan-bar-back!">
                 <span
                   v-if="printOpen"
-                  class="pointer-events-none absolute inset-y-0 w-[3px] bg-primary shadow-[0_0_12px_var(--ui-primary)] motion-safe:animate-scan-bar" />
+                  class="pointer-events-none absolute inset-0 motion-safe:animate-scan-bar">
+                  <span
+                    class="absolute inset-y-0 left-0 w-[3px] bg-primary shadow-[0_0_12px_var(--ui-primary)]" />
+                </span>
               </Transition>
             </div>
           </div>

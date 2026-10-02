@@ -16,8 +16,7 @@
   .slide-right-leave-active {
     transition:
       opacity 0.15s ease-in,
-      translate 0.15s ease-in,
-      clip-path 0.15s ease-in;
+      translate 0.15s ease-in;
   }
 
   .slide-left-enter-active,
@@ -25,8 +24,7 @@
     transition:
       opacity 0.3s cubic-bezier(0.2, 0.8, 0.2, 1),
       translate 0.3s cubic-bezier(0.2, 0.8, 0.2, 1),
-      rotate 0.3s cubic-bezier(0.2, 0.8, 0.2, 1),
-      clip-path 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+      rotate 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
   }
 
   /* Paper: the sheet is pulled out of the folder sideways and the next one is laid down,
@@ -63,37 +61,33 @@
     rotate: -1deg;
   }
 
-  /* Terminal: the screen is redrawn. The old page is wiped away and the new one is drawn in,
-     both sweeping in the direction of travel. clip-path can't animate from or to `none`,
-     so the fully drawn state is spelled out. */
+  /* Terminal: the screen is redrawn. The old page cuts out and the new one is drawn in, both
+     moving in the direction of travel. Only opacity and translate change so the browser moves
+     the page as a layer; a clip-path wipe repainted the whole (very tall) page every frame. */
   .dark
     :is(
-      .slide-left-enter-active,
-      .slide-left-leave-active,
-      .slide-right-enter-active,
-      .slide-right-leave-active
+      .slide-left-leave-to,
+      .slide-right-leave-to,
+      .slide-left-enter-from,
+      .slide-right-enter-from
     ) {
-    clip-path: inset(0);
+    opacity: 0;
   }
 
   .dark .slide-left-leave-to {
-    clip-path: inset(0 100% 0 0);
-    opacity: 0.4;
+    translate: -24px 0;
   }
 
   .dark .slide-right-leave-to {
-    clip-path: inset(0 0 0 100%);
-    opacity: 0.4;
+    translate: 24px 0;
   }
 
   .dark .slide-left-enter-from {
-    clip-path: inset(0 0 0 100%);
-    translate: 12px 0;
+    translate: 24px 0;
   }
 
   .dark .slide-right-enter-from {
-    clip-path: inset(0 100% 0 0);
-    translate: -12px 0;
+    translate: -24px 0;
   }
 }
 
@@ -309,12 +303,14 @@ html {
       opacity: 1;
     }
   }
+  /* The scan bars are full-size, pointer-less wrappers (see Dossier.vue, Declassify.vue) that
+     translate by their own size, so the line moves across its container on the compositor. */
   @keyframes scan {
     0% {
-      top: -20%;
+      transform: translateY(-100%);
     }
     100% {
-      top: 100%;
+      transform: translateY(500%);
     }
   }
   @keyframes reveal-in {
@@ -334,14 +330,14 @@ html {
   }
   @keyframes scan-bar {
     0% {
-      left: 0;
+      transform: translateX(0);
       opacity: 1;
     }
     90% {
       opacity: 1;
     }
     100% {
-      left: 100%;
+      transform: translateX(100%);
       opacity: 0;
     }
   }
@@ -362,14 +358,14 @@ html {
   }
   @keyframes scan-down {
     0% {
-      top: 0;
+      transform: translateY(0);
       opacity: 1;
     }
     90% {
       opacity: 1;
     }
     100% {
-      top: 100%;
+      transform: translateY(100%);
       opacity: 0;
     }
   }
@@ -464,7 +460,7 @@ html {
   }
   @keyframes scan-bar-back {
     0% {
-      left: 100%;
+      transform: translateX(100%);
       opacity: 0;
     }
     10% {
@@ -474,7 +470,7 @@ html {
       opacity: 1;
     }
     100% {
-      left: 0;
+      transform: translateX(0);
       opacity: 0;
     }
   }
