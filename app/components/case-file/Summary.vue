@@ -20,12 +20,21 @@ function measure() {
   arrowX.value = onLastLine && x < box.width - NOTE_WIDTH_PX ? x : null;
 }
 
+let observer: ResizeObserver | undefined;
+let unmounted = false;
+
 onMounted(() => {
   measure();
-  const observer = new ResizeObserver(measure);
+  observer = new ResizeObserver(measure);
   if (paragraph.value) observer.observe(paragraph.value);
-  document.fonts.ready.then(measure);
-  onBeforeUnmount(() => observer.disconnect());
+  document.fonts.ready.then(() => {
+    if (!unmounted) measure();
+  });
+});
+
+onBeforeUnmount(() => {
+  unmounted = true;
+  observer?.disconnect();
 });
 </script>
 

@@ -27,14 +27,10 @@ const isScrolled = ref(false);
 const headerHeight = ref<number | null>(null);
 const headerRef = ref<HTMLElement | null>(null);
 
-// Scroll events can fire several times per frame; measure once per frame instead.
-let frame: number | undefined;
+// Browsers already fire scroll events at most once per frame, and assigning the same value to
+// a ref triggers nothing, so the handler just compares scrollY with the threshold.
 function onScroll() {
-  if (frame !== undefined) return;
-  frame = requestAnimationFrame(() => {
-    frame = undefined;
-    isScrolled.value = window.scrollY > 10;
-  });
+  isScrolled.value = window.scrollY > 10;
 }
 
 onMounted(() => {
@@ -45,7 +41,6 @@ onMounted(() => {
 
 onBeforeUnmount(() => {
   window.removeEventListener("scroll", onScroll);
-  if (frame !== undefined) cancelAnimationFrame(frame);
 });
 </script>
 
