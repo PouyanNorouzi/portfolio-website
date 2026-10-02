@@ -26,7 +26,7 @@ const {
       type="button"
       :aria-label="alt ? `Enlarge image: ${alt}` : 'Enlarge image'"
       class="mx-auto block w-fit cursor-zoom-in rounded-md">
-      <img :src :alt :width :height class="block rounded-md" />
+      <img :src :alt :width :height loading="lazy" decoding="async" class="block rounded-md" />
     </button>
 
     <template #content="{ close }">
