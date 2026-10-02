@@ -75,11 +75,20 @@ function measure() {
   offsets.value = claimElements.map((el) => (el.offsetTop + el.offsetHeight / 2) / height);
 }
 
+// The offsets only matter once the pens draw, so rows far down the transcript don't measure
+// (a forced layout each) until they start.
 let observer: ResizeObserver | undefined;
 onMounted(() => {
-  measure();
-  observer = new ResizeObserver(measure);
-  if (element.value) observer.observe(element.value);
+  watch(
+    started,
+    (go) => {
+      if (!go || observer) return;
+      measure();
+      observer = new ResizeObserver(measure);
+      if (element.value) observer.observe(element.value);
+    },
+    { immediate: true }
+  );
 });
 onBeforeUnmount(() => observer?.disconnect());
 

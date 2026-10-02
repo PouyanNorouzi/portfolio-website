@@ -222,8 +222,21 @@ html {
     repeating-linear-gradient(to right, var(--grid-major) 0 1px, transparent 1px 40px),
     repeating-linear-gradient(to bottom, var(--grid-minor) 0 1px, transparent 1px 8px),
     repeating-linear-gradient(to right, var(--grid-minor) 0 1px, transparent 1px 8px), var(--paper);
-  /* The bottom edge is torn off the roll. */
+  /* The bottom edge is torn off the roll. Only that strip is masked (see .polygraph-tear): a mask
+     or filter over the whole sheet makes the browser re-composite the entire tall page each time
+     a character types. The border reserves the strip's room; the paper stops above it. */
+  border-bottom: 8px solid transparent;
+  background-clip: padding-box;
+}
+
+.polygraph-tear {
+  position: absolute;
+  inset-inline: 0;
+  top: 100%;
+  height: 8px;
+  background: var(--paper);
   mask: conic-gradient(from -45deg at bottom, #0000, #000 1deg 89deg, #0000 90deg) 50% / 14px 100%;
+  pointer-events: none;
 }
 
 /* Dimmer paper so it doesn't glare against the dark terminal. */

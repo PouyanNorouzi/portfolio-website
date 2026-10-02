@@ -81,8 +81,13 @@ const contactSection = CASE_FILE_SECTIONS.find((section) => section.tocLabel ===
       </div>
     </Transition>
 
-    <div class="w-full drop-shadow-[0_10px_18px_rgb(0_0_0/0.3)]">
-      <article class="polygraph-paper px-5 pt-6 pb-10 sm:px-9" @focusin="onFocusin">
+    <div class="relative w-full">
+      <!-- The sheet's shadow lives on its own plate: a drop-shadow filter over the tall, constantly
+           changing paper is re-rendered every frame. The plate stops above the torn edge. -->
+      <div
+        aria-hidden="true"
+        class="absolute inset-x-0 top-0 bottom-2 shadow-[0_10px_36px_rgb(0_0_0/0.3)]" />
+      <article class="polygraph-paper px-5 pt-6 pb-8 sm:px-9" @focusin="onFocusin">
         <header class="relative flex flex-col gap-5 pb-6">
           <figure
             class="absolute top-3 right-0 hidden w-32 rotate-3 bg-white p-1.5 pb-5 shadow-md sm:block">
@@ -164,6 +169,7 @@ const contactSection = CASE_FILE_SECTIONS.find((section) => section.tocLabel ===
             </span>
           </div>
         </PolygraphRow>
+        <span aria-hidden="true" class="polygraph-tear" />
       </article>
     </div>
 
