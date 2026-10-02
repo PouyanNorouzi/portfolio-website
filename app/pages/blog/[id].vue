@@ -26,6 +26,8 @@ const { data: neighbours } = await useAsyncData(`blog-${route.params.id}-neighbo
     .all();
   const index = posts.findIndex((post) => post.num === page.value?.num);
   return { previous: posts[index - 1], next: posts[index + 1] };
+}, {
+  getCachedData: (key, nuxtApp) => nuxtApp.payload.data[key] ?? nuxtApp.static.data[key],
 });
 
 // Intrinsic sizes of the post hero images, so the browser reserves the right box before the
