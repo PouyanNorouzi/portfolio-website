@@ -59,7 +59,10 @@ onBeforeUnmount(() => clearTimeout(glitchTimer));
           :class="declassified ? 'motion-safe:animate-reveal-down' : 'opacity-0'">
           <span
             v-if="declassified"
-            class="pointer-events-none absolute inset-x-0 h-[3px] bg-primary shadow-[0_0_12px_var(--ui-primary)] motion-safe:animate-scan-down" />
+            class="pointer-events-none absolute inset-0 motion-safe:animate-scan-down">
+            <span
+              class="absolute inset-x-0 top-0 h-[3px] bg-primary shadow-[0_0_12px_var(--ui-primary)]" />
+          </span>
           <span class="block font-mono text-xs tracking-widest text-primary">
             DECLASSIFIED FRAGMENT
           </span>

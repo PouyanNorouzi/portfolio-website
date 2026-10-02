@@ -303,12 +303,14 @@ html {
       opacity: 1;
     }
   }
+  /* The scan bars are full-size, pointer-less wrappers (see Dossier.vue, Declassify.vue) that
+     translate by their own size, so the line moves across its container on the compositor. */
   @keyframes scan {
     0% {
-      top: -20%;
+      transform: translateY(-100%);
     }
     100% {
-      top: 100%;
+      transform: translateY(500%);
     }
   }
   @keyframes reveal-in {
@@ -328,14 +330,14 @@ html {
   }
   @keyframes scan-bar {
     0% {
-      left: 0;
+      transform: translateX(0);
       opacity: 1;
     }
     90% {
       opacity: 1;
     }
     100% {
-      left: 100%;
+      transform: translateX(100%);
       opacity: 0;
     }
   }
@@ -356,14 +358,14 @@ html {
   }
   @keyframes scan-down {
     0% {
-      top: 0;
+      transform: translateY(0);
       opacity: 1;
     }
     90% {
       opacity: 1;
     }
     100% {
-      top: 100%;
+      transform: translateY(100%);
       opacity: 0;
     }
   }
@@ -458,7 +460,7 @@ html {
   }
   @keyframes scan-bar-back {
     0% {
-      left: 100%;
+      transform: translateX(100%);
       opacity: 0;
     }
     10% {
@@ -468,7 +470,7 @@ html {
       opacity: 1;
     }
     100% {
-      left: 0;
+      transform: translateX(0);
       opacity: 0;
     }
   }
