@@ -56,6 +56,8 @@ export default defineNuxtConfig({
       // woff2 is supported by every current browser; skipping woff drops the duplicate files
       formats: ["woff2"],
       subsets: ["latin"],
+      // the home page lays out text in these on first paint; without a preload the late swap shifts it
+      preload: true,
     },
     families: [
       // only used in markdown blog content, so the scanner can't detect it
