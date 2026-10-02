@@ -4,6 +4,12 @@
 /* Blog posts can use utility classes in MDC attributes ({.font-fancy}), so scan them too. */
 @source "../../../content";
 
+/* Section swipe (composables/useSectionSwipe.ts): pan-y leaves vertical scrolling to the
+   browser and hands horizontal moves to the swipe. */
+.page-shell {
+  touch-action: pan-y pinch-zoom;
+}
+
 @media (prefers-reduced-motion: no-preference) {
   html {
     scroll-behavior: smooth;
