@@ -3,26 +3,39 @@ import { CASE_FILE_SECTIONS } from "~/utils/constants/case-file";
 const active = ref(CASE_FILE_SECTIONS[0]!.id);
 const progress = ref(0);
 
-// Scroll events can fire several times per frame; measure once per frame instead.
+// Section tops (in document coordinates) and the scrollable height are measured only when the
+// layout changes, so a scroll frame is just arithmetic on scrollY with no layout reads.
+let tops: number[] = [];
+let scrollable = 0;
+
+function measureLayout() {
+  tops = CASE_FILE_SECTIONS.map((section) => {
+    const el = document.getElementById(section.id);
+    return el ? el.getBoundingClientRect().top + window.scrollY : Number.POSITIVE_INFINITY;
+  });
+  scrollable = document.documentElement.scrollHeight - window.innerHeight;
+  update();
+}
+
+function update() {
+  const y = window.scrollY;
+  const line = window.innerHeight * 0.4;
+  let current = CASE_FILE_SECTIONS[0]!.id;
+  CASE_FILE_SECTIONS.forEach((section, index) => {
+    if (tops[index]! - y < line) current = section.id;
+  });
+  active.value = current;
+  progress.value = scrollable > 0 ? Math.min(Math.max(y / scrollable, 0), 1) : 0;
+}
+
+// Scroll events can fire several times per frame; update once per frame instead.
 let frame: number | undefined;
 function onScroll() {
   if (frame !== undefined) return;
   frame = requestAnimationFrame(() => {
     frame = undefined;
-    measure();
+    update();
   });
-}
-
-function measure() {
-  let current = CASE_FILE_SECTIONS[0]!.id;
-  for (const section of CASE_FILE_SECTIONS) {
-    const el = document.getElementById(section.id);
-    if (el && el.getBoundingClientRect().top < window.innerHeight * 0.4) current = section.id;
-  }
-  active.value = current;
-
-  const scrollable = document.documentElement.scrollHeight - window.innerHeight;
-  progress.value = scrollable > 0 ? Math.min(Math.max(window.scrollY / scrollable, 0), 1) : 0;
 }
 
 function go(id: string) {
@@ -31,13 +44,20 @@ function go(id: string) {
     ?.scrollIntoView({ behavior: prefersReducedMotion() ? "auto" : "smooth" });
 }
 
+// The document's height changes as sections reveal or fonts load, and its width on resize;
+// either can move the sections, so measure again then.
+let resizeObserver: ResizeObserver | undefined;
+
 onMounted(() => {
   window.addEventListener("scroll", onScroll, { passive: true });
-  measure();
+  resizeObserver = new ResizeObserver(measureLayout);
+  resizeObserver.observe(document.documentElement);
+  measureLayout();
 });
 
 onBeforeUnmount(() => {
   window.removeEventListener("scroll", onScroll);
+  resizeObserver?.disconnect();
   if (frame !== undefined) cancelAnimationFrame(frame);
 });
 </script>
