@@ -27,6 +27,15 @@ export default defineNuxtConfig({
     provider: "none",
   },
 
+  // Icons resolve locally only: the @iconify-json collections are bundled into the server build
+  // and the client bundle holds every icon found in the source, so nothing is fetched from
+  // api.iconify.design at runtime. A missing icon fails visibly instead of falling back to the API.
+  icon: {
+    serverBundle: "local",
+    clientBundle: { scan: true },
+    fallbackToApi: false,
+  },
+
   ui: {
     theme: {
       colors: ["primary", "secondary", "tertiary", "info", "success", "warning", "error"],
