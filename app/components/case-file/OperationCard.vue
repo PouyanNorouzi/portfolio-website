@@ -30,6 +30,7 @@ const { tilt = 0 } = defineProps<{
             :alt="operation.project.name"
             width="640"
             height="360"
+            loading="lazy"
             class="size-full object-contain transition duration-300 [@media(hover:hover)]:contrast-110 [@media(hover:hover)]:grayscale group-hover:contrast-100 group-hover:grayscale-0" />
         </div>
         <span
