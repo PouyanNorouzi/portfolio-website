@@ -18,7 +18,8 @@ export default defineNuxtConfig({
     "@nuxt/image",
     "@nuxt/ui",
     "@nuxt/content",
-    "@nuxt/test-utils/module",
+    // Only the vitest integration needs it, so regular builds skip it
+    ...(process.env.VITEST ? ["@nuxt/test-utils/module"] : []),
   ],
 
   css: ["~/assets/css/main.css"],
