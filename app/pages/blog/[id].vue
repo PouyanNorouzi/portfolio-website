@@ -5,7 +5,9 @@ const route = useRoute();
 
 // `num` is a number in the content schema, so compare it as one. A non-numeric id (NaN) never
 // matches a post and falls through to the not-found error below.
-const num = Number(route.params.id);
+// Only plain positive integers count: Number() also accepts "02", "0x2" or "1e0", which would
+// serve post 2 again under a second URL.
+const num = /^[1-9]\d*$/.test(String(route.params.id)) ? Number(route.params.id) : Number.NaN;
 
 const { data: page } = await useAsyncData(`blog-${route.params.id}`, () =>
   Number.isNaN(num) ? Promise.resolve(null) : queryCollection("blog").where("num", "=", num).first()
@@ -57,7 +59,7 @@ usePageSeo({
       <div
         class="overflow-hidden rounded-md border border-default p-1.5 transition-colors group-hover:border-primary">
         <NuxtImg
-          class="h-auto w-full rounded-sm object-contain sm:h-[min(30vh,var(--hero-h))] sm:w-auto"
+          class="h-auto w-full rounded-sm object-contain sm:h-[min(30vh,var(--hero-h,30vh))] sm:w-auto"
           :style="heroSize ? { aspectRatio: `${heroSize.width} / ${heroSize.height}`, '--hero-h': `${heroSize.height / 2}px` } : undefined"
           :src="page.image"
           :width="heroSize?.width"

@@ -48,16 +48,24 @@ function go(id: string) {
 // either can move the sections, so measure again then.
 let resizeObserver: ResizeObserver | undefined;
 
+// A page transition (a slide and tilt in light mode) moves the sections while it plays, which
+// would bake an offset into the measured tops; the document size doesn't change when it ends,
+// so measure again then.
+const nuxtApp = useNuxtApp();
+let stopTransitionHook: (() => void) | undefined;
+
 onMounted(() => {
   window.addEventListener("scroll", onScroll, { passive: true });
   resizeObserver = new ResizeObserver(measureLayout);
   resizeObserver.observe(document.documentElement);
+  stopTransitionHook = nuxtApp.hook("page:transition:finish", measureLayout);
   measureLayout();
 });
 
 onBeforeUnmount(() => {
   window.removeEventListener("scroll", onScroll);
   resizeObserver?.disconnect();
+  stopTransitionHook?.();
   if (frame !== undefined) cancelAnimationFrame(frame);
 });
 </script>
