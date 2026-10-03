@@ -21,6 +21,11 @@ const layers = computed(() => [
   { ghost: false, lines: lines.value },
 ]);
 const typing = ref(false);
+// The window title follows the shell: it names whichever host the latest command was typed on.
+const title = computed(() => {
+  const last = lines.value.findLast((line) => line.kind === "command");
+  return `${(last ?? SCRIPT[0])?.prompt}: ~`;
+});
 let timer: ReturnType<typeof setTimeout> | undefined;
 
 const lineClass: Record<CaseFileTerminalLine["kind"], string> = {
@@ -56,12 +61,12 @@ function typeLine(index: number) {
   }
 
   typing.value = true;
-  lines.value.push({ kind: "command", text: "", full: entry.text });
+  lines.value.push({ ...entry, text: "", full: entry.text });
   let i = 0;
   const step = () => {
     i++;
     lines.value[lines.value.length - 1] = {
-      kind: "command",
+      ...entry,
       text: entry.text.slice(0, i),
       full: entry.text,
     };
@@ -128,7 +133,7 @@ onBeforeUnmount(() => {
       <div class="w-full max-w-2xl overflow-hidden rounded-md border border-neutral-800 shadow-lg">
         <div class="flex items-center bg-neutral-900 pl-4 text-neutral-400">
           <span class="flex-1 py-2 text-center font-sans text-sm font-medium">
-            pouyan@field-office-bc: ~
+            {{ title }}
           </span>
           <div class="flex">
             <UIcon name="i-lucide-minus" class="size-10 p-3 hover:bg-neutral-800" />
@@ -149,7 +154,7 @@ onBeforeUnmount(() => {
             :class="{ invisible: layer.ghost }">
             <div v-for="(line, index) in layer.lines" :key="index" :class="lineClass[line.kind]">
               <template v-if="line.kind === 'command'">
-                <span class="font-bold text-primary">pouyan@field-office-bc</span>
+                <span class="font-bold text-primary">{{ line.prompt }}</span>
                 <span class="text-neutral-50">:</span>
                 <span class="font-bold text-info">~</span>
                 <span class="mr-2 text-neutral-50">$</span>

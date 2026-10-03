@@ -30,6 +30,8 @@ declare interface CaseFileOperation {
 declare interface CaseFileTerminalLine {
   kind: "command" | "output" | "success" | "error";
   text: string;
+  // Commands only: the `user@host` shown in the shell prompt when the line is typed.
+  prompt?: string;
 }
 
 // A multi-line redaction: `hidden` only sizes the bar, `shown` is what it reads once revealed.

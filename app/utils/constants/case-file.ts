@@ -52,15 +52,19 @@ export const CASE_FILE_SECTIONS: CaseFileSection[] = [
   { id: "s08", number: "08", title: "How to Make Contact", tocLabel: "Contact" },
 ];
 
-// The boot screen that plays over the home page on the first visit.
+// The boot screen that plays over the home page on the first visit. The shell starts on the
+// visitor's own machine and only becomes the field office once the ssh connection is made.
+const LOCAL_PROMPT = "pouyan@pni-pc";
+const REMOTE_PROMPT = "agent-c@field-office-bc";
+
 export const CASE_FILE_BOOT_SCRIPT: CaseFileTerminalLine[] = [
-  { kind: "command", text: "ssh pouyan@field-office-bc" },
+  { kind: "command", text: `ssh ${REMOTE_PROMPT}`, prompt: LOCAL_PROMPT },
   { kind: "output", text: "Connection established." },
-  { kind: "command", text: `cat ${CASE_FILE_PATH}` },
+  { kind: "command", text: `cat ${CASE_FILE_PATH}`, prompt: REMOTE_PROMPT },
   { kind: "error", text: "Permission denied: this file is classified." },
-  { kind: "command", text: `sudo cat ${CASE_FILE_PATH}` },
+  { kind: "command", text: `sudo cat ${CASE_FILE_PATH}`, prompt: REMOTE_PROMPT },
   { kind: "success", text: "ACCESS GRANTED. Loading file..." },
-  { kind: "command", text: "rm -rf embarrassing_stuff/" },
+  { kind: "command", text: "rm -rf embarrassing_stuff/", prompt: REMOTE_PROMPT },
 ];
 
 export const CASE_FILE_FACTS: CaseFileFact[] = [
