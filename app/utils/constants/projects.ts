@@ -173,7 +173,7 @@ export const PROJECT_PORTFOLIO_WEBSITE: Project = {
   id: 8,
   name: "Portfolio Website",
   description:
-    "My personal portfolio website built with modern web technologies. Features responsive design, dark mode, project showcase, and contact form.",
+    "My personal portfolio website built with modern web technologies. Features responsive design, dark mode, a spy case-file theme, and a project showcase.",
   shortDescription: "Personal portfolio site with a polished dark-mode experience.",
   startDate: new Date(2025, 4),
   endDate: new Date(2025, 4),

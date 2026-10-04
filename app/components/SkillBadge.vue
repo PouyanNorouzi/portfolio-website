@@ -24,7 +24,9 @@ withDefaults(defineProps<Props>(), {
       :size="size"
       :variant="variant"
       :color="color"
-      class="flex items-center gap-1 py-1 px-2">
+      :tabindex="0"
+      :aria-label="ignoreLabel ? skill.title : undefined"
+      class="flex items-center gap-1 py-1 px-2 outline-none focus-visible:ring-2 focus-visible:ring-primary">
       <template #leading>
         <LightDarkIcon :size="iconSize" :icon="skill.icon" />
       </template>
@@ -39,6 +41,7 @@ withDefaults(defineProps<Props>(), {
         <span class="font-semibold">Clearance:</span>
         <UProgress
           class="mt-1"
+          :get-value-label="() => 'Clearance'"
           :model-value="skill.proficiency"
           :max="1"
           color="primary"

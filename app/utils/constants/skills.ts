@@ -565,7 +565,7 @@ export const SKILL_SVELTEKIT: EnhancedSkill = {
 
 // Added from the resume skill list. Every proficiency here is a placeholder (0.7); set the real ones.
 export const SKILL_GO: EnhancedSkill = {
-  id: 56,
+  id: 105,
   title: "Go",
   icon: "i-skill-icons-golang",
   proficiency: 0.6,

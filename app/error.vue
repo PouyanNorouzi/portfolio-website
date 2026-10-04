@@ -28,6 +28,7 @@ function returnToCaseFile() {
 
 <template>
   <UApp>
+    <NuxtRouteAnnouncer />
     <AppAtmosphere />
     <UContainer class="flex min-h-screen flex-col">
       <AppHeader />

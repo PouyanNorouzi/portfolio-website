@@ -1,7 +1,7 @@
 <script setup lang="ts">
 const colorMode = useColorMode();
 
-// Touch swipe between the top-level sections, with the page following the finger.
+// Touch swipe between the top-level sections.
 useSectionSwipe();
 
 // Tints the mobile browser bar to match the folder desk or the terminal background.
@@ -22,6 +22,7 @@ useHead({
       class="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-60 focus:border-2 focus:border-error focus:bg-default focus:px-3 focus:py-1.5 focus:font-mono focus:text-sm focus:font-bold focus:tracking-widest focus:text-error">
       SKIP TO FILE
     </a>
+    <NuxtRouteAnnouncer />
     <AppAtmosphere />
     <UContainer class="min-h-screen flex flex-col">
       <AppHeader />

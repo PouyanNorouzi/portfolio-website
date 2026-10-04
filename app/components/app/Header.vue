@@ -68,7 +68,7 @@ onBeforeUnmount(() => {
         <!-- Logo: a small rubber stamp with the file number -->
         <NuxtLink
           to="/"
-          aria-label="Home"
+          :aria-label="`${CASE_FILE_ID}, home`"
           class="hidden shrink-0 -rotate-3 border-4 border-double border-error px-1.5 font-name text-xs font-bold tracking-widest text-error transition-transform hover:rotate-0 sm:block sm:text-sm">
           {{ CASE_FILE_ID }}
         </NuxtLink>
@@ -83,7 +83,6 @@ onBeforeUnmount(() => {
             :key="page.path"
             :to="page.path"
             :aria-current="index === activeIndex ? 'page' : undefined"
-            :aria-label="page.label"
             class="flex min-h-11 min-w-0 flex-1 flex-col items-center justify-center border-b-2 px-0.5 font-mono text-[0.65rem] leading-tight tracking-normal whitespace-nowrap uppercase max-[359px]:text-[0.6rem] sm:tracking-wider transition-colors hover:text-primary sm:text-xs md:min-h-0 md:flex-none md:flex-row md:items-baseline md:gap-1 md:px-1 md:py-1 md:text-sm md:tracking-widest"
             :class="
               index === activeIndex
@@ -94,9 +93,10 @@ onBeforeUnmount(() => {
               >{{ page.number }}<span class="hidden md:inline">/</span></span
             >
             <span class="md:hidden">{{ page.short }}</span>
-            <span class="hidden md:inline">
+            <span class="hidden md:inline" aria-hidden="true">
               {{ index === activeIndex ? activeLabel.text.value : page.label }}
             </span>
+            <span class="sr-only">{{ page.label }}</span>
           </NuxtLink>
         </nav>
 
@@ -122,7 +122,7 @@ onBeforeUnmount(() => {
             <button
               type="button"
               :aria-pressed="!isDarkMode"
-              class="cursor-pointer bg-inverted px-1.5 py-0.5 text-inverted transition-colors dark:bg-transparent dark:text-muted dark:hover:text-highlighted"
+              class="inline-flex min-h-6 min-w-6 cursor-pointer items-center justify-center bg-inverted px-1.5 py-0.5 text-inverted transition-colors dark:bg-transparent dark:text-muted dark:hover:text-highlighted"
               @click="isDarkMode = false">
               <span class="sr-only sm:not-sr-only">PAPER</span>
               <UIcon
@@ -133,7 +133,7 @@ onBeforeUnmount(() => {
             <button
               type="button"
               :aria-pressed="isDarkMode"
-              class="cursor-pointer px-1.5 py-0.5 text-muted transition-colors hover:text-highlighted dark:bg-inverted dark:text-inverted dark:hover:text-inverted"
+              class="inline-flex min-h-6 min-w-6 cursor-pointer items-center justify-center px-1.5 py-0.5 text-muted transition-colors hover:text-highlighted dark:bg-inverted dark:text-inverted dark:hover:text-inverted"
               @click="isDarkMode = true">
               <span class="sr-only sm:not-sr-only">TERMINAL</span>
               <UIcon

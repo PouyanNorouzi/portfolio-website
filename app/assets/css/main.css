@@ -242,6 +242,9 @@ html {
 /* Dimmer paper so it doesn't glare against the dark terminal. */
 .dark .polygraph-paper {
   --paper: #e3ddcc;
+  /* Darker than the light-paper values: these two fall under 4.5:1 on the dimmer paper. */
+  --ink-muted: #5b564a;
+  --pen-cardio: #a3352e;
   --grid-minor: rgb(184 66 58 / 0.09);
   --hole: var(--ui-bg);
 }

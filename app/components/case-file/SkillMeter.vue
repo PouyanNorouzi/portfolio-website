@@ -34,6 +34,6 @@ onBeforeUnmount(() => cancelAnimationFrame(frame!));
       <CaseFileLabel>CLEARANCE</CaseFileLabel>
       <CaseFileLabel class="text-primary">{{ Math.round(shown * 100) }}%</CaseFileLabel>
     </div>
-    <UProgress :model-value="shown" :max="1" size="xs" />
+    <UProgress :model-value="shown" :max="1" size="xs" :get-value-label="() => 'Clearance'" />
   </div>
 </template>
