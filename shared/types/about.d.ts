@@ -12,7 +12,16 @@ declare interface Skill {
 
 // Skill categories
 declare type SkillName =
-  "Software Development" | "Web Technologies" | "Systems" | "Data" | "Cloud & DevOps";
+  | "Languages"
+  | "Frontend & Mobile"
+  | "Backend & APIs"
+  | "Data"
+  | "Systems"
+  | "Networking"
+  | "Security"
+  | "Cloud"
+  | "DevOps & Tooling"
+  | "AI/ML";
 
 // A skill with how well it is known and which category it belongs to
 declare interface EnhancedSkill extends Skill {
@@ -28,21 +37,28 @@ declare interface EnhancedSkill extends Skill {
 declare type PolygraphVerdict = "TRUTHFUL" | "PROBABLE" | "INCONCLUSIVE" | "DECEPTIVE";
 
 // A claim the needles react to. Without an explicit verdict it is derived from the skill's
-// proficiency. `label` names a claim that is not a skill (e.g. a joke).
+// proficiency. `label` names a claim that is not a skill (e.g. a joke). A `hidden` claim is not
+// listed, but the needles still react to it, level with the answer.
 declare interface PolygraphClaim {
   skill?: EnhancedSkill;
   label?: string;
   verdict?: PolygraphVerdict;
+  hidden?: boolean;
 }
 
 declare interface PolygraphExchange {
   question: string;
   answer: string;
+  // Who asks. Defaults to the examiner; "SUBJECT" turns the exchange around, so `question` is
+  // the subject's and `answer` is the examiner's.
+  askedBy?: "EXAMINER" | "SUBJECT";
   claims?: PolygraphClaim[];
   // A project the answer refers to, linked beside it.
   exhibit?: Project;
   // Sweeps a highlighter over the answer.
   highlight?: boolean;
+  // Blacks out the answer until it is declassified (hover, tap, or the declassify button).
+  redacted?: boolean;
 }
 
 declare interface PolygraphRapidItem {
