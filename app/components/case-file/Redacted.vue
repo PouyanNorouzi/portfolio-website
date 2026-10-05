@@ -73,7 +73,11 @@ const toggle = computed(() =>
       <span aria-hidden="true" class="invisible col-start-1 row-start-1 whitespace-nowrap">
         {{ line.hidden }}
       </span>
-      <span class="col-start-1 row-start-1 text-center whitespace-nowrap">{{ line.shown }}</span>
+      <span
+        class="col-start-1 row-start-1 text-center whitespace-nowrap"
+        :class="{ 'select-none': !revealed }">
+        {{ line.shown }}
+      </span>
       <span
         aria-hidden="true"
         class="pointer-events-none absolute inset-0 origin-right rounded-sm bg-inverted transition-transform duration-500 ease-in-out motion-reduce:transition-none"
@@ -90,7 +94,7 @@ const toggle = computed(() =>
     :class="
       revealed
         ? 'bg-size-[0%_100%] outline-error'
-        : 'bg-size-[100%_100%] text-transparent outline-transparent'
+        : 'bg-size-[100%_100%] text-transparent outline-transparent select-none'
     ">
     <slot />
   </span>
